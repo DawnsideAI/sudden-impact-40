@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -69,22 +68,19 @@ const Pricing = () => {
   const [annualBilling, setAnnualBilling] = useState(false);
   
   useEffect(() => {
-    // Scroll to top when component mounts
     window.scrollTo(0, 0);
-    
-    // Set page title
     document.title = "Pricing | Sudden Impact Agency";
   }, []);
-
-  const toggleBilling = () => {
-    setAnnualBilling(!annualBilling);
-  };
 
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="pt-24 pb-16 md:pt-32 md:pb-24 bg-gray-50">
-        <div className="container-custom">
+      <section className="pt-24 pb-16 md:pt-32 md:pb-24 relative overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 to-purple-900/20 backdrop-blur-3xl" />
+        </div>
+        
+        <div className="container-custom relative z-10">
           <div className="text-center max-w-3xl mx-auto">
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
@@ -98,7 +94,7 @@ const Pricing = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-xl text-gray-600 mb-8"
+              className="text-xl text-gray-300 mb-8"
             >
               Everything you need to launch, scale, and engage — powered by our AI Voice Agents and wrapped in the Sudden Impact Automation Suite.
             </motion.p>
@@ -107,12 +103,12 @@ const Pricing = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-white p-2 rounded-lg inline-flex shadow-sm mb-6"
+              className="glass-card p-2 rounded-lg inline-flex mb-6"
             >
               <button
                 onClick={() => setAnnualBilling(false)}
                 className={`px-4 py-2 rounded-md transition-all ${
-                  !annualBilling ? "bg-agency-blue text-white" : "text-gray-600 hover:text-gray-900"
+                  !annualBilling ? "gradient-bg text-white" : "text-gray-400 hover:text-white"
                 }`}
               >
                 Monthly
@@ -120,11 +116,11 @@ const Pricing = () => {
               <button
                 onClick={() => setAnnualBilling(true)}
                 className={`px-4 py-2 rounded-md transition-all ${
-                  annualBilling ? "bg-agency-blue text-white" : "text-gray-600 hover:text-gray-900"
+                  annualBilling ? "gradient-bg text-white" : "text-gray-400 hover:text-white"
                 }`}
               >
                 Annually
-                <span className="ml-1 text-xs py-0.5 px-1 bg-green-100 text-green-800 rounded">
+                <span className="ml-1 text-xs py-0.5 px-1 bg-green-900/50 text-green-400 rounded">
                   Save 20%
                 </span>
               </button>
@@ -136,16 +132,16 @@ const Pricing = () => {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="flex flex-col sm:flex-row items-center justify-center text-sm space-y-2 sm:space-y-0 sm:space-x-4"
             >
-              <div className="flex items-center text-gray-600">
-                <FiCheck className="text-agency-blue mr-2" />
+              <div className="flex items-center text-gray-300">
+                <FiCheck className="text-blue-400 mr-2" />
                 7-Day Free Trial
               </div>
-              <div className="flex items-center text-gray-600">
-                <FiCheck className="text-agency-blue mr-2" />
+              <div className="flex items-center text-gray-300">
+                <FiCheck className="text-blue-400 mr-2" />
                 $197 One-Time Setup Fee
               </div>
-              <div className="flex items-center text-gray-600">
-                <FiCheck className="text-agency-blue mr-2" />
+              <div className="flex items-center text-gray-300">
+                <FiCheck className="text-blue-400 mr-2" />
                 Cancel Anytime
               </div>
             </motion.div>
@@ -154,7 +150,7 @@ const Pricing = () => {
       </section>
 
       {/* Pricing Cards */}
-      <section className="py-12 md:py-16">
+      <section className="py-12 md:py-16 relative">
         <div className="container-custom">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {pricingPlans.map((plan, index) => (
@@ -163,29 +159,29 @@ const Pricing = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 + (index * 0.1) }}
-                className={`bg-white rounded-xl shadow-md overflow-hidden relative border ${
-                  plan.mostPopular ? 'border-agency-blue' : 'border-gray-200'
+                className={`glass-card rounded-xl overflow-hidden relative ${
+                  plan.mostPopular ? 'ring-2 ring-blue-500' : ''
                 }`}
               >
                 {plan.mostPopular && (
-                  <div className="absolute top-0 right-0 bg-agency-blue text-white py-1 px-3 text-sm font-medium">
+                  <div className="absolute top-0 right-0 bg-blue-500 text-white py-1 px-3 text-sm font-medium">
                     Most Popular
                   </div>
                 )}
 
                 <div className="p-8">
                   <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
-                  <p className="text-gray-600 mb-6">{plan.description}</p>
+                  <p className="text-gray-400 mb-6">{plan.description}</p>
                   
                   <div className="mb-8">
                     <div className="flex items-baseline">
                       <span className="text-4xl font-bold">
                         ${annualBilling ? plan.annualPrice : plan.price}
                       </span>
-                      <span className="text-gray-600 ml-2">/month</span>
+                      <span className="text-gray-400 ml-2">/month</span>
                     </div>
                     {annualBilling && (
-                      <p className="text-green-600 text-sm mt-1">
+                      <p className="text-green-400 text-sm mt-1">
                         Billed annually at ${plan.annualPrice * 12}/year
                       </p>
                     )}
@@ -195,8 +191,8 @@ const Pricing = () => {
                     to="/demo"
                     className={`block w-full py-3 px-4 text-center rounded-lg font-medium mb-8 ${
                       plan.mostPopular
-                        ? "gradient-bg text-white shadow-md hover:shadow-lg transition-all"
-                        : "bg-white border border-agency-blue text-agency-blue hover:bg-agency-blue hover:text-white transition-all"
+                        ? "gradient-bg text-white shadow-lg hover:shadow-xl transition-all"
+                        : "glass-card text-white hover:bg-white/10 transition-all"
                     }`}
                   >
                     {plan.ctaText}
@@ -205,8 +201,8 @@ const Pricing = () => {
                   <ul className="space-y-4">
                     {plan.features.map((feature, i) => (
                       <li key={i} className="flex">
-                        <FiCheck className="text-agency-blue mt-1 mr-3 flex-shrink-0" />
-                        <span className="text-gray-700">{feature}</span>
+                        <FiCheck className="text-blue-400 mt-1 mr-3 flex-shrink-0" />
+                        <span className="text-gray-300">{feature}</span>
                       </li>
                     ))}
                   </ul>
@@ -218,18 +214,22 @@ const Pricing = () => {
       </section>
       
       {/* FAQ Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container-custom">
+      <section className="py-16 relative overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background/80" />
+        </div>
+        
+        <div className="container-custom relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <h2 className="text-3xl font-bold mb-4">
               Frequently Asked <span className="gradient-text">Questions</span>
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-300">
               Everything you need to know about our pricing and plans
             </p>
           </div>
           
-          <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-sm overflow-hidden">
+          <div className="max-w-3xl mx-auto glass-card rounded-xl overflow-hidden">
             <div className="divide-y divide-gray-200">
               <div className="p-6">
                 <h3 className="text-lg font-medium text-gray-900 mb-2">What happens after the 7-day trial?</h3>
@@ -273,7 +273,7 @@ const Pricing = () => {
       {/* CTA Section */}
       <section className="py-16 md:py-24">
         <div className="container-custom">
-          <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12 border border-gray-100">
+          <div className="glass-card rounded-2xl p-8 md:p-12">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
               <div>
                 <h2 className="text-3xl font-bold mb-4">
@@ -287,7 +287,7 @@ const Pricing = () => {
                 </Link>
               </div>
               
-              <div className="bg-gray-50 p-6 rounded-xl border border-gray-200">
+              <div className="glass-card p-6 rounded-xl border border-gray-200">
                 <h3 className="text-xl font-bold mb-4">What's included in every plan</h3>
                 <ul className="space-y-3">
                   <li className="flex items-start">
