@@ -52,6 +52,16 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				agency: {
+					blue: '#2563EB',
+					purple: '#7E69AB',
+					darkPurple: '#1A1F2C',
+					lightPurple: '#D6BCFA',
+					vibrantPurple: '#8B5CF6',
+					gray: '#8E9196',
+					dark: '#222222',
+					light: '#FFFFFF',
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
