@@ -1,18 +1,16 @@
 
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { 
+import {
   Accordion,
   AccordionContent,
   AccordionItem,
-  AccordionTrigger
+  AccordionTrigger,
 } from "@/components/ui/accordion";
-import { cn } from "@/lib/utils";
 
 const faqs = [
   {
     question: "What does Sudden Impact Agency offer?",
-    answer: "We provide plug-and-play AI voice agents specifically designed for service-based businesses like contractors, call centers, restaurants, healthcare providers, and more. Our agents handle calls, qualify leads, schedule appointments, and integrate seamlessly into your workflows."
+    answer: "We provide plug-and-play AI voice agents specifically designed for service-based businesses. Our agents handle calls, qualify leads, schedule appointments, and integrate seamlessly into your workflows."
   },
   {
     question: "Are your AI voice agents customizable?",
@@ -28,19 +26,13 @@ const faqs = [
   },
   {
     question: "Is there a free trial?",
-    answer: "Yes! We offer a 7-day free trial on all subscription plans."
-  },
-  {
-    question: "Do I need a credit card for the trial?",
-    answer: "Yes, a valid credit card is required to start the trial. However, you won't be charged until the trial ends."
+    answer: "Yes! We offer a 7-day free trial on all subscription plans, allowing you to experience the full power of our AI voice agents."
   }
 ];
 
 const Faq = () => {
-  const [openItem, setOpenItem] = useState<string | null>("item-0");
-
   return (
-    <section className="section-padding bg-background/50">
+    <section className="py-24 bg-background/50">
       <div className="container-custom">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <motion.h2 
@@ -48,16 +40,16 @@ const Faq = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-3xl md:text-4xl font-bold mb-4"
+            className="text-4xl font-bold mb-4 bg-gradient-to-br from-white via-white/90 to-white/70 bg-clip-text text-transparent"
           >
-            Frequently Asked <span className="gradient-text">Questions</span>
+            Frequently Asked Questions
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-xl text-gray-300"
+            className="text-xl text-muted-foreground"
           >
             Find answers to common questions about our AI voice agent solutions
           </motion.p>
@@ -70,32 +62,21 @@ const Faq = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="max-w-3xl mx-auto"
         >
-          <div className="glass-card rounded-xl overflow-hidden">
-            <Accordion
-              type="single"
-              collapsible
-              value={openItem}
-              onValueChange={setOpenItem}
-              className="w-full"
-            >
+          <div className="glass-morphism rounded-xl overflow-hidden">
+            <Accordion type="single" collapsible className="w-full">
               {faqs.map((faq, index) => (
                 <AccordionItem 
-                  key={`item-${index}`}
+                  key={index} 
                   value={`item-${index}`}
-                  className={cn(
-                    "border-b border-white/10 last:border-0",
-                    "transition-all duration-200"
-                  )}
+                  className="border-b border-white/10 last:border-0 px-6"
                 >
-                  <AccordionTrigger className="py-5 px-6 hover:no-underline group">
-                    <span className="text-lg font-medium text-white group-hover:text-agency-vibrantPurple transition-colors">
+                  <AccordionTrigger className="hover:no-underline py-5">
+                    <span className="text-lg font-medium text-white hover:text-agency-vibrantPurple transition-colors text-left">
                       {faq.question}
                     </span>
                   </AccordionTrigger>
-                  <AccordionContent className="px-6 pb-5">
-                    <div className="text-gray-300 leading-relaxed">
-                      {faq.answer}
-                    </div>
+                  <AccordionContent className="text-muted-foreground pb-5">
+                    {faq.answer}
                   </AccordionContent>
                 </AccordionItem>
               ))}
