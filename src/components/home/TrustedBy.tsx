@@ -1,36 +1,42 @@
 
 import { motion } from "framer-motion";
+import { Chrome, Github, Slack, Figma, Dribbble } from "lucide-react";
 
 const trustedCompanies = [
   {
-    name: "OpenAI",
-    color: "#14B8A6",
-    textColor: "text-teal-500",
-    logo: "OA"
+    name: "Github",
+    color: "#333",
+    textColor: "text-gray-300",
+    Icon: Github,
+    description: "Version Control"
   },
   {
-    name: "Google",
+    name: "Chrome",
     color: "#4285F4",
     textColor: "text-blue-500",
-    logo: "G"
+    Icon: Chrome,
+    description: "Browser Extension"
   },
   {
-    name: "Microsoft",
-    color: "#6B7280",
-    textColor: "text-gray-500", 
-    logo: "MS"
+    name: "Slack",
+    color: "#E01E5A",
+    textColor: "text-pink-500",
+    Icon: Slack,
+    description: "Integration"
   },
   {
-    name: "Anthropic",
-    color: "#8B5CF6",
+    name: "Figma",
+    color: "#A259FF",
     textColor: "text-purple-500",
-    logo: "A"
+    Icon: Figma,
+    description: "Design Partner"
   },
   {
-    name: "DeepMind",
-    color: "#10B981",
-    textColor: "text-green-500",
-    logo: "DM"
+    name: "Dribbble",
+    color: "#EA4C89",
+    textColor: "text-pink-500",
+    Icon: Dribbble,
+    description: "Design Showcase"
   }
 ];
 
@@ -47,7 +53,7 @@ const TrustedBy = () => {
           <h2 className="text-2xl font-semibold text-white/80">Trusted by Industry Leaders</h2>
         </motion.div>
         
-        <div className="flex flex-wrap justify-center items-center gap-12 opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+        <div className="flex flex-wrap justify-center items-center gap-12 opacity-80 hover:opacity-100 transition-all duration-500">
           {trustedCompanies.map((company, i) => (
             <motion.div
               key={company.name}
@@ -55,12 +61,18 @@ const TrustedBy = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className={`w-32 h-16 rounded-lg flex items-center justify-center border border-white/10 shadow-lg`}
-              style={{ backgroundColor: `${company.color}20` }}
+              className="group relative w-32 h-32 rounded-xl flex flex-col items-center justify-center gap-2 border border-white/10 backdrop-blur-sm"
+              style={{ backgroundColor: `${company.color}10` }}
             >
-              <div className={`text-2xl font-bold ${company.textColor} opacity-80`}>
-                {company.logo}
-              </div>
+              <company.Icon 
+                className={`w-8 h-8 ${company.textColor} group-hover:scale-110 transition-transform duration-300`}
+              />
+              <span className={`text-sm font-medium ${company.textColor}`}>
+                {company.name}
+              </span>
+              <span className="text-xs text-white/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                {company.description}
+              </span>
             </motion.div>
           ))}
         </div>
