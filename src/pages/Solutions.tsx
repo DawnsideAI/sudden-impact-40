@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FiTool, FiHeart, FiPhoneCall, FiArrowRight, FiCheck } from "react-icons/fi";
@@ -188,7 +189,7 @@ const Solutions = () => {
       <section id="solutions-section" className="py-16">
         <div className="container-custom">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
-            {industries.map((industry) => (
+            {industries.map((industry, index) => (
               <IndustryCard
                 key={industry.id}
                 id={industry.id}
@@ -197,6 +198,7 @@ const Solutions = () => {
                 description={industry.description}
                 isActive={activeTab === industry.id}
                 onClick={() => setActiveTab(industry.id)}
+                index={index}
               />
             ))}
           </div>
