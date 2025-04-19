@@ -9,46 +9,44 @@ import {
 } from "@/components/ui/accordion";
 import { cn } from "@/lib/utils";
 
-const faqs = [
+const faqItems = [
   {
-    question: "What does Sudden Impact Agency offer?",
-    answer: "We provide plug-and-play AI voice agents specifically designed for service-based businesses like contractors, call centers, restaurants, healthcare providers, and more. Our agents handle calls, qualify leads, schedule appointments, and integrate seamlessly into your workflows."
+    question: "What happens after the 7-day trial?",
+    answer: "If you don't cancel before the trial ends, your chosen plan will begin automatically, and your card will be charged the monthly (or annual) subscription fee, along with a one-time $197 setup fee."
   },
   {
-    question: "Are your AI voice agents customizable?",
-    answer: "Yes! We offer both ready-to-deploy voice agents and fully custom AI solutions built to match your specific industry needs and internal systems."
+    question: "Can I cancel during the trial?",
+    answer: "Absolutely. You can cancel anytime during your 7-day trial with no charge."
   },
   {
-    question: "What is the Sudden Impact Automation Suite?",
-    answer: "It's our bundled platform that includes voice agents, CRM tools, smart calendars, funnel pages, and automation systems—all under one streamlined SaaS solution."
+    question: "What are AI Engagement Minutes?",
+    answer: "AI Engagement Minutes are the amount of time your AI agent spends actively engaging with your leads or customers. This includes live calls, demo sessions, and appointment workflows."
   },
   {
-    question: "Do you integrate with existing tools?",
-    answer: "Yes. We support integrations with most CRMs, scheduling systems, and communication platforms. Custom integrations are available for complex workflows."
+    question: "What if I go over my monthly minutes?",
+    answer: "If you exceed your plan's allocated minutes, you'll be charged an overage fee per minute at the current rate (currently $0.15/min). Your card on file will be billed automatically."
   },
   {
-    question: "Is there a free trial?",
-    answer: "Yes! We offer a 7-day free trial on all subscription plans."
-  },
-  {
-    question: "Do I need a credit card for the trial?",
-    answer: "Yes, a valid credit card is required to start the trial. However, you won't be charged until the trial ends."
+    question: "Can I upgrade or downgrade my plan?",
+    answer: "Yes! You can change your plan at any time. Upgrades go into effect immediately; downgrades take effect at the start of the next billing cycle."
   }
 ];
 
-const Faq = () => {
+const PricingFaq = () => {
   const [openItem, setOpenItem] = useState<string | null>("item-0");
 
   return (
-    <section className="section-padding bg-background/50">
-      <div className="container-custom">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+    <section className="py-16 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background/80" />
+      
+      <div className="container-custom relative z-10">
+        <div className="text-center max-w-3xl mx-auto mb-12">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-3xl md:text-4xl font-bold mb-4"
+            className="text-3xl font-bold mb-4"
           >
             Frequently Asked <span className="gradient-text">Questions</span>
           </motion.h2>
@@ -59,10 +57,10 @@ const Faq = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-xl text-gray-300"
           >
-            Find answers to common questions about our AI voice agent solutions
+            Everything you need to know about our pricing and plans
           </motion.p>
         </div>
-
+        
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -78,7 +76,7 @@ const Faq = () => {
               onValueChange={setOpenItem}
               className="w-full"
             >
-              {faqs.map((faq, index) => (
+              {faqItems.map((item, index) => (
                 <AccordionItem 
                   key={`item-${index}`}
                   value={`item-${index}`}
@@ -89,12 +87,12 @@ const Faq = () => {
                 >
                   <AccordionTrigger className="py-5 px-6 hover:no-underline group">
                     <span className="text-lg font-medium text-white group-hover:text-agency-vibrantPurple transition-colors">
-                      {faq.question}
+                      {item.question}
                     </span>
                   </AccordionTrigger>
                   <AccordionContent className="px-6 pb-5">
                     <div className="text-gray-300 leading-relaxed">
-                      {faq.answer}
+                      {item.answer}
                     </div>
                   </AccordionContent>
                 </AccordionItem>
@@ -107,4 +105,4 @@ const Faq = () => {
   );
 };
 
-export default Faq;
+export default PricingFaq;

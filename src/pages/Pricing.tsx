@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { FiCheck, FiInfo } from "react-icons/fi";
+import PricingFaq from "@/components/pricing/PricingFaq";
 
 const pricingPlans = [
   {
@@ -214,61 +215,7 @@ const Pricing = () => {
       </section>
       
       {/* FAQ Section */}
-      <section className="py-16 relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background/80" />
-        </div>
-        
-        <div className="container-custom relative z-10">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <h2 className="text-3xl font-bold mb-4">
-              Frequently Asked <span className="gradient-text">Questions</span>
-            </h2>
-            <p className="text-xl text-gray-300">
-              Everything you need to know about our pricing and plans
-            </p>
-          </div>
-          
-          <div className="max-w-3xl mx-auto glass-card rounded-xl overflow-hidden">
-            <div className="divide-y divide-gray-200">
-              <div className="p-6">
-                <h3 className="text-lg font-medium text-gray-900 mb-2">What happens after the 7-day trial?</h3>
-                <p className="text-gray-600">
-                  If you don't cancel before the trial ends, your chosen plan will begin automatically, and your card will be charged the monthly (or annual) subscription fee, along with a one-time $197 setup fee.
-                </p>
-              </div>
-              
-              <div className="p-6">
-                <h3 className="text-lg font-medium text-gray-900 mb-2">Can I cancel during the trial?</h3>
-                <p className="text-gray-600">
-                  Absolutely. You can cancel anytime during your 7-day trial with no charge.
-                </p>
-              </div>
-              
-              <div className="p-6">
-                <h3 className="text-lg font-medium text-gray-900 mb-2">What are AI Engagement Minutes?</h3>
-                <p className="text-gray-600">
-                  AI Engagement Minutes are the amount of time your AI agent spends actively engaging with your leads or customers. This includes live calls, demo sessions, and appointment workflows.
-                </p>
-              </div>
-              
-              <div className="p-6">
-                <h3 className="text-lg font-medium text-gray-900 mb-2">What if I go over my monthly minutes?</h3>
-                <p className="text-gray-600">
-                  If you exceed your plan's allocated minutes, you'll be charged an overage fee per minute at the current rate (currently $0.15/min). Your card on file will be billed automatically.
-                </p>
-              </div>
-              
-              <div className="p-6">
-                <h3 className="text-lg font-medium text-gray-900 mb-2">Can I upgrade or downgrade my plan?</h3>
-                <p className="text-gray-600">
-                  Yes! You can change your plan at any time. Upgrades go into effect immediately; downgrades take effect at the start of the next billing cycle.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PricingFaq />
       
       {/* CTA Section */}
       <section className="py-16 md:py-24">
