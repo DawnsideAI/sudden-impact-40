@@ -8,6 +8,8 @@ import CallToAction from "@/components/home/CallToAction";
 import Faq from "@/components/home/Faq";
 import DemoForm from "@/components/home/DemoForm";
 import CallerComparisonChart from "@/components/home/CallerComparisonChart";
+import Stats from "@/components/home/Stats";
+import TrustedBy from "@/components/home/TrustedBy";
 
 const Index = () => {
   useEffect(() => {
@@ -18,7 +20,9 @@ const Index = () => {
     <Layout>
       <div className="flex flex-col gap-0">
         <Hero />
+        <Stats />
         <ServiceFeatures />
+        <TrustedBy />
         <CallerComparisonChart />
         <IndustrySolutions />
         <DemoForm />
