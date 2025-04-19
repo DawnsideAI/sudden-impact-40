@@ -10,18 +10,19 @@ import DemoForm from "@/components/home/DemoForm";
 
 const Index = () => {
   useEffect(() => {
-    // Scroll to top when component mounts
     window.scrollTo(0, 0);
   }, []);
 
   return (
     <Layout>
-      <Hero />
-      <ServiceFeatures />
-      <IndustrySolutions />
-      <DemoForm />
-      <Faq />
-      <CallToAction />
+      <div className="flex flex-col gap-0">
+        <Hero />
+        <ServiceFeatures />
+        <IndustrySolutions />
+        <DemoForm />
+        <Faq />
+        <CallToAction />
+      </div>
     </Layout>
   );
 };

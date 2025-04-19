@@ -27,8 +27,13 @@ const features = [
 
 const ServiceFeatures = () => {
   return (
-    <section className="py-24 bg-background/50 border-y border-white/10">
-      <div className="container-custom">
+    <section className="py-24 relative overflow-hidden">
+      {/* Background elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-agency-vibrantPurple/20 rounded-full blur-3xl" />
+      </div>
+      
+      <div className="container-custom relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
@@ -58,12 +63,12 @@ const ServiceFeatures = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
-              className="glass-morphism rounded-xl p-6 hover:bg-white/10 transition-colors group"
+              className="glass-morphism rounded-xl p-6 hover:bg-white/5 transition-all duration-300 group"
             >
-              <div className="w-12 h-12 rounded-full bg-agency-vibrantPurple/20 group-hover:bg-agency-vibrantPurple/30 flex items-center justify-center text-white mb-4 transition-colors">
+              <div className="w-12 h-12 rounded-full bg-agency-vibrantPurple/20 group-hover:bg-agency-vibrantPurple/30 flex items-center justify-center mb-4 transition-colors">
                 {feature.icon}
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-white">{feature.title}</h3>
+              <h3 className="text-xl font-semibold mb-2 text-gradient">{feature.title}</h3>
               <p className="text-muted-foreground">{feature.description}</p>
             </motion.div>
           ))}
