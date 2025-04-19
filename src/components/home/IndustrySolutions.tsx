@@ -15,9 +15,7 @@ const industries = [
       "Reservation Management: Handle bookings efficiently, even during peak hours.",
       "Menu Assistance: Provide instant answers to menu inquiries and dietary concerns.",
       "Order Processing: Streamline takeout and delivery orders with precision."
-    ],
-    bgColor: "bg-amber-50",
-    accentColor: "text-amber-600"
+    ]
   },
   {
     id: "healthcare",
@@ -28,9 +26,7 @@ const industries = [
       "Patient Scheduling: Automate appointment bookings and reminders.",
       "Information Dissemination: Provide answers to common patient queries.",
       "Post-Care Follow-Up: Ensure patients receive timely post-treatment information."
-    ],
-    bgColor: "bg-blue-50",
-    accentColor: "text-blue-600"
+    ]
   },
   {
     id: "callcenters",
@@ -41,9 +37,7 @@ const industries = [
       "Call Routing: Direct calls to the appropriate departments or personnel.",
       "Customer Support: Handle FAQs and common issues without human intervention.",
       "Data Collection: Gather customer feedback and insights seamlessly."
-    ],
-    bgColor: "bg-purple-50",
-    accentColor: "text-purple-600"
+    ]
   }
 ];
 
@@ -57,15 +51,20 @@ const IndustrySolutions = () => {
   const current = getActiveIndustry();
 
   return (
-    <section className="section-padding">
-      <div className="container-custom">
+    <section className="section-padding relative overflow-hidden">
+      {/* Background elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-agency-vibrantPurple/20 rounded-full blur-3xl" />
+      </div>
+      
+      <div className="container-custom relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-3xl md:text-4xl font-bold mb-4"
+            className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-br from-white via-white/90 to-white/70 bg-clip-text text-transparent"
           >
             Custom AI Voice Solutions for{" "}
             <span className="gradient-text">Diverse Industries</span>
@@ -75,7 +74,7 @@ const IndustrySolutions = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-xl text-gray-600"
+            className="text-xl text-muted-foreground"
           >
             Beyond service contractors, we offer AI voice agents tailored to the unique demands of various sectors.
           </motion.p>
@@ -89,23 +88,23 @@ const IndustrySolutions = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className={`p-6 rounded-xl text-left transition-all duration-300 ${
+              className={`glass-morphism p-6 rounded-xl text-left transition-all duration-300 ${
                 activeIndustry === industry.id
-                  ? "border-2 border-agency-purple shadow-md"
-                  : "border border-gray-200 hover:border-agency-purple hover:shadow-sm"
+                  ? "border-2 border-agency-vibrantPurple shadow-md"
+                  : "border border-white/10 hover:border-agency-vibrantPurple/70 hover:shadow-sm"
               }`}
               onClick={() => setActiveIndustry(industry.id)}
             >
               <div className={`w-12 h-12 rounded-full flex items-center justify-center text-white mb-4 ${
-                activeIndustry === industry.id ? "gradient-bg" : "bg-gray-200"
+                activeIndustry === industry.id ? "bg-agency-vibrantPurple" : "bg-white/10"
               }`}>
                 {industry.icon}
               </div>
-              <h3 className="text-xl font-semibold mb-2">{industry.title}</h3>
-              <p className="text-gray-600 line-clamp-2">{industry.description}</p>
+              <h3 className="text-xl font-semibold mb-2 text-white">{industry.title}</h3>
+              <p className="text-muted-foreground line-clamp-2">{industry.description}</p>
               
               {activeIndustry === industry.id && (
-                <div className="mt-2 text-agency-blue font-medium">Selected</div>
+                <div className="mt-2 text-agency-vibrantPurple font-medium">Selected</div>
               )}
             </motion.button>
           ))}
@@ -116,15 +115,15 @@ const IndustrySolutions = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className={`rounded-2xl ${current.bgColor} p-8 border border-gray-100 shadow-sm`}
+          className="glass-morphism rounded-2xl p-8 border border-white/10"
         >
           <div className="flex flex-col md:flex-row md:items-center gap-6 mb-8">
-            <div className={`w-16 h-16 rounded-full gradient-bg flex items-center justify-center text-white shrink-0`}>
+            <div className="w-16 h-16 rounded-full bg-agency-vibrantPurple flex items-center justify-center text-white shrink-0">
               {current.icon}
             </div>
             <div>
-              <h3 className="text-2xl font-bold mb-2">{current.title}</h3>
-              <p className="text-gray-700">{current.description}</p>
+              <h3 className="text-2xl font-bold mb-2 text-white">{current.title}</h3>
+              <p className="text-muted-foreground">{current.description}</p>
             </div>
           </div>
           
@@ -133,16 +132,19 @@ const IndustrySolutions = () => {
               const [title, description] = feature.split(": ");
               
               return (
-                <div key={index} className="bg-white rounded-lg p-5 shadow-sm">
-                  <p className={`font-semibold mb-2 ${current.accentColor}`}>{title}</p>
-                  <p className="text-gray-600">{description}</p>
+                <div key={index} className="bg-white/5 rounded-lg p-5 border border-white/10">
+                  <p className="font-semibold mb-2 text-agency-vibrantPurple">{title}</p>
+                  <p className="text-muted-foreground">{description}</p>
                 </div>
               );
             })}
           </div>
           
           <div className="flex justify-center">
-            <Link to="/solutions" className="btn-primary">
+            <Link 
+              to="/solutions" 
+              className="inline-flex items-center justify-center px-6 py-3 text-white bg-agency-vibrantPurple hover:bg-agency-vibrantPurple/90 rounded-lg transition-colors"
+            >
               Learn More About {current.title}
             </Link>
           </div>
