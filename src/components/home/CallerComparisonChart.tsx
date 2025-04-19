@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/chart";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { motion } from "framer-motion";
-import { Timer, Clock, Speed, DollarSign } from "lucide-react";
+import { Timer, Clock, ChartBar, DollarSign } from "lucide-react";
 
 const metrics = [
   {
@@ -108,7 +108,8 @@ const CallerComparisonChart = () => {
                   />
                   <YAxis tick={{ fill: 'white' }} />
                   <Tooltip
-                    content={({ active, payload }) => {
+                    content={(props) => {
+                      const { active, payload } = props;
                       if (active && payload && payload.length) {
                         const data = payload[0].payload;
                         return (
@@ -166,7 +167,7 @@ const CallerComparisonChart = () => {
               description: "168 hours of weekly operation compared to 40 hours with human agents."
             },
             {
-              icon: Speed,
+              icon: ChartBar,
               title: "Faster Response",
               description: "1-second response time versus 45-second average human response."
             },

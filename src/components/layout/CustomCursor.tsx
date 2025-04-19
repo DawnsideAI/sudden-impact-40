@@ -27,7 +27,7 @@ const CustomCursor = () => {
         target.tagName === 'INPUT' ||
         target.closest('.feature-card');
       
-      setIsHovering(isInteractive);
+      setIsHovering(!!isInteractive); // Convert to boolean with !! operator
     };
 
     window.addEventListener('mousemove', handleMouseMove);
