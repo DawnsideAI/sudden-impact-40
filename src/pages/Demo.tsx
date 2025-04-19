@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
@@ -48,7 +47,13 @@ const Demo = () => {
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
             {/* Tab Navigation */}
-            <div className="flex flex-col sm:flex-row border-b border-white/10 mb-12">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="flex flex-col sm:flex-row border-b border-white/10 mb-12"
+            >
               <button
                 onClick={() => setActiveTab("live")}
                 className={`py-4 px-6 text-lg font-medium border-b-2 transition-colors ${
@@ -71,11 +76,17 @@ const Demo = () => {
                 <Calendar className="inline-block mr-2 h-5 w-5" />
                 Schedule for Later
               </button>
-            </div>
+            </motion.div>
 
             {/* Live Demo Form */}
             {activeTab === "live" && (
-              <div className="glass-morphism rounded-xl p-8">
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="glass-morphism rounded-xl p-8"
+              >
                 <div className="text-center mb-8">
                   <div className="w-16 h-16 mx-auto rounded-full bg-agency-vibrantPurple/20 flex items-center justify-center text-white mb-4">
                     <Mic className="h-6 w-6" />
@@ -87,12 +98,18 @@ const Demo = () => {
                 </div>
 
                 <DemoRequestForm />
-              </div>
+              </motion.div>
             )}
 
             {/* Schedule Demo */}
             {activeTab === "schedule" && (
-              <div className="glass-morphism rounded-xl p-8">
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="glass-morphism rounded-xl p-8"
+              >
                 <div className="text-center mb-8">
                   <div className="w-16 h-16 mx-auto rounded-full bg-agency-vibrantPurple/20 flex items-center justify-center text-white mb-4">
                     <Calendar className="h-6 w-6" />
@@ -132,7 +149,7 @@ const Demo = () => {
                     </button>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             )}
           </div>
         </div>
@@ -141,16 +158,28 @@ const Demo = () => {
       {/* Features Section */}
       <section className="py-16 bg-background/50 border-y border-white/10">
         <div className="container-custom">
-          <div className="max-w-3xl mx-auto text-center mb-12">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="max-w-3xl mx-auto text-center mb-12"
+          >
             <h2 className="text-3xl font-bold mb-4 bg-gradient-to-br from-white via-white/90 to-white/70 bg-clip-text text-transparent">
               What to Expect During Your Demo
             </h2>
             <p className="text-xl text-muted-foreground">
               Get a glimpse of how our AI voice agents can transform your business operations
             </p>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto"
+          >
             {[
               {
                 icon: <MessageSquare className="h-5 w-5" />,
@@ -183,7 +212,7 @@ const Demo = () => {
                 <p className="text-muted-foreground">{feature.description}</p>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
     </Layout>

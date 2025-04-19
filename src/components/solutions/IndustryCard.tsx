@@ -10,6 +10,7 @@ interface IndustryCardProps {
   description: string;
   isActive: boolean;
   onClick: () => void;
+  index: number;
 }
 
 export const IndustryCard = ({
@@ -19,13 +20,14 @@ export const IndustryCard = ({
   description,
   isActive,
   onClick,
+  index,
 }: IndustryCardProps) => {
   return (
     <motion.button
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: 0.2 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
       className={cn(
         "w-full p-6 rounded-xl text-left transition-all duration-300 glass-card hover:shadow-lg",
         isActive ? "border-[1.5px] border-agency-vibrantPurple shadow-lg" : "hover:border-agency-vibrantPurple/50"
