@@ -5,7 +5,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { ResponsiveBar } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { motion } from "framer-motion";
 
 const metrics = [
@@ -79,57 +79,56 @@ const CallerComparisonChart = () => {
                 },
               }}
             >
-              <ResponsiveBar
-                data={metrics}
-                keys={["human", "ai"]}
-                indexBy="category"
-                margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
-                padding={0.3}
-                valueScale={{ type: "linear" }}
-                indexScale={{ type: "band", round: true }}
-                colors={({ id, data }) => id === "human" ? data.humanColor : data.aiColor}
-                borderRadius={4}
-                axisTop={null}
-                axisRight={null}
-                axisBottom={{
-                  tickSize: 5,
-                  tickPadding: 5,
-                  tickRotation: -45,
-                }}
-                axisLeft={{
-                  tickSize: 5,
-                  tickPadding: 5,
-                  tickRotation: 0,
-                }}
-                labelSkipWidth={12}
-                labelSkipHeight={12}
-                legends={[
-                  {
-                    dataFrom: "keys",
-                    anchor: "bottom-right",
-                    direction: "column",
-                    justify: false,
-                    translateX: 120,
-                    translateY: 0,
-                    itemsSpacing: 2,
-                    itemWidth: 100,
-                    itemHeight: 20,
-                    itemDirection: "left-to-right",
-                    itemOpacity: 0.85,
-                    symbolSize: 20,
-                  },
-                ]}
-                role="application"
-                tooltip={({ id, value, color }) => (
-                  <ChartTooltip>
-                    <ChartTooltipContent>
-                      <div style={{ color: color }}>
-                        {id === "human" ? "Human Agents" : "AI Voice Agents"}: {value}
-                      </div>
-                    </ChartTooltipContent>
-                  </ChartTooltip>
-                )}
-              />
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart
+                  data={metrics}
+                  margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
+                  <XAxis 
+                    dataKey="category" 
+                    tick={{ fill: 'white' }}
+                    angle={-45}
+                    textAnchor="end"
+                    height={70}
+                  />
+                  <YAxis tick={{ fill: 'white' }} />
+                  <Tooltip
+                    content={({ active, payload }) => {
+                      if (active && payload && payload.length) {
+                        return (
+                          <ChartTooltip>
+                            <ChartTooltipContent>
+                              {payload.map((entry, index) => (
+                                <div 
+                                  key={`tooltip-${index}`} 
+                                  style={{ color: entry.color }}
+                                >
+                                  {entry.name === "human" ? "Human Agents" : "AI Voice Agents"}: {entry.value}
+                                </div>
+                              ))}
+                            </ChartTooltipContent>
+                          </ChartTooltip>
+                        );
+                      }
+                      return null;
+                    }}
+                  />
+                  <Legend />
+                  <Bar 
+                    dataKey="human" 
+                    name="Human Agents" 
+                    fill="#E5DEFF" 
+                    radius={[4, 4, 0, 0]}
+                  />
+                  <Bar 
+                    dataKey="ai" 
+                    name="AI Voice Agents" 
+                    fill="#8B5CF6" 
+                    radius={[4, 4, 0, 0]}
+                  />
+                </BarChart>
+              </ResponsiveContainer>
             </ChartContainer>
           </div>
         </Card>
