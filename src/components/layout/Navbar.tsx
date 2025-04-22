@@ -30,10 +30,19 @@ const Navbar = () => {
             to="/" 
             className="relative group flex items-center"
           >
-            <img 
-              src="/lovable-uploads/a8ea11c6-eee2-4a72-9e98-851efb0bdc3d.png" 
+            <motion.img 
+              src="/lovable-uploads/3094ebcc-0925-48b6-9f13-c4e025b7e67d.png" 
               alt="Sudden Impact Agency Logo" 
-              className="h-10 object-contain transition-transform group-hover:scale-105"
+              className="h-16 w-auto object-contain transition-all"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              whileHover={{ scale: 1.05 }}
+              transition={{ 
+                duration: 0.3,
+                type: "spring",
+                stiffness: 300,
+                damping: 10
+              }}
             />
           </Link>
 
