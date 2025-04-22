@@ -28,12 +28,13 @@ const Navbar = () => {
           {/* Logo */}
           <Link 
             to="/" 
-            className="relative group"
+            className="relative group flex items-center"
           >
-            <span className="text-2xl font-bold bg-gradient-to-r from-agency-blue to-agency-vibrantPurple bg-clip-text text-transparent">
-              Sudden Impact
-            </span>
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-agency-blue to-agency-vibrantPurple transition-all group-hover:w-full" />
+            <img 
+              src="/lovable-uploads/a8ea11c6-eee2-4a72-9e98-851efb0bdc3d.png" 
+              alt="Sudden Impact Agency Logo" 
+              className="h-10 object-contain transition-transform group-hover:scale-105"
+            />
           </Link>
 
           {/* Desktop Navigation */}
