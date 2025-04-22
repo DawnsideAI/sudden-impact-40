@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
 import { Calendar, Clock, Check, Mic, MessageSquare } from "lucide-react";
 import DemoRequestForm from "@/components/demo/DemoRequestForm";
+import AIDemoContact from "@/components/demo/AIDemoContact";
 
 const Demo = () => {
   const [activeTab, setActiveTab] = useState("live");
@@ -41,6 +42,9 @@ const Demo = () => {
           </div>
         </div>
       </section>
+
+      {/* AI Demo Contact */}
+      <AIDemoContact />
 
       {/* Demo Options */}
       <section className="py-16">
