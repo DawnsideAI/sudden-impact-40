@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -28,12 +29,23 @@
 }
 
 @layer base {
+  html {
+    -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+  }
+  
   * {
-    @apply border-border selection:bg-white/10 selection:text-white cursor-none;
+    @apply border-border selection:bg-white/10 selection:text-white;
+  }
+  
+  /* Only apply custom cursor on non-touch devices */
+  @media (pointer: fine) {
+    * {
+      @apply cursor-none;
+    }
   }
   
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-background text-foreground antialiased overflow-x-hidden;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
   }
 }
@@ -52,7 +64,7 @@
   }
   
   .feature-card {
-    @apply p-6 rounded-xl border border-white/10 backdrop-blur-lg bg-white/5 shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 hover:bg-white/10;
+    @apply p-4 md:p-6 rounded-xl border border-white/10 backdrop-blur-lg bg-white/5 shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 hover:bg-white/10;
   }
   
   .nav-link {
@@ -60,11 +72,11 @@
   }
   
   .btn-primary {
-    @apply gradient-bg text-white font-medium py-2 px-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5;
+    @apply gradient-bg text-white font-medium py-2 px-3 md:py-2 md:px-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5;
   }
   
   .btn-secondary {
-    @apply bg-white/5 backdrop-blur-lg text-white border border-white/20 font-medium py-2 px-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/10;
+    @apply bg-white/5 backdrop-blur-lg text-white border border-white/20 font-medium py-2 px-3 md:py-2 md:px-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/10;
   }
   
   .glass-card {
@@ -72,11 +84,28 @@
   }
   
   .section-padding {
-    @apply py-16 md:py-24;
+    @apply py-12 md:py-16 lg:py-24;
   }
   
   .container-custom {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Responsive text classes */
+  .text-responsive-xl {
+    @apply text-2xl md:text-3xl lg:text-4xl;
+  }
+  
+  .text-responsive-lg {
+    @apply text-xl md:text-2xl lg:text-3xl;
+  }
+  
+  .text-responsive-md {
+    @apply text-lg md:text-xl lg:text-2xl;
+  }
+  
+  .text-responsive-sm {
+    @apply text-base md:text-lg lg:text-xl;
   }
 }
 
@@ -128,4 +157,11 @@
 
 .delay-500 {
   animation-delay: 0.5s;
+}
+
+/* Media query for responsiveness adjustments */
+@media (max-width: 640px) {
+  .animate-float, .animate-glow, .animate-pulse-slow {
+    animation: none; /* Disable animations on small screens for better performance */
+  }
 }

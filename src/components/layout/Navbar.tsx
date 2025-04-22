@@ -1,13 +1,34 @@
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useScrollDirection } from "@/hooks/useScrollDirection";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const isVisible = useScrollDirection();
+  const isMobile = useIsMobile();
+
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isOpen]);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -30,7 +51,7 @@ const Navbar = () => {
       <div className="absolute inset-0 backdrop-blur-md bg-background/30" />
       
       <div className="relative container-custom">
-        <div className="flex items-center justify-between py-4">
+        <div className="flex items-center justify-between py-3 md:py-4">
           {/* Logo */}
           <Link 
             to="/" 
@@ -39,7 +60,7 @@ const Navbar = () => {
             <motion.img 
               src="/lovable-uploads/04e02938-36ca-4abc-adad-95afd668326b.png" 
               alt="Sudden Impact Agency Logo" 
-              className="h-20 w-auto object-contain transition-all bg-white/80 rounded-lg p-2"
+              className="h-14 sm:h-16 md:h-20 w-auto object-contain transition-all bg-white/80 rounded-lg p-2"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               whileHover={{ scale: 1.05 }}
@@ -53,7 +74,7 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
             {navItems.map((item) => (
               <Link
                 key={item.path}
@@ -81,11 +102,11 @@ const Navbar = () => {
           </div>
 
           {/* CTA Buttons */}
-          <div className="hidden md:flex items-center space-x-4">
-            <Link to="/demo" className="btn-secondary">
+          <div className="hidden md:flex items-center space-x-3 lg:space-x-4">
+            <Link to="/demo" className="btn-secondary text-sm">
               See Demo
             </Link>
-            <Link to="/pricing" className="btn-primary">
+            <Link to="/pricing" className="btn-primary text-sm">
               Start Free Trial
             </Link>
           </div>
@@ -106,18 +127,17 @@ const Navbar = () => {
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
+            animate={{ opacity: 1, height: '100vh' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="relative md:hidden"
+            className="md:hidden fixed inset-0 top-[65px] z-40 bg-background/95 backdrop-blur-lg overflow-auto"
           >
-            <div className="absolute inset-0 backdrop-blur-md bg-background/30" />
-            <div className="relative container-custom py-4 flex flex-col space-y-4">
+            <div className="container-custom py-6 flex flex-col space-y-5">
               {navItems.map((item) => (
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
+                  className={`px-3 py-3 text-lg font-medium rounded-lg transition-colors ${
                     location.pathname === item.path
                       ? 'bg-white/10 text-white'
                       : 'text-muted-foreground hover:bg-white/5 hover:text-white'
@@ -127,17 +147,17 @@ const Navbar = () => {
                   {item.label}
                 </Link>
               ))}
-              <div className="flex flex-col space-y-2 pt-2">
+              <div className="flex flex-col space-y-3 pt-4 mt-4 border-t border-white/10">
                 <Link 
                   to="/demo" 
-                  className="btn-secondary w-full text-center"
+                  className="btn-secondary w-full text-center py-3 text-lg"
                   onClick={() => setIsOpen(false)}
                 >
                   See Demo
                 </Link>
                 <Link 
                   to="/pricing" 
-                  className="btn-primary w-full text-center"
+                  className="btn-primary w-full text-center py-3 text-lg"
                   onClick={() => setIsOpen(false)}
                 >
                   Start Free Trial

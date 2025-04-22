@@ -31,14 +31,22 @@ const CustomCursor = () => {
       setIsHovering(!!isInteractive); // Convert to boolean with !! operator
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseover', handleMouseOver);
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseover', handleMouseOver);
-    };
+    // Only add mouse event listeners if not a touch device
+    if (window.matchMedia('(pointer: fine)').matches) {
+      window.addEventListener('mousemove', handleMouseMove);
+      window.addEventListener('mouseover', handleMouseOver);
+  
+      return () => {
+        window.removeEventListener('mousemove', handleMouseMove);
+        window.removeEventListener('mouseover', handleMouseOver);
+      };
+    }
   }, [cursorX, cursorY]);
+
+  // Don't render cursor on touch devices
+  if (!window.matchMedia('(pointer: fine)').matches) {
+    return null;
+  }
 
   return (
     <>
