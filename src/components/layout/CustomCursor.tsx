@@ -6,7 +6,8 @@ const CustomCursor = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
 
-  const springConfig = { damping: 15, stiffness: 150, mass: 0.2 };
+  // Adjusted spring config for smoother movement
+  const springConfig = { damping: 25, stiffness: 400, mass: 0.8 };
   const cursorX = useSpring(0, springConfig);
   const cursorY = useSpring(0, springConfig);
 
@@ -51,7 +52,7 @@ const CustomCursor = () => {
           translateY: -8,
         }}
         transition={{
-          scale: { type: "spring", stiffness: 300, damping: 30 }
+          scale: { type: "spring", stiffness: 400, damping: 25 }
         }}
       />
       <motion.div
@@ -64,7 +65,7 @@ const CustomCursor = () => {
           translateY: -16,
         }}
         transition={{
-          scale: { type: "spring", stiffness: 200, damping: 25 }
+          scale: { type: "spring", stiffness: 400, damping: 25 }
         }}
       />
     </>
