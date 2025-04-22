@@ -5,6 +5,7 @@ import { motion, useSpring } from 'framer-motion';
 const CustomCursor = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const [isClicking, setIsClicking] = useState(false);
 
   // Adjusted spring config for smoother movement
   const springConfig = { damping: 25, stiffness: 400, mass: 0.8 };
@@ -18,6 +19,9 @@ const CustomCursor = () => {
       cursorY.set(e.clientY);
     };
 
+    const handleMouseDown = () => setIsClicking(true);
+    const handleMouseUp = () => setIsClicking(false);
+
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const isInteractive = 
@@ -28,17 +32,21 @@ const CustomCursor = () => {
         target.tagName === 'INPUT' ||
         target.closest('.feature-card');
       
-      setIsHovering(!!isInteractive); // Convert to boolean with !! operator
+      setIsHovering(!!isInteractive);
     };
 
     // Only add mouse event listeners if not a touch device
     if (window.matchMedia('(pointer: fine)').matches) {
       window.addEventListener('mousemove', handleMouseMove);
       window.addEventListener('mouseover', handleMouseOver);
+      window.addEventListener('mousedown', handleMouseDown);
+      window.addEventListener('mouseup', handleMouseUp);
   
       return () => {
         window.removeEventListener('mousemove', handleMouseMove);
         window.removeEventListener('mouseover', handleMouseOver);
+        window.removeEventListener('mousedown', handleMouseDown);
+        window.removeEventListener('mouseup', handleMouseUp);
       };
     }
   }, [cursorX, cursorY]);
@@ -55,12 +63,12 @@ const CustomCursor = () => {
         style={{
           x: cursorX,
           y: cursorY,
-          scale: isHovering ? 2 : 1,
+          scale: isClicking ? 0.8 : isHovering ? 2 : 1,
           translateX: -8,
           translateY: -8,
         }}
         transition={{
-          scale: { type: "spring", stiffness: 400, damping: 25 }
+          scale: { type: "spring", stiffness: 600, damping: 30 }
         }}
       />
       <motion.div
@@ -68,12 +76,12 @@ const CustomCursor = () => {
         style={{
           x: cursorX,
           y: cursorY,
-          scale: isHovering ? 1.5 : 1,
+          scale: isClicking ? 1.2 : isHovering ? 1.5 : 1,
           translateX: -16,
           translateY: -16,
         }}
         transition={{
-          scale: { type: "spring", stiffness: 400, damping: 25 }
+          scale: { type: "spring", stiffness: 600, damping: 30 }
         }}
       />
     </>
@@ -81,3 +89,4 @@ const CustomCursor = () => {
 };
 
 export default CustomCursor;
+
