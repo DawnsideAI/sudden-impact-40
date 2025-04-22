@@ -1,12 +1,13 @@
-
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { useScrollDirection } from "@/hooks/useScrollDirection";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const isVisible = useScrollDirection();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -20,7 +21,12 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50">
+    <motion.nav 
+      className="fixed top-0 left-0 right-0 z-50"
+      initial={{ y: 0 }}
+      animate={{ y: isVisible ? 0 : '-100%' }}
+      transition={{ duration: 0.3 }}
+    >
       <div className="absolute inset-0 backdrop-blur-md bg-background/30" />
       
       <div className="relative container-custom">
@@ -141,7 +147,7 @@ const Navbar = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </motion.nav>
   );
 };
 
