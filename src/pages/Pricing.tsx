@@ -1,73 +1,55 @@
+
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
-import { FiCheck, FiInfo } from "react-icons/fi";
-import PricingFaq from "@/components/pricing/PricingFaq";
+import { Button } from "@/components/ui/button";
 
 const pricingPlans = [
   {
-    name: "Starter Impact",
-    price: 397,
-    annualPrice: 317,
-    description: "Perfect for solo pros & lean teams starting their AI journey",
+    name: "Starter",
+    price: 499,
+    description: "Perfect for small businesses just getting started with AI voice automation",
     features: [
-      "500 AI Engagement Minutes/month",
-      "1 AI Voice Agent (plug-and-play template)",
-      "Contact & lead CRM (via GHL)",
-      "1 Smart Booking Calendar (GHL native calendar)",
-      "1 Lead Capture Form (branded)",
-      "SMS & Email Follow-up Automation",
-      "Funnel access (1 prebuilt, branded)",
-      "Access to Live AI Demo Tool",
-      "Automated client onboarding via GHL snapshot"
+      "Up to 500 minutes/month",
+      "Basic scheduling",
+      "Email support",
+      "Business hours only"
     ],
     mostPopular: false,
-    ctaText: "Start Free Trial"
+    ctaText: "Get Started"
   },
   {
-    name: "Impact Pro",
-    price: 587,
-    annualPrice: 470,
-    description: "For growing teams who need smart routing and powerful automation",
+    name: "Professional",
+    price: 799,
+    description: "Ideal for growing businesses needing more advanced features",
     features: [
-      "1,500 AI Engagement Minutes/month",
-      "Up to 3 AI Voice Agents (e.g., per service or department)",
-      "Smart Round-Robin Calendar Routing",
-      "Up to 5 Funnels or Landing Pages",
-      "Advanced Pipeline & Deal Management",
-      "Voicemail Drops + Missed Call Text-Backs",
-      "Multi-Step Email/SMS Sequences",
-      "Smart Demo Scheduler + Custom Reminder Flows",
-      "GHL automation & campaign snapshot included"
+      "Up to 5000 minutes/month",
+      "Advanced scheduling",
+      "Priority support",
+      "24/7 availability",
+      "Custom responses"
     ],
     mostPopular: true,
-    ctaText: "Start Free Trial"
+    ctaText: "Get Started"
   },
   {
     name: "Enterprise",
-    price: 897,
-    annualPrice: 718,
-    description: "Ideal for scaling companies & multi-location teams",
+    price: null,
+    description: "For large organizations requiring custom solutions",
     features: [
-      "5,000 AI Engagement Minutes/month",
-      "Unlimited AI Voice Agents",
-      "Unlimited Calendars, Forms, Funnels",
-      "Multi-location CRM Dashboard",
-      "Smart Round-Robin Calendar Routing",
-      "Advanced Pipeline & Deal Management",
-      "Voicemail Drops + Missed Call Text-Backs",
-      "Multi-Step Email/SMS Sequences",
-      "Enterprise-level automation & campaign snapshot"
+      "Unlimited minutes",
+      "Full feature set",
+      "Dedicated support",
+      "Custom integration",
+      "Advanced analytics"
     ],
     mostPopular: false,
-    ctaText: "Start Free Trial"
+    ctaText: "Get Started"
   }
 ];
 
 const Pricing = () => {
-  const [annualBilling, setAnnualBilling] = useState(false);
-  
   useEffect(() => {
     window.scrollTo(0, 0);
     document.title = "Pricing | Sudden Impact Agency";
@@ -91,61 +73,6 @@ const Pricing = () => {
             >
               Simple, Transparent <span className="gradient-text">Pricing</span>
             </motion.h1>
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-xl text-gray-300 mb-8"
-            >
-              Everything you need to launch, scale, and engage — powered by our AI Voice Agents and wrapped in the Sudden Impact Automation Suite.
-            </motion.p>
-            
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="glass-card p-2 rounded-lg inline-flex mb-6"
-            >
-              <button
-                onClick={() => setAnnualBilling(false)}
-                className={`px-4 py-2 rounded-md transition-all ${
-                  !annualBilling ? "gradient-bg text-white" : "text-gray-400 hover:text-white"
-                }`}
-              >
-                Monthly
-              </button>
-              <button
-                onClick={() => setAnnualBilling(true)}
-                className={`px-4 py-2 rounded-md transition-all ${
-                  annualBilling ? "gradient-bg text-white" : "text-gray-400 hover:text-white"
-                }`}
-              >
-                Annually
-                <span className="ml-1 text-xs py-0.5 px-1 bg-green-900/50 text-green-400 rounded">
-                  Save 20%
-                </span>
-              </button>
-            </motion.div>
-            
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="flex flex-col sm:flex-row items-center justify-center text-sm space-y-2 sm:space-y-0 sm:space-x-4"
-            >
-              <div className="flex items-center text-gray-300">
-                <FiCheck className="text-blue-400 mr-2" />
-                7-Day Free Trial
-              </div>
-              <div className="flex items-center text-gray-300">
-                <FiCheck className="text-blue-400 mr-2" />
-                $197 One-Time Setup Fee
-              </div>
-              <div className="flex items-center text-gray-300">
-                <FiCheck className="text-blue-400 mr-2" />
-                Cancel Anytime
-              </div>
-            </motion.div>
           </div>
         </div>
       </section>
@@ -176,16 +103,15 @@ const Pricing = () => {
                   
                   <div className="mb-8">
                     <div className="flex items-baseline">
-                      <span className="text-4xl font-bold">
-                        ${annualBilling ? plan.annualPrice : plan.price}
-                      </span>
-                      <span className="text-gray-400 ml-2">/month</span>
+                      {plan.price ? (
+                        <>
+                          <span className="text-4xl font-bold">${plan.price}</span>
+                          <span className="text-gray-400 ml-2">/month</span>
+                        </>
+                      ) : (
+                        <span className="text-4xl font-bold">Custom Pricing</span>
+                      )}
                     </div>
-                    {annualBilling && (
-                      <p className="text-green-400 text-sm mt-1">
-                        Billed annually at ${plan.annualPrice * 12}/year
-                      </p>
-                    )}
                   </div>
                   
                   <Link
@@ -202,7 +128,7 @@ const Pricing = () => {
                   <ul className="space-y-4">
                     {plan.features.map((feature, i) => (
                       <li key={i} className="flex">
-                        <FiCheck className="text-blue-400 mt-1 mr-3 flex-shrink-0" />
+                        <span className="text-blue-400 mr-3">•</span>
                         <span className="text-gray-300">{feature}</span>
                       </li>
                     ))}
@@ -210,56 +136,6 @@ const Pricing = () => {
                 </div>
               </motion.div>
             ))}
-          </div>
-        </div>
-      </section>
-      
-      {/* FAQ Section */}
-      <PricingFaq />
-      
-      {/* CTA Section */}
-      <section className="py-16 md:py-24">
-        <div className="container-custom">
-          <div className="glass-card rounded-2xl p-8 md:p-12">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-              <div>
-                <h2 className="text-3xl font-bold mb-4">
-                  Ready to experience the <span className="gradient-text">future of business automation</span>?
-                </h2>
-                <p className="text-xl text-gray-600 mb-6">
-                  Start your 7-day free trial today and see how our AI voice agents can transform your business operations.
-                </p>
-                <Link to="/demo" className="btn-primary inline-block">
-                  See Demo and Start Free Trial
-                </Link>
-              </div>
-              
-              <div className="glass-card p-6 rounded-xl border border-gray-200">
-                <h3 className="text-xl font-bold mb-4">What's included in every plan</h3>
-                <ul className="space-y-3">
-                  <li className="flex items-start">
-                    <FiCheck className="text-agency-blue mt-1 mr-3 flex-shrink-0" />
-                    <span>AI Voice Agent Capability</span>
-                  </li>
-                  <li className="flex items-start">
-                    <FiCheck className="text-agency-blue mt-1 mr-3 flex-shrink-0" />
-                    <span>CRM Integration</span>
-                  </li>
-                  <li className="flex items-start">
-                    <FiCheck className="text-agency-blue mt-1 mr-3 flex-shrink-0" />
-                    <span>Booking & Calendar Functions</span>
-                  </li>
-                  <li className="flex items-start">
-                    <FiCheck className="text-agency-blue mt-1 mr-3 flex-shrink-0" />
-                    <span>Email & SMS Follow-ups</span>
-                  </li>
-                  <li className="flex items-start">
-                    <FiCheck className="text-agency-blue mt-1 mr-3 flex-shrink-0" />
-                    <span>Dedicated Support Team</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
           </div>
         </div>
       </section>
