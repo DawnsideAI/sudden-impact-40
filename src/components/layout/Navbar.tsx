@@ -31,9 +31,9 @@ const Navbar = () => {
             className="relative group flex items-center"
           >
             <motion.img 
-              src="/lovable-uploads/3094ebcc-0925-48b6-9f13-c4e025b7e67d.png" 
+              src="/lovable-uploads/04e02938-36ca-4abc-adad-95afd668326b.png" 
               alt="Sudden Impact Agency Logo" 
-              className="h-16 w-auto object-contain transition-all"
+              className="h-20 w-auto object-contain transition-all bg-transparent"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               whileHover={{ scale: 1.05 }}
