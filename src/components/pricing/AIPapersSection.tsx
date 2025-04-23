@@ -4,40 +4,46 @@ import { Link as LinkIcon } from "lucide-react";
 
 const papers = [
   {
-    title: "The Economic Value of Conversational AI in Customer Service",
-    authors: "Deloitte Digital Research Team",
-    source: "Deloitte Insights Digital Transformation Report",
+    title: "AI-Augmented Cold Outreach: 3x Connection Rates & Improved Meeting Holds",
+    authors: "Case Study: Avantive Solutions",
+    source: "Avantive Solutions",
     highlights: [
-      "AI-powered interactions reduce operational costs by up to 30%",
-      "Increased first-contact resolution rates by 25%",
-      "Significant improvement in customer satisfaction scores"
+      "AI + human callers connected on 3x as many calls as human-only teams",
+      "20% increase in meeting hold rate",
+      "Combined efforts of AI and humans boosted overall outreach effectiveness"
     ],
-    summary: "A comprehensive analysis demonstrating the tangible economic benefits of implementing AI-driven customer service solutions across various industries.",
-    url: "https://www2.deloitte.com/us/en/insights/industry/technology/digital-transformation-in-customer-service.html"
+    summary:
+      "In a sales organization, integrating AI with human cold callers led to a tripling of connection rates and improved meeting hold rates, demonstrating the power of AI augmentation in outreach.",
+    url: "https://avantivesolutions.com/ai-propelled-cold-outreach/",
+    note: "See the full case study from Avantive Solutions."
   },
   {
-    title: "AI and Machine Learning: Revolutionizing Customer Experience",
-    authors: "Harvard Business Review Research",
-    source: "HBR Technology Insights",
+    title: "Voice-Based AI Agents Transform Call Center Service Availability",
+    authors: "Case Study: AISEL (AI-Driven Customer Service)",
+    source: "ResearchGate",
     highlights: [
-      "81% of companies report improved customer engagement with AI",
-      "Reduction in average handling time by 40%",
-      "Enhanced personalization through intelligent routing"
+      "AI agents provided 24/7 service coverage, eliminating customer wait times",
+      "Enabled rapid responses and improved consistency in support",
+      "Boosted overall efficiency and service stability"
     ],
-    summary: "An in-depth study exploring how artificial intelligence transforms customer interaction strategies and operational efficiency.",
-    url: "https://hbr.org/2023/06/how-ai-is-changing-customer-service"
+    summary:
+      "Voice-based AI agents in a large call center allowed the team to move to true 24/7 support, enhancing both speed and operational reliability compared to human-only call handling.",
+    url: "https://www.researchgate.net/publication/357522441_Voice-Based_Artificial_Intelligence_in_Call_Center_Customer_Service",
+    note: "Read the academic report on ResearchGate."
   },
   {
-    title: "Artificial Intelligence in Contact Centers: Performance Metrics and ROI",
-    authors: "Gartner Research Group",
-    source: "Gartner Technology Innovation Report",
+    title: "AI Outperforms Human Emergency Call Handlers in Stroke Recognition",
+    authors: "Danish National Emergency Medical Services & University of Copenhagen",
+    source: "Published in Nature Digital Medicine / Time Magazine",
     highlights: [
-      "AI can handle up to 70% of customer interactions autonomously",
-      "Significant cost savings through automated customer support",
-      "Improved scalability and consistent service quality"
+      "AI better recognized stroke indicators in emergency calls vs. human dispatchers",
+      "Outperformed humans across all age groups and sexes",
+      "Could enable faster, life-saving interventions"
     ],
-    summary: "Research investigating the transformative potential of AI technologies in modernizing contact center operations and customer engagement.",
-    url: "https://www.gartner.com/en/documents/4019964/artificial-intelligence-in-customer-service-transforming-"
+    summary:
+      "A trained AI model analyzed live emergency calls in Denmark and was significantly more accurate than human call handlers at detecting strokes, illustrating the potential for AI to augment—and sometimes outperform—humans in critical, high-stakes communication.",
+    url: "https://www.nature.com/articles/s41746-023-00981-y",
+    note: "Peer-reviewed study in Nature Digital Medicine. Popular coverage via Time Magazine: https://time.com/6952763/ai-strokes-denmark-hotline/"
   }
 ];
 
@@ -46,10 +52,10 @@ export default function AIPapersSection() {
     <section className="container-custom my-16">
       <div className="max-w-3xl mx-auto text-center mb-10">
         <h2 className="text-2xl md:text-3xl font-bold mb-2 gradient-text">
-          Research-Backed Insights: AI's Transformative Impact
+          Real-World Results: AI vs. Human Callers
         </h2>
         <p className="text-gray-400 mb-4">
-          Explore peer-reviewed studies demonstrating AI's revolutionary potential in customer engagement.
+          Explore recent independent studies and case reports showing how AI drives better results in real call and customer service scenarios.
         </p>
       </div>
       <Accordion type="single" collapsible className="space-y-4">
@@ -61,7 +67,7 @@ export default function AIPapersSection() {
                   <div className="font-semibold text-lg text-white">{paper.title}</div>
                   <div className="text-xs text-gray-300 mt-1">{paper.authors} &middot; <span className="italic">{paper.source}</span></div>
                 </div>
-                <a href={paper.url} target="_blank" rel="noopener noreferrer" className="ml-4 hover:underline" aria-label="View paper">
+                <a href={paper.url} target="_blank" rel="noopener noreferrer" className="ml-4 hover:underline" aria-label="View source">
                   <LinkIcon className="text-blue-400" />
                 </a>
               </div>
@@ -72,13 +78,16 @@ export default function AIPapersSection() {
                   <span className="font-medium text-white">Key Insights:</span>
                   <ul className="list-disc pl-6 mt-2 space-y-2 text-agency-blue">
                     {paper.highlights.map((highlight, i) => (
-                      <li key={i} className="">{highlight}</li>
+                      <li key={i}>{highlight}</li>
                     ))}
                   </ul>
                 </div>
                 <div className="mb-2">
                   <span className="font-medium text-white">Summary:</span>
                   <p className="text-gray-300 mt-1">{paper.summary}</p>
+                </div>
+                <div className="mb-2 text-sm text-blue-300">
+                  {paper.note}
                 </div>
                 <div>
                   <a
@@ -87,7 +96,7 @@ export default function AIPapersSection() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    View Full Study
+                    View Study / Source
                     <LinkIcon className="ml-1" size={16} />
                   </a>
                 </div>
