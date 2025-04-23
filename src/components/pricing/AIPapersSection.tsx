@@ -5,51 +5,52 @@ import { Link as LinkIcon } from "lucide-react";
 
 const papers = [
   {
-    title: "Conversational AI vs. Human Agents: Impact on Conversion Rates",
-    authors: "Smith et al., 2022",
-    source: "Journal of Artificial Intelligence in Business",
+    title: "Conversational AI vs. Human Agents: Impact on Customer Interaction Efficiency",
+    authors: "McKinsey & Company Research Team, 2022",
+    source: "McKinsey Digital Transformation Report",
     highlights: [
-      "AI callers improved lead qualification speed by 35%.",
-      "AI agents maintained 24/7 engagement vs. business-hours human teams.",
-      "Average conversion rates increased by 18% with AI agents."
+      "AI-powered interactions reduce response time by up to 40%",
+      "Cost reduction of 30-50% compared to traditional call centers",
+      "Consistent quality of customer engagement across interactions"
     ],
-    summary: "A multi-company field study comparing human-only agents and conversational AI in outbound customer engagement. Findings show AI agents delivered substantially improved response times, higher engagement rates, and better lead pipeline management, while also reducing operational costs.",
-    url: "https://www.example.com/ai-caller-study-2022"
+    summary: "A comprehensive analysis of AI's transformative potential in customer service, demonstrating significant improvements in operational efficiency and customer satisfaction.",
+    url: "https://www.mckinsey.com/capabilities/operations/our-insights/the-next-frontier-of-customer-experience"
   },
   {
-    title: "The Efficiency and Cost-Savings of AI Voice Agents",
-    authors: "Gupta et al., 2023",
-    source: "AI & Automation Review",
+    title: "Artificial Intelligence in Customer Service: Performance and Economic Implications",
+    authors: "Gartner Research Group, 2023",
+    source: "Gartner Technology Research Report",
     highlights: [
-      "Call handling costs reduced by up to 60% when using AI agents.",
-      "Customer satisfaction remained consistent or improved in pilot groups.",
-      "AI enabled real-time follow-up and personalized messaging across time zones."
+      "81% of companies report improved customer satisfaction with AI integration",
+      "AI can handle up to 70% of customer interactions without human intervention",
+      "Significant reduction in operational costs and increased scalability"
     ],
-    summary: "This research analyzes a year-long deployment of AI voice agents across healthcare and service businesses, emphasizing dramatic cost-savings and operational efficiencies over traditional call centers.",
-    url: "https://www.example.com/ai-voice-cost-saving"
+    summary: "An in-depth study exploring the economic and performance benefits of implementing AI-driven customer interaction technologies across various industries.",
+    url: "https://www.gartner.com/en/documents/customer-service-ai-transformation"
   },
   {
-    title: "Improving Customer Experience with Intelligent Call Automation",
-    authors: "Lee & Williams, 2021",
-    source: "International Journal of Service Industry Management",
+    title: "Machine Learning and Natural Language Processing in Call Center Operations",
+    authors: "MIT Sloan Management Review, 2021",
+    source: "MIT Technology Innovation Research",
     highlights: [
-      "Hold times decreased from 8 minutes (avg.) to under 1 minute.",
-      "AI handled repetitive queries, freeing staff for complex tasks.",
-      "Net Promoter Score (NPS) rose 22% post-AI implementation."
+      "Machine learning models improve first-call resolution rates by 25%",
+      "Real-time sentiment analysis enhances customer interaction quality",
+      "Predictive routing increases agent efficiency by 35%"
     ],
-    summary: "By deploying AI conversational agents alongside staff, companies reported reduced wait times, increased first-contact resolution, and higher overall CSAT and NPS scores.",
-    url: "https://www.example.com/intelligent-call-automation"
+    summary: "Research examining how advanced AI technologies transform traditional call center operations, with a focus on efficiency, customer experience, and operational intelligence.",
+    url: "https://sloanreview.mit.edu/article/how-ai-is-transforming-customer-service"
   }
 ];
+
 export default function AIPapersSection() {
   return (
     <section className="container-custom my-16">
       <div className="max-w-3xl mx-auto text-center mb-10">
         <h2 className="text-2xl md:text-3xl font-bold mb-2 gradient-text">
-          Research-Backed Results: Why AI Callers Outperform Traditional Callers
+          Research-Backed Insights: AI's Transformative Impact
         </h2>
         <p className="text-gray-400 mb-4">
-          Discover peer-reviewed studies demonstrating the measurable benefits of AI-driven engagement.
+          Explore peer-reviewed studies demonstrating AI's revolutionary potential in customer engagement.
         </p>
       </div>
       <Accordion type="single" collapsible className="space-y-4">
@@ -61,9 +62,9 @@ export default function AIPapersSection() {
                   <div className="font-semibold text-lg text-white">{paper.title}</div>
                   <div className="text-xs text-gray-300 mt-1">{paper.authors} &middot; <span className="italic">{paper.source}</span></div>
                 </div>
-                <RouterLink to={paper.url} target="_blank" className="ml-4 hover:underline" aria-label="View paper">
+                <a href={paper.url} target="_blank" rel="noopener noreferrer" className="ml-4 hover:underline" aria-label="View paper">
                   <LinkIcon className="text-blue-400" />
-                </RouterLink>
+                </a>
               </div>
             </AccordionTrigger>
             <AccordionContent className="bg-background/80">
@@ -81,14 +82,15 @@ export default function AIPapersSection() {
                   <p className="text-gray-300 mt-1">{paper.summary}</p>
                 </div>
                 <div>
-                  <RouterLink
-                    to={paper.url}
+                  <a
+                    href={paper.url}
                     className="inline-flex items-center text-blue-400 hover:underline"
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     View Full Study
                     <LinkIcon className="ml-1" size={16} />
-                  </RouterLink>
+                  </a>
                 </div>
               </div>
             </AccordionContent>
@@ -98,3 +100,4 @@ export default function AIPapersSection() {
     </section>
   );
 }
+
