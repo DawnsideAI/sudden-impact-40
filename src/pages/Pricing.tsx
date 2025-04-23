@@ -160,9 +160,6 @@ const Pricing = () => {
         </div>
       </section>
 
-      {/* Insert AI Research Papers Interactive Section */}
-      <AIPapersSection />
-
       {/* Custom Solutions Section */}
       <section className="py-12 md:py-16 relative border-t border-white/10">
         <div className="container-custom">

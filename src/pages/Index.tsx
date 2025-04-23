@@ -10,6 +10,7 @@ import DemoForm from "@/components/home/DemoForm";
 import CallerComparisonChart from "@/components/home/CallerComparisonChart";
 import Stats from "@/components/home/Stats";
 import TrustedBy from "@/components/home/TrustedBy";
+import AIPapersSection from "@/components/pricing/AIPapersSection";
 
 const Index = () => {
   useEffect(() => {
@@ -25,6 +26,7 @@ const Index = () => {
         <TrustedBy />
         <CallerComparisonChart />
         <IndustrySolutions />
+        <AIPapersSection />
         <DemoForm />
         <Faq />
         <CallToAction />

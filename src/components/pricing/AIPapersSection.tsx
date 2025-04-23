@@ -1,6 +1,6 @@
 
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
-import { Link as LinkIcon } from "lucide-react";
+import { Link as LinkIcon, Info } from "lucide-react";
 
 const papers = [
   {
@@ -105,6 +105,15 @@ export default function AIPapersSection() {
           </AccordionItem>
         ))}
       </Accordion>
+      {/* Disclaimer */}
+      <div className="mt-8 max-w-3xl mx-auto text-xs flex items-start gap-2 bg-white/5 rounded-lg px-4 py-3 text-left border border-white/10">
+        <Info className="text-agency-vibrantPurple mt-0.5" size={18} />
+        <span>
+          <b>Disclaimer:</b> The above case studies and reports are taken from their respective cited sources.
+          Results are provided for informational purposes only to offer a viable idea of AI's impact in select scenarios.
+          Actual results may vary and are not guaranteed by Sudden Impact Agency.
+        </span>
+      </div>
     </section>
   );
 }
