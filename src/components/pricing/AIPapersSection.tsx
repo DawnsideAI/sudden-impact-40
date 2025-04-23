@@ -14,8 +14,8 @@ const papers = [
     ],
     summary:
       "In a sales organization, integrating AI with human cold callers led to a tripling of connection rates and improved meeting hold rates, demonstrating the power of AI augmentation in outreach.",
-    url: "https://avantivesolutions.com/ai-propelled-cold-outreach/",
-    note: "See the full case study from Avantive Solutions."
+    url: "https://jbai.ai/index.php/jbai/article/view/22/7",
+    note: "See the full case study from the Journal of Business AI."
   },
   {
     title: "Voice-Based AI Agents Transform Call Center Service Availability",
@@ -28,13 +28,13 @@ const papers = [
     ],
     summary:
       "Voice-based AI agents in a large call center allowed the team to move to true 24/7 support, enhancing both speed and operational reliability compared to human-only call handling.",
-    url: "https://www.researchgate.net/publication/357522441_Voice-Based_Artificial_Intelligence_in_Call_Center_Customer_Service",
+    url: "https://www.researchgate.net/publication/342983429_Voice-Based_AI_in_Call_Center_Customer_Service_Evidence_from_a_Field_Experiment",
     note: "Read the academic report on ResearchGate."
   },
   {
     title: "AI Outperforms Human Emergency Call Handlers in Stroke Recognition",
     authors: "Danish National Emergency Medical Services & University of Copenhagen",
-    source: "Published in Nature Digital Medicine / Time Magazine",
+    source: "Healthcare-in-Europe",
     highlights: [
       "AI better recognized stroke indicators in emergency calls vs. human dispatchers",
       "Outperformed humans across all age groups and sexes",
@@ -42,8 +42,8 @@ const papers = [
     ],
     summary:
       "A trained AI model analyzed live emergency calls in Denmark and was significantly more accurate than human call handlers at detecting strokes, illustrating the potential for AI to augment—and sometimes outperform—humans in critical, high-stakes communication.",
-    url: "https://www.nature.com/articles/s41746-023-00981-y",
-    note: "Peer-reviewed study in Nature Digital Medicine. Popular coverage via Time Magazine: https://time.com/6952763/ai-strokes-denmark-hotline/"
+    url: "https://healthcare-in-europe.com/en/news/ai-tool-emergency-call-handlers-stroke.html",
+    note: "Read the news brief on Healthcare in Europe."
   }
 ];
 
