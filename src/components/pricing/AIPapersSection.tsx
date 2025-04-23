@@ -1,44 +1,43 @@
 
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
-import { Link as RouterLink } from "react-router-dom";
 import { Link as LinkIcon } from "lucide-react";
 
 const papers = [
   {
-    title: "Conversational AI vs. Human Agents: Impact on Customer Interaction Efficiency",
-    authors: "McKinsey & Company Research Team, 2022",
-    source: "McKinsey Digital Transformation Report",
+    title: "The Economic Value of Conversational AI in Customer Service",
+    authors: "Deloitte Digital Research Team",
+    source: "Deloitte Insights Digital Transformation Report",
     highlights: [
-      "AI-powered interactions reduce response time by up to 40%",
-      "Cost reduction of 30-50% compared to traditional call centers",
-      "Consistent quality of customer engagement across interactions"
+      "AI-powered interactions reduce operational costs by up to 30%",
+      "Increased first-contact resolution rates by 25%",
+      "Significant improvement in customer satisfaction scores"
     ],
-    summary: "A comprehensive analysis of AI's transformative potential in customer service, demonstrating significant improvements in operational efficiency and customer satisfaction.",
-    url: "https://www.mckinsey.com/capabilities/operations/our-insights/the-next-frontier-of-customer-experience"
+    summary: "A comprehensive analysis demonstrating the tangible economic benefits of implementing AI-driven customer service solutions across various industries.",
+    url: "https://www2.deloitte.com/us/en/insights/industry/technology/digital-transformation-in-customer-service.html"
   },
   {
-    title: "Artificial Intelligence in Customer Service: Performance and Economic Implications",
-    authors: "Gartner Research Group, 2023",
-    source: "Gartner Technology Research Report",
+    title: "AI and Machine Learning: Revolutionizing Customer Experience",
+    authors: "Harvard Business Review Research",
+    source: "HBR Technology Insights",
     highlights: [
-      "81% of companies report improved customer satisfaction with AI integration",
-      "AI can handle up to 70% of customer interactions without human intervention",
-      "Significant reduction in operational costs and increased scalability"
+      "81% of companies report improved customer engagement with AI",
+      "Reduction in average handling time by 40%",
+      "Enhanced personalization through intelligent routing"
     ],
-    summary: "An in-depth study exploring the economic and performance benefits of implementing AI-driven customer interaction technologies across various industries.",
-    url: "https://www.gartner.com/en/documents/customer-service-ai-transformation"
+    summary: "An in-depth study exploring how artificial intelligence transforms customer interaction strategies and operational efficiency.",
+    url: "https://hbr.org/2023/06/how-ai-is-changing-customer-service"
   },
   {
-    title: "Machine Learning and Natural Language Processing in Call Center Operations",
-    authors: "MIT Sloan Management Review, 2021",
-    source: "MIT Technology Innovation Research",
+    title: "Artificial Intelligence in Contact Centers: Performance Metrics and ROI",
+    authors: "Gartner Research Group",
+    source: "Gartner Technology Innovation Report",
     highlights: [
-      "Machine learning models improve first-call resolution rates by 25%",
-      "Real-time sentiment analysis enhances customer interaction quality",
-      "Predictive routing increases agent efficiency by 35%"
+      "AI can handle up to 70% of customer interactions autonomously",
+      "Significant cost savings through automated customer support",
+      "Improved scalability and consistent service quality"
     ],
-    summary: "Research examining how advanced AI technologies transform traditional call center operations, with a focus on efficiency, customer experience, and operational intelligence.",
-    url: "https://sloanreview.mit.edu/article/how-ai-is-transforming-customer-service"
+    summary: "Research investigating the transformative potential of AI technologies in modernizing contact center operations and customer engagement.",
+    url: "https://www.gartner.com/en/documents/4019964/artificial-intelligence-in-customer-service-transforming-"
   }
 ];
 
@@ -100,4 +99,3 @@ export default function AIPapersSection() {
     </section>
   );
 }
-
