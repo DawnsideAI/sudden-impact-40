@@ -1,8 +1,8 @@
-
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
+import AIPapersSection from "@/components/pricing/AIPapersSection";
 
 const pricingPlans = [
   {
@@ -159,6 +159,9 @@ const Pricing = () => {
           </div>
         </div>
       </section>
+
+      {/* Insert AI Research Papers Interactive Section */}
+      <AIPapersSection />
 
       {/* Custom Solutions Section */}
       <section className="py-12 md:py-16 relative border-t border-white/10">
