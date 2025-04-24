@@ -1,6 +1,6 @@
-
 import { Link } from "react-router-dom";
 import { FiTwitter, FiLinkedin, FiFacebook, FiInstagram } from "react-icons/fi";
+import { FaFacebook, FaLinkedin, FaTiktok } from "react-icons/fa";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -16,17 +16,29 @@ const Footer = () => {
               Your AI-powered automation partner providing cutting-edge voice agent solutions for modern businesses.
             </p>
             <div className="flex space-x-4 mt-4">
-              <a href="#" className="text-gray-300 hover:text-white transition-colors">
-                <FiTwitter size={20} />
+              <a 
+                href="https://www.facebook.com/suddenaiimpact/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-gray-300 hover:text-white transition-colors"
+              >
+                <FaFacebook size={20} />
               </a>
-              <a href="#" className="text-gray-300 hover:text-white transition-colors">
-                <FiLinkedin size={20} />
+              <a 
+                href="https://www.linkedin.com/company/suddenimpact/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-gray-300 hover:text-white transition-colors"
+              >
+                <FaLinkedin size={20} />
               </a>
-              <a href="#" className="text-gray-300 hover:text-white transition-colors">
-                <FiFacebook size={20} />
-              </a>
-              <a href="#" className="text-gray-300 hover:text-white transition-colors">
-                <FiInstagram size={20} />
+              <a 
+                href="https://www.tiktok.com/@suddenimpactai" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-gray-300 hover:text-white transition-colors"
+              >
+                <FaTiktok size={20} />
               </a>
             </div>
           </div>
