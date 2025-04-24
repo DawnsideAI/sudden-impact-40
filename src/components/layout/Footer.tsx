@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { FiTwitter, FiLinkedin, FiFacebook, FiInstagram } from "react-icons/fi";
-import { FaFacebook, FaLinkedin, FaTiktok } from "react-icons/fa";
+import { FaFacebook, FaLinkedin, FaTiktok, FaInstagram } from "react-icons/fa";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -39,6 +39,14 @@ const Footer = () => {
                 className="text-gray-300 hover:text-white transition-colors"
               >
                 <FaTiktok size={20} />
+              </a>
+              <a 
+                href="https://www.instagram.com/suddenimpactagency/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-gray-300 hover:text-white transition-colors"
+              >
+                <FaInstagram size={20} />
               </a>
             </div>
           </div>
