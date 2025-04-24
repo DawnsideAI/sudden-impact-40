@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { FiTwitter, FiLinkedin, FiFacebook, FiInstagram } from "react-icons/fi";
-import { FaFacebook, FaLinkedin, FaTiktok, FaInstagram } from "react-icons/fa";
+import { FiLinkedin, FiFacebook, FiInstagram } from "react-icons/fi";
+import { FaFacebook, FaLinkedin, FaTiktok, FaInstagram, FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -47,6 +47,14 @@ const Footer = () => {
                 className="text-gray-300 hover:text-white transition-colors"
               >
                 <FaInstagram size={20} />
+              </a>
+              <a 
+                href="https://x.com/SImpactAgency" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-gray-300 hover:text-white transition-colors"
+              >
+                <FaXTwitter size={20} />
               </a>
             </div>
           </div>
