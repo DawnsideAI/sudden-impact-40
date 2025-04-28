@@ -1,16 +1,18 @@
 
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import Layout from "@/components/layout/Layout";
 import Hero from "@/components/home/Hero";
-import ServiceFeatures from "@/components/home/ServiceFeatures";
-import IndustrySolutions from "@/components/home/IndustrySolutions";
-import CallToAction from "@/components/home/CallToAction";
-import Faq from "@/components/home/Faq";
-import DemoForm from "@/components/home/DemoForm";
-import CallerComparisonChart from "@/components/home/CallerComparisonChart";
 import Stats from "@/components/home/Stats";
+import ServiceFeatures from "@/components/home/ServiceFeatures";
 import TrustedBy from "@/components/home/TrustedBy";
-import AIPapersSection from "@/components/pricing/AIPapersSection";
+
+// Lazy load non-critical components
+const CallerComparisonChart = lazy(() => import("@/components/home/CallerComparisonChart"));
+const IndustrySolutions = lazy(() => import("@/components/home/IndustrySolutions"));
+const AIPapersSection = lazy(() => import("@/components/pricing/AIPapersSection"));
+const DemoForm = lazy(() => import("@/components/home/DemoForm"));
+const Faq = lazy(() => import("@/components/home/Faq"));
+const CallToAction = lazy(() => import("@/components/home/CallToAction"));
 
 const Index = () => {
   useEffect(() => {
@@ -24,12 +26,14 @@ const Index = () => {
         <Stats />
         <ServiceFeatures />
         <TrustedBy />
-        <CallerComparisonChart />
-        <IndustrySolutions />
-        <AIPapersSection />
-        <DemoForm />
-        <Faq />
-        <CallToAction />
+        <Suspense fallback={<div className="h-96 flex items-center justify-center">Loading...</div>}>
+          <CallerComparisonChart />
+          <IndustrySolutions />
+          <AIPapersSection />
+          <DemoForm />
+          <Faq />
+          <CallToAction />
+        </Suspense>
       </div>
     </Layout>
   );
