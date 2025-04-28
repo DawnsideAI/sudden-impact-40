@@ -7,6 +7,7 @@ import AIDemoContact from "@/components/demo/AIDemoContact";
 
 const Demo = () => {
   const [activeTab, setActiveTab] = useState("live");
+  const [showAIDemo, setShowAIDemo] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -43,8 +44,8 @@ const Demo = () => {
         </div>
       </section>
 
-      {/* AI Demo Contact */}
-      <AIDemoContact />
+      {/* AI Demo Contact - Only shown after form submission */}
+      {showAIDemo && <AIDemoContact />}
 
       {/* Demo Options */}
       <section className="py-16">
@@ -97,11 +98,11 @@ const Demo = () => {
                   </div>
                   <h2 className="text-2xl font-bold mb-2 text-white">Live AI Voice Agent Demo</h2>
                   <p className="text-muted-foreground">
-                    Complete the form below to instantly experience our AI voice agent in action.
+                    Complete the form below to access our AI voice agent demo.
                   </p>
                 </div>
 
-                <DemoRequestForm />
+                <DemoRequestForm onFormSubmit={() => setShowAIDemo(true)} />
               </motion.div>
             )}
 

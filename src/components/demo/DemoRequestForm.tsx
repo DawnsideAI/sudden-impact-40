@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
@@ -10,7 +9,11 @@ interface FormState {
   phone: string;
 }
 
-const DemoRequestForm = () => {
+interface DemoRequestFormProps {
+  onFormSubmit?: () => void;
+}
+
+const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
   const [formState, setFormState] = useState<FormState>({
     name: "",
     email: "",
@@ -37,6 +40,7 @@ const DemoRequestForm = () => {
       await new Promise(resolve => setTimeout(resolve, 1500));
       
       setIsSubmitted(true);
+      onFormSubmit?.();
       toast({
         title: "Demo Request Submitted!",
         description: "You'll be redirected to the demo experience shortly.",
