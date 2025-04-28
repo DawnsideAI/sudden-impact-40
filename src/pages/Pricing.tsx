@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import AIPapersSection from "@/components/pricing/AIPapersSection";
+import LiveDemoDialog from "@/components/pricing/LiveDemoDialog";
 
 const pricingPlans = [
   {
@@ -64,10 +65,17 @@ const pricingPlans = [
 ];
 
 const Pricing = () => {
+  const [showDemoDialog, setShowDemoDialog] = useState(false);
+  
   useEffect(() => {
     window.scrollTo(0, 0);
     document.title = "Pricing | Sudden Impact Agency";
   }, []);
+
+  const handleDemoClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setShowDemoDialog(true);
+  };
 
   return (
     <Layout>
@@ -134,8 +142,9 @@ const Pricing = () => {
                     </div>
                   </div>
                   
-                  <Link
-                    to="/demo"
+                  <a
+                    href="#"
+                    onClick={handleDemoClick}
                     className={`block w-full py-3 px-4 text-center rounded-lg font-medium mb-8 ${
                       plan.mostPopular
                         ? "gradient-bg text-white shadow-lg hover:shadow-xl transition-all"
@@ -143,7 +152,7 @@ const Pricing = () => {
                     }`}
                   >
                     {plan.ctaText}
-                  </Link>
+                  </a>
                   
                   <ul className="space-y-4">
                     {plan.features.map((feature, i) => (
@@ -200,6 +209,11 @@ const Pricing = () => {
           </div>
         </div>
       </section>
+
+      <LiveDemoDialog 
+        open={showDemoDialog} 
+        onOpenChange={setShowDemoDialog} 
+      />
     </Layout>
   );
 };
