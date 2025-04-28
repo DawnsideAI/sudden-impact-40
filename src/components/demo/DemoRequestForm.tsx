@@ -3,6 +3,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import LiveDemoDialog from "@/components/pricing/LiveDemoDialog";
 
 interface FormState {
   name: string;
@@ -23,6 +24,7 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
   
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [showDemoDialog, setShowDemoDialog] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -44,8 +46,9 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
       onFormSubmit?.();
       toast({
         title: "Demo Request Submitted!",
-        description: "You'll be redirected to the demo experience shortly.",
+        description: "You'll be connected to our AI voice agent shortly.",
       });
+      setShowDemoDialog(true);
     } catch (error) {
       toast({
         variant: "destructive",
@@ -59,15 +62,21 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
 
   if (isSubmitted) {
     return (
-      <div className="text-center py-4 sm:py-8">
-        <div className="w-12 h-12 sm:w-16 sm:h-16 mx-auto rounded-full bg-agency-vibrantPurple flex items-center justify-center text-white mb-4 sm:mb-6">
-          <Check className="h-6 w-6 sm:h-8 sm:w-8" />
+      <>
+        <div className="text-center py-4 sm:py-8">
+          <div className="w-12 h-12 sm:w-16 sm:h-16 mx-auto rounded-full bg-agency-vibrantPurple flex items-center justify-center text-white mb-4 sm:mb-6">
+            <Check className="h-6 w-6 sm:h-8 sm:w-8" />
+          </div>
+          <h3 className="text-xl sm:text-2xl font-bold mb-2 text-white">Demo Request Submitted!</h3>
+          <p className="text-muted-foreground text-sm sm:text-base mb-4 sm:mb-6">
+            You'll be redirected to our demo experience momentarily. Get ready to interact with our AI voice agent!
+          </p>
         </div>
-        <h3 className="text-xl sm:text-2xl font-bold mb-2 text-white">Demo Request Submitted!</h3>
-        <p className="text-muted-foreground text-sm sm:text-base mb-4 sm:mb-6">
-          You'll be redirected to our demo experience momentarily. Get ready to interact with our AI voice agent!
-        </p>
-      </div>
+        <LiveDemoDialog 
+          open={showDemoDialog} 
+          onOpenChange={setShowDemoDialog} 
+        />
+      </>
     );
   }
 
