@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { FiCheck, FiClock } from "react-icons/fi";
@@ -177,15 +178,7 @@ const DemoForm = () => {
               </div>
             )}
             
-            <div className="mt-8 pt-6 border-t border-white/10">
-              <h4 className="text-center font-medium mb-4 text-white">Or Schedule for Later</h4>
-              <Link 
-                to="/demo#schedule" 
-                className="block w-full inline-flex items-center justify-center px-6 py-3 text-white bg-white/10 hover:bg-white/20 rounded-lg backdrop-blur-sm transition-colors border border-white/20"
-              >
-                Book a Demo Appointment
-              </Link>
-            </div>
+            {/* Removed "Book a Demo Appointment" section */}
           </motion.div>
         </div>
       </div>
