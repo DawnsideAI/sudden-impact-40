@@ -170,15 +170,10 @@ const DemoForm = () => {
                 </div>
                 <h3 className="text-2xl font-bold mb-2 text-white">Demo Request Submitted!</h3>
                 <p className="text-muted-foreground mb-6">
-                  You'll be redirected to our demo experience momentarily. Get ready to interact with our AI voice agent!
+                  We'll be in touch shortly to schedule your interactive AI voice demo.
                 </p>
-                <div className="text-sm text-muted-foreground">
-                  (In a real implementation, you would be redirected to the demo page)
-                </div>
               </div>
             )}
-            
-            {/* Removed "Book a Demo Appointment" section */}
           </motion.div>
         </div>
       </div>

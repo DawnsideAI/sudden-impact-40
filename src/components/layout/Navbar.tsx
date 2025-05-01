@@ -37,6 +37,7 @@ const Navbar = () => {
   const navItems = [
     { path: '/', label: 'Home' },
     { path: '/solutions', label: 'Solutions' },
+    { path: '/industries', label: 'Industries' },
     { path: '/pricing', label: 'Pricing' },
     { path: '/demo', label: 'Demo' }
   ];
@@ -60,7 +61,7 @@ const Navbar = () => {
             <motion.img 
               src="/lovable-uploads/04e02938-36ca-4abc-adad-95afd668326b.png" 
               alt="Sudden Impact Agency Logo" 
-              className="h-14 sm:h-16 md:h-20 w-auto object-contain transition-all bg-white/80 rounded-lg p-2"
+              className="h-16 sm:h-20 md:h-24 w-auto object-contain transition-all bg-white/80 rounded-lg p-2"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               whileHover={{ scale: 1.05 }}

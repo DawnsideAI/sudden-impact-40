@@ -78,6 +78,10 @@ const IndustrySolutions = () => {
           >
             Beyond service contractors, we offer AI voice agents tailored to the unique demands of various sectors.
           </motion.p>
+          
+          <Link to="/industries" className="btn-secondary inline-block mt-6">
+            Explore All Industry Solutions
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
@@ -142,7 +146,7 @@ const IndustrySolutions = () => {
           
           <div className="flex justify-center">
             <Link 
-              to="/solutions" 
+              to={`/industries/${current.id}`} 
               className="inline-flex items-center justify-center px-6 py-3 text-white bg-agency-vibrantPurple hover:bg-agency-vibrantPurple/90 rounded-lg transition-colors"
             >
               Learn More About {current.title}

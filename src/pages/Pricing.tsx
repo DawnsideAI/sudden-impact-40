@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -27,8 +28,8 @@ const pricingPlans = [
   },
   {
     name: "Impact Pro",
-    price: 587,
-    annualPrice: 470,
+    price: 597,
+    annualPrice: 478,
     description: "For growing teams who need smart routing and powerful automation",
     features: [
       "1,500 AI Engagement Minutes/month",
@@ -198,10 +199,12 @@ const Pricing = () => {
               </li>
             </ul>
             <Link
-              to="/demo"
+              to="https://www.go.suddenimpact.agency/meetings/suddenimpact/30min"
+              target="_blank"
+              rel="noopener noreferrer"
               className="block w-full py-3 px-4 text-center rounded-lg glass-card text-white hover:bg-white/10 transition-all"
             >
-              Contact for Pricing
+              Schedule a Consultation
             </Link>
           </div>
           <div className="text-center mt-8 text-sm text-gray-400">
