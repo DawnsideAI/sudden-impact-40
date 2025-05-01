@@ -1,7 +1,7 @@
 
 import { ReactNode } from 'react';
 import { motion } from 'framer-motion';
-import { FiHome, FiMusic, FiUtensils } from 'react-icons/fi';
+import { FiHome, FiMusic } from 'react-icons/fi';
 import { RiRestaurantLine, RiBuilding2Line, RiMusicLine } from 'react-icons/ri';
 
 interface IndustryAnimationProps {
@@ -319,3 +319,4 @@ const IndustryAnimation = ({ industry }: IndustryAnimationProps) => {
 };
 
 export default IndustryAnimation;
+
