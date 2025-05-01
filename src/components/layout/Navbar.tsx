@@ -51,11 +51,17 @@ const Navbar: React.FC<NavbarProps> = ({ isSolid }) => {
       <div className="container-custom py-2">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center">
-            <img 
-              src="/lovable-uploads/46b36e77-e44d-4dfd-8c35-6805698f485f.png" 
-              alt="Sudden Impact Agency Logo" 
-              className="h-20 w-auto rounded-md bg-white/20 p-2 backdrop-blur-sm" 
-            />
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="relative"
+            >
+              <div className="absolute -inset-1 bg-gradient-to-r from-agency-blue to-agency-vibrantPurple rounded-md blur-sm opacity-70"></div>
+              <img 
+                src="/lovable-uploads/46b36e77-e44d-4dfd-8c35-6805698f485f.png" 
+                alt="Sudden Impact Agency Logo" 
+                className="relative h-20 w-auto rounded-md bg-white/30 p-2 shadow-lg backdrop-blur-sm border border-white/20 hover:border-white/40 transition-all duration-300" 
+              />
+            </motion.div>
           </Link>
           <nav className="hidden md:flex items-center gap-6">
             <Link to="/" className="nav-link">
