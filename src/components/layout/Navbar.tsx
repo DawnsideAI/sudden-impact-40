@@ -1,10 +1,10 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from 'next-themes';
-import { siteConfig } from '@/config/site';
 import { cn } from '@/lib/utils';
 import { Icons } from '@/components/icons';
 import { ModeToggle } from '@/components/ui/mode-toggle';
@@ -58,7 +58,7 @@ const Navbar: React.FC<NavbarProps> = ({ isSolid }) => {
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center font-semibold">
             <Icons.logo className="mr-2 h-6 w-6" />
-            <span>{siteConfig.name}</span>
+            <span>AI Caller</span>
           </Link>
           <nav className="hidden md:flex items-center gap-6">
             <Link to="/" className="nav-link">
