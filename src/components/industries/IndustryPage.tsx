@@ -1,5 +1,5 @@
 
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Layout from '@/components/layout/Layout';
 import IndustrySelector from './IndustrySelector';
