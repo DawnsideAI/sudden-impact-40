@@ -3,6 +3,7 @@ import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Layout from '@/components/layout/Layout';
 import IndustrySelector from './IndustrySelector';
+import IndustryAnimation from './IndustryAnimation';
 import { motion } from 'framer-motion';
 import { FiCheck, FiArrowRight } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
@@ -218,15 +219,16 @@ const IndustryPage = () => {
           />
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 items-center">
-            <div>
-              <motion.img 
-                src={currentIndustry.image}
-                alt={`${currentIndustry.title} AI Voice Solutions`}
-                className="rounded-xl shadow-xl w-full"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+            <div className="rounded-xl overflow-hidden shadow-xl border border-white/10">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
                 transition={{ duration: 0.5 }}
-              />
+                className="glass-card"
+                key={industry} // Important to reset animation on industry change
+              >
+                <IndustryAnimation industry={industry} />
+              </motion.div>
             </div>
             <div>
               <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">Key Benefits</h2>
