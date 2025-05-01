@@ -40,15 +40,15 @@ const Navbar: React.FC<NavbarProps> = ({ isSolid }) => {
   }, [scrolled]);
 
   const bgColor = isSolid || scrolled 
-    ? 'bg-background/80 backdrop-blur-xl' 
-    : 'bg-transparent backdrop-blur-md bg-black/20';
-  const textColor = isSolid || scrolled ? 'text-foreground' : 'text-white';
+    ? 'bg-white/70 backdrop-blur-xl' 
+    : 'bg-white/20 backdrop-blur-lg';
+  const textColor = isSolid || scrolled ? 'text-foreground' : 'text-gray-800';
 
   return (
     <motion.div
       className={cn(
         'fixed top-0 w-full z-50 transition-all duration-300 border-b',
-        isSolid || scrolled ? 'border-border' : 'border-transparent',
+        isSolid || scrolled ? 'border-gray-200/50' : 'border-transparent',
         bgColor,
         textColor
       )}
