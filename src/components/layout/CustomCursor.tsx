@@ -1,5 +1,5 @@
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { MousePointer } from 'lucide-react';
 
 const CustomCursor = () => {
