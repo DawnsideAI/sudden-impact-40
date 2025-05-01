@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -10,7 +9,7 @@ const pricingPlans = [
   {
     name: "Starter Impact",
     price: 397,
-    annualPrice: 317,
+    annualPrice: 317, // 397 - 20% = 317.6, rounded to 317
     description: "Perfect for solo pros & lean teams starting their AI journey",
     features: [
       "500 AI Engagement Minutes/month",
@@ -29,7 +28,7 @@ const pricingPlans = [
   {
     name: "Impact Pro",
     price: 597,
-    annualPrice: 478,
+    annualPrice: 478, // 597 - 20% = 477.6, rounded up to 478
     description: "For growing teams who need smart routing and powerful automation",
     features: [
       "1,500 AI Engagement Minutes/month",
@@ -48,7 +47,7 @@ const pricingPlans = [
   {
     name: "Enterprise",
     price: 897,
-    annualPrice: 718,
+    annualPrice: 718, // 897 - 20% = 717.6, rounded up to 718
     description: "Ideal for scaling companies & multi-location teams",
     features: [
       "5,000 AI Engagement Minutes/month",
