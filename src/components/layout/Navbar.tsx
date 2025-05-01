@@ -39,7 +39,9 @@ const Navbar: React.FC<NavbarProps> = ({ isSolid }) => {
     };
   }, [scrolled]);
 
-  const bgColor = isSolid || scrolled ? 'bg-background/90 backdrop-blur-md' : 'bg-transparent';
+  const bgColor = isSolid || scrolled 
+    ? 'bg-background/80 backdrop-blur-xl' 
+    : 'bg-transparent backdrop-blur-md bg-black/20';
   const textColor = isSolid || scrolled ? 'text-foreground' : 'text-white';
 
   return (
@@ -60,7 +62,7 @@ const Navbar: React.FC<NavbarProps> = ({ isSolid }) => {
             <img 
               src="/lovable-uploads/46b36e77-e44d-4dfd-8c35-6805698f485f.png" 
               alt="Sudden Impact Agency Logo" 
-              className="h-20 w-auto shadow-lg" 
+              className="h-20 w-auto shadow-lg rounded-md" 
             />
           </Link>
           <nav className="hidden md:flex items-center gap-6">
