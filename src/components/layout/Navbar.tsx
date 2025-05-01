@@ -62,7 +62,7 @@ const Navbar: React.FC<NavbarProps> = ({ isSolid }) => {
             <img 
               src="/lovable-uploads/46b36e77-e44d-4dfd-8c35-6805698f485f.png" 
               alt="Sudden Impact Agency Logo" 
-              className="h-20 w-auto shadow-lg rounded-md" 
+              className="h-14 w-auto rounded-md" 
             />
           </Link>
           <nav className="hidden md:flex items-center gap-6">
