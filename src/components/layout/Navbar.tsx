@@ -56,13 +56,12 @@ const Navbar: React.FC<NavbarProps> = ({ isSolid }) => {
     >
       <div className="container-custom py-4">
         <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center font-semibold">
+          <Link to="/" className="flex items-center">
             <img 
               src="/lovable-uploads/46b36e77-e44d-4dfd-8c35-6805698f485f.png" 
               alt="Sudden Impact Agency Logo" 
-              className="mr-2 h-8 w-auto"
+              className="h-16 w-auto" 
             />
-            <span>Sudden Impact Agency</span>
           </Link>
           <nav className="hidden md:flex items-center gap-6">
             <Link to="/" className="nav-link">
