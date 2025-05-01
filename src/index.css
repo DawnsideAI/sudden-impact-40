@@ -38,14 +38,65 @@
   }
   
   /* Custom cursor styles */
-  .custom-cursor, .custom-cursor * {
-    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='m3 3 7.07 16.97 2.51-7.39 7.39-2.51L3 3z'/><path d='m13 13 6 6'/></svg>") 0 0, auto !important;
+  .custom-cursor {
+    cursor: none !important;
+  }
+  
+  .custom-cursor a, 
+  .custom-cursor button,
+  .custom-cursor [role="button"],
+  .custom-cursor input,
+  .custom-cursor select,
+  .custom-cursor textarea,
+  .custom-cursor label {
+    cursor: none !important;
+  }
+  
+  .cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    background: linear-gradient(to right, #2563EB, #8B5CF6);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+  }
+  
+  .cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    border: 2px solid rgba(139, 92, 246, 0.6);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99998;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s, border-color 0.2s;
+  }
+  
+  .cursor-ring.clicking {
+    width: 22px;
+    height: 22px;
+    border-color: rgba(139, 92, 246, 1);
+  }
+  
+  .cursor-ring.pointer {
+    width: 40px;
+    height: 40px;
+    border-color: rgba(37, 99, 235, 0.8);
+    border-width: 3px;
+    mix-blend-mode: difference;
   }
   
   /* Only apply custom cursor on non-touch devices */
-  @media (pointer: fine) {
-    .custom-cursor, .custom-cursor * {
-      cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='m3 3 7.07 16.97 2.51-7.39 7.39-2.51L3 3z'/><path d='m13 13 6 6'/></svg>") 0 0, auto !important;
+  @media (pointer: coarse) {
+    .cursor-dot, .cursor-ring {
+      display: none !important;
     }
   }
   
