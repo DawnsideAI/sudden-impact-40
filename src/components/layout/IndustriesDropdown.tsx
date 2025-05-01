@@ -1,19 +1,19 @@
 
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ChevronDown, Restaurant, Building, Music } from "lucide-react";
+import { ChevronDown, Utensils, Building2, Music } from "lucide-react";
 
 const industries = [
   {
     id: "restaurants",
     name: "Restaurants & Hospitality",
-    icon: <Restaurant className="w-5 h-5 mr-2" />,
+    icon: <Utensils className="w-5 h-5 mr-2" />,
     url: "/industries/restaurants",
   },
   {
     id: "realEstate",
     name: "Real Estate",
-    icon: <Building className="w-5 h-5 mr-2" />,
+    icon: <Building2 className="w-5 h-5 mr-2" />,
     url: "/industries/realEstate",
   },
   {

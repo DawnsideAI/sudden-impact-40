@@ -21,7 +21,7 @@ const Layout = ({ children }: LayoutProps) => {
       
       {/* Content */}
       <div className="relative z-10 flex flex-col min-h-screen">
-        <Navbar />
+        <Navbar isSolid={false} />
         <main className="flex-grow">
           {children}
         </main>
