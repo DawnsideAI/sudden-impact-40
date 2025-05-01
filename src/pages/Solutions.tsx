@@ -196,7 +196,7 @@ const Solutions = () => {
 
   return (
     <Layout>
-      <section className="pt-24 pb-16 md:pt-32 md:pb-24 relative">
+      <section className="pt-28 pb-16 md:pt-36 md:pb-24 relative">
         <div className="container-custom">
           <div className="text-center max-w-3xl mx-auto">
             <motion.h1 
