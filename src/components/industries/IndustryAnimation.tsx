@@ -1,4 +1,3 @@
-
 import { ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import { FiHome, FiMusic } from 'react-icons/fi';
@@ -319,4 +318,3 @@ const IndustryAnimation = ({ industry }: IndustryAnimationProps) => {
 };
 
 export default IndustryAnimation;
-
