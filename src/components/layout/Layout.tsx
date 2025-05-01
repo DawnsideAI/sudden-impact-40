@@ -3,18 +3,15 @@ import { ReactNode } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import CustomCursor from './CustomCursor';
-import { useIsMobile } from '@/hooks/use-mobile';
 
 interface LayoutProps {
   children: ReactNode;
 }
 
 const Layout = ({ children }: LayoutProps) => {
-  const isMobile = useIsMobile();
-  
   return (
     <div className="flex flex-col min-h-screen bg-background">
-      {!isMobile && <CustomCursor />}
+      <CustomCursor />
       {/* Background effects */}
       <div className="fixed inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
       <div 
