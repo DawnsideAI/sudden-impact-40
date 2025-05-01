@@ -30,7 +30,8 @@ export const IndustryCard = ({
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className={cn(
         "w-full p-6 rounded-xl text-left transition-all duration-300 glass-card hover:shadow-lg",
-        isActive ? "border-[1.5px] border-agency-vibrantPurple shadow-lg" : "hover:border-agency-vibrantPurple/50"
+        isActive ? "border-[1.5px] border-agency-vibrantPurple shadow-lg ring-1 ring-agency-vibrantPurple/30" : 
+        "hover:border-agency-vibrantPurple/50"
       )}
       onClick={onClick}
     >
@@ -44,7 +45,10 @@ export const IndustryCard = ({
       <p className="text-gray-400 line-clamp-2">{description}</p>
       
       {isActive && (
-        <div className="mt-2 text-agency-vibrantPurple font-medium">Selected</div>
+        <div className="mt-2 text-agency-vibrantPurple font-medium flex items-center gap-1">
+          <span className="w-2 h-2 bg-agency-vibrantPurple rounded-full"></span>
+          Selected
+        </div>
       )}
     </motion.button>
   );

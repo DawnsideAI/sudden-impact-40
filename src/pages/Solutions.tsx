@@ -7,6 +7,14 @@ import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { IndustryCard } from "@/components/solutions/IndustryCard";
 import { IndustryDetails } from "@/components/solutions/IndustryDetails";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const industries = [
   {
@@ -145,10 +153,19 @@ const industries = [
 
 const Solutions = () => {
   const [activeTab, setActiveTab] = useState(industries[0].id);
+  const [mobileView, setMobileView] = useState(false);
   
   useEffect(() => {
+    const checkMobileView = () => {
+      setMobileView(window.innerWidth < 768);
+    };
+    
     window.scrollTo(0, 0);
     document.title = "Solutions | Sudden Impact Agency";
+    checkMobileView();
+    
+    window.addEventListener("resize", checkMobileView);
+    
     const hash = window.location.hash.replace('#', '');
     if (hash && industries.some(industry => industry.id === hash)) {
       setActiveTab(hash);
@@ -159,7 +176,23 @@ const Solutions = () => {
         }
       }, 100);
     }
+    
+    return () => {
+      window.removeEventListener("resize", checkMobileView);
+    };
   }, []);
+
+  const handleIndustryChange = (value: string) => {
+    setActiveTab(value);
+    
+    // Smooth scroll to the details section
+    const element = document.getElementById('industry-details');
+    if (element) {
+      setTimeout(() => {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
+  };
 
   return (
     <Layout>
@@ -188,181 +221,173 @@ const Solutions = () => {
 
       <section id="solutions-section" className="py-16">
         <div className="container-custom">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
-            {industries.map((industry, index) => (
-              <IndustryCard
-                key={industry.id}
-                id={industry.id}
-                icon={industry.icon}
-                title={industry.title}
-                description={industry.description}
-                isActive={activeTab === industry.id}
-                onClick={() => setActiveTab(industry.id)}
-                index={index}
-              />
+          {mobileView ? (
+            <div className="mb-8">
+              <Card className="glass-card border border-white/10 backdrop-blur-xl">
+                <CardContent className="pt-6">
+                  <h2 className="text-xl font-semibold mb-4 text-white">Select Your Industry</h2>
+                  <Select onValueChange={handleIndustryChange} defaultValue={activeTab}>
+                    <SelectTrigger className="glass-card border border-white/20 text-white">
+                      <SelectValue placeholder="Select an industry" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-background/95 backdrop-blur-lg border border-white/20 text-white">
+                      {industries.map((industry) => (
+                        <SelectItem 
+                          key={industry.id} 
+                          value={industry.id}
+                          className="focus:bg-white/10 focus:text-white"
+                        >
+                          <div className="flex items-center gap-2">
+                            <span className="inline-flex items-center justify-center w-6 h-6">
+                              {industry.icon}
+                            </span>
+                            <span>{industry.title}</span>
+                          </div>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </CardContent>
+              </Card>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+              {industries.map((industry, index) => (
+                <IndustryCard
+                  key={industry.id}
+                  id={industry.id}
+                  icon={industry.icon}
+                  title={industry.title}
+                  description={industry.description}
+                  isActive={activeTab === industry.id}
+                  onClick={() => setActiveTab(industry.id)}
+                  index={index}
+                />
+              ))}
+            </div>
+          )}
+
+          <div id="industry-details">
+            {industries.map((industry) => (
+              activeTab === industry.id && (
+                <IndustryDetails
+                  key={industry.id}
+                  {...industry}
+                />
+              )
             ))}
           </div>
-
-          {industries.map((industry) => (
-            activeTab === industry.id && (
-              <IndustryDetails
-                key={industry.id}
-                {...industry}
-              />
-            )
-          ))}
         </div>
       </section>
 
-      <section className="py-16">
+      <section className="py-16 bg-background/50">
         <div className="container-custom">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl font-bold mb-4 text-white">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="text-3xl font-bold mb-4 text-white"
+            >
               Need a <span className="gradient-text">Custom Solution</span>?
-            </h2>
-            <p className="text-xl text-gray-300">
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="text-xl text-gray-300"
+            >
               Beyond our ready-to-deploy industry solutions, we offer fully customized AI voice agents built specifically for your unique business requirements.
-            </p>
+            </motion.p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div className="glass-card p-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="glass-card p-8 rounded-xl border border-white/10"
+            >
               <h3 className="text-2xl font-bold mb-4 text-white">Tailored to Your Business</h3>
               <p className="text-gray-300 mb-6">
                 Our custom AI voice solutions are designed to address your specific challenges, integrate with your existing systems, and reflect your unique brand voice.
               </p>
               
               <ul className="space-y-4 mb-8">
-                <li className="flex items-start">
-                  <div className="flex-shrink-0 mt-1">
-                    <div className="w-5 h-5 rounded-full gradient-bg flex items-center justify-center text-white">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                        <polyline points="20 6 9 17 4 12"></polyline>
-                      </svg>
+                {[
+                  { title: "Unique Voice Personas", desc: "Develop AI voices that match your brand identity" },
+                  { title: "Custom Workflows", desc: "Design specific conversation flows unique to your business" },
+                  { title: "API Integrations", desc: "Connect with your existing software stack" },
+                  { title: "Specialized Training", desc: "AI agents trained on your industry-specific knowledge" }
+                ].map((item, index) => (
+                  <li key={index} className="flex items-start">
+                    <div className="flex-shrink-0 mt-1">
+                      <div className="w-5 h-5 rounded-full gradient-bg flex items-center justify-center text-white">
+                        <FiCheck size={12} />
+                      </div>
                     </div>
-                  </div>
-                  <p className="ml-3 text-gray-700">
-                    <strong>Unique Voice Personas</strong> - Develop AI voices that match your brand identity
-                  </p>
-                </li>
-                <li className="flex items-start">
-                  <div className="flex-shrink-0 mt-1">
-                    <div className="w-5 h-5 rounded-full gradient-bg flex items-center justify-center text-white">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                        <polyline points="20 6 9 17 4 12"></polyline>
-                      </svg>
-                    </div>
-                  </div>
-                  <p className="ml-3 text-gray-700">
-                    <strong>Custom Workflows</strong> - Design specific conversation flows unique to your business
-                  </p>
-                </li>
-                <li className="flex items-start">
-                  <div className="flex-shrink-0 mt-1">
-                    <div className="w-5 h-5 rounded-full gradient-bg flex items-center justify-center text-white">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                        <polyline points="20 6 9 17 4 12"></polyline>
-                      </svg>
-                    </div>
-                  </div>
-                  <p className="ml-3 text-gray-700">
-                    <strong>API Integrations</strong> - Connect with your existing software stack
-                  </p>
-                </li>
-                <li className="flex items-start">
-                  <div className="flex-shrink-0 mt-1">
-                    <div className="w-5 h-5 rounded-full gradient-bg flex items-center justify-center text-white">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                        <polyline points="20 6 9 17 4 12"></polyline>
-                      </svg>
-                    </div>
-                  </div>
-                  <p className="ml-3 text-gray-700">
-                    <strong>Specialized Training</strong> - AI agents trained on your industry-specific knowledge
-                  </p>
-                </li>
+                    <p className="ml-3 text-gray-300">
+                      <strong>{item.title}</strong> - {item.desc}
+                    </p>
+                  </li>
+                ))}
               </ul>
               
-              <Link to="/demo" className="btn-primary inline-flex items-center">
-                Discuss Your Custom Needs <FiArrowRight className="ml-2" />
+              <Link to="/calendar" className="btn-primary inline-flex items-center">
+                Schedule a Consultation <FiArrowRight className="ml-2" />
               </Link>
-            </div>
+            </motion.div>
             
-            <div className="glass-card p-8">
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="glass-card p-8 rounded-xl border border-white/10"
+            >
               <h3 className="text-2xl font-bold mb-4 text-white">Our Development Process</h3>
               <p className="text-gray-300 mb-6">
                 Building your custom AI voice solution follows our proven methodology to ensure perfect alignment with your business goals.
               </p>
               
               <div className="space-y-6">
-                <div className="flex items-start">
-                  <div className="flex-shrink-0">
-                    <div className="w-8 h-8 rounded-full gradient-bg flex items-center justify-center text-white font-bold text-sm">
-                      1
+                {[
+                  { step: 1, title: "Discovery & Requirements", desc: "We analyze your business processes and identify the optimal voice automation opportunities." },
+                  { step: 2, title: "Solution Design", desc: "Creating conversation flows, integration points, and voice personas tailored to your needs." },
+                  { step: 3, title: "Development & Training", desc: "Building and training your custom AI voice agents with your industry-specific knowledge." },
+                  { step: 4, title: "Testing & Refinement", desc: "Rigorous testing and optimization to ensure exceptional customer experiences." },
+                  { step: 5, title: "Deployment & Ongoing Support", desc: "Seamless launch with continuous monitoring, updates, and performance optimization." }
+                ].map((item) => (
+                  <div key={item.step} className="flex items-start">
+                    <div className="flex-shrink-0">
+                      <div className="w-8 h-8 rounded-full gradient-bg flex items-center justify-center text-white font-bold text-sm">
+                        {item.step}
+                      </div>
+                    </div>
+                    <div className="ml-4">
+                      <h4 className="font-semibold mb-1 text-white">{item.title}</h4>
+                      <p className="text-gray-400">{item.desc}</p>
                     </div>
                   </div>
-                  <div className="ml-4">
-                    <h4 className="font-semibold mb-1">Discovery & Requirements</h4>
-                    <p className="text-gray-600">We analyze your business processes and identify the optimal voice automation opportunities.</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start">
-                  <div className="flex-shrink-0">
-                    <div className="w-8 h-8 rounded-full gradient-bg flex items-center justify-center text-white font-bold text-sm">
-                      2
-                    </div>
-                  </div>
-                  <div className="ml-4">
-                    <h4 className="font-semibold mb-1">Solution Design</h4>
-                    <p className="text-gray-600">Creating conversation flows, integration points, and voice personas tailored to your needs.</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start">
-                  <div className="flex-shrink-0">
-                    <div className="w-8 h-8 rounded-full gradient-bg flex items-center justify-center text-white font-bold text-sm">
-                      3
-                    </div>
-                  </div>
-                  <div className="ml-4">
-                    <h4 className="font-semibold mb-1">Development & Training</h4>
-                    <p className="text-gray-600">Building and training your custom AI voice agents with your industry-specific knowledge.</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start">
-                  <div className="flex-shrink-0">
-                    <div className="w-8 h-8 rounded-full gradient-bg flex items-center justify-center text-white font-bold text-sm">
-                      4
-                    </div>
-                  </div>
-                  <div className="ml-4">
-                    <h4 className="font-semibold mb-1">Testing & Refinement</h4>
-                    <p className="text-gray-600">Rigorous testing and optimization to ensure exceptional customer experiences.</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start">
-                  <div className="flex-shrink-0">
-                    <div className="w-8 h-8 rounded-full gradient-bg flex items-center justify-center text-white font-bold text-sm">
-                      5
-                    </div>
-                  </div>
-                  <div className="ml-4">
-                    <h4 className="font-semibold mb-1">Deployment & Ongoing Support</h4>
-                    <p className="text-gray-600">Seamless launch with continuous monitoring, updates, and performance optimization.</p>
-                  </div>
-                </div>
+                ))}
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       <section className="py-16">
         <div className="container-custom">
-          <div className="rounded-2xl gradient-bg text-white p-8 md:p-12 shadow-xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="rounded-2xl gradient-bg text-white p-8 md:p-12 shadow-xl"
+          >
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="text-3xl font-bold mb-6">
                 Ready to Transform Your Business with AI Voice Agents?
@@ -380,7 +405,7 @@ const Solutions = () => {
                 </Link>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
     </Layout>
