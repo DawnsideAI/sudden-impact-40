@@ -11,6 +11,7 @@ const Navbar = () => {
   const location = useLocation();
   const isVisible = useScrollDirection();
   const isMobile = useIsMobile();
+  const isHomePage = location.pathname === '/';
 
   // Close mobile menu when route changes
   useEffect(() => {
@@ -61,7 +62,11 @@ const Navbar = () => {
             <motion.img 
               src="/lovable-uploads/04e02938-36ca-4abc-adad-95afd668326b.png" 
               alt="Sudden Impact Agency Logo" 
-              className="h-16 sm:h-20 md:h-24 w-auto object-contain transition-all bg-white/80 rounded-lg p-2"
+              className={`transition-all bg-white/80 rounded-lg p-2 ${
+                isHomePage 
+                  ? "h-20 sm:h-24 md:h-28 w-auto object-contain"
+                  : "h-16 sm:h-20 md:h-24 w-auto object-contain"
+              }`}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               whileHover={{ scale: 1.05 }}
