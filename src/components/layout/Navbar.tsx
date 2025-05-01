@@ -4,10 +4,8 @@ import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useTheme } from 'next-themes';
 import { cn } from '@/lib/utils';
 import { Icons } from '@/components/icons';
-import { ModeToggle } from '@/components/ui/mode-toggle';
 import IndustriesDropdown from './IndustriesDropdown';
 
 interface NavbarProps {
@@ -16,13 +14,7 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ isSolid }) => {
   const { pathname } = useLocation();
-  const [mounted, setMounted] = React.useState(false);
-  const { setTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -77,15 +69,7 @@ const Navbar: React.FC<NavbarProps> = ({ isSolid }) => {
               Pricing
             </Link>
           </nav>
-          <div className="flex items-center gap-2">
-            {mounted && (
-              <ModeToggle
-                enableSystem={true}
-                onChange={(mode) => {
-                  setTheme(mode);
-                }}
-              />
-            )}
+          <div className="flex items-center">
             <Link to="/demo" className="btn-primary">
               Request a Demo
             </Link>
