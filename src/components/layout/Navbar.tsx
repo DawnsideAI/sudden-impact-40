@@ -31,16 +31,15 @@ const Navbar: React.FC<NavbarProps> = ({ isSolid }) => {
     };
   }, [scrolled]);
 
-  const bgColor = isSolid || scrolled 
-    ? 'bg-background/80 backdrop-blur-xl' 
-    : 'bg-transparent backdrop-blur-md bg-black/20';
-  const textColor = isSolid || scrolled ? 'text-foreground' : 'text-white';
+  // Always use a visible background for the header
+  const bgColor = 'bg-gray-900/80 backdrop-blur-xl';
+  const textColor = 'text-white';
 
   return (
     <motion.div
       className={cn(
         'fixed top-0 w-full z-50 transition-all duration-300 border-b',
-        isSolid || scrolled ? 'border-border' : 'border-transparent',
+        'border-white/10',
         bgColor,
         textColor
       )}
@@ -53,12 +52,12 @@ const Navbar: React.FC<NavbarProps> = ({ isSolid }) => {
           <Link to="/" className="flex items-center">
             <motion.div
               whileHover={{ scale: 1.05 }}
-              className="relative"
+              className="relative bg-white/5 rounded-lg p-1"
             >
               <img 
                 src="/lovable-uploads/46b36e77-e44d-4dfd-8c35-6805698f485f.png" 
                 alt="Sudden Impact Agency Logo" 
-                className="h-28 w-auto p-2 bg-gray-900/20 backdrop-blur-sm rounded-md shadow-sm" 
+                className="h-28 w-auto p-2 rounded-md shadow-md" 
               />
             </motion.div>
           </Link>
