@@ -47,7 +47,7 @@ const Navbar: React.FC<NavbarProps> = ({ isSolid }) => {
       animate={{ y: 0 }}
       transition={{ duration: 0.5, delay: 0.2 }}
     >
-      <div className="container-custom py-2">
+      <div className="container-custom py-1">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center">
             <motion.div
@@ -57,7 +57,7 @@ const Navbar: React.FC<NavbarProps> = ({ isSolid }) => {
               <img 
                 src="/lovable-uploads/46b36e77-e44d-4dfd-8c35-6805698f485f.png" 
                 alt="Sudden Impact Agency Logo" 
-                className="h-28 w-auto p-2 rounded-md shadow-md" 
+                className="h-20 w-auto p-1 rounded-md shadow-md" 
               />
             </motion.div>
           </Link>
