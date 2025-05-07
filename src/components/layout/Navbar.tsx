@@ -58,7 +58,7 @@ const Navbar: React.FC<NavbarProps> = ({ isSolid }) => {
               <img 
                 src="/lovable-uploads/46b36e77-e44d-4dfd-8c35-6805698f485f.png" 
                 alt="Sudden Impact Agency Logo" 
-                className="h-28 w-auto p-2 bg-white rounded-md shadow-sm" 
+                className="h-28 w-auto p-2 bg-gray-900/20 backdrop-blur-sm rounded-md shadow-sm" 
               />
             </motion.div>
           </Link>
