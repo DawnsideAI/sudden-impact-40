@@ -55,11 +55,10 @@ const Navbar: React.FC<NavbarProps> = ({ isSolid }) => {
               whileHover={{ scale: 1.05 }}
               className="relative"
             >
-              <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-blue-400 rounded-md blur-sm opacity-70"></div>
               <img 
                 src="/lovable-uploads/46b36e77-e44d-4dfd-8c35-6805698f485f.png" 
                 alt="Sudden Impact Agency Logo" 
-                className="relative h-28 w-auto rounded-md bg-white/30 p-2 shadow-lg backdrop-blur-sm border border-white/20 hover:border-white/40 transition-all duration-300" 
+                className="h-28 w-auto p-2 shadow-sm" 
               />
             </motion.div>
           </Link>
