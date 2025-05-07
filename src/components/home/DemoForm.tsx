@@ -9,6 +9,8 @@ const DemoForm = () => {
     name: "",
     email: "",
     phone: "",
+    company: "",
+    message: "",
   });
   
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -22,15 +24,34 @@ const DemoForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      setIsLoading(false);
+    try {
+      // GHL form submission endpoint
+      const ghlFormEndpoint = "https://www.go.suddenimpact.agency/l/1089001/2024-05-07/5sgcb";
+      
+      // Submit to GHL form
+      const formData = new FormData();
+      formData.append('name', formState.name);
+      formData.append('email', formState.email);
+      formData.append('phone', formState.phone);
+      formData.append('company', formState.company);
+      formData.append('message', formState.message);
+      
+      await fetch(ghlFormEndpoint, {
+        method: 'POST',
+        body: formData,
+        mode: 'no-cors', // GHL form may require this
+      });
+      
       setIsSubmitted(true);
-    }, 1000);
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -117,6 +138,22 @@ const DemoForm = () => {
                   </div>
                   
                   <div>
+                    <label htmlFor="company" className="block text-sm font-medium text-white mb-1">
+                      Company Name
+                    </label>
+                    <input
+                      type="text"
+                      id="company"
+                      name="company"
+                      value={formState.company}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-agency-vibrantPurple focus:border-agency-vibrantPurple placeholder-white/50"
+                      placeholder="Your company name"
+                    />
+                  </div>
+                  
+                  <div>
                     <label htmlFor="email" className="block text-sm font-medium text-white mb-1">
                       Email Address
                     </label>
@@ -145,6 +182,21 @@ const DemoForm = () => {
                       required
                       className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-agency-vibrantPurple focus:border-agency-vibrantPurple placeholder-white/50"
                       placeholder="(123) 456-7890"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-medium text-white mb-1">
+                      How can we help?
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      value={formState.message}
+                      onChange={handleChange}
+                      rows={3}
+                      className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-agency-vibrantPurple focus:border-agency-vibrantPurple placeholder-white/50"
+                      placeholder="Tell us about your business needs"
                     />
                   </div>
                   

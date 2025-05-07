@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -20,7 +21,12 @@ const pricingPlans = [
       "SMS & Email Follow-up Automation",
       "Funnel access (1 prebuilt, branded)",
       "Access to Live AI Demo Tool",
-      "Automated client onboarding via GHL snapshot"
+      "Automated client onboarding via GHL snapshot",
+      "Unified Inbox Mobile App (iOS & Android)",
+      "Real-Time Notifications",
+      "2-Way SMS & Email Campaigns",
+      "Social Media Scheduler",
+      "Reputation Management"
     ],
     mostPopular: false,
     ctaText: "Start Free Trial"
@@ -39,7 +45,14 @@ const pricingPlans = [
       "Voicemail Drops + Missed Call Text-Backs",
       "Multi-Step Email/SMS Sequences",
       "Smart Demo Scheduler + Custom Reminder Flows",
-      "GHL automation & campaign snapshot included"
+      "GHL automation & campaign snapshot included",
+      "Unified Inbox Mobile App (iOS & Android)",
+      "Real-Time Notifications",
+      "2-Way SMS & Email Campaigns",
+      "Social Media Scheduler",
+      "Reputation Management",
+      "Custom KPI Dashboard & Reports",
+      "Zapier & API Integrations"
     ],
     mostPopular: true,
     ctaText: "Start Free Trial"
@@ -57,7 +70,14 @@ const pricingPlans = [
       "Role-based Permissions + User Controls",
       "White-labeled SaaS Portal Branding",
       "Quarterly Automation Success Check-ins",
-      "Priority Support Access"
+      "Priority Support Access",
+      "Unified Inbox Mobile App (iOS & Android)",
+      "Real-Time Notifications",
+      "2-Way SMS & Email Campaigns",
+      "Social Media Scheduler",
+      "Reputation Management",
+      "Custom KPI Dashboard & Reports",
+      "Zapier & API Integrations"
     ],
     mostPopular: false,
     ctaText: "Start Free Trial"
@@ -169,32 +189,101 @@ const Pricing = () => {
         </div>
       </section>
 
+      {/* Overage Pricing Section */}
+      <section className="py-12 md:py-16 relative border-t border-white/10">
+        <div className="container-custom">
+          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center text-white">
+            Overage Pricing
+          </h2>
+          <div className="glass-card rounded-xl overflow-hidden p-8 max-w-3xl mx-auto mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="text-center">
+                <h3 className="text-lg font-semibold mb-2">Outbound</h3>
+                <p className="text-3xl font-bold text-agency-vibrantPurple">$0.056</p>
+                <p className="text-sm text-gray-400">per minute</p>
+              </div>
+              <div className="text-center">
+                <h3 className="text-lg font-semibold mb-2">Inbound</h3>
+                <p className="text-3xl font-bold text-agency-vibrantPurple">$0.034</p>
+                <p className="text-sm text-gray-400">per minute</p>
+              </div>
+              <div className="text-center">
+                <h3 className="text-lg font-semibold mb-2">SMS</h3>
+                <p className="text-3xl font-bold text-agency-vibrantPurple">$0.0316</p>
+                <p className="text-sm text-gray-400">per segment</p>
+              </div>
+            </div>
+            <div className="mt-6 pt-6 border-t border-white/10 text-center">
+              <p className="text-sm text-gray-400">
+                Overage minutes are automatically charged to your card on file when you exceed your plan's limits.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Custom Solutions Section */}
       <section className="py-12 md:py-16 relative border-t border-white/10">
         <div className="container-custom">
           <div className="glass-card rounded-xl overflow-hidden p-8 max-w-3xl mx-auto">
             <h3 className="text-2xl font-bold mb-4">Custom AI Solutions</h3>
             <p className="text-gray-400 mb-6">For healthcare, call centers, or multi-brand teams needing high-complexity builds</p>
-            <ul className="space-y-4 mb-8">
+            <ul className="space-y-4 mb-8 grid grid-cols-1 md:grid-cols-2 gap-4">
               <li className="flex">
                 <span className="text-blue-400 mr-3">•</span>
-                <span className="text-gray-300">Custom AI Agent Development</span>
+                <span className="text-gray-300">Custom AI Voice Agent Development</span>
               </li>
               <li className="flex">
                 <span className="text-blue-400 mr-3">•</span>
-                <span className="text-gray-300">HIPAA-ready Workflows (on request)</span>
+                <span className="text-gray-300">HIPAA-Compliance Ready Workflows</span>
               </li>
               <li className="flex">
                 <span className="text-blue-400 mr-3">•</span>
-                <span className="text-gray-300">Complex Multi-step Voice Logic</span>
+                <span className="text-gray-300">Complex Multi-Step Voice Logic</span>
               </li>
               <li className="flex">
                 <span className="text-blue-400 mr-3">•</span>
-                <span className="text-gray-300">Industry-tailored Automations</span>
+                <span className="text-gray-300">Industry-Tailored Automations</span>
               </li>
               <li className="flex">
                 <span className="text-blue-400 mr-3">•</span>
                 <span className="text-gray-300">Full Implementation + Strategy Buildout</span>
+              </li>
+              <li className="flex">
+                <span className="text-blue-400 mr-3">•</span>
+                <span className="text-gray-300">POS System Integrations</span>
+              </li>
+              <li className="flex">
+                <span className="text-blue-400 mr-3">•</span>
+                <span className="text-gray-300">EMR/CRM Sync via API or Webhooks</span>
+              </li>
+              <li className="flex">
+                <span className="text-blue-400 mr-3">•</span>
+                <span className="text-gray-300">AI Scheduling with Staff/Provider Matching</span>
+              </li>
+              <li className="flex">
+                <span className="text-blue-400 mr-3">•</span>
+                <span className="text-gray-300">Multi-Location Call Routing by Intent</span>
+              </li>
+              <li className="flex">
+                <span className="text-blue-400 mr-3">•</span>
+                <span className="text-gray-300">Custom Data Capture + Validation</span>
+              </li>
+              <li className="flex">
+                <span className="text-blue-400 mr-3">•</span>
+                <span className="text-gray-300">Bilingual/Multilingual Voice Agent Support</span>
+              </li>
+              <li className="flex">
+                <span className="text-blue-400 mr-3">•</span>
+                <span className="text-gray-300">Post-Call Summarization + CRM Logging</span>
+              </li>
+              <li className="flex">
+                <span className="text-blue-400 mr-3">•</span>
+                <span className="text-gray-300">Escalation to Live Agents with Handoff</span>
+              </li>
+              <li className="flex">
+                <span className="text-blue-400 mr-3">•</span>
+                <span className="text-gray-300">Secure Call Recording + Compliance Tracking</span>
               </li>
             </ul>
             <Link

@@ -1,7 +1,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ChevronDown, Utensils, Building2, Music } from "lucide-react";
+import { ChevronDown, Utensils, Building2, Music, Tool, PhoneCall } from "lucide-react";
 
 const industries = [
   {
@@ -21,6 +21,18 @@ const industries = [
     name: "Music Artists & Labels",
     icon: <Music className="w-5 h-5 mr-2" />,
     url: "/industries/music",
+  },
+  {
+    id: "contractors",
+    name: "Service Contractors",
+    icon: <Tool className="w-5 h-5 mr-2" />,
+    url: "/industries/contractors",
+  },
+  {
+    id: "callcenters",
+    name: "Call Centers",
+    icon: <PhoneCall className="w-5 h-5 mr-2" />,
+    url: "/industries/callcenters",
   },
 ];
 

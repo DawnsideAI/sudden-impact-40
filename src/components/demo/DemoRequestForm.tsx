@@ -1,12 +1,16 @@
+
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Check, PhoneCall } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { Link } from "react-router-dom";
 
 interface FormState {
   name: string;
   email: string;
   phone: string;
+  company: string;
+  message: string;
 }
 
 interface DemoRequestFormProps {
@@ -18,12 +22,14 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
     name: "",
     email: "",
     phone: "",
+    company: "",
+    message: "",
   });
   
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormState((prev) => ({
       ...prev,
@@ -36,8 +42,22 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
     setIsLoading(true);
     
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      // Link to GHL form submission endpoint
+      const ghlFormEndpoint = "https://www.go.suddenimpact.agency/l/1089001/2024-05-07/5sgcb";
+      
+      // Submit to GHL form
+      const formData = new FormData();
+      formData.append('name', formState.name);
+      formData.append('email', formState.email);
+      formData.append('phone', formState.phone);
+      formData.append('company', formState.company);
+      formData.append('message', formState.message);
+      
+      const response = await fetch(ghlFormEndpoint, {
+        method: 'POST',
+        body: formData,
+        mode: 'no-cors', // GHL form may require this
+      });
       
       setIsSubmitted(true);
       onFormSubmit?.();
@@ -158,6 +178,22 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
       </div>
       
       <div>
+        <label htmlFor="company" className="block text-sm font-medium text-white mb-1">
+          Company Name
+        </label>
+        <input
+          type="text"
+          id="company"
+          name="company"
+          value={formState.company}
+          onChange={handleChange}
+          required
+          className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-white/5 border border-white/10 focus:outline-none focus:ring-2 focus:ring-agency-vibrantPurple focus:border-agency-vibrantPurple text-white text-sm sm:text-base"
+          placeholder="Your company name"
+        />
+      </div>
+      
+      <div>
         <label htmlFor="email" className="block text-sm font-medium text-white mb-1">
           Email Address
         </label>
@@ -189,6 +225,21 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
         />
       </div>
       
+      <div>
+        <label htmlFor="message" className="block text-sm font-medium text-white mb-1">
+          How can we help?
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          value={formState.message}
+          onChange={handleChange}
+          rows={3}
+          className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-white/5 border border-white/10 focus:outline-none focus:ring-2 focus:ring-agency-vibrantPurple focus:border-agency-vibrantPurple text-white text-sm sm:text-base"
+          placeholder="Tell us about your business needs"
+        />
+      </div>
+      
       <button
         type="submit"
         disabled={isLoading}
@@ -201,13 +252,13 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
       
       <p className="text-xs sm:text-sm text-center text-muted-foreground mt-4">
         By submitting, you agree to our{" "}
-        <a href="/legal" className="text-agency-vibrantPurple hover:underline">
+        <Link to="/legal" className="text-agency-vibrantPurple hover:underline">
           Terms & Conditions
-        </a>{" "}
+        </Link>{" "}
         and{" "}
-        <a href="/legal" className="text-agency-vibrantPurple hover:underline">
+        <Link to="/legal" className="text-agency-vibrantPurple hover:underline">
           Privacy Policy
-        </a>
+        </Link>
         .
       </p>
     </form>

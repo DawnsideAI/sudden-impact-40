@@ -22,41 +22,55 @@ const industryData = {
     ],
     pricing: [
       {
-        title: "Starter",
-        price: "$299",
+        title: "Starter Impact",
+        price: "$397",
         description: "Perfect for small restaurants just getting started with AI voice technology",
         features: [
-          "100 minutes of AI calls per month",
-          "Basic reservation handling",
-          "Menu information responses",
-          "Business hours and location info"
+          "500 AI Engagement Minutes/month",
+          "1 AI Voice Agent (plug-and-play template)",
+          "Contact & lead CRM (via GHL)",
+          "1 Smart Booking Calendar (GHL native calendar)",
+          "1 Lead Capture Form (branded)",
+          "SMS & Email Follow-up Automation",
+          "Unified Inbox Mobile App (iOS & Android)",
+          "Real-Time Notifications",
+          "Social Media Scheduler"
         ]
       },
       {
         title: "Impact Pro",
-        price: "$599",
+        price: "$597",
         description: "Ideal for established restaurants with steady call volume",
         features: [
-          "500 minutes of AI calls per month",
-          "Advanced reservation management",
-          "Complete menu handling with customization",
-          "Takeout order processing",
-          "Integration with existing POS systems",
-          "Custom voice personality"
+          "1,500 AI Engagement Minutes/month",
+          "Up to 3 AI Voice Agents",
+          "Smart Round-Robin Calendar Routing",
+          "Up to 5 Funnels or Landing Pages",
+          "Advanced Pipeline & Deal Management",
+          "Multi-Step Email/SMS Sequences",
+          "Unified Inbox Mobile App (iOS & Android)",
+          "Real-Time Notifications",
+          "Social Media Scheduler",
+          "Reputation Management",
+          "Custom KPI Dashboard & Reports",
+          "Zapier & API Integrations"
         ],
         highlighted: true
       },
       {
         title: "Enterprise",
-        price: "Contact Us",
+        price: "$897",
         description: "For restaurant groups and high-volume establishments",
         features: [
-          "Unlimited AI call minutes",
-          "Multiple location support",
-          "Complete system integration",
-          "Custom workflow creation",
-          "Advanced analytics dashboard",
-          "Dedicated support team"
+          "5,000 AI Engagement Minutes/month",
+          "Unlimited AI Voice Agents",
+          "Unlimited Calendars, Forms, Funnels",
+          "Multi-location CRM Dashboard",
+          "Role-based Permissions + User Controls",
+          "White-labeled SaaS Portal Branding",
+          "Quarterly Automation Success Check-ins",
+          "Priority Support Access",
+          "All Pro features included"
         ]
       }
     ],
@@ -74,41 +88,55 @@ const industryData = {
     ],
     pricing: [
       {
-        title: "Starter",
-        price: "$349",
+        title: "Starter Impact",
+        price: "$397",
         description: "For individual agents and small agencies",
         features: [
-          "150 minutes of AI calls per month",
-          "Basic property information handling",
-          "Showing scheduling assistance",
-          "Contact information collection"
+          "500 AI Engagement Minutes/month",
+          "1 AI Voice Agent (plug-and-play template)",
+          "Contact & lead CRM (via GHL)",
+          "1 Smart Booking Calendar (GHL native calendar)",
+          "1 Lead Capture Form (branded)",
+          "SMS & Email Follow-up Automation",
+          "Unified Inbox Mobile App (iOS & Android)",
+          "Real-Time Notifications",
+          "Social Media Scheduler"
         ]
       },
       {
         title: "Impact Pro",
-        price: "$699",
+        price: "$597",
         description: "For growing agencies with multiple agents",
         features: [
-          "600 minutes of AI calls per month",
-          "Complete property detailing system",
-          "Advanced showing scheduling",
-          "Buyer/renter pre-qualification",
-          "Integration with CRM systems",
-          "Custom scripts for different property types"
+          "1,500 AI Engagement Minutes/month",
+          "Up to 3 AI Voice Agents",
+          "Smart Round-Robin Calendar Routing",
+          "Up to 5 Funnels or Landing Pages",
+          "Advanced Pipeline & Deal Management",
+          "Multi-Step Email/SMS Sequences",
+          "Unified Inbox Mobile App (iOS & Android)",
+          "Real-Time Notifications",
+          "Social Media Scheduler",
+          "Reputation Management",
+          "Custom KPI Dashboard & Reports",
+          "Zapier & API Integrations"
         ],
         highlighted: true
       },
       {
         title: "Enterprise",
-        price: "Contact Us",
+        price: "$897",
         description: "For large brokerages and property management firms",
         features: [
-          "Unlimited AI call minutes",
-          "Multi-agent, multi-property support",
-          "Full CRM and system integrations",
-          "Custom workflow creation",
-          "White-labeled voice solutions",
-          "Dedicated account executive"
+          "5,000 AI Engagement Minutes/month",
+          "Unlimited AI Voice Agents",
+          "Unlimited Calendars, Forms, Funnels",
+          "Multi-location CRM Dashboard",
+          "Role-based Permissions + User Controls",
+          "White-labeled SaaS Portal Branding",
+          "Quarterly Automation Success Check-ins",
+          "Priority Support Access",
+          "All Pro features included"
         ]
       }
     ],
@@ -126,52 +154,200 @@ const industryData = {
     ],
     pricing: [
       {
-        title: "Starter",
-        price: "$249",
+        title: "Starter Impact",
+        price: "$397",
         description: "For emerging artists and small labels",
         features: [
-          "100 minutes of AI calls per month",
-          "Basic event and release information",
-          "Fan contact collection",
-          "Simple booking inquiry handling"
+          "500 AI Engagement Minutes/month",
+          "1 AI Voice Agent (plug-and-play template)",
+          "Contact & lead CRM (via GHL)",
+          "1 Smart Booking Calendar (GHL native calendar)",
+          "1 Lead Capture Form (branded)",
+          "SMS & Email Follow-up Automation",
+          "Unified Inbox Mobile App (iOS & Android)",
+          "Real-Time Notifications",
+          "Social Media Scheduler"
         ]
       },
       {
         title: "Impact Pro",
-        price: "$549",
+        price: "$597",
         description: "For established artists and mid-size labels",
         features: [
-          "500 minutes of AI calls per month",
-          "Complete tour and release management",
-          "Merchandise ordering assistance",
-          "Fan club membership handling",
-          "Media inquiry filtering",
-          "Custom artist voice personality"
+          "1,500 AI Engagement Minutes/month",
+          "Up to 3 AI Voice Agents",
+          "Smart Round-Robin Calendar Routing",
+          "Up to 5 Funnels or Landing Pages",
+          "Advanced Pipeline & Deal Management",
+          "Multi-Step Email/SMS Sequences",
+          "Unified Inbox Mobile App (iOS & Android)",
+          "Real-Time Notifications",
+          "Social Media Scheduler",
+          "Reputation Management",
+          "Custom KPI Dashboard & Reports",
+          "Zapier & API Integrations"
         ],
         highlighted: true
       },
       {
         title: "Enterprise",
-        price: "Contact Us",
+        price: "$897",
         description: "For major labels and top-tier artists",
         features: [
-          "Unlimited AI call minutes",
-          "Multi-artist support",
-          "Global territory management",
-          "Advanced merchandising integration",
-          "Complete media and booking workflow",
-          "Custom voice solution design"
+          "5,000 AI Engagement Minutes/month",
+          "Unlimited AI Voice Agents",
+          "Unlimited Calendars, Forms, Funnels",
+          "Multi-location CRM Dashboard",
+          "Role-based Permissions + User Controls",
+          "White-labeled SaaS Portal Branding",
+          "Quarterly Automation Success Check-ins",
+          "Priority Support Access",
+          "All Pro features included"
         ]
       }
     ],
     image: "/lovable-uploads/3094ebcc-0925-48b6-9f13-c4e025b7e67d.png"
+  },
+  contractors: {
+    title: "Service Contractors",
+    intro: "Optimize appointment scheduling, client communication, and field service management with AI voice technology.",
+    benefits: [
+      "Never miss a service call or inquiry, even after hours",
+      "Schedule and manage appointments efficiently",
+      "Pre-qualify leads and collect essential information",
+      "Answer common questions about services and pricing",
+      "Follow up with clients automatically for reviews"
+    ],
+    pricing: [
+      {
+        title: "Starter Impact",
+        price: "$397",
+        description: "For solo contractors and small teams",
+        features: [
+          "500 AI Engagement Minutes/month",
+          "1 AI Voice Agent (plug-and-play template)",
+          "Contact & lead CRM (via GHL)",
+          "1 Smart Booking Calendar (GHL native calendar)",
+          "1 Lead Capture Form (branded)",
+          "SMS & Email Follow-up Automation",
+          "Unified Inbox Mobile App (iOS & Android)",
+          "Real-Time Notifications",
+          "Social Media Scheduler"
+        ]
+      },
+      {
+        title: "Impact Pro",
+        price: "$597",
+        description: "For growing contractor businesses",
+        features: [
+          "1,500 AI Engagement Minutes/month",
+          "Up to 3 AI Voice Agents",
+          "Smart Round-Robin Calendar Routing",
+          "Up to 5 Funnels or Landing Pages",
+          "Advanced Pipeline & Deal Management",
+          "Multi-Step Email/SMS Sequences",
+          "Unified Inbox Mobile App (iOS & Android)",
+          "Real-Time Notifications",
+          "Social Media Scheduler",
+          "Reputation Management",
+          "Custom KPI Dashboard & Reports",
+          "Zapier & API Integrations"
+        ],
+        highlighted: true
+      },
+      {
+        title: "Enterprise",
+        price: "$897",
+        description: "For large service companies and franchises",
+        features: [
+          "5,000 AI Engagement Minutes/month",
+          "Unlimited AI Voice Agents",
+          "Unlimited Calendars, Forms, Funnels",
+          "Multi-location CRM Dashboard",
+          "Role-based Permissions + User Controls",
+          "White-labeled SaaS Portal Branding",
+          "Quarterly Automation Success Check-ins",
+          "Priority Support Access",
+          "All Pro features included"
+        ]
+      }
+    ],
+    image: "/lovable-uploads/a8ea11c6-eee2-4a72-9e98-851efb0bdc3d.png"
+  },
+  callcenters: {
+    title: "Call Centers",
+    intro: "Transform customer service and call management with AI voice agents designed for call centers.",
+    benefits: [
+      "Handle routine inquiries without human intervention",
+      "Reduce wait times and improve customer satisfaction",
+      "Provide 24/7 support coverage for global operations",
+      "Intelligently route calls based on intent and priority",
+      "Collect valuable customer data and insights"
+    ],
+    pricing: [
+      {
+        title: "Starter Impact",
+        price: "$397",
+        description: "For small contact centers starting with AI",
+        features: [
+          "500 AI Engagement Minutes/month",
+          "1 AI Voice Agent (plug-and-play template)",
+          "Contact & lead CRM (via GHL)",
+          "1 Smart Booking Calendar (GHL native calendar)",
+          "1 Lead Capture Form (branded)",
+          "SMS & Email Follow-up Automation",
+          "Unified Inbox Mobile App (iOS & Android)",
+          "Real-Time Notifications",
+          "Social Media Scheduler"
+        ]
+      },
+      {
+        title: "Impact Pro",
+        price: "$597",
+        description: "For established call centers with steady volume",
+        features: [
+          "1,500 AI Engagement Minutes/month",
+          "Up to 3 AI Voice Agents",
+          "Smart Round-Robin Calendar Routing",
+          "Up to 5 Funnels or Landing Pages",
+          "Advanced Pipeline & Deal Management",
+          "Multi-Step Email/SMS Sequences",
+          "Unified Inbox Mobile App (iOS & Android)",
+          "Real-Time Notifications",
+          "Social Media Scheduler",
+          "Reputation Management",
+          "Custom KPI Dashboard & Reports",
+          "Zapier & API Integrations"
+        ],
+        highlighted: true
+      },
+      {
+        title: "Enterprise",
+        price: "$897",
+        description: "For large call centers and BPO operations",
+        features: [
+          "5,000 AI Engagement Minutes/month",
+          "Unlimited AI Voice Agents",
+          "Unlimited Calendars, Forms, Funnels",
+          "Multi-location CRM Dashboard",
+          "Role-based Permissions + User Controls",
+          "White-labeled SaaS Portal Branding",
+          "Quarterly Automation Success Check-ins",
+          "Priority Support Access",
+          "All Pro features included"
+        ]
+      }
+    ],
+    image: "/lovable-uploads/a8ea11c6-eee2-4a72-9e98-851efb0bdc3d.png"
   }
 };
 
 const industries = [
   { id: "restaurants", title: "Restaurants & Hospitality" },
   { id: "realEstate", title: "Real Estate" },
-  { id: "music", title: "Music Artists & Labels" }
+  { id: "music", title: "Music Artists & Labels" },
+  { id: "contractors", title: "Service Contractors" },
+  { id: "callcenters", title: "Call Centers" }
 ];
 
 const IndustryPage = () => {
@@ -329,8 +505,13 @@ const IndustryPage = () => {
               <p className="text-xl mb-8 text-white/80 max-w-2xl mx-auto">
                 Schedule a personalized demo to see how our AI voice agents can revolutionize your customer interactions and operational efficiency.
               </p>
-              <Link to="/demo" className="btn-primary bg-white text-agency-vibrantPurple hover:bg-white/90 inline-flex items-center">
-                Request a Custom Demo <FiArrowRight className="ml-2" />
+              <Link 
+                to="https://www.go.suddenimpact.agency/meetings/suddenimpact/30min" 
+                className="btn-primary bg-white text-agency-vibrantPurple hover:bg-white/90 inline-flex items-center"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Schedule a Custom Demo <FiArrowRight className="ml-2" />
               </Link>
             </motion.div>
           </div>
