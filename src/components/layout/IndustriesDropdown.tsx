@@ -1,7 +1,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ChevronDown, Utensils, Building2, Music, Tool, PhoneCall } from "lucide-react";
+import { ChevronDown, Utensils, Building2, Music, Wrench, PhoneCall } from "lucide-react";
 
 const industries = [
   {
@@ -25,7 +25,7 @@ const industries = [
   {
     id: "contractors",
     name: "Service Contractors",
-    icon: <Tool className="w-5 h-5 mr-2" />,
+    icon: <Wrench className="w-5 h-5 mr-2" />,
     url: "/industries/contractors",
   },
   {
