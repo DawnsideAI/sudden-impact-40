@@ -107,6 +107,14 @@ const CallerComparisonChart = () => {
   const isMobile = useIsMobile();
   const mobileData = transformDataForMobile(metrics);
 
+  // Safe formatter function that checks for undefined values
+  const safeLabelFormatter = (value, entry) => {
+    if (entry && entry.payload && entry.payload.label) {
+      return `${value} ${entry.payload.label}`;
+    }
+    return value;
+  };
+
   return (
     <motion.section 
       initial={{ opacity: 0, y: 20 }}
@@ -178,7 +186,6 @@ const CallerComparisonChart = () => {
                       dataKey="value" 
                       fill={(data) => data.color} 
                       radius={[4, 4, 4, 4]}
-                      name={(data) => data.type}
                     >
                       <LabelList 
                         dataKey="value" 
@@ -186,7 +193,12 @@ const CallerComparisonChart = () => {
                         fill="#333" 
                         fontSize={14}
                         fontWeight="bold"
-                        formatter={(value, entry) => `${value} ${entry.payload.label}`}
+                        formatter={(value, entry) => {
+                          if (entry && entry.payload) {
+                            return `${value} ${entry.payload.label}`;
+                          }
+                          return value;
+                        }}
                       />
                     </Bar>
                   </BarChart>
@@ -280,7 +292,7 @@ const CallerComparisonChart = () => {
                       fill="#555" 
                       fontSize={14}
                       fontWeight="bold"
-                      formatter={(value, entry) => `${value} ${entry.payload.label}`}
+                      formatter={safeLabelFormatter}
                     />
                   </Bar>
                   <Bar 
@@ -295,7 +307,7 @@ const CallerComparisonChart = () => {
                       fill="#7C3AED"
                       fontSize={14}
                       fontWeight="bold"
-                      formatter={(value, entry) => `${value} ${entry.payload.label}`}
+                      formatter={safeLabelFormatter}
                     />
                   </Bar>
                 </BarChart>
