@@ -11,6 +11,7 @@ interface IndustryCardProps {
   isActive: boolean;
   onClick: () => void;
   index: number;
+  lightMode?: boolean;
 }
 
 export const IndustryCard = ({
@@ -21,6 +22,7 @@ export const IndustryCard = ({
   isActive,
   onClick,
   index,
+  lightMode,
 }: IndustryCardProps) => {
   return (
     <motion.button

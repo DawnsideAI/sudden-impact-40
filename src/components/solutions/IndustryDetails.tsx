@@ -15,9 +15,10 @@ interface Industry {
 
 interface IndustryDetailsProps {
   industry: Industry;
+  lightMode?: boolean;
 }
 
-const IndustryDetails = ({ industry }: IndustryDetailsProps) => {
+const IndustryDetails = ({ industry, lightMode }: IndustryDetailsProps) => {
   return (
     <div className="bg-white shadow-lg rounded-xl p-6 h-full border border-gray-200">
       <div className="flex items-center gap-3 mb-4">

@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import Layout from "@/components/layout/Layout";
 import WhiteSection from "@/components/layout/WhiteSection";
@@ -5,7 +6,18 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { motion } from "framer-motion";
 import { IndustryCard } from '@/components/solutions/IndustryCard';
 import IndustryDetails from '@/components/solutions/IndustryDetails';
-import { Building, Home, Utensils, Car, Briefcase, BookOpen, Stethoscope } from 'lucide-react';
+import { 
+  Building, 
+  Home, 
+  Utensils, 
+  Car, 
+  Briefcase, 
+  BookOpen, 
+  Stethoscope, 
+  Wrench, 
+  Heart, 
+  PhoneCall 
+} from 'lucide-react';
 
 const industries = [
   {
@@ -30,134 +42,78 @@ const industries = [
   },
   {
     id: "contractors",
-    icon: <FiTool size={24} />,
+    icon: <Wrench className="h-5 w-5" />,
     title: "Service Contractors",
     description: "AI voice agents designed specifically for plumbers, electricians, HVAC technicians, and other service contractors.",
-    color: "bg-blue-50",
-    accentColor: "text-blue-600",
+    detailsTitle: "AI Voice Agents for Service Contractors",
+    detailsDescription: "Our AI voice agents handle customer calls, schedule appointments, and qualify leads, allowing service contractors to focus on delivering quality service.",
     features: [
-      {
-        title: "24/7 Availability",
-        description: "Never miss a call or appointment opportunity with always-on AI voice agents."
-      },
-      {
-        title: "Appointment Scheduling",
-        description: "Automate bookings and integrate seamlessly with your existing calendar systems."
-      },
-      {
-        title: "Lead Qualification",
-        description: "Pre-screen potential clients to focus your efforts on high-quality leads."
-      },
-      {
-        title: "Seamless Integration",
-        description: "Compatible with your existing systems and workflows for a friction-free experience."
-      }
+      "24/7 Availability",
+      "Appointment Scheduling",
+      "Lead Qualification",
+      "Seamless Integration"
     ],
-    benefits: [
-      "Reduce missed call opportunities",
-      "Automate routine scheduling tasks",
-      "Improve customer response times",
-      "Focus resources on service delivery",
-      "Enhance customer satisfaction with responsive communication"
+    results: [
+      "35% reduction in missed call opportunities",
+      "42% increase in service appointments",
+      "28% improvement in customer response times"
     ]
   },
   {
     id: "restaurants",
-    icon: <RiRestaurantLine size={24} />,
+    icon: <Utensils className="h-5 w-5" />,
     title: "Restaurants & Hospitality",
     description: "Streamline reservations, handle menu inquiries, and process orders with our specialized AI voice agents.",
-    color: "bg-amber-50",
-    accentColor: "text-amber-600",
+    detailsTitle: "AI Voice Agents for Restaurants",
+    detailsDescription: "Our AI voice agents handle reservations, takeout orders, and menu inquiries, freeing up your staff to focus on in-person guests.",
     features: [
-      {
-        title: "Reservation Management",
-        description: "Handle bookings efficiently, even during peak hours when staff are busy."
-      },
-      {
-        title: "Menu Assistance",
-        description: "Provide instant answers to menu inquiries, special offerings, and dietary concerns."
-      },
-      {
-        title: "Order Processing",
-        description: "Streamline takeout and delivery orders with precision and accuracy."
-      },
-      {
-        title: "Special Events & Promotions",
-        description: "Automated information and booking for special events, private dining, and promotions."
-      }
+      "Reservation Management",
+      "Menu Assistance",
+      "Order Processing",
+      "Special Events & Promotions"
     ],
-    benefits: [
-      "Never miss a reservation or takeout order",
-      "Free up staff to focus on in-person guests",
-      "Reduce hold times during rush periods",
-      "Capture accurate order details",
-      "Improve customer satisfaction with responsive service"
+    results: [
+      "45% reduction in missed calls during peak hours",
+      "38% increase in takeout orders",
+      "31% improvement in reservation accuracy"
     ]
   },
   {
     id: "healthcare",
-    icon: <FiHeart size={24} />,
+    icon: <Heart className="h-5 w-5" />,
     title: "Healthcare Providers",
     description: "HIPAA-compliant voice agents to improve patient care, scheduling, and information sharing.",
-    color: "bg-blue-50",
-    accentColor: "text-blue-600",
+    detailsTitle: "AI Voice Agents for Healthcare",
+    detailsDescription: "Our HIPAA-compliant AI voice agents handle appointment scheduling, patient inquiries, and follow-ups, allowing your staff to focus on patient care.",
     features: [
-      {
-        title: "Patient Scheduling",
-        description: "Automate appointment bookings and reminders to reduce no-shows."
-      },
-      {
-        title: "Information Dissemination",
-        description: "Provide answers to common patient queries about services, insurance, and procedures."
-      },
-      {
-        title: "Post-Care Follow-Up",
-        description: "Ensure patients receive timely post-treatment information and check-ins."
-      },
-      {
-        title: "HIPAA Compliance",
-        description: "Our healthcare solutions are fully HIPAA-compliant for secure patient interactions."
-      }
+      "Patient Scheduling",
+      "Information Dissemination",
+      "Post-Care Follow-Up",
+      "HIPAA Compliance"
     ],
-    benefits: [
-      "Reduce administrative burden on healthcare staff",
-      "Improve patient communication and follow-up",
-      "Decrease appointment no-shows",
-      "Enhance patient satisfaction with responsive care",
-      "Maintain HIPAA compliance with secure communications"
+    results: [
+      "38% reduction in administrative workload",
+      "42% decrease in appointment no-shows",
+      "35% improvement in patient satisfaction"
     ]
   },
   {
     id: "callcenters",
-    icon: <FiPhoneCall size={24} />,
+    icon: <PhoneCall className="h-5 w-5" />,
     title: "Call Centers",
     description: "Enhance operational efficiency with intelligent call routing, support, and data collection.",
-    color: "bg-purple-50",
-    accentColor: "text-purple-600",
+    detailsTitle: "AI Voice Agents for Call Centers",
+    detailsDescription: "Our AI voice agents handle routine customer inquiries, route calls efficiently, and collect customer data, improving your call center's efficiency and reducing wait times.",
     features: [
-      {
-        title: "Call Routing",
-        description: "Direct calls to the appropriate departments or personnel based on customer needs."
-      },
-      {
-        title: "Customer Support",
-        description: "Handle FAQs and common issues without human intervention."
-      },
-      {
-        title: "Data Collection",
-        description: "Gather customer feedback and insights seamlessly for business intelligence."
-      },
-      {
-        title: "Call Overflow Management",
-        description: "Manage high call volume periods without long wait times or dropped calls."
-      }
+      "Call Routing",
+      "Customer Support",
+      "Data Collection",
+      "Call Overflow Management"
     ],
-    benefits: [
-      "Reduce wait times for customers",
-      "Optimize agent utilization for complex issues",
-      "Ensure 24/7 customer support coverage",
-      "Improve first-call resolution rates",
-      "Enhance customer satisfaction with efficient service"
+    results: [
+      "45% reduction in average wait times",
+      "32% improvement in first-call resolution rates",
+      "38% increase in customer satisfaction ratings"
     ]
   }
 ];
@@ -202,7 +158,6 @@ const Solutions = () => {
                         isActive={selectedIndustry.id === industry.id}
                         onClick={() => setSelectedIndustry(industry)}
                         index={index}
-                        lightMode={true}
                       />
                     ))}
                   </div>
@@ -216,7 +171,7 @@ const Solutions = () => {
                     transition={{ duration: 0.5 }}
                     className="h-full"
                   >
-                    <IndustryDetails industry={selectedIndustry} lightMode={true} />
+                    <IndustryDetails industry={selectedIndustry} />
                   </motion.div>
                 </div>
               </div>
