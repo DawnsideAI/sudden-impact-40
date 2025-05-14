@@ -10,7 +10,7 @@ const statsData = [
 
 const Stats = () => {
   return (
-    <div className="py-8">
+    <div className="py-12">
       <div className="text-center mb-12">
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
@@ -40,11 +40,11 @@ const Stats = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="text-center"
+            className="text-center bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-all"
           >
             <div className="flex flex-col items-center">
-              <span className="text-4xl md:text-5xl font-bold mb-2 text-agency-blue">{stat.value}</span>
-              <span className="text-agency-gray text-sm md:text-base">{stat.label}</span>
+              <span className="text-4xl md:text-5xl font-bold mb-3 text-agency-blue">{stat.value}</span>
+              <span className="text-agency-gray text-sm md:text-base font-medium">{stat.label}</span>
             </div>
           </motion.div>
         ))}
