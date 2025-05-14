@@ -21,27 +21,37 @@ const Index = () => {
   }, []);
 
   return (
-    <Layout>
+    <Layout lightMode={true}>
       <div className="flex flex-col gap-0">
         <Hero />
-        <WhiteSection>
+        <WhiteSection className="bg-white border-b border-gray-200">
           <Stats />
         </WhiteSection>
-        <ServiceFeatures />
-        <WhiteSection>
+        <WhiteSection className="bg-gray-50 border-b border-gray-200">
+          <ServiceFeatures />
+        </WhiteSection>
+        <WhiteSection className="bg-white border-b border-gray-200">
           <TrustedBy />
         </WhiteSection>
         <Suspense fallback={<div className="h-96 flex items-center justify-center">Loading...</div>}>
-          <CallerComparisonChart />
-          <WhiteSection>
+          <WhiteSection className="bg-gray-50 border-b border-gray-200">
+            <CallerComparisonChart />
+          </WhiteSection>
+          <WhiteSection className="bg-white border-b border-gray-200">
             <IndustrySolutions />
           </WhiteSection>
-          <AIPapersSection />
-          <WhiteSection>
+          <WhiteSection className="bg-gray-50 border-b border-gray-200">
+            <AIPapersSection />
+          </WhiteSection>
+          <WhiteSection className="bg-white border-b border-gray-200">
             <DemoForm />
           </WhiteSection>
-          <Faq />
-          <CallToAction />
+          <WhiteSection className="bg-agency-blue text-white py-16">
+            <Faq />
+          </WhiteSection>
+          <WhiteSection className="bg-white">
+            <CallToAction />
+          </WhiteSection>
         </Suspense>
       </div>
     </Layout>

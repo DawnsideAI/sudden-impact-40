@@ -7,15 +7,16 @@ import CustomCursor from './CustomCursor';
 interface LayoutProps {
   children: ReactNode;
   showBgEffects?: boolean;
+  lightMode?: boolean;
 }
 
-const Layout = ({ children, showBgEffects = true }: LayoutProps) => {
+const Layout = ({ children, showBgEffects = true, lightMode = false }: LayoutProps) => {
   return (
-    <div className="flex flex-col min-h-screen bg-background">
+    <div className={`flex flex-col min-h-screen ${lightMode ? 'bg-white' : 'bg-background'}`}>
       <CustomCursor />
       
-      {/* Background effects - only shown when requested */}
-      {showBgEffects && (
+      {/* Background effects - only shown when requested and not in light mode */}
+      {showBgEffects && !lightMode && (
         <>
           <div className="fixed inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
           <div 
@@ -27,11 +28,11 @@ const Layout = ({ children, showBgEffects = true }: LayoutProps) => {
       
       {/* Content */}
       <div className="relative z-10 flex flex-col min-h-screen">
-        <Navbar isSolid={false} />
+        <Navbar isSolid={false} lightMode={lightMode} />
         <main className="flex-grow">
           {children}
         </main>
-        <Footer />
+        <Footer lightMode={lightMode} />
       </div>
     </div>
   );

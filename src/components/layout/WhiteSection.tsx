@@ -10,7 +10,7 @@ interface WhiteSectionProps {
 
 const WhiteSection = ({ children, className, containerClassName }: WhiteSectionProps) => {
   return (
-    <section className={cn("py-16 bg-white text-agency-dark", className)}>
+    <section className={cn("py-16", className)}>
       <div className={cn("container-custom", containerClassName)}>
         {children}
       </div>

@@ -10,9 +10,10 @@ import IndustriesDropdown from './IndustriesDropdown';
 
 interface NavbarProps {
   isSolid: boolean;
+  lightMode?: boolean;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ isSolid }) => {
+const Navbar: React.FC<NavbarProps> = ({ isSolid, lightMode = false }) => {
   const { pathname } = useLocation();
   const [scrolled, setScrolled] = useState(false);
 
@@ -31,15 +32,19 @@ const Navbar: React.FC<NavbarProps> = ({ isSolid }) => {
     };
   }, [scrolled]);
 
-  // Use a semi-transparent background for better visibility and color balance
-  const bgColor = 'bg-gray-800/60 backdrop-blur-xl';
-  const textColor = 'text-white';
+  // Use theme-appropriate background and text colors
+  const bgColor = lightMode 
+    ? scrolled ? 'bg-white shadow-md' : 'bg-white/80 backdrop-blur-xl' 
+    : 'bg-gray-800/60 backdrop-blur-xl';
+    
+  const textColor = lightMode ? 'text-agency-dark' : 'text-white';
+  const borderColor = lightMode ? 'border-gray-200' : 'border-white/10';
 
   return (
     <motion.div
       className={cn(
         'fixed top-0 w-full z-50 transition-all duration-300 border-b',
-        'border-white/10',
+        borderColor,
         bgColor,
         textColor
       )}
@@ -62,19 +67,24 @@ const Navbar: React.FC<NavbarProps> = ({ isSolid }) => {
             </motion.div>
           </Link>
           <nav className="hidden md:flex items-center gap-6">
-            <Link to="/" className="nav-link">
+            <Link to="/" className={lightMode ? "text-agency-dark hover:text-agency-blue transition-colors duration-200" : "nav-link"}>
               Home
             </Link>
-            <Link to="/solutions" className="nav-link">
+            <Link to="/solutions" className={lightMode ? "text-agency-dark hover:text-agency-blue transition-colors duration-200" : "nav-link"}>
               Solutions
             </Link>
             <IndustriesDropdown />
-            <Link to="/pricing" className="nav-link">
+            <Link to="/pricing" className={lightMode ? "text-agency-dark hover:text-agency-blue transition-colors duration-200" : "nav-link"}>
               Pricing
             </Link>
           </nav>
           <div className="flex items-center">
-            <Link to="/demo" className="btn-primary">
+            <Link 
+              to="/demo" 
+              className={lightMode 
+                ? "bg-agency-blue text-white font-medium py-2 px-3 md:py-2 md:px-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:bg-agency-blue/90" 
+                : "btn-primary"}
+            >
               Request a Demo
             </Link>
           </div>
