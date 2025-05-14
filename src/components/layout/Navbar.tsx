@@ -31,8 +31,8 @@ const Navbar: React.FC<NavbarProps> = ({ isSolid }) => {
     };
   }, [scrolled]);
 
-  // Always use a visible background for the header
-  const bgColor = 'bg-gray-900/80 backdrop-blur-xl';
+  // Use a semi-transparent background for better visibility and color balance
+  const bgColor = 'bg-gray-800/60 backdrop-blur-xl';
   const textColor = 'text-white';
 
   return (
@@ -52,12 +52,12 @@ const Navbar: React.FC<NavbarProps> = ({ isSolid }) => {
           <Link to="/" className="flex items-center">
             <motion.div
               whileHover={{ scale: 1.05 }}
-              className="relative bg-white/5 rounded-lg p-1"
+              className="relative bg-transparent rounded-lg"
             >
               <img 
-                src="/lovable-uploads/46b36e77-e44d-4dfd-8c35-6805698f485f.png" 
+                src="/lovable-uploads/cf7822cb-c186-4075-9bc8-c04e61c0b9b0.png" 
                 alt="Sudden Impact Agency Logo" 
-                className="h-20 w-auto p-1 rounded-md shadow-md" 
+                className="h-16 w-auto rounded-md" 
               />
             </motion.div>
           </Link>

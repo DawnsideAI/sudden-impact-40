@@ -5,6 +5,10 @@ import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import AIPapersSection from "@/components/pricing/AIPapersSection";
 import LiveDemoDialog from "@/components/pricing/LiveDemoDialog";
+import { Calendar } from "@/components/ui/calendar";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import DemoCalendarForm from "@/components/demo/DemoCalendarForm";
 
 const pricingPlans = [
   {
@@ -86,6 +90,7 @@ const pricingPlans = [
 
 const Pricing = () => {
   const [showDemoDialog, setShowDemoDialog] = useState(false);
+  const [showCalendarDialog, setShowCalendarDialog] = useState(false);
   
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -95,6 +100,17 @@ const Pricing = () => {
   const handleDemoClick = (e: React.MouseEvent) => {
     e.preventDefault();
     setShowDemoDialog(true);
+  };
+  
+  const handleScheduleDemoClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setShowCalendarDialog(true);
+  };
+  
+  const handlePurchaseClick = (planName: string) => {
+    // Direct to checkout page with the selected plan
+    // This would typically navigate to a checkout page or add to cart
+    window.location.href = `https://checkout.suddenimpact.agency?plan=${encodeURIComponent(planName)}`;
   };
 
   return (
@@ -127,7 +143,7 @@ const Pricing = () => {
       </section>
 
       {/* Pricing Cards */}
-      <section className="py-12 md:py-16 relative">
+      <section className="py-12 md:py-16 relative section-light">
         <div className="container-custom">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {pricingPlans.map((plan, index) => (
@@ -136,49 +152,48 @@ const Pricing = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 + (index * 0.1) }}
-                className={`glass-card rounded-xl overflow-hidden relative ${
-                  plan.mostPopular ? 'ring-2 ring-blue-500' : ''
+                className={`card-light overflow-hidden relative ${
+                  plan.mostPopular ? 'ring-2 ring-agency-vibrantPurple shadow-soft' : ''
                 }`}
               >
                 {plan.mostPopular && (
-                  <div className="absolute top-0 right-0 bg-blue-500 text-white py-1 px-3 text-sm font-medium">
+                  <div className="absolute top-0 right-0 bg-agency-vibrantPurple text-white py-1 px-3 text-sm font-medium">
                     Most Popular
                   </div>
                 )}
 
                 <div className="p-8">
-                  <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
-                  <p className="text-gray-400 mb-6">{plan.description}</p>
+                  <h3 className="text-2xl font-bold mb-2 text-gray-800">{plan.name}</h3>
+                  <p className="text-gray-600 mb-6">{plan.description}</p>
                   
                   <div className="mb-8">
                     <div className="flex flex-col gap-2">
                       <div className="flex items-baseline">
-                        <span className="text-4xl font-bold">${plan.price}</span>
-                        <span className="text-gray-400 ml-2">/month</span>
+                        <span className="text-4xl font-bold text-gray-800">${plan.price}</span>
+                        <span className="text-gray-500 ml-2">/month</span>
                       </div>
-                      <div className="text-sm text-gray-400">
+                      <div className="text-sm text-gray-500">
                         ${plan.annualPrice}/month billed annually
                       </div>
                     </div>
                   </div>
                   
-                  <a
-                    href="#"
-                    onClick={handleDemoClick}
+                  <button
+                    onClick={() => handlePurchaseClick(plan.name)}
                     className={`block w-full py-3 px-4 text-center rounded-lg font-medium mb-8 ${
                       plan.mostPopular
                         ? "gradient-bg text-white shadow-lg hover:shadow-xl transition-all"
-                        : "glass-card text-white hover:bg-white/10 transition-all"
+                        : "bg-gray-800 text-white hover:bg-gray-700 transition-all"
                     }`}
                   >
                     {plan.ctaText}
-                  </a>
+                  </button>
                   
                   <ul className="space-y-4">
                     {plan.features.map((feature, i) => (
                       <li key={i} className="flex">
-                        <span className="text-blue-400 mr-3">•</span>
-                        <span className="text-gray-300">{feature}</span>
+                        <span className="text-agency-vibrantPurple mr-3">•</span>
+                        <span className="text-gray-600">{feature}</span>
                       </li>
                     ))}
                   </ul>
@@ -186,11 +201,30 @@ const Pricing = () => {
               </motion.div>
             ))}
           </div>
+          
+          <div className="mt-12 text-center">
+            <p className="text-gray-700 mb-6">Not sure which plan is right for you?</p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button 
+                onClick={handleDemoClick}
+                className="gradient-bg text-white"
+              >
+                Try a Live Demo
+              </Button>
+              <Button 
+                onClick={handleScheduleDemoClick}
+                variant="outline"
+                className="border-gray-300 text-gray-800 hover:bg-gray-100"
+              >
+                Schedule a Consultation
+              </Button>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Overage Pricing Section */}
-      <section className="py-12 md:py-16 relative border-t border-white/10">
+      <section className="py-12 md:py-16 relative">
         <div className="container-custom">
           <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center text-white">
             Overage Pricing
@@ -223,88 +257,99 @@ const Pricing = () => {
       </section>
 
       {/* Custom Solutions Section */}
-      <section className="py-12 md:py-16 relative border-t border-white/10">
+      <section className="py-12 md:py-16 relative section-light">
         <div className="container-custom">
-          <div className="glass-card rounded-xl overflow-hidden p-8 max-w-3xl mx-auto">
-            <h3 className="text-2xl font-bold mb-4">Custom AI Solutions</h3>
-            <p className="text-gray-400 mb-6">For healthcare, call centers, or multi-brand teams needing high-complexity builds</p>
+          <div className="card-light rounded-xl overflow-hidden p-8 max-w-3xl mx-auto">
+            <h3 className="text-2xl font-bold mb-4 text-gray-800">Custom AI Solutions</h3>
+            <p className="text-gray-600 mb-6">For healthcare, call centers, or multi-brand teams needing high-complexity builds</p>
             <ul className="space-y-4 mb-8 grid grid-cols-1 md:grid-cols-2 gap-4">
               <li className="flex">
-                <span className="text-blue-400 mr-3">•</span>
-                <span className="text-gray-300">Custom AI Voice Agent Development</span>
+                <span className="text-agency-vibrantPurple mr-3">•</span>
+                <span className="text-gray-700">Custom AI Voice Agent Development</span>
               </li>
               <li className="flex">
-                <span className="text-blue-400 mr-3">•</span>
-                <span className="text-gray-300">HIPAA-Compliance Ready Workflows</span>
+                <span className="text-agency-vibrantPurple mr-3">•</span>
+                <span className="text-gray-700">HIPAA-Compliance Ready Workflows</span>
               </li>
               <li className="flex">
-                <span className="text-blue-400 mr-3">•</span>
-                <span className="text-gray-300">Complex Multi-Step Voice Logic</span>
+                <span className="text-agency-vibrantPurple mr-3">•</span>
+                <span className="text-gray-700">Complex Multi-Step Voice Logic</span>
               </li>
               <li className="flex">
-                <span className="text-blue-400 mr-3">•</span>
-                <span className="text-gray-300">Industry-Tailored Automations</span>
+                <span className="text-agency-vibrantPurple mr-3">•</span>
+                <span className="text-gray-700">Industry-Tailored Automations</span>
               </li>
               <li className="flex">
-                <span className="text-blue-400 mr-3">•</span>
-                <span className="text-gray-300">Full Implementation + Strategy Buildout</span>
+                <span className="text-agency-vibrantPurple mr-3">•</span>
+                <span className="text-gray-700">Full Implementation + Strategy Buildout</span>
               </li>
               <li className="flex">
-                <span className="text-blue-400 mr-3">•</span>
-                <span className="text-gray-300">POS System Integrations</span>
+                <span className="text-agency-vibrantPurple mr-3">•</span>
+                <span className="text-gray-700">POS System Integrations</span>
               </li>
               <li className="flex">
-                <span className="text-blue-400 mr-3">•</span>
-                <span className="text-gray-300">EMR/CRM Sync via API or Webhooks</span>
+                <span className="text-agency-vibrantPurple mr-3">•</span>
+                <span className="text-gray-700">EMR/CRM Sync via API or Webhooks</span>
               </li>
               <li className="flex">
-                <span className="text-blue-400 mr-3">•</span>
-                <span className="text-gray-300">AI Scheduling with Staff/Provider Matching</span>
+                <span className="text-agency-vibrantPurple mr-3">•</span>
+                <span className="text-gray-700">AI Scheduling with Staff/Provider Matching</span>
               </li>
               <li className="flex">
-                <span className="text-blue-400 mr-3">•</span>
-                <span className="text-gray-300">Multi-Location Call Routing by Intent</span>
+                <span className="text-agency-vibrantPurple mr-3">•</span>
+                <span className="text-gray-700">Multi-Location Call Routing by Intent</span>
               </li>
               <li className="flex">
-                <span className="text-blue-400 mr-3">•</span>
-                <span className="text-gray-300">Custom Data Capture + Validation</span>
+                <span className="text-agency-vibrantPurple mr-3">•</span>
+                <span className="text-gray-700">Custom Data Capture + Validation</span>
               </li>
               <li className="flex">
-                <span className="text-blue-400 mr-3">•</span>
-                <span className="text-gray-300">Bilingual/Multilingual Voice Agent Support</span>
+                <span className="text-agency-vibrantPurple mr-3">•</span>
+                <span className="text-gray-700">Bilingual/Multilingual Voice Agent Support</span>
               </li>
               <li className="flex">
-                <span className="text-blue-400 mr-3">•</span>
-                <span className="text-gray-300">Post-Call Summarization + CRM Logging</span>
+                <span className="text-agency-vibrantPurple mr-3">•</span>
+                <span className="text-gray-700">Post-Call Summarization + CRM Logging</span>
               </li>
               <li className="flex">
-                <span className="text-blue-400 mr-3">•</span>
-                <span className="text-gray-300">Escalation to Live Agents with Handoff</span>
+                <span className="text-agency-vibrantPurple mr-3">•</span>
+                <span className="text-gray-700">Escalation to Live Agents with Handoff</span>
               </li>
               <li className="flex">
-                <span className="text-blue-400 mr-3">•</span>
-                <span className="text-gray-300">Secure Call Recording + Compliance Tracking</span>
+                <span className="text-agency-vibrantPurple mr-3">•</span>
+                <span className="text-gray-700">Secure Call Recording + Compliance Tracking</span>
               </li>
             </ul>
             <Link
               to="https://www.go.suddenimpact.agency/meetings/suddenimpact/30min"
               target="_blank"
               rel="noopener noreferrer"
-              className="block w-full py-3 px-4 text-center rounded-lg glass-card text-white hover:bg-white/10 transition-all"
+              className="block w-full py-3 px-4 text-center rounded-lg bg-gray-800 text-white hover:bg-gray-700 transition-all"
             >
               Schedule a Consultation
             </Link>
           </div>
-          <div className="text-center mt-8 text-sm text-gray-400">
+          <div className="text-center mt-8 text-sm text-gray-600">
             ⚠️ Overages billed at $0.15/minute — auto-charged to card on file
           </div>
         </div>
       </section>
 
+      {/* Demo Dialog */}
       <LiveDemoDialog 
         open={showDemoDialog} 
         onOpenChange={setShowDemoDialog} 
       />
+      
+      {/* Calendar Dialog */}
+      <Dialog open={showCalendarDialog} onOpenChange={setShowCalendarDialog}>
+        <DialogContent className="sm:max-w-[600px] bg-gray-900 border-white/10">
+          <DialogHeader>
+            <DialogTitle className="text-xl font-bold">Schedule Your Demo</DialogTitle>
+          </DialogHeader>
+          <DemoCalendarForm onSubmitSuccess={() => setShowCalendarDialog(false)} />
+        </DialogContent>
+      </Dialog>
     </Layout>
   );
 };

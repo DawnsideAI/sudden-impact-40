@@ -24,6 +24,10 @@
     --input: 240 3.7% 15.9%;
     --ring: 240 4.9% 83.9%;
     --radius: 0.75rem;
+    
+    --light-bg: 0 0% 100%;
+    --light-text: 240 10% 3.9%;
+    --light-border: 240 5.9% 90%;
   }
 }
 
@@ -73,6 +77,14 @@
   
   .glass-card {
     @apply backdrop-blur-xl bg-white/5 border border-white/10 shadow-[0_4px_12px_-2px_rgba(0,0,0,0.3)];
+  }
+  
+  .section-light {
+    @apply bg-white/90 text-gray-800 py-12 md:py-16;
+  }
+  
+  .card-light {
+    @apply bg-white shadow-md border border-gray-100 rounded-xl p-6;
   }
   
   .section-padding {
@@ -189,5 +201,23 @@
   
   .gpu-accelerate {
     transform: translateZ(0);
+  }
+  
+  /* New utility classes for improved UI */
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .shadow-soft {
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .light-section-divider {
+    @apply relative overflow-hidden bg-white py-16;
+  }
+  
+  .light-section-divider::before {
+    content: '';
+    @apply absolute top-0 left-0 w-full h-12 bg-gradient-to-b from-black/20 to-transparent;
   }
 }

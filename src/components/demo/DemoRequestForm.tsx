@@ -28,6 +28,7 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
   
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [formError, setFormError] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -35,17 +36,46 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
       ...prev,
       [name]: value,
     }));
+    // Clear any previous errors when the user starts typing again
+    if (formError) setFormError("");
+  };
+
+  const validateForm = () => {
+    // Basic email validation
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(formState.email)) {
+      setFormError("Please enter a valid email address.");
+      return false;
+    }
+    
+    // Basic phone validation - at least 10 digits
+    const phoneDigits = formState.phone.replace(/\D/g, '');
+    if (phoneDigits.length < 10) {
+      setFormError("Please enter a valid phone number with at least 10 digits.");
+      return false;
+    }
+    
+    return true;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Reset any previous errors
+    setFormError("");
+    
+    // Validate form
+    if (!validateForm()) {
+      return;
+    }
+    
     setIsLoading(true);
     
     try {
       // Link to GHL form submission endpoint
       const ghlFormEndpoint = "https://www.go.suddenimpact.agency/l/1089001/2024-05-07/5sgcb";
       
-      // Submit to GHL form
+      // Create form data for submission
       const formData = new FormData();
       formData.append('name', formState.name);
       formData.append('email', formState.email);
@@ -53,12 +83,14 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
       formData.append('company', formState.company);
       formData.append('message', formState.message);
       
-      const response = await fetch(ghlFormEndpoint, {
+      // Submit to GHL form
+      await fetch(ghlFormEndpoint, {
         method: 'POST',
         body: formData,
         mode: 'no-cors', // GHL form may require this
       });
       
+      // Show success message and update state
       setIsSubmitted(true);
       onFormSubmit?.();
       toast({
@@ -66,6 +98,8 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
         description: "You'll be connected to our AI voice agent shortly.",
       });
     } catch (error) {
+      console.error("Error submitting form:", error);
+      setFormError("There was an error submitting your request. Please try again.");
       toast({
         variant: "destructive",
         title: "Error",
@@ -85,7 +119,7 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, type: "spring", bounce: 0.3 }}
-            className="glass-morphism rounded-xl p-8 max-w-2xl mx-auto relative overflow-hidden"
+            className="glass-card rounded-xl p-8 max-w-2xl mx-auto relative overflow-hidden"
           >
             <div className="absolute inset-0">
               <div className="absolute inset-0 bg-gradient-to-r from-agency-vibrantPurple/10 via-transparent to-agency-blue/10 animate-pulse-slow" />
@@ -161,6 +195,12 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+      {formError && (
+        <div className="bg-red-500/20 border border-red-500/50 text-white px-4 py-2 rounded-lg">
+          {formError}
+        </div>
+      )}
+      
       <div>
         <label htmlFor="name" className="block text-sm font-medium text-white mb-1">
           Your Name
