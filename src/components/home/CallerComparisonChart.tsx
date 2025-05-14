@@ -1,4 +1,3 @@
-
 import { Card } from "@/components/ui/card";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { motion } from "framer-motion";
@@ -115,6 +114,11 @@ const CallerComparisonChart = () => {
     return value;
   };
 
+  // Function to determine fill color for mobile bars
+  const getBarFill = (entry) => {
+    return entry && entry.color ? entry.color : "#CBD5E1";
+  };
+
   return (
     <motion.section 
       initial={{ opacity: 0, y: 20 }}
@@ -184,7 +188,10 @@ const CallerComparisonChart = () => {
                     />
                     <Bar 
                       dataKey="value" 
-                      fill={(data) => data.color} 
+                      fill="#CBD5E1"
+                      fillOpacity={(entry) => entry?.type === 'Human' ? 0.8 : 1}
+                      stroke={(entry) => entry?.type === 'AI' ? '#7C3AED' : 'none'}
+                      strokeWidth={1}
                       radius={[4, 4, 4, 4]}
                     >
                       <LabelList 
