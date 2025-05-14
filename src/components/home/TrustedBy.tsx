@@ -1,5 +1,7 @@
 
 import { motion } from 'framer-motion';
+import StyleProvider from '../design/StyleProvider';
+import SectionTitle from '../design/SectionTitle';
 
 const logos = [
   { id: 1, src: '/lovable-uploads/46b36e77-e44d-4dfd-8c35-6805698f485f.png', alt: 'Client Logo 1' },
@@ -11,26 +13,17 @@ const logos = [
 const TrustedBy = () => {
   return (
     <div className="py-8">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="text-center mb-12"
-      >
-        <h2 className="text-3xl font-bold text-agency-dark mb-2">
-          Trusted by Businesses
-        </h2>
-        <p className="text-agency-gray max-w-2xl mx-auto">
-          Join hundreds of companies already using our AI voice agents to revolutionize their customer interactions
-        </p>
-      </motion.div>
+      <StyleProvider className="text-center mb-12">
+        <SectionTitle
+          title="Trusted by Businesses"
+          subtitle="Join hundreds of companies already using our AI voice agents to revolutionize their customer interactions"
+          centered={true}
+          maxWidth="max-w-2xl"
+        />
+      </StyleProvider>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.2 }}
+      <StyleProvider
+        delay={0.2}
         className="flex flex-wrap justify-center items-center gap-8 md:gap-12"
       >
         {logos.map((logo, index) => (
@@ -49,7 +42,7 @@ const TrustedBy = () => {
             />
           </motion.div>
         ))}
-      </motion.div>
+      </StyleProvider>
     </div>
   );
 };

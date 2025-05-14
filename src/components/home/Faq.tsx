@@ -6,6 +6,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import StyleProvider from "../design/StyleProvider";
+import SectionTitle from "../design/SectionTitle";
 
 const faqs = [
   {
@@ -33,33 +35,17 @@ const faqs = [
 const Faq = () => {
   return (
     <section className="py-24 bg-background/50">
-      <div className="container-custom">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-4xl font-bold mb-4 bg-gradient-to-br from-white via-white/90 to-white/70 bg-clip-text text-transparent"
-          >
-            Frequently Asked Questions
-          </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-xl text-muted-foreground"
-          >
-            Find answers to common questions about our AI voice agent solutions
-          </motion.p>
-        </div>
+      <StyleProvider className="container-custom">
+        <SectionTitle
+          title="Frequently Asked Questions"
+          subtitle="Find answers to common questions about our AI voice agent solutions"
+          centered={true}
+          light={true}
+          className="mb-16"
+        />
 
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+        <StyleProvider 
+          delay={0.2}
           className="max-w-3xl mx-auto"
         >
           <div className="glass-morphism rounded-xl overflow-hidden">
@@ -82,8 +68,8 @@ const Faq = () => {
               ))}
             </Accordion>
           </div>
-        </motion.div>
-      </div>
+        </StyleProvider>
+      </StyleProvider>
     </section>
   );
 };

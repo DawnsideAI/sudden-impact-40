@@ -18,6 +18,8 @@ import {
   Heart, 
   PhoneCall 
 } from 'lucide-react';
+import SectionTitle from '@/components/design/SectionTitle';
+import StyleProvider from '@/components/design/StyleProvider';
 
 const industries = [
   {
@@ -126,12 +128,13 @@ const Solutions = () => {
     <Layout lightMode={true}>
       <div className="pt-24 bg-white">
         <WhiteSection className="bg-gray-50 border-b border-gray-200">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold mb-4 text-agency-dark">Solutions</h1>
-            <p className="text-lg text-agency-gray max-w-2xl mx-auto">
-              Discover how our AI voice agents and automation tools can transform your business
-            </p>
-          </div>
+          <StyleProvider className="mb-12">
+            <SectionTitle
+              title="Solutions"
+              subtitle="Discover how our AI voice agents and automation tools can transform your business"
+              centered={true}
+            />
+          </StyleProvider>
 
           <Tabs
             defaultValue="industries"
@@ -178,12 +181,12 @@ const Solutions = () => {
             </TabsContent>
 
             <TabsContent value="features" className="mt-8">
-              <div className="text-center">
+              <StyleProvider className="text-center">
                 <h2 className="text-2xl font-bold mb-4 text-agency-dark">Coming Soon</h2>
                 <p className="text-agency-gray">
                   Our features section is currently being developed.
                 </p>
-              </div>
+              </StyleProvider>
             </TabsContent>
           </Tabs>
         </WhiteSection>

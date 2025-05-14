@@ -2,6 +2,7 @@
 import { Clock, Calendar, Filter, Link as LinkIcon } from "lucide-react";
 import SectionTitle from "../design/SectionTitle";
 import FeatureCard from "../design/FeatureCard";
+import StyleProvider from "../design/StyleProvider";
 
 const features = [
   {
@@ -34,7 +35,7 @@ const ServiceFeatures = () => {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-agency-vibrantPurple/5 rounded-full blur-3xl" />
       </div>
       
-      <div className="container-custom relative z-10">
+      <StyleProvider className="container-custom relative z-10">
         <SectionTitle
           title="Plug-and-Play AI Voice Agents for Service Pros"
           subtitle="Our ready-to-deploy AI voice agents are designed to streamline your operations and enhance customer interactions."
@@ -52,7 +53,7 @@ const ServiceFeatures = () => {
             />
           ))}
         </div>
-      </div>
+      </StyleProvider>
     </section>
   );
 };

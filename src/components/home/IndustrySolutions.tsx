@@ -1,9 +1,10 @@
-
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { IndustryCard } from '@/components/solutions/IndustryCard';
 import IndustryDetails from '@/components/solutions/IndustryDetails';
 import { Calendar, Building, Utensils, Car, Home, Briefcase, BookOpen, Stethoscope } from 'lucide-react';
+import SectionTitle from '../design/SectionTitle';
+import StyleProvider from '../design/StyleProvider';
 
 const industries = [
   {
@@ -133,20 +134,13 @@ const IndustrySolutions = () => {
 
   return (
     <div>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="text-center mb-12"
-      >
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-agency-dark">
-          Industry Solutions
-        </h2>
-        <p className="text-lg text-agency-gray max-w-2xl mx-auto">
-          Our AI voice agents are tailored to meet the specific needs of your industry
-        </p>
-      </motion.div>
+      <StyleProvider className="text-center mb-12">
+        <SectionTitle
+          title="Industry Solutions"
+          subtitle="Our AI voice agents are tailored to meet the specific needs of your industry"
+          centered={true}
+        />
+      </StyleProvider>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
         <div className="space-y-4">

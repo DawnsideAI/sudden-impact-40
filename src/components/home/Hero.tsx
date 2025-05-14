@@ -1,6 +1,7 @@
 
 import HeroContent from "./hero/HeroContent";
 import HeroPreview from "./hero/HeroPreview";
+import StyleProvider from "../design/StyleProvider";
 
 const Hero = () => {
   return (
@@ -11,12 +12,12 @@ const Hero = () => {
         <div className="absolute h-[600px] w-[600px] rounded-full bg-agency-vibrantPurple/5 blur-3xl top-40 right-10"></div>
       </div>
       
-      <div className="container-custom relative z-10 py-24 md:py-32">
+      <StyleProvider className="container-custom relative z-10 py-24 md:py-32">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <HeroContent lightMode={true} />
           <HeroPreview lightMode={true} />
         </div>
-      </div>
+      </StyleProvider>
     </div>
   );
 };

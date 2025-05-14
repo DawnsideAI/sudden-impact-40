@@ -6,6 +6,7 @@ import Stats from "@/components/home/Stats";
 import ServiceFeatures from "@/components/home/ServiceFeatures";
 import TrustedBy from "@/components/home/TrustedBy";
 import WhiteSection from "@/components/layout/WhiteSection";
+import StyleProvider from "@/components/design/StyleProvider";
 
 // Lazy load non-critical components
 const CallerComparisonChart = lazy(() => import("@/components/home/CallerComparisonChart"));

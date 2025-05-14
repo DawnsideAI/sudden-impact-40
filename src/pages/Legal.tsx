@@ -1,9 +1,10 @@
-
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import WhiteSection from "@/components/layout/WhiteSection";
+import StyleProvider from "@/components/design/StyleProvider";
+import SectionTitle from "@/components/design/SectionTitle";
 
 const Legal = () => {
   useEffect(() => {
@@ -25,22 +26,13 @@ const Legal = () => {
     <Layout showBgEffects={false}>
       <div className="pt-24 pb-16 md:pt-32 md:pb-24 bg-white text-agency-dark">
         <div className="container-custom">
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-4xl font-bold mb-12 border-b border-gray-300 pb-4"
-          >
-            Legal Information
-          </motion.h1>
+          <StyleProvider className="mb-12">
+            <h1 className="text-4xl font-bold border-b border-gray-300 pb-4">
+              Legal Information
+            </h1>
+          </StyleProvider>
           
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
+          <StyleProvider delay={0.2}>
             <Accordion type="single" collapsible className="space-y-4">
               <AccordionItem value="overage-policy">
                 <AccordionTrigger className="text-2xl font-semibold hover:bg-gray-100 px-4 py-2 rounded-lg">
@@ -155,7 +147,7 @@ const Legal = () => {
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
-          </motion.div>
+          </StyleProvider>
         </div>
       </div>
     </Layout>

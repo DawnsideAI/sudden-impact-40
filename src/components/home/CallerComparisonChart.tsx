@@ -15,6 +15,9 @@ import {
   LabelList,
   Cell,
 } from "recharts";
+import SectionTitle from "../design/SectionTitle";
+import StyleProvider from "../design/StyleProvider";
+import FeatureCard from "../design/FeatureCard";
 
 const metrics = [
   {
@@ -104,36 +107,63 @@ const transformDataForMobile = (data) => {
   return result;
 };
 
+const ChartTooltip = ({ active, payload }) => {
+  if (active && payload && payload.length) {
+    const data = payload[0].payload;
+    return (
+      <div className="bg-white border border-gray-200 p-4 rounded-lg shadow-xl">
+        <p className="text-lg font-semibold text-agency-blue mb-2">{data.category || data.name}</p>
+        <div className="space-y-1">
+          {data.type ? (
+            <p className="text-base">
+              <span className="font-medium">{data.type}:</span> {data.value} {data.label}
+            </p>
+          ) : (
+            <>
+              <p className="text-base">
+                <span className="font-medium text-agency-vibrantPurple">AI Voice Agent:</span> {data.ai} {data.label}
+              </p>
+              <p className="text-base text-gray-600">
+                <span className="font-medium">Human Agent:</span> {data.human} {data.label}
+              </p>
+            </>
+          )}
+          {data.percentage && (
+            <p className="text-sm font-medium text-agency-vibrantPurple mt-2 pt-2 border-t border-gray-200">
+              {data.percentage}
+            </p>
+          )}
+        </div>
+        <p className="text-xs text-agency-gray mt-2">{data.description}</p>
+      </div>
+    );
+  }
+  return null;
+};
+
+// Safe formatter function that checks for undefined values
+const safeLabelFormatter = (value, entry) => {
+  if (entry && entry.payload && entry.payload.label) {
+    return `${value} ${entry.payload.label}`;
+  }
+  return value;
+};
+
 const CallerComparisonChart = () => {
   const isMobile = useIsMobile();
   const mobileData = transformDataForMobile(metrics);
 
-  // Safe formatter function that checks for undefined values
-  const safeLabelFormatter = (value, entry) => {
-    if (entry && entry.payload && entry.payload.label) {
-      return `${value} ${entry.payload.label}`;
-    }
-    return value;
-  };
-
   return (
-    <motion.section 
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
+    <StyleProvider
       className="section-padding bg-white"
     >
       <div className="container-custom">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-br from-agency-blue via-agency-blue to-agency-vibrantPurple bg-clip-text text-transparent">
-            AI Voice Agents vs Human Agents
-          </h2>
-          <p className="text-xl text-agency-gray max-w-3xl mx-auto">
-            Experience the future of customer service with our AI voice agents - delivering unmatched efficiency, 
-            availability, and cost savings compared to traditional human call handlers
-          </p>
-        </div>
+        <SectionTitle
+          title="AI Voice Agents vs Human Agents"
+          subtitle="Experience the future of customer service with our AI voice agents - delivering unmatched efficiency, availability, and cost savings compared to traditional human call handlers"
+          centered={true}
+          className="mb-12"
+        />
 
         <Card className="p-6 bg-white shadow-lg border border-gray-100 relative overflow-hidden">
           {/* Mobile Chart View */}
@@ -159,30 +189,7 @@ const CallerComparisonChart = () => {
                       tick={{ fill: '#333', fontSize: 14, fontWeight: 'bold' }}
                       width={110}
                     />
-                    <Tooltip
-                      content={({ active, payload }) => {
-                        if (active && payload && payload.length) {
-                          const data = payload[0].payload;
-                          return (
-                            <div className="bg-white border border-gray-200 p-4 rounded-lg shadow-xl">
-                              <p className="text-lg font-semibold text-agency-blue mb-2">{data.name}</p>
-                              <div className="space-y-1">
-                                <p className="text-base">
-                                  <span className="font-medium">{data.type}:</span> {data.value} {data.label}
-                                </p>
-                                {data.percentage && (
-                                  <p className="text-sm font-medium text-agency-vibrantPurple mt-2">
-                                    {data.percentage}
-                                  </p>
-                                )}
-                              </div>
-                              <p className="text-xs text-agency-gray mt-2">{data.description}</p>
-                            </div>
-                          );
-                        }
-                        return null;
-                      }}
-                    />
+                    <Tooltip content={ChartTooltip} />
                     <Bar 
                       dataKey="value" 
                       fill="#CBD5E1"
@@ -191,10 +198,7 @@ const CallerComparisonChart = () => {
                       {mobileData.map((entry, index) => (
                         <Cell 
                           key={`cell-${index}`} 
-                          fill={entry.color} 
-                          fillOpacity={entry.type === 'Human' ? 0.8 : 1}
-                          stroke={entry.type === 'AI' ? '#7C3AED' : 'none'}
-                          strokeWidth={entry.type === 'AI' ? 1 : 0}
+                          fill={entry.color}
                         />
                       ))}
                       <LabelList 
@@ -203,12 +207,7 @@ const CallerComparisonChart = () => {
                         fill="#333" 
                         fontSize={14}
                         fontWeight="bold"
-                        formatter={(value, entry) => {
-                          if (entry && entry.payload) {
-                            return `${value} ${entry.payload.label}`;
-                          }
-                          return value;
-                        }}
+                        formatter={safeLabelFormatter}
                       />
                     </Bar>
                   </BarChart>
@@ -255,31 +254,7 @@ const CallerComparisonChart = () => {
                     axisLine={{ stroke: '#e5e7eb' }}
                     tickLine={{ stroke: '#e5e7eb' }}
                   />
-                  <Tooltip
-                    content={({ active, payload }) => {
-                      if (active && payload && payload.length) {
-                        const data = payload[0].payload;
-                        return (
-                          <div className="bg-white border border-gray-200 p-4 rounded-lg shadow-xl">
-                            <p className="text-lg font-semibold text-agency-blue mb-2">{data.category}</p>
-                            <div className="space-y-1">
-                              <p className="text-base">
-                                <span className="font-medium text-agency-vibrantPurple">AI Voice Agent:</span> {data.ai} {data.label}
-                              </p>
-                              <p className="text-base text-gray-600">
-                                <span className="font-medium">Human Agent:</span> {data.human} {data.label}
-                              </p>
-                              <p className="text-sm font-medium text-agency-vibrantPurple mt-2 pt-2 border-t border-gray-200">
-                                {data.percentage}
-                              </p>
-                            </div>
-                            <p className="text-xs text-agency-gray mt-2">{data.description}</p>
-                          </div>
-                        );
-                      }
-                      return null;
-                    }}
-                  />
+                  <Tooltip content={ChartTooltip} />
                   <Legend 
                     verticalAlign="top" 
                     height={36}
@@ -348,22 +323,17 @@ const CallerComparisonChart = () => {
               description: "Instant responses in under 1 second, compared to 45-second average human response time."
             }
           ].map((feature, index) => (
-            <motion.div
+            <FeatureCard
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-all"
-            >
-              <feature.icon className="w-6 h-6 text-agency-blue mb-4" />
-              <h3 className="text-xl font-semibold mb-2 text-agency-dark">{feature.title}</h3>
-              <p className="text-agency-gray">{feature.description}</p>
-            </motion.div>
+              icon={feature.icon}
+              title={feature.title}
+              description={feature.description}
+              index={index}
+            />
           ))}
         </div>
       </div>
-    </motion.section>
+    </StyleProvider>
   );
 };
 
