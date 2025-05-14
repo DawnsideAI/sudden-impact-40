@@ -4,6 +4,7 @@ import Layout from "@/components/layout/Layout";
 import { Calendar, Clock, Check, Mic, MessageSquare } from "lucide-react";
 import DemoRequestForm from "@/components/demo/DemoRequestForm";
 import AIDemoContact from "@/components/demo/AIDemoContact";
+import WhiteSection from "@/components/layout/WhiteSection";
 
 const Demo = () => {
   const [activeTab, setActiveTab] = useState("live");
@@ -48,117 +49,115 @@ const Demo = () => {
       {showAIDemo && <AIDemoContact />}
 
       {/* Demo Options */}
-      <section className="py-16">
-        <div className="container-custom">
-          <div className="max-w-4xl mx-auto">
-            {/* Tab Navigation */}
+      <WhiteSection>
+        <div className="max-w-4xl mx-auto">
+          {/* Tab Navigation */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="flex flex-col sm:flex-row border-b border-gray-300 mb-12"
+          >
+            <button
+              onClick={() => setActiveTab("live")}
+              className={`py-4 px-6 text-lg font-medium border-b-2 transition-colors ${
+                activeTab === "live"
+                  ? "border-agency-vibrantPurple text-agency-vibrantPurple"
+                  : "border-transparent text-agency-gray hover:text-agency-dark"
+              }`}
+            >
+              <Mic className="inline-block mr-2 h-5 w-5" />
+              Live Demo
+            </button>
+            <button
+              onClick={() => setActiveTab("schedule")}
+              className={`py-4 px-6 text-lg font-medium border-b-2 transition-colors ${
+                activeTab === "schedule"
+                  ? "border-agency-vibrantPurple text-agency-vibrantPurple"
+                  : "border-transparent text-agency-gray hover:text-agency-dark"
+              }`}
+            >
+              <Calendar className="inline-block mr-2 h-5 w-5" />
+              Schedule for Later
+            </button>
+          </motion.div>
+
+          {/* Live Demo Form */}
+          {activeTab === "live" && (
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="flex flex-col sm:flex-row border-b border-white/10 mb-12"
+              className="bg-white rounded-xl p-8 shadow-md border border-gray-200"
             >
-              <button
-                onClick={() => setActiveTab("live")}
-                className={`py-4 px-6 text-lg font-medium border-b-2 transition-colors ${
-                  activeTab === "live"
-                    ? "border-agency-vibrantPurple text-agency-vibrantPurple"
-                    : "border-transparent text-muted-foreground hover:text-white"
-                }`}
-              >
-                <Mic className="inline-block mr-2 h-5 w-5" />
-                Live Demo
-              </button>
-              <button
-                onClick={() => setActiveTab("schedule")}
-                className={`py-4 px-6 text-lg font-medium border-b-2 transition-colors ${
-                  activeTab === "schedule"
-                    ? "border-agency-vibrantPurple text-agency-vibrantPurple"
-                    : "border-transparent text-muted-foreground hover:text-white"
-                }`}
-              >
-                <Calendar className="inline-block mr-2 h-5 w-5" />
-                Schedule for Later
-              </button>
+              <div className="text-center mb-8">
+                <div className="w-16 h-16 mx-auto rounded-full bg-agency-vibrantPurple/20 flex items-center justify-center text-agency-vibrantPurple mb-4">
+                  <Mic className="h-6 w-6" />
+                </div>
+                <h2 className="text-2xl font-bold mb-2 text-agency-dark">Live AI Voice Agent Demo</h2>
+                <p className="text-agency-gray">
+                  Complete the form below to access our AI voice agent demo.
+                </p>
+              </div>
+
+              <DemoRequestForm onFormSubmit={() => setShowAIDemo(true)} />
             </motion.div>
+          )}
 
-            {/* Live Demo Form */}
-            {activeTab === "live" && (
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                className="glass-morphism rounded-xl p-8"
-              >
-                <div className="text-center mb-8">
-                  <div className="w-16 h-16 mx-auto rounded-full bg-agency-vibrantPurple/20 flex items-center justify-center text-white mb-4">
-                    <Mic className="h-6 w-6" />
-                  </div>
-                  <h2 className="text-2xl font-bold mb-2 text-white">Live AI Voice Agent Demo</h2>
-                  <p className="text-muted-foreground">
-                    Complete the form below to access our AI voice agent demo.
-                  </p>
+          {/* Schedule Demo */}
+          {activeTab === "schedule" && (
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="bg-white rounded-xl p-8 shadow-md border border-gray-200"
+            >
+              <div className="text-center mb-8">
+                <div className="w-16 h-16 mx-auto rounded-full bg-agency-vibrantPurple/20 flex items-center justify-center text-agency-vibrantPurple mb-4">
+                  <Calendar className="h-6 w-6" />
                 </div>
+                <h2 className="text-2xl font-bold mb-2 text-agency-dark">Schedule Your Demo</h2>
+                <p className="text-agency-gray">
+                  Pick a convenient time for your 10-minute AI voice agent demo.
+                </p>
+              </div>
 
-                <DemoRequestForm onFormSubmit={() => setShowAIDemo(true)} />
-              </motion.div>
-            )}
-
-            {/* Schedule Demo */}
-            {activeTab === "schedule" && (
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                className="glass-morphism rounded-xl p-8"
-              >
-                <div className="text-center mb-8">
-                  <div className="w-16 h-16 mx-auto rounded-full bg-agency-vibrantPurple/20 flex items-center justify-center text-white mb-4">
-                    <Calendar className="h-6 w-6" />
-                  </div>
-                  <h2 className="text-2xl font-bold mb-2 text-white">Schedule Your Demo</h2>
-                  <p className="text-muted-foreground">
-                    Pick a convenient time for your 10-minute AI voice agent demo.
-                  </p>
-                </div>
-
-                <div className="space-y-8">
-                  <div className="bg-white/5 p-6 rounded-lg border border-white/10">
-                    <h3 className="font-medium mb-4 text-white">How It Works:</h3>
-                    <ul className="space-y-4">
-                      {["Book a Time Slot", "Receive Confirmation", "Get Reminders", "Experience the Demo"].map((step, index) => (
-                        <li key={index} className="flex items-start">
-                          <div className="flex-shrink-0 mt-1">
-                            <div className="bg-agency-vibrantPurple/20 text-white w-5 h-5 rounded-full flex items-center justify-center text-xs font-medium">
-                              {index + 1}
-                            </div>
+              <div className="space-y-8">
+                <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                  <h3 className="font-medium mb-4 text-agency-dark">How It Works:</h3>
+                  <ul className="space-y-4">
+                    {["Book a Time Slot", "Receive Confirmation", "Get Reminders", "Experience the Demo"].map((step, index) => (
+                      <li key={index} className="flex items-start">
+                        <div className="flex-shrink-0 mt-1">
+                          <div className="bg-agency-vibrantPurple/20 text-agency-vibrantPurple w-5 h-5 rounded-full flex items-center justify-center text-xs font-medium">
+                            {index + 1}
                           </div>
-                          <p className="ml-3 text-muted-foreground">
-                            <strong className="text-white">{step}</strong>
-                          </p>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="bg-white/5 p-8 rounded-lg border border-white/10 text-center">
-                    <h3 className="text-xl font-medium mb-4 text-white">Demo Scheduler</h3>
-                    <p className="text-muted-foreground mb-6">
-                      Select an available time slot for your interactive demo session.
-                    </p>
-                    <button className="px-6 py-3 text-white bg-agency-vibrantPurple hover:bg-agency-vibrantPurple/90 rounded-lg transition-colors">
-                      View Available Time Slots
-                    </button>
-                  </div>
+                        </div>
+                        <p className="ml-3 text-agency-gray">
+                          <strong className="text-agency-dark">{step}</strong>
+                        </p>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              </motion.div>
-            )}
-          </div>
+
+                <div className="bg-gray-50 p-8 rounded-lg border border-gray-200 text-center">
+                  <h3 className="text-xl font-medium mb-4 text-agency-dark">Demo Scheduler</h3>
+                  <p className="text-agency-gray mb-6">
+                    Select an available time slot for your interactive demo session.
+                  </p>
+                  <button className="px-6 py-3 text-white bg-agency-vibrantPurple hover:bg-agency-vibrantPurple/90 rounded-lg transition-colors">
+                    View Available Time Slots
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          )}
         </div>
-      </section>
+      </WhiteSection>
 
       {/* Features Section */}
       <section className="py-16 bg-background/50 border-y border-white/10">

@@ -5,6 +5,7 @@ import Hero from "@/components/home/Hero";
 import Stats from "@/components/home/Stats";
 import ServiceFeatures from "@/components/home/ServiceFeatures";
 import TrustedBy from "@/components/home/TrustedBy";
+import WhiteSection from "@/components/layout/WhiteSection";
 
 // Lazy load non-critical components
 const CallerComparisonChart = lazy(() => import("@/components/home/CallerComparisonChart"));
@@ -23,14 +24,22 @@ const Index = () => {
     <Layout>
       <div className="flex flex-col gap-0">
         <Hero />
-        <Stats />
+        <WhiteSection>
+          <Stats />
+        </WhiteSection>
         <ServiceFeatures />
-        <TrustedBy />
+        <WhiteSection>
+          <TrustedBy />
+        </WhiteSection>
         <Suspense fallback={<div className="h-96 flex items-center justify-center">Loading...</div>}>
           <CallerComparisonChart />
-          <IndustrySolutions />
+          <WhiteSection>
+            <IndustrySolutions />
+          </WhiteSection>
           <AIPapersSection />
-          <DemoForm />
+          <WhiteSection>
+            <DemoForm />
+          </WhiteSection>
           <Faq />
           <CallToAction />
         </Suspense>

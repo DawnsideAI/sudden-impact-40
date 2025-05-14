@@ -6,18 +6,24 @@ import CustomCursor from './CustomCursor';
 
 interface LayoutProps {
   children: ReactNode;
+  showBgEffects?: boolean;
 }
 
-const Layout = ({ children }: LayoutProps) => {
+const Layout = ({ children, showBgEffects = true }: LayoutProps) => {
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <CustomCursor />
-      {/* Background effects */}
-      <div className="fixed inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
-      <div 
-        className="fixed inset-0 bg-background [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#8B5CF6_100%)]" 
-        style={{ opacity: 0.15 }}
-      />
+      
+      {/* Background effects - only shown when requested */}
+      {showBgEffects && (
+        <>
+          <div className="fixed inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
+          <div 
+            className="fixed inset-0 bg-background [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#8B5CF6_100%)]" 
+            style={{ opacity: 0.15 }}
+          />
+        </>
+      )}
       
       {/* Content */}
       <div className="relative z-10 flex flex-col min-h-screen">

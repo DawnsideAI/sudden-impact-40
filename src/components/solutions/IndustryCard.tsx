@@ -29,20 +29,23 @@ export const IndustryCard = ({
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className={cn(
-        "w-full p-6 rounded-xl text-left transition-all duration-300 glass-card hover:shadow-lg",
-        isActive ? "border-[1.5px] border-agency-vibrantPurple shadow-lg ring-1 ring-agency-vibrantPurple/30" : 
-        "hover:border-agency-vibrantPurple/50"
+        "w-full p-6 rounded-xl text-left transition-all duration-300 bg-white shadow-md hover:shadow-lg border",
+        isActive 
+          ? "border-[1.5px] border-agency-vibrantPurple shadow-lg ring-1 ring-agency-vibrantPurple/30" 
+          : "border-gray-200 hover:border-agency-vibrantPurple/50"
       )}
       onClick={onClick}
     >
       <div className={cn(
-        "w-12 h-12 rounded-full flex items-center justify-center text-white mb-4",
-        isActive ? "gradient-bg" : "bg-white/5"
+        "w-12 h-12 rounded-full flex items-center justify-center mb-4",
+        isActive 
+          ? "gradient-bg text-white" 
+          : "bg-gray-100 text-agency-vibrantPurple"
       )}>
         {icon}
       </div>
-      <h3 className="text-xl font-semibold mb-2 text-white">{title}</h3>
-      <p className="text-gray-400 line-clamp-2">{description}</p>
+      <h3 className="text-xl font-semibold mb-2 text-agency-dark">{title}</h3>
+      <p className="text-agency-gray line-clamp-2">{description}</p>
       
       {isActive && (
         <div className="mt-2 text-agency-vibrantPurple font-medium flex items-center gap-1">

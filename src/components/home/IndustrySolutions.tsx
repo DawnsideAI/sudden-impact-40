@@ -1,160 +1,182 @@
 
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { FiUsers, FiHeart, FiPhoneCall } from "react-icons/fi";
-import { RiRestaurantLine } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { IndustryCard } from '@/components/solutions/IndustryCard';
+import IndustryDetails from '@/components/solutions/IndustryDetails';
+import { Calendar, Building, Utensils, Car, Home, Briefcase, BookOpen, Stethoscope } from 'lucide-react';
 
 const industries = [
   {
-    id: "restaurants",
-    icon: <RiRestaurantLine size={24} />,
-    title: "Restaurants & Hospitality",
-    description: "Streamline reservations, handle menu inquiries, and process orders with our specialized AI voice agents.",
+    id: "real-estate",
+    icon: <Home className="h-5 w-5" />,
+    title: "Real Estate",
+    description: "Property management and real estate agent solutions",
+    detailsTitle: "AI Voice Agents for Real Estate",
+    detailsDescription: "Our AI agents handle property inquiries, schedule viewings, and follow up with potential buyers, freeing up agents to close more deals.",
     features: [
-      "Reservation Management: Handle bookings efficiently, even during peak hours.",
-      "Menu Assistance: Provide instant answers to menu inquiries and dietary concerns.",
-      "Order Processing: Streamline takeout and delivery orders with precision."
+      "Instant response to property listing inquiries",
+      "24/7 qualification of potential buyers",
+      "Automated viewing scheduling and reminders",
+      "Post-viewing feedback collection",
+      "Continuous follow-ups with prospective clients"
+    ],
+    results: [
+      "42% increase in qualified leads",
+      "28% reduction in admin workload",
+      "35% more properties shown per month"
+    ]
+  },
+  {
+    id: "restaurants",
+    icon: <Utensils className="h-5 w-5" />,
+    title: "Restaurants",
+    description: "Streamline reservations and orders",
+    detailsTitle: "AI Voice Agents for Restaurants",
+    detailsDescription: "Our AI voice agents handle phone reservations, takeout orders, and answer common questions, allowing your staff to focus on delivering exceptional in-house service.",
+    features: [
+      "24/7 reservation management",
+      "Takeout order processing",
+      "Menu and allergen information",
+      "Special event bookings",
+      "Peak-time call overflow handling"
+    ],
+    results: [
+      "89% reduction in missed calls",
+      "32% increase in takeout orders",
+      "4.8/5 average customer satisfaction"
+    ]
+  },
+  {
+    id: "auto-dealerships",
+    icon: <Car className="h-5 w-5" />,
+    title: "Auto Dealerships",
+    description: "Lead qualification and appointment setting",
+    detailsTitle: "AI Voice Agents for Auto Dealerships",
+    detailsDescription: "Our AI voice agents qualify leads, schedule test drives, and follow up with potential buyers, helping your sales team focus on closing deals.",
+    features: [
+      "24/7 vehicle inquiry handling",
+      "Test drive scheduling",
+      "Pre-qualification of buyers",
+      "Trade-in value estimations",
+      "Automated follow-ups"
+    ],
+    results: [
+      "45% increase in qualified leads",
+      "37% more test drives scheduled",
+      "28% improvement in sales team efficiency"
+    ]
+  },
+  {
+    id: "professional-services",
+    icon: <Briefcase className="h-5 w-5" />,
+    title: "Professional Services",
+    description: "Client intake and appointment scheduling",
+    detailsTitle: "AI Voice Agents for Professional Services",
+    detailsDescription: "Our AI voice agents handle initial client inquiries, collect information, and schedule consultations, letting professionals focus on delivering high-value services.",
+    features: [
+      "24/7 inquiry handling",
+      "Client pre-screening",
+      "Consultation scheduling",
+      "Service information and pricing",
+      "Follow-up management"
+    ],
+    results: [
+      "52% reduction in administrative tasks",
+      "38% increase in consultation bookings",
+      "41% faster client onboarding"
+    ]
+  },
+  {
+    id: "education",
+    icon: <BookOpen className="h-5 w-5" />,
+    title: "Education",
+    description: "Student inquiries and enrollment",
+    detailsTitle: "AI Voice Agents for Education",
+    detailsDescription: "Our AI voice agents handle admissions inquiries, scheduling, and follow-ups, allowing education staff to focus on current students.",
+    features: [
+      "24/7 program information",
+      "Application process assistance",
+      "Campus tour scheduling",
+      "Financial aid information",
+      "Enrollment follow-ups"
+    ],
+    results: [
+      "48% increase in enrollment inquiries handled",
+      "35% reduction in administrative workload",
+      "42% more campus tours scheduled"
     ]
   },
   {
     id: "healthcare",
-    icon: <FiHeart size={24} />,
-    title: "Healthcare Providers",
-    description: "HIPAA-compliant voice agents to improve patient care, scheduling, and information sharing.",
+    icon: <Stethoscope className="h-5 w-5" />,
+    title: "Healthcare",
+    description: "Patient scheduling and information",
+    detailsTitle: "AI Voice Agents for Healthcare Providers",
+    detailsDescription: "Our AI voice agents handle appointment scheduling, insurance verification, and common patient questions, letting your staff focus on in-person care.",
     features: [
-      "Patient Scheduling: Automate appointment bookings and reminders.",
-      "Information Dissemination: Provide answers to common patient queries.",
-      "Post-Care Follow-Up: Ensure patients receive timely post-treatment information."
+      "24/7 appointment scheduling",
+      "New patient intake",
+      "Insurance verification",
+      "Appointment reminders",
+      "Post-visit follow-ups"
+    ],
+    results: [
+      "62% reduction in missed appointments",
+      "41% decrease in scheduling staff workload",
+      "35% faster new patient processing"
     ]
   },
-  {
-    id: "callcenters",
-    icon: <FiPhoneCall size={24} />,
-    title: "Call Centers",
-    description: "Enhance operational efficiency with intelligent call routing, support, and data collection.",
-    features: [
-      "Call Routing: Direct calls to the appropriate departments or personnel.",
-      "Customer Support: Handle FAQs and common issues without human intervention.",
-      "Data Collection: Gather customer feedback and insights seamlessly."
-    ]
-  }
 ];
 
 const IndustrySolutions = () => {
-  const [activeIndustry, setActiveIndustry] = useState(industries[0].id);
-
-  const getActiveIndustry = () => {
-    return industries.find(industry => industry.id === activeIndustry) || industries[0];
-  };
-
-  const current = getActiveIndustry();
+  const [selectedIndustry, setSelectedIndustry] = useState(industries[0]);
 
   return (
-    <section className="section-padding relative overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-agency-vibrantPurple/20 rounded-full blur-3xl" />
-      </div>
-      
-      <div className="container-custom relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-br from-white via-white/90 to-white/70 bg-clip-text text-transparent"
-          >
-            Custom AI Voice Solutions for{" "}
-            <span className="gradient-text">Diverse Industries</span>
-          </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-xl text-muted-foreground"
-          >
-            Beyond service contractors, we offer AI voice agents tailored to the unique demands of various sectors.
-          </motion.p>
-          
-          <Link to="/industries" className="btn-secondary inline-block mt-6">
-            Explore All Industry Solutions
-          </Link>
-        </div>
+    <div>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="text-center mb-12"
+      >
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-agency-dark">
+          Industry Solutions
+        </h2>
+        <p className="text-lg text-agency-gray max-w-2xl mx-auto">
+          Our AI voice agents are tailored to meet the specific needs of your industry
+        </p>
+      </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-          {industries.map((industry) => (
-            <motion.button
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+        <div className="space-y-4">
+          {industries.slice(0, 6).map((industry, index) => (
+            <IndustryCard
               key={industry.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className={`glass-morphism p-6 rounded-xl text-left transition-all duration-300 ${
-                activeIndustry === industry.id
-                  ? "border-2 border-agency-vibrantPurple shadow-md"
-                  : "border border-white/10 hover:border-agency-vibrantPurple/70 hover:shadow-sm"
-              }`}
-              onClick={() => setActiveIndustry(industry.id)}
-            >
-              <div className={`w-12 h-12 rounded-full flex items-center justify-center text-white mb-4 ${
-                activeIndustry === industry.id ? "bg-agency-vibrantPurple" : "bg-white/10"
-              }`}>
-                {industry.icon}
-              </div>
-              <h3 className="text-xl font-semibold mb-2 text-white">{industry.title}</h3>
-              <p className="text-muted-foreground line-clamp-2">{industry.description}</p>
-              
-              {activeIndustry === industry.id && (
-                <div className="mt-2 text-agency-vibrantPurple font-medium">Selected</div>
-              )}
-            </motion.button>
+              id={industry.id}
+              icon={industry.icon}
+              title={industry.title}
+              description={industry.description}
+              isActive={selectedIndustry.id === industry.id}
+              onClick={() => setSelectedIndustry(industry)}
+              index={index}
+            />
           ))}
         </div>
 
-        <motion.div
-          key={current.id}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="glass-morphism rounded-2xl p-8 border border-white/10"
-        >
-          <div className="flex flex-col md:flex-row md:items-center gap-6 mb-8">
-            <div className="w-16 h-16 rounded-full bg-agency-vibrantPurple flex items-center justify-center text-white shrink-0">
-              {current.icon}
-            </div>
-            <div>
-              <h3 className="text-2xl font-bold mb-2 text-white">{current.title}</h3>
-              <p className="text-muted-foreground">{current.description}</p>
-            </div>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            {current.features.map((feature, index) => {
-              const [title, description] = feature.split(": ");
-              
-              return (
-                <div key={index} className="bg-white/5 rounded-lg p-5 border border-white/10">
-                  <p className="font-semibold mb-2 text-agency-vibrantPurple">{title}</p>
-                  <p className="text-muted-foreground">{description}</p>
-                </div>
-              );
-            })}
-          </div>
-          
-          <div className="flex justify-center">
-            <Link 
-              to={`/industries/${current.id}`} 
-              className="inline-flex items-center justify-center px-6 py-3 text-white bg-agency-vibrantPurple hover:bg-agency-vibrantPurple/90 rounded-lg transition-colors"
-            >
-              Learn More About {current.title}
-            </Link>
-          </div>
-        </motion.div>
+        <div className="lg:col-span-2">
+          <motion.div
+            key={selectedIndustry.id}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="h-full"
+          >
+            <IndustryDetails industry={selectedIndustry} />
+          </motion.div>
+        </div>
       </div>
-    </section>
+    </div>
   );
 };
 
