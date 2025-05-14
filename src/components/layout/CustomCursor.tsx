@@ -61,8 +61,7 @@ const CustomCursor: React.FC<CustomCursorProps> = ({ lightMode = false }) => {
           width: isPointer ? 40 : 20,
           left: position.x,
           top: position.y,
-          translateX: "-50%",
-          translateY: "-50%",
+          transform: "translate(-50%, -50%)"
         }}
         animate={{
           scale: isActive ? 0.8 : 1,
@@ -85,8 +84,7 @@ const CustomCursor: React.FC<CustomCursorProps> = ({ lightMode = false }) => {
           width: 5,
           left: position.x,
           top: position.y,
-          translateX: "-50%",
-          translateY: "-50%",
+          transform: "translate(-50%, -50%)"
         }}
         transition={{
           type: "spring",

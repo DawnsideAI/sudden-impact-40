@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import SectionTitle from "../design/SectionTitle";
 
 const CallToAction = () => {
   return (
@@ -20,13 +21,14 @@ const CallToAction = () => {
           className="glass-morphism rounded-3xl p-8 md:p-16"
         >
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-br from-white via-white/90 to-white/70 bg-clip-text text-transparent">
-              Ready to Transform Your Business with AI Voice Agents?
-            </h2>
-            <p className="text-xl mb-8 text-muted-foreground">
-              Start your free 7-day trial today and experience how our AI voice agents can revolutionize your operations and enhance customer experiences.
-            </p>
-            <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center">
+            <SectionTitle
+              title="Ready to Transform Your Business with AI Voice Agents?"
+              subtitle="Start your free 7-day trial today and experience how our AI voice agents can revolutionize your operations and enhance customer experiences."
+              centered={true}
+              light={true}
+            />
+            
+            <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center mt-8">
               <Link 
                 to="/pricing" 
                 className="inline-flex items-center justify-center px-6 py-3 text-white bg-agency-vibrantPurple hover:bg-agency-vibrantPurple/90 rounded-lg transition-colors"

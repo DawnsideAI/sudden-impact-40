@@ -13,7 +13,7 @@ interface LayoutProps {
 const Layout = ({ children, showBgEffects = true, lightMode = false }: LayoutProps) => {
   return (
     <div className={`flex flex-col min-h-screen ${lightMode ? 'bg-white' : 'bg-background'}`}>
-      <CustomCursor />
+      <CustomCursor lightMode={lightMode} />
       
       {/* Background effects - only shown when requested and not in light mode */}
       {showBgEffects && !lightMode && (

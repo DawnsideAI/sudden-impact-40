@@ -294,7 +294,6 @@ const CallerComparisonChart = () => {
                     name="human" 
                     fill="#CBD5E1"
                     radius={[6, 6, 0, 0]}
-                    opacity={0.8}
                   >
                     <LabelList 
                       dataKey="human" 
