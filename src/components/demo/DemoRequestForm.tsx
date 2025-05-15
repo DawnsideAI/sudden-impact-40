@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Check, PhoneCall } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { useIsMobile } from '@/hooks/use-mobile';
+import { Button } from "@/components/ui/button";
 
 interface DemoRequestFormProps {
   onFormSubmit?: () => void;
@@ -61,6 +62,8 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
     handleFormSubmission();
   };
 
+  const phoneNumber = "+1 (302) 618-3977";
+
   return (
     <div className="relative iframe-container" style={{ height: "auto" }}>
       {!isSubmitted ? (
@@ -89,22 +92,37 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
           className="no-scrollbar"
         />
       ) : (
-        <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
+        <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
           <div className="w-20 h-20 rounded-full bg-gradient-to-r from-brand-pink to-brand-aqua flex items-center justify-center text-white mb-6">
             <PhoneCall size={32} />
           </div>
-          <h3 className="text-2xl font-bold mb-3 text-gray-800">Call Our AI Voice Agent</h3>
-          <p className="text-lg text-gray-600 mb-6">
-            Experience our AI voice technology by calling:
+          
+          <h3 className="text-3xl font-bold mb-3 text-gray-800">Thank you for taking the time to complete this form.</h3>
+          
+          <p className="text-xl text-gray-600 mb-8">
+            Call our AI voice agent to experience our technology:
           </p>
-          <a 
-            href="tel:+13026183977"
-            className="text-2xl font-semibold text-brand-aqua hover:underline flex items-center mb-4"
+          
+          <div className="mb-6">
+            <a 
+              href={`tel:${phoneNumber.replace(/\D/g, '')}`}
+              className="text-3xl font-semibold text-brand-aqua hover:underline flex items-center justify-center mb-2"
+            >
+              <PhoneCall className="h-6 w-6 mr-3 text-brand-pink" />
+              {phoneNumber}
+            </a>
+          </div>
+          
+          <Button
+            variant="action"
+            size="xl"
+            className="shadow-lg bg-gradient-to-r from-brand-pink to-brand-aqua hover:shadow-xl transition-all duration-300"
+            onClick={() => window.location.href = `tel:${phoneNumber.replace(/\D/g, '')}`}
           >
-            <PhoneCall className="h-5 w-5 mr-2 text-brand-pink" />
-            +1 (302) 618-3977
-          </a>
-          <p className="text-sm text-gray-500">
+            <PhoneCall className="mr-2" /> Call Now
+          </Button>
+          
+          <p className="text-sm text-gray-500 mt-4">
             Available 24/7 for demonstration purposes
           </p>
         </div>
