@@ -1,6 +1,10 @@
 
+import React from "react";
+import { motion } from "framer-motion";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
-import { Link as LinkIcon, Info } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { Link as LinkIcon, Info, ChevronDown } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 const papers = [
   {
@@ -51,64 +55,85 @@ export default function AIPapersSection() {
   return (
     <section className="container-custom my-16">
       <div className="max-w-3xl mx-auto text-center mb-10">
-        <h2 className="text-2xl md:text-3xl font-bold mb-2 gradient-text">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 bg-gradient-to-r from-purple-600 via-violet-500 to-purple-500 bg-clip-text text-transparent">
           Real-World Results: AI vs. Human Callers
         </h2>
-        <p className="text-gray-400 mb-4">
+        <p className="text-gray-500 md:text-lg mb-4">
           Explore recent independent studies and case reports showing how AI drives better results in real call and customer service scenarios.
         </p>
       </div>
-      <Accordion type="single" collapsible className="space-y-4">
+      
+      <div className="space-y-4 max-w-4xl mx-auto">
         {papers.map((paper, idx) => (
-          <AccordionItem key={idx} value={`paper-${idx}`} className="glass-card rounded-xl overflow-hidden border border-white/10">
-            <AccordionTrigger className="px-6 py-4 text-left hover-scale">
-              <div className="flex items-center justify-between w-full">
-                <div>
-                  <div className="font-semibold text-lg text-white">{paper.title}</div>
-                  <div className="text-xs text-gray-300 mt-1">{paper.authors} &middot; <span className="italic">{paper.source}</span></div>
-                </div>
-                <a href={paper.url} target="_blank" rel="noopener noreferrer" className="ml-4 hover:underline" aria-label="View source">
-                  <LinkIcon className="text-blue-400" />
-                </a>
-              </div>
-            </AccordionTrigger>
-            <AccordionContent className="bg-background/80">
-              <div className="p-4">
-                <div className="mb-2">
-                  <span className="font-medium text-white">Key Insights:</span>
-                  <ul className="list-disc pl-6 mt-2 space-y-2 text-agency-blue">
-                    {paper.highlights.map((highlight, i) => (
-                      <li key={i}>{highlight}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="mb-2">
-                  <span className="font-medium text-white">Summary:</span>
-                  <p className="text-gray-300 mt-1">{paper.summary}</p>
-                </div>
-                <div className="mb-2 text-sm text-blue-300">
-                  {paper.note}
-                </div>
-                <div>
-                  <a
-                    href={paper.url}
-                    className="inline-flex items-center text-blue-400 hover:underline"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    View Study / Source
-                    <LinkIcon className="ml-1" size={16} />
-                  </a>
-                </div>
-              </div>
-            </AccordionContent>
-          </AccordionItem>
+          <Card key={idx} className="bg-white shadow-lg rounded-xl overflow-hidden border border-gray-100">
+            <Accordion type="single" collapsible>
+              <AccordionItem value={`paper-${idx}`} className="border-none">
+                <AccordionTrigger className="px-6 py-5 hover:no-underline">
+                  <div className="flex items-center justify-between w-full text-left">
+                    <div>
+                      <div className="font-medium text-gray-800">{paper.authors} <span className="text-gray-400 italic">{paper.source && `· ${paper.source}`}</span></div>
+                      <div className="font-semibold text-lg text-gray-900 mt-1">{paper.title}</div>
+                    </div>
+                    <div className="flex items-center ml-4">
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <a 
+                              href={paper.url} 
+                              target="_blank" 
+                              rel="noopener noreferrer" 
+                              onClick={(e) => e.stopPropagation()}
+                              className="text-blue-500 hover:text-blue-700 mr-2"
+                            >
+                              <LinkIcon className="h-5 w-5" />
+                            </a>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>View source</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                      <ChevronDown className="h-5 w-5 text-gray-400 transform transition-transform duration-200" />
+                    </div>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-6 pt-2">
+                  <div className="space-y-4">
+                    <div>
+                      <span className="font-medium text-gray-700">Key Insights:</span>
+                      <ul className="list-disc pl-6 mt-2 space-y-1 text-gray-600">
+                        {paper.highlights.map((highlight, i) => (
+                          <li key={i}>{highlight}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div>
+                      <span className="font-medium text-gray-700">Summary:</span>
+                      <p className="text-gray-600 mt-1">{paper.summary}</p>
+                    </div>
+                    <div>
+                      <a
+                        href={paper.url}
+                        className="inline-flex items-center text-blue-500 hover:text-blue-700 hover:underline"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {paper.note || "View Source"}
+                        <LinkIcon className="ml-1" size={14} />
+                      </a>
+                    </div>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </Card>
         ))}
-      </Accordion>
+      </div>
+
       {/* Disclaimer */}
-      <div className="mt-8 max-w-3xl mx-auto text-xs flex items-start gap-2 bg-white/5 rounded-lg px-4 py-3 text-left border border-white/10">
-        <Info className="text-agency-vibrantPurple mt-0.5" size={18} />
-        <span>
+      <div className="mt-8 max-w-3xl mx-auto text-sm flex items-start gap-2 bg-gray-50 rounded-lg px-4 py-3 text-left border border-gray-100">
+        <Info className="text-gray-400 mt-0.5 flex-shrink-0" size={18} />
+        <span className="text-gray-600">
           <b>Disclaimer:</b> The above case studies and reports are taken from their respective cited sources.
           Results are provided for informational purposes only to offer a viable idea of AI's impact in select scenarios.
           Actual results may vary and are not guaranteed by Sudden Impact Agency.
