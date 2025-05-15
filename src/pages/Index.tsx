@@ -7,6 +7,7 @@ import ServiceFeatures from "@/components/home/ServiceFeatures";
 import TrustedBy from "@/components/home/TrustedBy";
 import WhiteSection from "@/components/layout/WhiteSection";
 import StyleProvider from "@/components/design/StyleProvider";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 // Lazy load non-critical components
 const CallerComparisonChart = lazy(() => import("@/components/home/CallerComparisonChart"));
@@ -19,6 +20,8 @@ const Faq = lazy(() => import("@/components/home/Faq"));
 const CallToAction = lazy(() => import("@/components/home/CallToAction"));
 
 const Index = () => {
+  const isMobile = useIsMobile();
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -40,11 +43,11 @@ const Index = () => {
         </WhiteSection>
         
         {/* Trusted By - White Background */}
-        <WhiteSection className="bg-white border-b border-gray-100">
+        <WhiteSection className="bg-white border-b border-gray-100 py-6 md:py-12">
           <TrustedBy />
         </WhiteSection>
         
-        <Suspense fallback={<div className="h-96 flex items-center justify-center">Loading...</div>}>
+        <Suspense fallback={<div className="h-40 md:h-96 flex items-center justify-center">Loading...</div>}>
           {/* Comparison Chart - Gradient Background */}
           <WhiteSection className="bg-gradient-to-br from-brand-aqua/5 via-white to-brand-pink/5 border-b border-gray-100">
             <CallerComparisonChart />

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import StyleProvider from '../design/StyleProvider';
 import SectionTitle from '../design/SectionTitle';
 import { Github, Chrome, Figma, Slack, Dribbble } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 // Updated logos array with actual companies and their correct Lucide icons
 const logos = [
@@ -14,9 +15,11 @@ const logos = [
 ];
 
 const TrustedBy = () => {
+  const isMobile = useIsMobile();
+  
   return (
-    <div className="py-16 bg-[#0C0F19] rounded-3xl mx-4 md:mx-8">
-      <StyleProvider className="text-center mb-12">
+    <div className="py-12 md:py-16 bg-[#0C0F19] rounded-xl md:rounded-3xl mx-2 md:mx-8">
+      <StyleProvider className="text-center mb-8 md:mb-12 px-4">
         <SectionTitle
           title="Trusted by Industry Leaders"
           subtitle="Join hundreds of companies already using our AI voice agents to revolutionize their customer interactions"
@@ -28,7 +31,7 @@ const TrustedBy = () => {
 
       <StyleProvider
         delay={0.2}
-        className="flex flex-wrap justify-center items-center gap-10 md:gap-16 lg:gap-24"
+        className="flex flex-wrap justify-center items-center gap-6 md:gap-16 lg:gap-24 px-4"
       >
         {logos.map((logo, index) => {
           const LogoComponent = logo.component;
@@ -41,10 +44,10 @@ const TrustedBy = () => {
               transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
               className="flex flex-col items-center justify-center"
             >
-              <div className="h-20 w-20 flex items-center justify-center mb-4 bg-[#0F1320] rounded-full shadow-lg border border-[#1A1F2C]">
-                <LogoComponent className={`h-10 w-10 ${logo.color}`} strokeWidth={1.5} />
+              <div className={`${isMobile ? 'h-16 w-16' : 'h-20 w-20'} flex items-center justify-center mb-3 md:mb-4 bg-[#0F1320] rounded-full shadow-lg border border-[#1A1F2C]`}>
+                <LogoComponent className={`${isMobile ? 'h-8 w-8' : 'h-10 w-10'} ${logo.color}`} strokeWidth={1.5} />
               </div>
-              <span className={`${logo.color} font-medium text-lg`}>{logo.name}</span>
+              <span className={`${logo.color} font-medium text-sm md:text-lg`}>{logo.name}</span>
             </motion.div>
           );
         })}

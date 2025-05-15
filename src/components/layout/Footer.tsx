@@ -34,8 +34,8 @@ const Footer: React.FC<FooterProps> = ({ lightMode = false }) => {
 
   return (
     <footer className={`${bgColor} border-t ${borderColor} pt-10 pb-6`}>
-      <div className="container-custom max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <div className="container-custom max-w-6xl mx-auto px-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-8">
           {/* Company Info */}
           <div>
             <motion.div
@@ -104,8 +104,8 @@ const Footer: React.FC<FooterProps> = ({ lightMode = false }) => {
         </div>
 
         <div className={`border-t ${borderColor} pt-4 mt-4`}>
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className={`${textColor} text-xs mb-3 md:mb-0`}>
+          <div className="flex flex-col sm:flex-row justify-between items-center">
+            <p className={`${textColor} text-xs mb-3 sm:mb-0`}>
               © {new Date().getFullYear()} Sudden Impact Agency. All rights reserved.
             </p>
             <div className="flex space-x-4">
