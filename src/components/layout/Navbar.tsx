@@ -69,7 +69,7 @@ const Navbar = () => {
                 <img 
                   src="/lovable-uploads/293aebbf-1435-4e16-867f-2a95f52ef685.png" 
                   alt="Sudden Impact Agency Logo" 
-                  className="h-20 md:h-28 w-auto rounded-md" 
+                  className="h-40 md:h-56 w-auto rounded-md" 
                 />
               </motion.div>
             </Link>
