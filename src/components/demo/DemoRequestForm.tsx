@@ -26,98 +26,40 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
     };
   }, []);
   
-  // Mock submission functionality for demo purposes
+  // Listen for form submission events from the iframe
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      // Check if the message is from our form iframe
+      if (
+        event.data && 
+        typeof event.data === 'object' && 
+        event.data.formId === 'Gf3ORV8Uba4HRiXoml5L' && 
+        event.data.type === 'form:submit'
+      ) {
+        handleFormSubmission();
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, [onFormSubmit]);
+  
+  // Submission functionality
   const handleFormSubmission = () => {
     setIsSubmitted(true);
-    onFormSubmit?.();
+    if (onFormSubmit) {
+      onFormSubmit();
+    }
     toast({
       title: "Demo Request Submitted!",
       description: "You'll be connected to our AI voice agent shortly.",
     });
   };
 
-  if (isSubmitted) {
-    return (
-      <section className="py-8 md:py-12">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, type: "spring", bounce: 0.3 }}
-            className="glass-card rounded-xl p-5 md:p-8 max-w-2xl mx-auto relative overflow-hidden"
-          >
-            <div className="absolute inset-0">
-              <div className="absolute inset-0 bg-gradient-to-r from-brand-pink/10 via-transparent to-brand-aqua/10 animate-pulse-slow" />
-            </div>
-
-            <motion.div 
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-              className="text-center mb-6 md:mb-8 relative z-10"
-            >
-              <div className="w-14 h-14 md:w-16 md:h-16 mx-auto rounded-full bg-brand-vibrantPurple flex items-center justify-center text-white mb-3 md:mb-4">
-                <Check className="h-6 w-6 md:h-8 md:w-8" />
-              </div>
-              <h3 className="text-xl md:text-2xl font-bold text-white mb-2 md:mb-3">
-                Demo Request Submitted!
-              </h3>
-              <p className="text-sm md:text-base text-muted-foreground">
-                Call now to interact with Michelle, our AI receptionist, and experience the future of business communication.
-              </p>
-            </motion.div>
-
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3, duration: 0.5 }}
-              className="space-y-4 md:space-y-6 relative z-10"
-            >
-              <motion.div 
-                whileHover={{ scale: 1.02 }}
-                className="flex items-center justify-center gap-3 md:gap-4"
-              >
-                <motion.div
-                  animate={{ scale: [1, 1.1, 1] }}
-                  transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
-                >
-                  <PhoneCall className="w-5 h-5 md:w-6 md:h-6 text-brand-vibrantPurple" />
-                </motion.div>
-                <a 
-                  href="tel:+13026183977"
-                  className="text-lg md:text-xl font-medium text-white hover:text-brand-vibrantPurple transition-colors"
-                >
-                  +1 (302) 618-3977
-                </a>
-              </motion.div>
-              
-              <div className="text-center">
-                <p className="text-xs md:text-sm text-muted-foreground">
-                  Available 24/7 for demonstration purposes
-                </p>
-              </div>
-            </motion.div>
-
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 0.5, scale: 1 }}
-              transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse" }}
-              className="absolute -top-4 -right-4 w-20 md:w-24 h-20 md:h-24 bg-brand-vibrantPurple/20 rounded-full blur-xl"
-            />
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 0.5, scale: 1 }}
-              transition={{ duration: 2, repeat: Infinity, repeatType: "reverse", delay: 0.5 }}
-              className="absolute -bottom-4 -left-4 w-24 md:w-32 h-24 md:h-32 bg-brand-blue/20 rounded-full blur-xl"
-            />
-          </motion.div>
-        </div>
-      </section>
-    );
-  }
+  // For demo testing purposes
+  const handleTestSubmit = () => {
+    handleFormSubmission();
+  };
 
   return (
     <div className="relative iframe-container" style={{ height: "auto" }}>
@@ -147,13 +89,12 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
       />
       
       {/* Demo-only submit button - for testing the success state */}
-      <div className="absolute bottom-4 right-4 opacity-0">
+      <div className="absolute bottom-4 right-4">
         <button 
-          onClick={handleFormSubmission}
-          aria-hidden="true" 
-          className="sr-only"
+          onClick={handleTestSubmit}
+          className="text-xs text-gray-400 hover:text-gray-500"
         >
-          Test Submit
+          (Demo Submit)
         </button>
       </div>
     </div>

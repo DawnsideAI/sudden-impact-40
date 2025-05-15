@@ -5,6 +5,7 @@ import Layout from "@/components/layout/Layout";
 import { Calendar, Clock, Check, Mic, MessageSquare, CalendarClock } from "lucide-react";
 import DemoRequestForm from "@/components/demo/DemoRequestForm";
 import AIDemoContact from "@/components/demo/AIDemoContact";
+import AIDemoCallDialog from "@/components/niches/AIDemoCallDialog";
 import WhiteSection from "@/components/layout/WhiteSection";
 import StyleProvider from "@/components/design/StyleProvider";
 import SectionTitle from "@/components/design/SectionTitle";
@@ -14,6 +15,7 @@ import "../styles/iframe-container.css"; // Import the iframe-container CSS
 const Demo = () => {
   const [activeTab, setActiveTab] = useState("live");
   const [showAIDemo, setShowAIDemo] = useState(false);
+  const [showCallDialog, setShowCallDialog] = useState(false);
   const isMobile = useIsMobile();
   const [isBookingScriptLoaded, setIsBookingScriptLoaded] = useState(false);
 
@@ -42,6 +44,11 @@ const Demo = () => {
       };
     }
   }, [activeTab, isBookingScriptLoaded]);
+
+  // Handle form submission
+  const handleFormSubmit = () => {
+    setShowCallDialog(true);
+  };
 
   return (
     <Layout lightMode={true}>
@@ -122,7 +129,7 @@ const Demo = () => {
                     </p>
                   </div>
 
-                  <DemoRequestForm onFormSubmit={() => setShowAIDemo(true)} />
+                  <DemoRequestForm onFormSubmit={handleFormSubmit} />
                 </StyleProvider>
               </motion.div>
             )}
@@ -265,6 +272,13 @@ const Demo = () => {
           </div>
         </section>
       )}
+      
+      {/* AI Demo Call Dialog */}
+      <AIDemoCallDialog 
+        open={showCallDialog} 
+        onOpenChange={setShowCallDialog}
+        phoneNumber="+1 (302) 618-3977"
+      />
     </Layout>
   );
 };
