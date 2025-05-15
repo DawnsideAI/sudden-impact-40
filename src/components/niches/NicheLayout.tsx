@@ -2,9 +2,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Phone, ArrowRight } from 'lucide-react';
+import { Phone, ArrowRight, Check, HelpCircle, DollarSign, Star } from 'lucide-react';
 import StyleProvider from '@/components/design/StyleProvider';
 import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 interface NicheLayoutProps {
   children: React.ReactNode;
@@ -44,27 +52,90 @@ const NicheLayout = ({ children, industry, title, subtitle }: NicheLayoutProps) 
         return 'Get Started';
     }
   };
+
+  const getIndustryBenefits = () => {
+    switch(industry) {
+      case 'healthcare':
+        return {
+          title: "Why AI Voice Agents for Healthcare?",
+          benefits: [
+            "24/7 appointment booking even when your office is closed",
+            "Reduce missed appointments by 35% with automated reminders",
+            "Capture patient information accurately without front desk staff",
+            "HIPAA-compliant conversations and secure data handling",
+            "Seamless integration with your existing scheduling systems"
+          ]
+        };
+      case 'real-estate':
+        return {
+          title: "Why AI Voice Agents for Real Estate?",
+          benefits: [
+            "Never miss a potential buyer inquiry - 24/7 responsiveness",
+            "Qualify leads automatically and schedule showings instantly",
+            "Follow up with prospects consistently through their journey",
+            "Provide instant property information without agent intervention",
+            "Increase conversion rates by 40% with timely follow-ups"
+          ]
+        };
+      case 'restaurants':
+        return {
+          title: "Why AI Voice Agents for Restaurants?",
+          benefits: [
+            "Handle reservation peaks without additional staff",
+            "Answer common questions instantly (hours, location, menu)",
+            "Upsell specials and event bookings automatically",
+            "Capture customer preferences for personalized experiences",
+            "Reduce no-shows by 45% with automated reminders"
+          ]
+        };
+      case 'service-contractors':
+        return {
+          title: "Why AI Voice Agents for Service Contractors?",
+          benefits: [
+            "Book appointments while your team is on service calls",
+            "Qualify emergency vs. standard service needs automatically",
+            "Send appointment confirmations with technician information",
+            "Automated follow-ups for estimates and maintenance reminders",
+            "Increase customer satisfaction with improved response times"
+          ]
+        };
+      default:
+        return {
+          title: "Why AI Voice Agents?",
+          benefits: [
+            "24/7 availability for your customers",
+            "Reduce staffing costs while improving service",
+            "Consistent quality in every interaction",
+            "Automated follow-ups and reminders",
+            "Detailed analytics on customer interactions"
+          ]
+        };
+    }
+  };
   
   const gradient = getGradient();
   const buttonText = getButtonText();
+  const industryBenefits = getIndustryBenefits();
   
   return (
     <div className="min-h-screen bg-white">
       {/* Simple header without any navigation to main site */}
-      <header className="bg-white border-b border-gray-200 py-4">
+      <header className="bg-white border-b border-gray-200 py-6">
         <div className="container-custom">
           <div className="flex justify-center">
-            <img 
+            <motion.img 
               src="/lovable-uploads/293aebbf-1435-4e16-867f-2a95f52ef685.png" 
               alt="Sudden Impact Agency Logo" 
-              className="h-16 md:h-20 w-auto" 
+              className="h-24 md:h-32 w-auto" 
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
             />
           </div>
         </div>
       </header>
       
-      {/* Hero Section */}
-      <section className="bg-gray-50 pt-16 pb-24">
+      {/* Hero Section with Interactive Elements */}
+      <section className="bg-gray-50 pt-20 pb-24">
         <div className="container-custom">
           <div className="text-center max-w-3xl mx-auto">
             <StyleProvider>
@@ -76,7 +147,32 @@ const NicheLayout = ({ children, industry, title, subtitle }: NicheLayoutProps) 
               <p className="text-xl text-gray-600 mt-6">
                 {subtitle}
               </p>
-              <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+              
+              {/* Interactive Video or Demo Section */}
+              <motion.div 
+                className="mt-10 bg-white rounded-xl p-6 shadow-lg border border-gray-200 max-w-2xl mx-auto"
+                whileHover={{ y: -5 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center mb-4 overflow-hidden">
+                  <div className="relative w-full h-full">
+                    <iframe 
+                      className="absolute top-0 left-0 w-full h-full" 
+                      src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                      title="AI Voice Agent Demo" 
+                      frameBorder="0" 
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                </div>
+                <h3 className={`text-xl font-medium bg-gradient-to-r ${gradient} bg-clip-text text-transparent`}>
+                  See the AI Voice Agent in Action
+                </h3>
+                <p className="text-gray-600 mt-2">Watch how our AI handles calls for {industry.replace('-', ' ')} businesses</p>
+              </motion.div>
+              
+              <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
                 <Button 
                   className={`bg-gradient-to-r ${gradient} text-white hover:opacity-90 px-6 py-6 rounded-lg shadow-lg flex items-center gap-2 text-lg`}
                   onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
@@ -100,6 +196,150 @@ const NicheLayout = ({ children, industry, title, subtitle }: NicheLayoutProps) 
                 <Link to="/legal" className="text-gray-600 hover:text-gray-900 text-sm underline">Legal</Link>
               </div>
             </StyleProvider>
+          </div>
+        </div>
+      </section>
+      
+      {/* Industry-Specific Benefits Section */}
+      <section className="py-16 bg-white">
+        <div className="container-custom">
+          <StyleProvider>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+              <span className={`bg-gradient-to-r ${gradient} bg-clip-text text-transparent`}>
+                {industryBenefits.title}
+              </span>
+            </h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* Key Benefits */}
+              <Card className="shadow-lg hover:shadow-xl transition-all duration-300 border-t-4 border-t-brand-pink">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Star className="text-brand-pink" />
+                    Key Benefits
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-3">
+                    {industryBenefits.benefits.map((benefit, index) => (
+                      <motion.li 
+                        key={index} 
+                        className="flex items-start gap-2"
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                        viewport={{ once: true }}
+                      >
+                        <Check className="text-brand-pink mt-1 flex-shrink-0" />
+                        <span>{benefit}</span>
+                      </motion.li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+              
+              {/* ROI Calculator */}
+              <Card className="shadow-lg hover:shadow-xl transition-all duration-300 border-t-4 border-t-brand-aqua">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <DollarSign className="text-brand-aqua" />
+                    ROI Calculator
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Monthly Calls</label>
+                      <input type="range" min="100" max="1000" step="100" defaultValue="500" 
+                        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer" />
+                      <div className="flex justify-between text-xs text-gray-500 mt-1">
+                        <span>100</span>
+                        <span>1000</span>
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Average Transaction Value ($)</label>
+                      <input type="range" min="50" max="500" step="50" defaultValue="150" 
+                        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer" />
+                      <div className="flex justify-between text-xs text-gray-500 mt-1">
+                        <span>$50</span>
+                        <span>$500</span>
+                      </div>
+                    </div>
+                    
+                    <div className="bg-gray-50 p-4 rounded-lg mt-4">
+                      <h4 className="font-medium mb-2">Your Potential Monthly Savings</h4>
+                      <p className="text-2xl font-bold text-brand-aqua">$2,450</p>
+                      <p className="text-sm text-gray-500 mt-1">Based on industry averages</p>
+                    </div>
+                  </div>
+                </CardContent>
+                <CardFooter>
+                  <Button 
+                    className={`w-full bg-gradient-to-r from-brand-aqua to-brand-purple text-white`}
+                    onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                  >
+                    Calculate Your Savings
+                  </Button>
+                </CardFooter>
+              </Card>
+              
+              {/* FAQ Quick Answers */}
+              <Card className="shadow-lg hover:shadow-xl transition-all duration-300 border-t-4 border-t-brand-purple">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <HelpCircle className="text-brand-purple" />
+                    Common Questions
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div>
+                      <h4 className="font-medium text-gray-800">How quickly can I get started?</h4>
+                      <p className="text-gray-600 text-sm mt-1">Our setup takes just 24-48 hours for most {industry.replace('-', ' ')} businesses.</p>
+                    </div>
+                    
+                    <div>
+                      <h4 className="font-medium text-gray-800">Will it integrate with my current systems?</h4>
+                      <p className="text-gray-600 text-sm mt-1">Yes! We integrate with most popular {industry.replace('-', ' ')} software platforms.</p>
+                    </div>
+                    
+                    <div>
+                      <h4 className="font-medium text-gray-800">What if the AI can't answer a question?</h4>
+                      <p className="text-gray-600 text-sm mt-1">It will seamlessly transfer to your team while keeping all context.</p>
+                    </div>
+                  </div>
+                </CardContent>
+                <CardFooter>
+                  <Link 
+                    to={`/niches/${industry}/about`}
+                    className="w-full text-center text-brand-purple hover:text-brand-pink transition-colors"
+                  >
+                    View All FAQs
+                  </Link>
+                </CardFooter>
+              </Card>
+            </div>
+          </StyleProvider>
+        </div>
+      </section>
+      
+      {/* CTA Banner */}
+      <section className={`py-12 bg-gradient-to-r ${gradient}`}>
+        <div className="container-custom">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="text-white">
+              <h3 className="text-2xl md:text-3xl font-bold">Ready to transform your {industry.replace('-', ' ')} business?</h3>
+              <p className="mt-2 text-white/80">Join hundreds of businesses saving time and growing revenue.</p>
+            </div>
+            <Button
+              variant="outline"
+              className="bg-white text-brand-pink hover:bg-gray-100 px-8 py-6 rounded-lg text-lg font-medium"
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              Get Started Today
+            </Button>
           </div>
         </div>
       </section>
