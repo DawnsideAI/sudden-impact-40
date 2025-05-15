@@ -127,7 +127,7 @@ const DemoForm = () => {
               <>
                 <h3 className="text-2xl font-bold mb-6 text-center text-gray-800">Try Our AI Voice Agent</h3>
                 
-                <div className="w-full h-[735px] relative">
+                <div className="w-full iframe-container">
                   <iframe
                     src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
                     style={{width:"100%", height:"100%", border:"none", borderRadius:"8px"}}
@@ -144,6 +144,7 @@ const DemoForm = () => {
                     data-layout-iframe-id="inline-Gf3ORV8Uba4HRiXoml5L"
                     data-form-id="Gf3ORV8Uba4HRiXoml5L"
                     title="A2P Form - New"
+                    className="no-scrollbar"
                   />
                   
                   {/* Demo-only submit button - for testing the success state */}

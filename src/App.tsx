@@ -13,7 +13,7 @@ import Demo from "./pages/Demo";
 import Legal from "./pages/Legal";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
-import "./styles/iframe-container.css"; // Import the iframe container styles
+import "./styles/iframe-container.css"; // Import the iframe container styles globally
 
 // Create the client
 const queryClient = new QueryClient();

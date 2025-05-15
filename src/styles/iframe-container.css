@@ -27,7 +27,7 @@
   
   .iframe-container iframe {
     position: relative;
-    height: 700px !important; /* Increased height to prevent cut-off */
+    height: 800px !important; /* Further increased height to prevent cut-off */
     -webkit-overflow-scrolling: touch;
   }
   
