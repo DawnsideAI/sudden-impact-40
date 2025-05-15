@@ -9,6 +9,7 @@ import { toast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
 import StyleProvider from '@/components/design/StyleProvider';
 import SectionTitle from '@/components/design/SectionTitle';
+import IndustryAnimation from '@/components/industries/IndustryAnimation';
 
 // Define industry data with testimonials
 const industryData = {
@@ -330,32 +331,38 @@ const IndustryPage = () => {
   let industryName = "";
   let textColorClass = "";
   let gradientClass = "";
+  let animationType = "";
   
   switch(industry) {
     case "restaurants":
       industryName = "Restaurants &";
       textColorClass = "text-brand-pink";
       gradientClass = "from-brand-pink to-brand-aqua";
+      animationType = "restaurants";
       break;
     case "realestate":
       industryName = "Real Estate";
       textColorClass = "text-brand-purple";
       gradientClass = "from-brand-purple to-brand-aqua";
+      animationType = "realEstate";
       break;
     case "healthcare":
       industryName = "Healthcare &";
       textColorClass = "text-brand-aqua";
       gradientClass = "from-brand-aqua to-brand-pink";
+      animationType = "healthcare";
       break;
     case "contractors":
       industryName = "Service Contractors";
       textColorClass = "text-brand-blue";
       gradientClass = "from-brand-blue to-brand-purple";
+      animationType = "contractors";
       break;
     default:
       industryName = "Restaurants &";
       textColorClass = "text-brand-pink";
       gradientClass = "from-brand-pink to-brand-aqua";
+      animationType = "restaurants";
   }
 
   // Second part of title for restaurants and healthcare
@@ -406,13 +413,21 @@ const IndustryPage = () => {
                 <div className="absolute -z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] rounded-full bg-gradient-to-br from-brand-pink/5 via-transparent to-brand-aqua/5 blur-xl"></div>
                 <div className="absolute -z-10 -bottom-10 -right-10 w-40 h-40 rounded-full bg-gradient-to-br from-brand-aqua/10 to-transparent blur-xl"></div>
                 
-                <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 transform hover:scale-[1.02] transition-transform duration-300">
-                  <img 
-                    src={currentIndustry.image} 
-                    alt={`${currentIndustry.title} illustration`} 
-                    className="w-full h-auto rounded-lg" 
-                  />
-                </div>
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6 }}
+                  className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 transform hover:scale-[1.02] transition-transform duration-300"
+                >
+                  <div className="relative">
+                    <IndustryAnimation industry={animationType} />
+                    <img 
+                      src={currentIndustry.image} 
+                      alt={`${currentIndustry.title} illustration`} 
+                      className="w-full h-auto rounded-lg opacity-50 absolute top-0 left-0 z-0" 
+                    />
+                  </div>
+                </motion.div>
               </div>
             </StyleProvider>
           </div>
