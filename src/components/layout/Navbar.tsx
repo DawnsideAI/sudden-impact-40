@@ -31,7 +31,7 @@ const Navbar = () => {
   return (
     <motion.div
       className={cn(
-        'w-full transition-all duration-300 border-b py-3 border-gray-200',
+        'w-full transition-all duration-300 border-b py-4 border-gray-200',
         bgColor,
         scrolled ? 'shadow-md' : ''
       )}
@@ -49,7 +49,7 @@ const Navbar = () => {
               <img 
                 src="/lovable-uploads/293aebbf-1435-4e16-867f-2a95f52ef685.png" 
                 alt="Sudden Impact Agency Logo" 
-                className="h-16 md:h-24 w-auto rounded-md" 
+                className="h-20 md:h-28 w-auto rounded-md" 
               />
             </motion.div>
           </Link>
