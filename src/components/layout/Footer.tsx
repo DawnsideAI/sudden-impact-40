@@ -44,11 +44,6 @@ const Footer: React.FC<FooterProps> = ({ lightMode = false }) => {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <img 
-                src="/lovable-uploads/cf7822cb-c186-4075-9bc8-c04e61c0b9b0.png" 
-                alt="Sudden Impact Agency Logo" 
-                className="h-8 mb-3" 
-              />
               <p className={`${textColor} text-sm`}>
                 Transforming business communication through intelligent AI voice agents.
               </p>

@@ -47,7 +47,7 @@ const Navbar = () => {
               className="relative bg-transparent rounded-lg"
             >
               <img 
-                src="/lovable-uploads/cf7822cb-c186-4075-9bc8-c04e61c0b9b0.png" 
+                src="/lovable-uploads/293aebbf-1435-4e16-867f-2a95f52ef685.png" 
                 alt="Sudden Impact Agency Logo" 
                 className="h-12 md:h-16 w-auto rounded-md" 
               />
