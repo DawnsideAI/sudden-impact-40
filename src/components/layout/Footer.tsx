@@ -2,11 +2,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Facebook, Linkedin, Twitter, TikTok } from 'lucide-react';
+import { Facebook, Linkedin } from 'lucide-react';
 
 interface FooterProps {
   lightMode?: boolean;
 }
+
+// Custom TikTok icon since it's not available in lucide-react
+const TikTokIcon = ({ className }: { className?: string }) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2" 
+    strokeLinecap="round" 
+    strokeLinejoin="round" 
+    className={className}
+  >
+    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+  </svg>
+);
 
 const Footer: React.FC<FooterProps> = ({ lightMode = false }) => {
   // Define classes based on light/dark mode
@@ -105,7 +121,7 @@ const Footer: React.FC<FooterProps> = ({ lightMode = false }) => {
                 <Linkedin className="h-4 w-4" />
               </a>
               <a href="https://www.tiktok.com/@suddenimpactai" target="_blank" rel="noopener noreferrer" className={textColor} aria-label="TikTok">
-                <TikTok className="h-4 w-4" />
+                <TikTokIcon className="h-4 w-4" />
               </a>
             </div>
           </div>
