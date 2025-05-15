@@ -13,6 +13,12 @@ import Demo from "./pages/Demo";
 import Legal from "./pages/Legal";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+
+// Import niche pages
+import HealthcareNiche from "./pages/niches/Healthcare";
+import RealEstateNiche from "./pages/niches/RealEstate";
+import RestaurantsNiche from "./pages/niches/Restaurants";
+
 import "./styles/iframe-container.css"; // Import the iframe container styles globally
 
 // Create the client
@@ -33,6 +39,12 @@ const App = () => (
           <Route path="/demo" element={<Demo />} />
           <Route path="/legal" element={<Legal />} />
           <Route path="/contact" element={<Contact />} />
+          
+          {/* Niche page routes - separate from main navigation */}
+          <Route path="/niches/healthcare" element={<HealthcareNiche />} />
+          <Route path="/niches/real-estate" element={<RealEstateNiche />} />
+          <Route path="/niches/restaurants" element={<RestaurantsNiche />} />
+          
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
