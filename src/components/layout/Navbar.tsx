@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown, ChevronUp } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { 
   NavigationMenu,
@@ -18,6 +18,7 @@ import {
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [expandedSection, setExpandedSection] = useState<string | null>(null);
   const isMobile = useIsMobile();
 
   useEffect(() => {
@@ -38,6 +39,7 @@ const Navbar = () => {
   // Close mobile menu when route changes or screen size changes
   useEffect(() => {
     setMobileMenuOpen(false);
+    setExpandedSection(null);
   }, [isMobile]);
 
   // Handle body scroll when mobile menu is open
@@ -51,6 +53,10 @@ const Navbar = () => {
       document.body.style.overflow = 'auto';
     };
   }, [mobileMenuOpen]);
+
+  const toggleSection = (section: string) => {
+    setExpandedSection(prev => prev === section ? null : section);
+  };
 
   // Use consistent styling
   const bgColor = 'bg-white/90 backdrop-blur-xl';
@@ -220,56 +226,76 @@ const Navbar = () => {
               <div className="space-y-3">
                 <button 
                   className="flex items-center justify-between w-full text-xl font-medium text-gray-800 hover:text-brand-pink transition-colors"
-                  onClick={(e) => {
-                    const target = e.currentTarget.nextElementSibling;
-                    if (target) {
-                      target.classList.toggle('hidden');
-                    }
-                  }}
+                  onClick={() => toggleSection('solutions')}
                 >
                   <span>Solutions</span>
-                  <ChevronDown className="h-5 w-5" />
+                  {expandedSection === 'solutions' ? (
+                    <ChevronUp className="h-5 w-5" />
+                  ) : (
+                    <ChevronDown className="h-5 w-5" />
+                  )}
                 </button>
-                <div className="hidden ml-4 pl-2 border-l border-gray-200 space-y-2">
+                <motion.div 
+                  className={cn(
+                    "ml-4 pl-2 border-l border-gray-200 space-y-2",
+                    expandedSection !== 'solutions' && "hidden"
+                  )}
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ 
+                    height: expandedSection === 'solutions' ? 'auto' : 0,
+                    opacity: expandedSection === 'solutions' ? 1 : 0
+                  }}
+                  transition={{ duration: 0.2 }}
+                >
                   {solutionsLinks.map((solution) => (
                     <Link
                       key={solution.title}
                       to={solution.path}
-                      className="block py-1 text-gray-600 hover:text-brand-pink"
+                      className="block py-2 text-gray-600 hover:text-brand-pink transition-colors"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       {solution.title}
                     </Link>
                   ))}
-                </div>
+                </motion.div>
               </div>
               
               {/* Industries dropdown for mobile */}
               <div className="space-y-3">
                 <button 
                   className="flex items-center justify-between w-full text-xl font-medium text-gray-800 hover:text-brand-pink transition-colors"
-                  onClick={(e) => {
-                    const target = e.currentTarget.nextElementSibling;
-                    if (target) {
-                      target.classList.toggle('hidden');
-                    }
-                  }}
+                  onClick={() => toggleSection('industries')}
                 >
                   <span>Industries</span>
-                  <ChevronDown className="h-5 w-5" />
+                  {expandedSection === 'industries' ? (
+                    <ChevronUp className="h-5 w-5" />
+                  ) : (
+                    <ChevronDown className="h-5 w-5" />
+                  )}
                 </button>
-                <div className="hidden ml-4 pl-2 border-l border-gray-200 space-y-2">
+                <motion.div 
+                  className={cn(
+                    "ml-4 pl-2 border-l border-gray-200 space-y-2",
+                    expandedSection !== 'industries' && "hidden"
+                  )}
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ 
+                    height: expandedSection === 'industries' ? 'auto' : 0,
+                    opacity: expandedSection === 'industries' ? 1 : 0
+                  }}
+                  transition={{ duration: 0.2 }}
+                >
                   {industriesLinks.map((industry) => (
                     <Link
                       key={industry.title}
                       to={industry.path}
-                      className="block py-1 text-gray-600 hover:text-brand-pink"
+                      className="block py-2 text-gray-600 hover:text-brand-pink transition-colors"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       {industry.title}
                     </Link>
                   ))}
-                </div>
+                </motion.div>
               </div>
               
               <Link 
