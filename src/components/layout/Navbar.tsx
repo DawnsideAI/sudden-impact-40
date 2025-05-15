@@ -53,7 +53,7 @@ const Navbar = () => {
               />
             </motion.div>
           </Link>
-          <nav className="hidden md:flex items-center gap-6">
+          <nav className="hidden md:flex items-center gap-5">
             <Link to="/" className={navItemClass}>
               Home
             </Link>
@@ -65,6 +65,9 @@ const Navbar = () => {
             </Link>
             <Link to="/pricing" className={navItemClass}>
               Pricing
+            </Link>
+            <Link to="/contact" className={navItemClass}>
+              Contact
             </Link>
           </nav>
           <div className="flex items-center">

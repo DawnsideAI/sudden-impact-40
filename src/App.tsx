@@ -11,6 +11,7 @@ import Industries from "./pages/Industries";
 import IndustryPage from "./components/industries/IndustryPage";
 import Demo from "./pages/Demo";
 import Legal from "./pages/Legal";
+import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
 // Create the client
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/industries/:industryId" element={<IndustryPage />} />
           <Route path="/demo" element={<Demo />} />
           <Route path="/legal" element={<Legal />} />
+          <Route path="/contact" element={<Contact />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
