@@ -73,15 +73,6 @@ const IndustryDetails = ({ industry, lightMode }: IndustryDetailsProps) => {
             ))}
           </div>
         </div>
-
-        <div className="mt-10 text-center">
-          <Link 
-            to={`/industries/${industry.id}`} 
-            className="px-6 py-3 pink-aqua-bg text-white rounded-lg hover:opacity-90 transition-colors shadow-md font-medium"
-          >
-            Learn More About {industry.title} Solutions
-          </Link>
-        </div>
       </div>
     </div>
   );
