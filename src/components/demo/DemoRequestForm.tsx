@@ -5,12 +5,14 @@ import { PhoneCall } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 
 interface DemoRequestFormProps {
   onFormSubmit?: () => void;
+  showVideo?: boolean;
 }
 
-const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
+const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormProps) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const isMobile = useIsMobile();
@@ -62,6 +64,25 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
   };
 
   const phoneNumber = "+1 (302) 618-3977";
+
+  // Render demo video if showVideo prop is true
+  if (showVideo) {
+    return (
+      <Card className="overflow-hidden">
+        <CardContent className="p-0">
+          <div className="aspect-video w-full">
+            <iframe
+              src="https://www.youtube.com/embed/HuU_pxXVVqo"
+              title="AI Voice Agent Demo"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="w-full h-full"
+            ></iframe>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
 
   return (
     <div className="relative iframe-container" style={{ height: "auto" }}>

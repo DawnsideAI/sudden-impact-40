@@ -1,14 +1,16 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import NicheLayout from '@/components/niches/NicheLayout';
 import StyleProvider from '@/components/design/StyleProvider';
 import SectionTitle from '@/components/design/SectionTitle';
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import '@/styles/iframe-container.css';
 
 const NicheBooking = () => {
   const { industry = 'healthcare' } = useParams();
+  const [showDemoVideo, setShowDemoVideo] = useState(false);
   const validIndustry = ['healthcare', 'real-estate', 'restaurants', 'service-contractors'].includes(industry) 
     ? industry 
     : 'healthcare';
@@ -46,32 +48,75 @@ const NicheBooking = () => {
             />
             
             <StyleProvider className="bg-white rounded-xl p-6 md:p-8 shadow-lg border border-gray-200 mt-12">
-              {/* Embedding the external form to access AI's number */}
-              <div className="iframe-container" style={{ height: "500px" }}>
-                <iframe 
-                  src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
-                  id="inline-Gf3ORV8Uba4HRiXoml5L" 
-                  className="w-full h-full border-0 no-scrollbar"
-                  title="AI Voice Agent Demo Form"
-                  loading="lazy"
-                ></iframe>
-              </div>
-              
-              <div className="text-center mt-8">
-                <p className="text-gray-600 mb-4">Alternatively, schedule a consultation with our team:</p>
-                <a 
-                  href="https://link.suddenimpactagency.io/widget/booking/MYRdt5Un7mP29erZS5rx"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block px-6 py-3 bg-gradient-to-r from-brand-vibrantPurple to-brand-pink text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
-                >
-                  Schedule a Consultation
-                </a>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="space-y-6">
+                  <h3 className="text-xl font-bold text-gray-800">Schedule a Live Demo</h3>
+                  {/* Embedding the external form to access AI's number */}
+                  <div className="iframe-container" style={{ height: "500px" }}>
+                    <iframe 
+                      src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
+                      id="inline-Gf3ORV8Uba4HRiXoml5L" 
+                      className="w-full h-full border-0 no-scrollbar"
+                      title="AI Voice Agent Demo Form"
+                      loading="lazy"
+                    ></iframe>
+                  </div>
+                </div>
+                
+                <div className="space-y-6">
+                  <h3 className="text-xl font-bold text-gray-800">Watch Demo Video</h3>
+                  <div onClick={() => setShowDemoVideo(true)} className="aspect-video bg-gray-100 rounded-lg overflow-hidden cursor-pointer relative group">
+                    <div className="absolute inset-0 bg-brand-darkPurple/50 flex items-center justify-center group-hover:bg-brand-darkPurple/70 transition-all duration-300">
+                      <motion.div 
+                        className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center"
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-brand-pink" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                        </svg>
+                      </motion.div>
+                    </div>
+                    <img 
+                      src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=80&w=800" 
+                      alt="Demo video thumbnail"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  
+                  <div>
+                    <h4 className="font-medium text-gray-800 mb-2">Or schedule a consultation with our team:</h4>
+                    <a 
+                      href="https://link.suddenimpactagency.io/widget/booking/MYRdt5Un7mP29erZS5rx"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block px-6 py-3 bg-gradient-to-r from-brand-vibrantPurple to-brand-pink text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
+                    >
+                      Schedule a Consultation
+                    </a>
+                  </div>
+                </div>
               </div>
             </StyleProvider>
           </div>
         </div>
       </section>
+      
+      {/* Demo video dialog */}
+      <Dialog open={showDemoVideo} onOpenChange={setShowDemoVideo}>
+        <DialogContent className="sm:max-w-[800px] bg-white border border-brand-pink/10 shadow-xl">
+          <DialogTitle className="text-xl font-bold text-center mb-4 text-gray-800">AI Voice Agent Demo</DialogTitle>
+          <div className="aspect-video relative bg-gradient-to-br from-brand-pink/5 to-brand-aqua/5 rounded-lg overflow-hidden">
+            <iframe 
+              src="https://www.youtube.com/embed/HuU_pxXVVqo" 
+              className="w-full h-full"
+              title="AI Voice Agent Demo"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
+        </DialogContent>
+      </Dialog>
       
       {/* Add pricing section directly on the booking page for easier access */}
       <section className="py-16 bg-gray-50">

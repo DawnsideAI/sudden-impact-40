@@ -16,6 +16,7 @@ const Demo = () => {
   const [activeTab, setActiveTab] = useState("live");
   const [showAIDemo, setShowAIDemo] = useState(false);
   const [showCallDialog, setShowCallDialog] = useState(false);
+  const [showDemoVideo, setShowDemoVideo] = useState(false);
   const isMobile = useIsMobile();
   const [isBookingScriptLoaded, setIsBookingScriptLoaded] = useState(false);
 
@@ -25,6 +26,8 @@ const Demo = () => {
     
     if (window.location.hash === "#schedule") {
       setActiveTab("schedule");
+    } else if (window.location.hash === "#video") {
+      setActiveTab("video");
     }
 
     // Load booking script for the scheduler
@@ -99,6 +102,17 @@ const Demo = () => {
                 Live Demo
               </button>
               <button
+                onClick={() => setActiveTab("video")}
+                className={`py-2 md:py-4 px-3 md:px-6 text-sm md:text-lg font-medium border-b-2 transition-colors whitespace-nowrap flex-1 ${
+                  activeTab === "video"
+                    ? "border-brand-violet text-brand-violet"
+                    : "border-transparent text-brand-gray hover:text-brand-dark"
+                }`}
+              >
+                <MessageSquare className="inline-block mr-1 md:mr-2 h-4 w-4 md:h-5 md:w-5" />
+                Video Demo
+              </button>
+              <button
                 onClick={() => setActiveTab("schedule")}
                 className={`py-2 md:py-4 px-3 md:px-6 text-sm md:text-lg font-medium border-b-2 transition-colors whitespace-nowrap flex-1 ${
                   activeTab === "schedule"
@@ -130,6 +144,29 @@ const Demo = () => {
                   </div>
 
                   <DemoRequestForm onFormSubmit={handleFormSubmit} />
+                </StyleProvider>
+              </motion.div>
+            )}
+
+            {/* Video Demo */}
+            {activeTab === "video" && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+              >
+                <StyleProvider delay={0.2} className="bg-white rounded-xl p-2 md:p-8 shadow-md border border-brand-purple/10">
+                  <div className="text-center mb-3 md:mb-8">
+                    <div className="w-12 h-12 md:w-16 md:h-16 mx-auto rounded-full bg-gradient-to-br from-brand-pink to-brand-aqua/70 flex items-center justify-center text-white mb-2 md:mb-4">
+                      <MessageSquare className="h-4 w-4 md:h-6 md:w-6" />
+                    </div>
+                    <h2 className="text-lg md:text-2xl font-bold mb-1 md:mb-2 text-brand-dark">AI Voice Agent Demo Video</h2>
+                    <p className="text-xs md:text-base text-brand-gray mb-6">
+                      Watch our AI voice agent in action with this demo video.
+                    </p>
+                  </div>
+
+                  <DemoRequestForm showVideo={true} />
                 </StyleProvider>
               </motion.div>
             )}
@@ -245,7 +282,7 @@ const Demo = () => {
                   Ready to See Our AI Voice Agent in Action?
                 </h2>
                 <p className="text-sm md:text-lg text-gray-600 mb-5 md:mb-8">
-                  Choose the option that works best for you. Try our live demo now or schedule a time for later.
+                  Choose the option that works best for you. Try our live demo now, watch a video demo, or schedule a time for later.
                 </p>
                 <div className="flex flex-col sm:flex-row justify-center gap-3 md:gap-4">
                   <button 
@@ -256,6 +293,15 @@ const Demo = () => {
                     className="px-4 md:px-6 py-2.5 md:py-3 bg-gradient-to-r from-brand-pink to-brand-aqua text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all hover:-translate-y-1 text-sm md:text-base"
                   >
                     Try Live Demo Now
+                  </button>
+                  <button 
+                    onClick={() => {
+                      setActiveTab("video");
+                      window.scrollTo({ top: 400, behavior: 'smooth' });
+                    }}
+                    className="px-4 md:px-6 py-2.5 md:py-3 bg-white border border-brand-purple/30 text-brand-purple font-medium rounded-lg shadow-sm hover:shadow-md transition-all hover:-translate-y-1 text-sm md:text-base"
+                  >
+                    Watch Video Demo
                   </button>
                   <button 
                     onClick={() => {

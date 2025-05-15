@@ -261,17 +261,14 @@ const DemoForm = () => {
       <Dialog open={showDemoVideo} onOpenChange={setShowDemoVideo}>
         <DialogContent className="sm:max-w-[800px] bg-white border border-brand-pink/10 shadow-xl">
           <DialogTitle className="text-xl font-bold text-center mb-4 text-gray-800">AI Voice Agent Demo</DialogTitle>
-          <div className="aspect-video relative bg-gradient-to-br from-brand-pink/5 to-brand-aqua/5 rounded-lg overflow-hidden flex items-center justify-center">
-            {/* Replace with actual video once available */}
-            <div className="text-center p-8">
-              <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-r from-brand-pink to-brand-aqua flex items-center justify-center text-white mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                </svg>
-              </div>
-              <p className="text-gray-600 mb-4">Demo video will be placed here once available.</p>
-              <p className="text-sm text-gray-500">This video will show the AI voice agent in action, CRM dashboard previews, and onboarding automation.</p>
-            </div>
+          <div className="aspect-video relative bg-gradient-to-br from-brand-pink/5 to-brand-aqua/5 rounded-lg overflow-hidden">
+            <iframe 
+              src="https://www.youtube.com/embed/HuU_pxXVVqo" 
+              className="w-full h-full"
+              title="AI Voice Agent Demo"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
           </div>
         </DialogContent>
       </Dialog>
