@@ -133,18 +133,18 @@ const Demo = () => {
                 transition={{ duration: 0.4 }}
               >
                 <StyleProvider delay={0.2} className="bg-white rounded-xl p-5 md:p-8 shadow-md border border-brand-purple/10">
-                  <div className="text-center mb-6 md:mb-8">
+                  <div className="text-center mb-4">
                     <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-brand-pink to-brand-aqua/70 flex items-center justify-center text-white mb-4">
                       <CalendarClock className="h-6 w-6" />
                     </div>
                     <h2 className="text-xl md:text-2xl font-bold mb-2 text-brand-dark">Schedule Your Demo</h2>
-                    <p className="text-sm md:text-base text-brand-gray mb-6">
+                    <p className="text-sm md:text-base text-brand-gray mb-4">
                       Pick a convenient time for your 10-minute AI voice agent demo.
                     </p>
                   </div>
 
-                  {/* Booking Widget */}
-                  <div className="w-full" style={{ height: "630px" }}>
+                  {/* Booking Widget - Updated with larger height to fill space better */}
+                  <div className="w-full" style={{ height: isMobile ? "700px" : "750px" }}>
                     <iframe
                       src="https://link.suddenimpactagency.io/widget/booking/MYRdt5Un7mP29erZS5rx"
                       style={{ width: "100%", height: "100%", border: "none", borderRadius: "8px" }}
@@ -157,7 +157,7 @@ const Demo = () => {
                       data-deactivation-type="neverDeactivate"
                       data-deactivation-value=""
                       data-form-name="Demo Scheduler"
-                      data-height="630"
+                      data-height={isMobile ? "700" : "750"}
                       data-layout-iframe-id="booking-MYRdt5Un7mP29erZS5rx"
                       data-form-id="MYRdt5Un7mP29erZS5rx"
                       title="Demo Scheduler"
