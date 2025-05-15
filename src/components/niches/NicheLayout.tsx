@@ -28,7 +28,21 @@ const NicheLayout = ({ children, industry, title, subtitle }: NicheLayoutProps) 
     }
   };
   
+  const getButtonText = () => {
+    switch(industry) {
+      case 'healthcare':
+        return 'Book Your Appointment';
+      case 'real-estate':
+        return 'Get Started Now';
+      case 'restaurants':
+        return 'Reserve Now';
+      default:
+        return 'Get Started';
+    }
+  };
+  
   const gradient = getGradient();
+  const buttonText = getButtonText();
   
   return (
     <div className="min-h-screen bg-white">
@@ -63,7 +77,7 @@ const NicheLayout = ({ children, industry, title, subtitle }: NicheLayoutProps) 
                   className={`bg-gradient-to-r ${gradient} text-white hover:opacity-90 px-6 py-6 rounded-lg shadow-lg flex items-center gap-2 text-lg`}
                   onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
                 >
-                  Get Started
+                  {buttonText}
                   <ArrowRight size={18} />
                 </Button>
                 

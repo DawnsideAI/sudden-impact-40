@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Check } from 'lucide-react';
+import { Check, Calendar, Bell, Star, User } from 'lucide-react';
 import NicheLayout from '@/components/niches/NicheLayout';
 import NicheContactForm from '@/components/niches/NicheContactForm';
 import StyleProvider from '@/components/design/StyleProvider';
@@ -10,26 +10,53 @@ import FeatureCard from '@/components/design/FeatureCard';
 
 const Restaurants = () => {
   const benefits = [
-    "Never miss a reservation or takeout order call again",
-    "Handle peak-time call overflow automatically",
-    "Take orders accurately with zero staff intervention",
-    "Reduce staffing costs while maintaining excellent service",
-    "Collect valuable customer feedback and preferences",
-    "Provide 24/7 availability for information and bookings"
+    "Book tables in seconds with online reservations",
+    "Receive instant booking confirmations",
+    "Access exclusive offers and promotions",
+    "Track and redeem loyalty rewards",
+    "Get reminders for upcoming reservations",
+    "Book special events and private dining"
+  ];
+
+  const workflows = [
+    {
+      title: "Reservation Booking Workflow",
+      trigger: "Form submission or chat widget inquiry",
+      actions: "Confirmation email/SMS, add to calendar, 24hr reminder",
+      icon: Calendar
+    },
+    {
+      title: "Missed Call Text-Back",
+      trigger: "Missed call",
+      actions: "SMS with link to reserve or ask a question",
+      icon: Bell
+    },
+    {
+      title: "Review Request Automation",
+      trigger: "2 hours after reservation time",
+      actions: "SMS and email with Google/Yelp review link",
+      icon: Star
+    },
+    {
+      title: "Loyalty Campaign",
+      trigger: "Birthday or visit milestone",
+      actions: "Personalized offer via SMS/email",
+      icon: User
+    }
   ];
 
   return (
     <NicheLayout 
       industry="restaurants"
-      title="Restaurant AI Voice Solutions"
-      subtitle="Transform your restaurant operations with AI voice agents that handle reservations, takeout orders, and customer inquiries 24/7."
+      title="Book Your Table or Event in Seconds"
+      subtitle="Instant reservations, exclusive offers, and loyalty rewards — all in one seamless experience."
     >
       {/* Benefits Section */}
       <section className="py-20 bg-gradient-to-br from-brand-pink/5 to-brand-aqua/5">
         <div className="container-custom">
           <SectionTitle
-            title="Level Up Your Restaurant Operations"
-            subtitle="Our AI voice agents handle calls while your staff focuses on creating exceptional dining experiences"
+            title="Enhance Your Dining Experience"
+            subtitle="Our AI voice agents handle reservations and inquiries while your staff focuses on creating exceptional dining experiences"
             centered={true}
           />
           
@@ -50,52 +77,38 @@ const Restaurants = () => {
         </div>
       </section>
       
-      {/* Features Section */}
+      {/* Workflows Section */}
       <section className="py-20 bg-white">
         <div className="container-custom">
           <SectionTitle
-            title="Restaurant-Specific AI Features"
-            subtitle="Purpose-built technology for the hospitality industry"
+            title="Restaurant Automation Workflows"
+            subtitle="Seamless experiences from reservation to loyalty rewards"
             centered={true}
           />
           
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <FeatureCard
-              icon={Check}
-              title="Reservation Management"
-              description="Handle table bookings, modifications, and cancellations according to your restaurant's availability and seating configurations."
-              index={0}
-            />
-            <FeatureCard
-              icon={Check}
-              title="Takeout Order Processing"
-              description="Take accurate food orders, including modifiers and special requests, and confirm details before finalizing."
-              index={1}
-            />
-            <FeatureCard
-              icon={Check}
-              title="Menu Information"
-              description="Answer detailed questions about your menu items, including ingredients, allergens, and preparation methods."
-              index={2}
-            />
-            <FeatureCard
-              icon={Check}
-              title="POS Integration"
-              description="Connect with your point-of-sale system to maintain accurate menu information and streamline order processing."
-              index={3}
-            />
-            <FeatureCard
-              icon={Check}
-              title="Customer Recognition"
-              description="Identify returning customers and recall their preferences for a personalized dining experience."
-              index={4}
-            />
-            <FeatureCard
-              icon={Check}
-              title="Multilingual Support"
-              description="Communicate with customers in their preferred language to ensure clear understanding of orders and requests."
-              index={5}
-            />
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+            {workflows.map((workflow, index) => (
+              <StyleProvider key={index} delay={index * 0.1} className="bg-white p-6 rounded-xl border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-300">
+                <div className="flex flex-col h-full">
+                  <div className="mb-4">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-brand-pink to-brand-aqua flex items-center justify-center shadow-md mb-4">
+                      {React.createElement(workflow.icon, { className: "text-white", size: 20 })}
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-800">{workflow.title}</h3>
+                  </div>
+                  <div className="space-y-3 flex-grow">
+                    <div>
+                      <p className="text-sm font-medium text-gray-500">TRIGGER</p>
+                      <p className="text-gray-700">{workflow.trigger}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-gray-500">ACTIONS</p>
+                      <p className="text-gray-700">{workflow.actions}</p>
+                    </div>
+                  </div>
+                </div>
+              </StyleProvider>
+            ))}
           </div>
         </div>
       </section>
@@ -116,7 +129,7 @@ const Restaurants = () => {
               </div>
               <div className="flex-1">
                 <p className="text-lg text-gray-700 italic mb-4">
-                  "Our staff used to spend hours on the phone taking orders and reservations. Now our AI assistant handles it all, and our team can focus on creating amazing dining experiences. We've seen a 35% increase in takeout orders since implementing the AI voice agent. It never misses specials or upsell opportunities!"
+                  "Our staff used to spend hours on the phone taking reservations. Now our AI assistant handles it all, and our team can focus on creating amazing dining experiences. The automated review requests have boosted our online ratings, and our loyalty program runs itself!"
                 </p>
                 <div>
                   <h4 className="text-gray-800 font-medium">Michael Chen</h4>

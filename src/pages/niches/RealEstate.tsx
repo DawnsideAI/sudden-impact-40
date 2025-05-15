@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Check } from 'lucide-react';
+import { Check, Home, Calendar, User, Star } from 'lucide-react';
 import NicheLayout from '@/components/niches/NicheLayout';
 import NicheContactForm from '@/components/niches/NicheContactForm';
 import StyleProvider from '@/components/design/StyleProvider';
@@ -10,26 +10,53 @@ import FeatureCard from '@/components/design/FeatureCard';
 
 const RealEstate = () => {
   const benefits = [
-    "Qualify leads 24/7 without agent intervention",
-    "Automatically schedule and confirm property viewings",
-    "Follow up with interested buyers without manual effort",
-    "Collect detailed buyer requirements and preferences",
-    "Free up agents' time for high-value activities",
-    "Never miss an opportunity with round-the-clock availability"
+    "Schedule property viewings instantly online",
+    "Get pre-qualified for mortgages faster",
+    "Access exclusive property listings",
+    "Communicate with agents on your schedule",
+    "Receive updates on market changes",
+    "Complete paperwork securely online"
+  ];
+
+  const workflows = [
+    {
+      title: "Lead Nurture Funnel",
+      trigger: "Property inquiry form",
+      actions: "Assign to agent, email/SMS series with listings, videos, and appointments",
+      icon: Home
+    },
+    {
+      title: "Open House Automation",
+      trigger: "Open house sign-in",
+      actions: "Thank you SMS, follow-up email, property links",
+      icon: Calendar
+    },
+    {
+      title: "Mortgage Pre-Qual Form + Funnel",
+      trigger: "Pre-qual form filled",
+      actions: "Send required docs list, schedule consult",
+      icon: User
+    },
+    {
+      title: "Referral + Review Request",
+      trigger: "Deal closed",
+      actions: "Review request + referral offer via SMS/email",
+      icon: Star
+    }
   ];
 
   return (
     <NicheLayout 
       industry="real-estate"
-      title="Real Estate AI Voice Solutions"
-      subtitle="Convert more leads, schedule more viewings, and close more deals with AI voice agents built specifically for real estate professionals."
+      title="Find Your Dream Home or Finance It — Fast"
+      subtitle="Schedule a viewing, apply for a mortgage, or speak to an agent instantly."
     >
       {/* Benefits Section */}
       <section className="py-20 bg-gradient-to-br from-brand-purple/5 to-brand-aqua/5">
         <div className="container-custom">
           <SectionTitle
-            title="Elevate Your Real Estate Business"
-            subtitle="Our AI voice agents qualify leads and schedule viewings while your agents focus on closing deals"
+            title="Elevate Your Real Estate Experience"
+            subtitle="Our AI voice agents handle inquiries and scheduling while your agents focus on closing deals"
             centered={true}
           />
           
@@ -50,52 +77,38 @@ const RealEstate = () => {
         </div>
       </section>
       
-      {/* Features Section */}
+      {/* Workflows Section */}
       <section className="py-20 bg-white">
         <div className="container-custom">
           <SectionTitle
-            title="Real Estate-Specific AI Features"
-            subtitle="Purpose-built technology for property professionals"
+            title="Automated Real Estate Workflows"
+            subtitle="From first contact to closing and beyond"
             centered={true}
           />
           
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <FeatureCard
-              icon={Check}
-              title="Lead Qualification"
-              description="Automatically screen incoming inquiries, qualify leads, and route them to the appropriate agent based on buyer preferences."
-              index={0}
-            />
-            <FeatureCard
-              icon={Check}
-              title="MLS Integration"
-              description="Connect with your MLS listings to provide callers with accurate, up-to-date property information instantly."
-              index={1}
-            />
-            <FeatureCard
-              icon={Check}
-              title="Viewing Scheduler"
-              description="Allow potential buyers to schedule property viewings based on your agents' real-time availability."
-              index={2}
-            />
-            <FeatureCard
-              icon={Check}
-              title="Property Matching"
-              description="Collect buyer preferences and automatically match them with suitable properties in your inventory."
-              index={3}
-            />
-            <FeatureCard
-              icon={Check}
-              title="Follow-up Sequences"
-              description="Automated follow-ups with interested buyers at optimal times to maintain engagement without manual effort."
-              index={4}
-            />
-            <FeatureCard
-              icon={Check}
-              title="CRM Integration"
-              description="Seamlessly connect with your existing CRM to maintain a single source of truth for all client interactions."
-              index={5}
-            />
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+            {workflows.map((workflow, index) => (
+              <StyleProvider key={index} delay={index * 0.1} className="bg-white p-6 rounded-xl border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-300">
+                <div className="flex flex-col h-full">
+                  <div className="mb-4">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-brand-purple to-brand-aqua flex items-center justify-center shadow-md mb-4">
+                      {React.createElement(workflow.icon, { className: "text-white", size: 20 })}
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-800">{workflow.title}</h3>
+                  </div>
+                  <div className="space-y-3 flex-grow">
+                    <div>
+                      <p className="text-sm font-medium text-gray-500">TRIGGER</p>
+                      <p className="text-gray-700">{workflow.trigger}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-gray-500">ACTIONS</p>
+                      <p className="text-gray-700">{workflow.actions}</p>
+                    </div>
+                  </div>
+                </div>
+              </StyleProvider>
+            ))}
           </div>
         </div>
       </section>
@@ -116,7 +129,7 @@ const RealEstate = () => {
               </div>
               <div className="flex-1">
                 <p className="text-lg text-gray-700 italic mb-4">
-                  "Our agents save at least 15 hours per week now that the AI assistant handles initial inquiries and schedules viewings. The detailed lead qualification means our agents only speak with serious buyers who are ready to move forward. Our sales have increased by 28% this quarter!"
+                  "Our agents save at least 15 hours per week now that the AI assistant handles initial inquiries and schedules viewings. The automated lead nurturing ensures potential buyers stay engaged, and our closing rate has increased by 28% this quarter!"
                 </p>
                 <div>
                   <h4 className="text-gray-800 font-medium">Jennifer Lopez</h4>

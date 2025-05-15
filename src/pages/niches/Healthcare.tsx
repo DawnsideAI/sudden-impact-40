@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Check } from 'lucide-react';
+import { Check, Calendar, Bell } from 'lucide-react';
 import NicheLayout from '@/components/niches/NicheLayout';
 import NicheContactForm from '@/components/niches/NicheContactForm';
 import StyleProvider from '@/components/design/StyleProvider';
@@ -10,26 +10,53 @@ import FeatureCard from '@/components/design/FeatureCard';
 
 const Healthcare = () => {
   const benefits = [
-    "Reduce front-desk staff workload by 70%",
-    "Decrease no-show appointments by 45%",
-    "Handle patient inquiries 24/7 without additional staffing",
-    "Improve patient satisfaction with prompt responses",
-    "HIPAA-compliant communication for patient data security",
-    "Custom scheduling rules for different providers and services"
+    "Book your visit online in seconds",
+    "Get SMS and email reminders",
+    "Access secure patient forms",
+    "Reschedule without phone calls",
+    "Review your care plan anywhere",
+    "Communicate securely with your provider"
+  ];
+
+  const workflows = [
+    {
+      title: "Appointment Booking + Reminder",
+      trigger: "Form submission",
+      actions: "SMS/email confirmation + 24hr/2hr reminders",
+      icon: Calendar
+    },
+    {
+      title: "Missed Call Text-Back",
+      trigger: "Missed call",
+      actions: "SMS with link to schedule online",
+      icon: Bell
+    },
+    {
+      title: "Reactivation Campaign",
+      trigger: "6 months inactive",
+      actions: "Email/SMS prompt to schedule next visit",
+      icon: Calendar
+    },
+    {
+      title: "New Patient Intake",
+      trigger: "Booking confirmation",
+      actions: "Send secure form for intake",
+      icon: Check
+    }
   ];
 
   return (
     <NicheLayout 
       industry="healthcare"
-      title="Healthcare AI Voice Solutions"
-      subtitle="Streamline patient scheduling, reduce administrative burden, and improve patient experience with AI voice agents tailored for healthcare practices."
+      title="Secure, Simple Healthcare Appointments"
+      subtitle="Book your visit, get reminders, and stay in control of your care."
     >
       {/* Benefits Section */}
       <section className="py-20 bg-gradient-to-br from-brand-aqua/5 to-brand-pink/5">
         <div className="container-custom">
           <SectionTitle
-            title="Transform Your Healthcare Practice"
-            subtitle="Our AI voice agents handle appointment scheduling, patient inquiries, and follow-ups while your staff focuses on in-person care"
+            title="Transform Your Healthcare Experience"
+            subtitle="Our AI voice agents handle appointment scheduling, reminders, and follow-ups while your staff focuses on patient care"
             centered={true}
           />
           
@@ -50,52 +77,38 @@ const Healthcare = () => {
         </div>
       </section>
       
-      {/* Features Section */}
+      {/* Workflows Section */}
       <section className="py-20 bg-white">
         <div className="container-custom">
           <SectionTitle
-            title="HIPAA-Compliant Voice AI"
-            subtitle="Purpose-built features for healthcare providers"
+            title="Automated Healthcare Workflows"
+            subtitle="Seamless experiences from booking to follow-up"
             centered={true}
           />
           
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <FeatureCard
-              icon={Check}
-              title="Patient Scheduling"
-              description="AI voice agents handle new appointments, reschedules, and cancellations according to your practice's availability rules."
-              index={0}
-            />
-            <FeatureCard
-              icon={Check}
-              title="Insurance Verification"
-              description="Collect and verify insurance information before appointments to streamline patient check-in process."
-              index={1}
-            />
-            <FeatureCard
-              icon={Check}
-              title="Appointment Reminders"
-              description="Automated call reminders to reduce no-shows and late cancellations, improving practice efficiency."
-              index={2}
-            />
-            <FeatureCard
-              icon={Check}
-              title="Patient Triage"
-              description="Screen calls for urgent issues and route to staff when necessary while handling routine inquiries."
-              index={3}
-            />
-            <FeatureCard
-              icon={Check}
-              title="EHR Integration"
-              description="Seamlessly connect with your existing Electronic Health Record system for updated patient information."
-              index={4}
-            />
-            <FeatureCard
-              icon={Check}
-              title="Multilingual Support"
-              description="Communicate with patients in their preferred language to ensure clear understanding."
-              index={5}
-            />
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+            {workflows.map((workflow, index) => (
+              <StyleProvider key={index} delay={index * 0.1} className="bg-white p-6 rounded-xl border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-300">
+                <div className="flex flex-col h-full">
+                  <div className="mb-4">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-brand-aqua to-brand-pink flex items-center justify-center shadow-md mb-4">
+                      {React.createElement(workflow.icon, { className: "text-white", size: 20 })}
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-800">{workflow.title}</h3>
+                  </div>
+                  <div className="space-y-3 flex-grow">
+                    <div>
+                      <p className="text-sm font-medium text-gray-500">TRIGGER</p>
+                      <p className="text-gray-700">{workflow.trigger}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-gray-500">ACTIONS</p>
+                      <p className="text-gray-700">{workflow.actions}</p>
+                    </div>
+                  </div>
+                </div>
+              </StyleProvider>
+            ))}
           </div>
         </div>
       </section>
@@ -116,7 +129,7 @@ const Healthcare = () => {
               </div>
               <div className="flex-1">
                 <p className="text-lg text-gray-700 italic mb-4">
-                  "Our front desk staff was overwhelmed with calls before implementing this AI solution. Now they can focus on patients in the office while the voice agent handles scheduling and routine inquiries. We've seen a 45% reduction in no-shows and our staff is much happier."
+                  "Our front desk staff was overwhelmed with calls before implementing this AI solution. Now they can focus on patients in the office while the voice agent handles scheduling and routine inquiries. We've seen a 45% reduction in no-shows and our patient satisfaction has improved tremendously."
                 </p>
                 <div>
                   <h4 className="text-gray-800 font-medium">Dr. Rebecca Harris</h4>
