@@ -118,13 +118,13 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
   }
 
   return (
-    <div className="relative">
+    <div className="relative" style={{ height: "735px" }}>
       <iframe
         ref={iframeRef}
         src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
-        style={{width:"100%", height:"600px", border:"none", borderRadius:"8px"}}
-        id="popup-Gf3ORV8Uba4HRiXoml5L" 
-        data-layout="{'id':'POPUP'}"
+        style={{ width:"100%", height:"100%", border:"none", borderRadius:"8px" }}
+        id="inline-Gf3ORV8Uba4HRiXoml5L" 
+        data-layout="{'id':'INLINE'}"
         data-trigger-type="alwaysShow"
         data-trigger-value=""
         data-activation-type="alwaysActivated"
@@ -132,8 +132,8 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
         data-deactivation-type="neverDeactivate"
         data-deactivation-value=""
         data-form-name="A2P Form - New"
-        data-height="628"
-        data-layout-iframe-id="popup-Gf3ORV8Uba4HRiXoml5L"
+        data-height="735"
+        data-layout-iframe-id="inline-Gf3ORV8Uba4HRiXoml5L"
         data-form-id="Gf3ORV8Uba4HRiXoml5L"
         title="A2P Form - New"
       />

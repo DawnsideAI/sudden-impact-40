@@ -127,12 +127,12 @@ const DemoForm = () => {
               <>
                 <h3 className="text-2xl font-bold mb-6 text-center text-gray-800">Try Our AI Voice Agent</h3>
                 
-                <div className="w-full h-[600px] relative">
+                <div className="w-full h-[735px] relative">
                   <iframe
                     src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
                     style={{width:"100%", height:"100%", border:"none", borderRadius:"8px"}}
-                    id="home-popup-Gf3ORV8Uba4HRiXoml5L" 
-                    data-layout="{'id':'POPUP'}"
+                    id="inline-Gf3ORV8Uba4HRiXoml5L" 
+                    data-layout="{'id':'INLINE'}"
                     data-trigger-type="alwaysShow"
                     data-trigger-value=""
                     data-activation-type="alwaysActivated"
@@ -140,8 +140,8 @@ const DemoForm = () => {
                     data-deactivation-type="neverDeactivate"
                     data-deactivation-value=""
                     data-form-name="A2P Form - New"
-                    data-height="600"
-                    data-layout-iframe-id="home-popup-Gf3ORV8Uba4HRiXoml5L"
+                    data-height="735"
+                    data-layout-iframe-id="inline-Gf3ORV8Uba4HRiXoml5L"
                     data-form-id="Gf3ORV8Uba4HRiXoml5L"
                     title="A2P Form - New"
                   />
