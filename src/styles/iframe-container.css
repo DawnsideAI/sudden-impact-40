@@ -1,39 +1,39 @@
 
-/* Custom styles for iframe containers */
+/* Styling for iframe containers */
 .iframe-container {
   position: relative;
   width: 100%;
   overflow: hidden;
-  border-radius: 8px;
 }
 
-/* Hide scrollbar for better mobile experience */
 .no-scrollbar {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
 
 .no-scrollbar::-webkit-scrollbar {
-  display: none;  /* Chrome, Safari and Opera */
+  display: none;  /* Safari and Chrome */
 }
 
-/* Mobile-specific iframe adjustments */
-@media (max-width: 768px) {
-  .iframe-container {
-    overflow: visible;
-    height: auto !important;
-    min-height: 700px;
-  }
-  
-  .iframe-container iframe {
-    position: relative;
-    height: 1000px !important; /* Significantly increased height to show all content including submit buttons */
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  .calendar-container {
-    padding: 0;
-    margin: 0;
-    width: 100%;
-  }
+/* Specific form iframe styling for homepage */
+#inline-Gf3ORV8Uba4HRiXoml5L {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+/* Ensure calendar booking widgets display properly */
+[id^="msgsndr-calendar"] {
+  min-height: 600px;
+  background-color: white !important;
+}
+
+/* Fix form input styles */
+.iframe-container iframe form input,
+.iframe-container iframe form select,
+.iframe-container iframe form textarea {
+  background-color: white !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 0.375rem !important;
+  padding: 0.5rem 0.75rem !important;
 }
