@@ -1,128 +1,32 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Check, Calendar, PhoneCall } from "lucide-react";
 import { Link } from "react-router-dom";
 import { toast } from "@/hooks/use-toast";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import { Checkbox } from "@/components/ui/checkbox";
 import DemoCalendarForm from "@/components/demo/DemoCalendarForm";
 
-interface FormState {
-  name: string;
-  email: string;
-  phone: string;
-  company: string;
-  message: string;
-  smsConsent: boolean;
-}
-
 const DemoForm = () => {
-  const [formState, setFormState] = useState<FormState>({
-    name: "",
-    email: "",
-    phone: "",
-    company: "",
-    message: "",
-    smsConsent: false,
-  });
-  
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [formError, setFormError] = useState("");
   const [showCalendar, setShowCalendar] = useState(false);
   const [showDemoVideo, setShowDemoVideo] = useState(false);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormState((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-    // Clear errors when user starts typing
-    if (formError) setFormError("");
-  };
-
-  const handleCheckboxChange = (checked: boolean) => {
-    setFormState((prev) => ({
-      ...prev,
-      smsConsent: checked,
-    }));
-  };
-
-  const validateForm = () => {
-    // Basic validation
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(formState.email)) {
-      setFormError("Please enter a valid email address");
-      return false;
-    }
+  
+  // Add the script tag for the form embed.js after component mounts
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = "https://link.suddenimpactagency.io/js/form_embed.js";
+    script.async = true;
+    document.body.appendChild(script);
     
-    const phoneDigits = formState.phone.replace(/\D/g, '');
-    if (phoneDigits.length < 10) {
-      setFormError("Please enter a valid phone number");
-      return false;
-    }
-    
-    // Validate SMS consent
-    if (!formState.smsConsent) {
-      setFormError("Please consent to receive SMS messages to continue");
-      return false;
-    }
-    
-    return true;
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // Reset errors
-    setFormError("");
-    
-    // Validate form
-    if (!validateForm()) {
-      return;
-    }
-    
-    setIsLoading(true);
-    
-    try {
-      // GHL form submission endpoint
-      const ghlFormEndpoint = "https://www.go.suddenimpact.agency/l/1089001/2024-05-07/5sgcb";
-      
-      // Create form data for submission
-      const formData = new FormData();
-      formData.append('name', formState.name);
-      formData.append('email', formState.email);
-      formData.append('phone', formState.phone);
-      formData.append('company', formState.company);
-      formData.append('message', formState.message);
-      formData.append('smsConsent', formState.smsConsent ? 'yes' : 'no');
-      
-      // Submit to GHL form
-      await fetch(ghlFormEndpoint, {
-        method: 'POST',
-        body: formData,
-        mode: 'no-cors', // GHL form may require this
-      });
-      
-      setIsSubmitted(true);
-      toast({
-        title: "Demo Request Submitted!",
-        description: "You'll be connected to our AI voice agent shortly.",
-      });
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      setFormError("There was an error submitting your form. Please try again.");
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Failed to submit demo request. Please try again.",
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  };
+    return () => {
+      // Clean up script when component unmounts
+      const existingScript = document.querySelector(`script[src="https://link.suddenimpactagency.io/js/form_embed.js"]`);
+      if (existingScript && existingScript.parentNode) {
+        existingScript.parentNode.removeChild(existingScript);
+      }
+    };
+  }, []);
 
   const handleScheduleClick = () => {
     setShowCalendar(true);
@@ -130,6 +34,15 @@ const DemoForm = () => {
 
   const handleDemoVideoClick = () => {
     setShowDemoVideo(true);
+  };
+  
+  // For demo purposes - simulates form submission
+  const handleFormSubmitted = () => {
+    setIsSubmitted(true);
+    toast({
+      title: "Demo Request Submitted!",
+      description: "You'll be connected to our AI voice agent shortly.",
+    });
   };
 
   return (
@@ -214,122 +127,36 @@ const DemoForm = () => {
               <>
                 <h3 className="text-2xl font-bold mb-6 text-center text-gray-800">Try Our AI Voice Agent</h3>
                 
-                {formError && (
-                  <div className="bg-red-100 border border-red-300 text-red-700 px-4 py-3 rounded-lg mb-4">
-                    {formError}
-                  </div>
-                )}
-                
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div>
-                    <label htmlFor="home-name" className="block text-sm font-medium text-gray-700 mb-1">
-                      Your Name
-                    </label>
-                    <input
-                      type="text"
-                      id="home-name"
-                      name="name"
-                      value={formState.name}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-300 text-gray-800 focus:outline-none focus:ring-2 focus:ring-brand-aqua focus:border-brand-aqua"
-                      placeholder="Enter your full name"
-                    />
-                  </div>
+                <div className="w-full h-[600px] relative">
+                  <iframe
+                    src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
+                    style={{width:"100%", height:"100%", border:"none", borderRadius:"8px"}}
+                    id="home-popup-Gf3ORV8Uba4HRiXoml5L" 
+                    data-layout="{'id':'POPUP'}"
+                    data-trigger-type="alwaysShow"
+                    data-trigger-value=""
+                    data-activation-type="alwaysActivated"
+                    data-activation-value=""
+                    data-deactivation-type="neverDeactivate"
+                    data-deactivation-value=""
+                    data-form-name="A2P Form - New"
+                    data-height="600"
+                    data-layout-iframe-id="home-popup-Gf3ORV8Uba4HRiXoml5L"
+                    data-form-id="Gf3ORV8Uba4HRiXoml5L"
+                    title="A2P Form - New"
+                  />
                   
-                  <div>
-                    <label htmlFor="home-company" className="block text-sm font-medium text-gray-700 mb-1">
-                      Company Name
-                    </label>
-                    <input
-                      type="text"
-                      id="home-company"
-                      name="company"
-                      value={formState.company}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-300 text-gray-800 focus:outline-none focus:ring-2 focus:ring-brand-aqua focus:border-brand-aqua"
-                      placeholder="Your company name"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label htmlFor="home-email" className="block text-sm font-medium text-gray-700 mb-1">
-                      Email Address
-                    </label>
-                    <input
-                      type="email"
-                      id="home-email"
-                      name="email"
-                      value={formState.email}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-300 text-gray-800 focus:outline-none focus:ring-2 focus:ring-brand-aqua focus:border-brand-aqua"
-                      placeholder="you@company.com"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label htmlFor="home-phone" className="block text-sm font-medium text-gray-700 mb-1">
-                      Phone Number
-                    </label>
-                    <input
-                      type="tel"
-                      id="home-phone"
-                      name="phone"
-                      value={formState.phone}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-300 text-gray-800 focus:outline-none focus:ring-2 focus:ring-brand-aqua focus:border-brand-aqua"
-                      placeholder="(123) 456-7890"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label htmlFor="home-message" className="block text-sm font-medium text-gray-700 mb-1">
-                      How can we help?
-                    </label>
-                    <textarea
-                      id="home-message"
-                      name="message"
-                      value={formState.message}
-                      onChange={handleChange}
-                      rows={3}
-                      className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-300 text-gray-800 focus:outline-none focus:ring-2 focus:ring-brand-aqua focus:border-brand-aqua"
-                      placeholder="Tell us about your business needs"
-                    />
-                  </div>
-                  
-                  {/* A2P Compliance SMS Consent Checkbox */}
-                  <div className="flex items-start space-x-2">
-                    <Checkbox 
-                      id="home-smsConsent" 
-                      checked={formState.smsConsent}
-                      onCheckedChange={handleCheckboxChange}
-                      className="border-brand-aqua data-[state=checked]:bg-brand-aqua data-[state=checked]:border-brand-aqua mt-1"
-                    />
-                    <label
-                      htmlFor="home-smsConsent"
-                      className="text-sm text-gray-600 cursor-pointer"
+                  {/* Demo-only submit button - for testing the success state */}
+                  <div className="absolute bottom-0 right-0 opacity-0">
+                    <button 
+                      onClick={handleFormSubmitted}
+                      aria-hidden="true" 
+                      className="sr-only"
                     >
-                      I consent to receive SMS messages from Sudden Impact Agency regarding my demo request and follow-ups. Message and data rates may apply.
-                    </label>
+                      Test Submit
+                    </button>
                   </div>
-                  
-                  <button
-                    type="submit"
-                    disabled={isLoading}
-                    className={`w-full inline-flex items-center justify-center px-6 py-3 text-white bg-gradient-to-r from-brand-pink to-brand-aqua hover:opacity-90 rounded-lg shadow-lg transition-colors ${
-                      isLoading ? "opacity-70 cursor-not-allowed" : ""
-                    }`}
-                  >
-                    {isLoading ? "Processing..." : "Try the AI Voice Agent"}
-                  </button>
-                  
-                  <p className="text-xs text-center text-gray-500 mt-4">
-                    By submitting, you agree to our <Link to="/legal" className="text-brand-pink hover:underline">Terms & Conditions</Link> and <Link to="/legal" className="text-brand-pink hover:underline">Privacy Policy</Link>.
-                  </p>
-                </form>
+                </div>
               </>
             ) : (
               <div className="text-center py-8">

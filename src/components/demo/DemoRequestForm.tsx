@@ -1,130 +1,37 @@
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Check, PhoneCall } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
-import { Link } from "react-router-dom";
-import { Checkbox } from "@/components/ui/checkbox";
-
-interface FormState {
-  name: string;
-  email: string;
-  phone: string;
-  company: string;
-  message: string;
-  smsConsent: boolean;
-}
 
 interface DemoRequestFormProps {
   onFormSubmit?: () => void;
 }
 
 const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
-  const [formState, setFormState] = useState<FormState>({
-    name: "",
-    email: "",
-    phone: "",
-    company: "",
-    message: "",
-    smsConsent: false,
-  });
-  
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [formError, setFormError] = useState("");
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormState((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-    // Clear any previous errors when the user starts typing again
-    if (formError) setFormError("");
-  };
-
-  const handleCheckboxChange = (checked: boolean) => {
-    setFormState((prev) => ({
-      ...prev,
-      smsConsent: checked,
-    }));
-  };
-
-  const validateForm = () => {
-    // Basic email validation
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(formState.email)) {
-      setFormError("Please enter a valid email address.");
-      return false;
-    }
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  
+  // Add the script tag for the form embed.js after component mounts
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = "https://link.suddenimpactagency.io/js/form_embed.js";
+    script.async = true;
+    document.body.appendChild(script);
     
-    // Basic phone validation - at least 10 digits
-    const phoneDigits = formState.phone.replace(/\D/g, '');
-    if (phoneDigits.length < 10) {
-      setFormError("Please enter a valid phone number with at least 10 digits.");
-      return false;
-    }
-    
-    // SMS consent validation
-    if (!formState.smsConsent) {
-      setFormError("Please consent to receive SMS messages to continue.");
-      return false;
-    }
-    
-    return true;
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // Reset any previous errors
-    setFormError("");
-    
-    // Validate form
-    if (!validateForm()) {
-      return;
-    }
-    
-    setIsLoading(true);
-    
-    try {
-      // Link to GHL form submission endpoint
-      const ghlFormEndpoint = "https://www.go.suddenimpact.agency/l/1089001/2024-05-07/5sgcb";
-      
-      // Create form data for submission
-      const formData = new FormData();
-      formData.append('name', formState.name);
-      formData.append('email', formState.email);
-      formData.append('phone', formState.phone);
-      formData.append('company', formState.company);
-      formData.append('message', formState.message);
-      formData.append('smsConsent', formState.smsConsent ? 'yes' : 'no');
-      
-      // Submit to GHL form
-      await fetch(ghlFormEndpoint, {
-        method: 'POST',
-        body: formData,
-        mode: 'no-cors', // GHL form may require this
-      });
-      
-      // Show success message and update state
-      setIsSubmitted(true);
-      onFormSubmit?.();
-      toast({
-        title: "Demo Request Submitted!",
-        description: "You'll be connected to our AI voice agent shortly.",
-      });
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      setFormError("There was an error submitting your request. Please try again.");
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Failed to submit demo request. Please try again.",
-      });
-    } finally {
-      setIsLoading(false);
-    }
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+  
+  // Mock submission functionality for demo purposes
+  const handleFormSubmission = () => {
+    setIsSubmitted(true);
+    onFormSubmit?.();
+    toast({
+      title: "Demo Request Submitted!",
+      description: "You'll be connected to our AI voice agent shortly.",
+    });
   };
 
   if (isSubmitted) {
@@ -211,130 +118,37 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-      {formError && (
-        <div className="bg-red-500/20 border border-red-500/50 text-white px-4 py-2 rounded-lg">
-          {formError}
-        </div>
-      )}
+    <div className="relative">
+      <iframe
+        ref={iframeRef}
+        src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
+        style={{width:"100%", height:"600px", border:"none", borderRadius:"8px"}}
+        id="popup-Gf3ORV8Uba4HRiXoml5L" 
+        data-layout="{'id':'POPUP'}"
+        data-trigger-type="alwaysShow"
+        data-trigger-value=""
+        data-activation-type="alwaysActivated"
+        data-activation-value=""
+        data-deactivation-type="neverDeactivate"
+        data-deactivation-value=""
+        data-form-name="A2P Form - New"
+        data-height="628"
+        data-layout-iframe-id="popup-Gf3ORV8Uba4HRiXoml5L"
+        data-form-id="Gf3ORV8Uba4HRiXoml5L"
+        title="A2P Form - New"
+      />
       
-      <div>
-        <label htmlFor="name" className="block text-sm font-medium text-white mb-1">
-          Your Name
-        </label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={formState.name}
-          onChange={handleChange}
-          required
-          className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-white/5 border border-white/10 focus:outline-none focus:ring-2 focus:ring-brand-vibrantPurple focus:border-brand-vibrantPurple text-white text-sm sm:text-base"
-          placeholder="Enter your full name"
-        />
-      </div>
-      
-      <div>
-        <label htmlFor="company" className="block text-sm font-medium text-white mb-1">
-          Company Name
-        </label>
-        <input
-          type="text"
-          id="company"
-          name="company"
-          value={formState.company}
-          onChange={handleChange}
-          required
-          className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-white/5 border border-white/10 focus:outline-none focus:ring-2 focus:ring-brand-vibrantPurple focus:border-brand-vibrantPurple text-white text-sm sm:text-base"
-          placeholder="Your company name"
-        />
-      </div>
-      
-      <div>
-        <label htmlFor="email" className="block text-sm font-medium text-white mb-1">
-          Email Address
-        </label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={formState.email}
-          onChange={handleChange}
-          required
-          className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-white/5 border border-white/10 focus:outline-none focus:ring-2 focus:ring-brand-vibrantPurple focus:border-brand-vibrantPurple text-white text-sm sm:text-base"
-          placeholder="you@company.com"
-        />
-      </div>
-      
-      <div>
-        <label htmlFor="phone" className="block text-sm font-medium text-white mb-1">
-          Phone Number
-        </label>
-        <input
-          type="tel"
-          id="phone"
-          name="phone"
-          value={formState.phone}
-          onChange={handleChange}
-          required
-          className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-white/5 border border-white/10 focus:outline-none focus:ring-2 focus:ring-brand-vibrantPurple focus:border-brand-vibrantPurple text-white text-sm sm:text-base"
-          placeholder="(123) 456-7890"
-        />
-      </div>
-      
-      <div>
-        <label htmlFor="message" className="block text-sm font-medium text-white mb-1">
-          How can we help?
-        </label>
-        <textarea
-          id="message"
-          name="message"
-          value={formState.message}
-          onChange={handleChange}
-          rows={3}
-          className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-white/5 border border-white/10 focus:outline-none focus:ring-2 focus:ring-brand-vibrantPurple focus:border-brand-vibrantPurple text-white text-sm sm:text-base"
-          placeholder="Tell us about your business needs"
-        />
-      </div>
-      
-      {/* A2P Compliance SMS Consent Checkbox */}
-      <div className="flex items-start space-x-2">
-        <Checkbox 
-          id="smsConsent" 
-          checked={formState.smsConsent}
-          onCheckedChange={handleCheckboxChange}
-          className="border-brand-vibrantPurple data-[state=checked]:bg-brand-vibrantPurple data-[state=checked]:border-brand-vibrantPurple mt-1"
-        />
-        <label
-          htmlFor="smsConsent"
-          className="text-sm text-white/90 cursor-pointer"
+      {/* Demo-only submit button - for testing the success state */}
+      <div className="absolute bottom-4 right-4 opacity-0">
+        <button 
+          onClick={handleFormSubmission}
+          aria-hidden="true" 
+          className="sr-only"
         >
-          I consent to receive SMS messages from Sudden Impact Agency regarding my demo request and follow-ups. Message and data rates may apply.
-        </label>
+          Test Submit
+        </button>
       </div>
-      
-      <button
-        type="submit"
-        disabled={isLoading}
-        className={`w-full px-4 sm:px-6 py-2 sm:py-3 text-white bg-gradient-to-r from-brand-pink to-brand-aqua hover:opacity-90 rounded-lg transition-colors flex items-center justify-center text-sm sm:text-base ${
-          isLoading ? "opacity-70 cursor-not-allowed" : ""
-        }`}
-      >
-        {isLoading ? "Processing..." : "Try the AI Voice Agent"}
-      </button>
-      
-      <p className="text-xs sm:text-sm text-center text-muted-foreground mt-4">
-        By submitting, you agree to our{" "}
-        <Link to="/legal" className="text-brand-vibrantPurple hover:underline">
-          Terms & Conditions
-        </Link>{" "}
-        and{" "}
-        <Link to="/legal" className="text-brand-vibrantPurple hover:underline">
-          Privacy Policy
-        </Link>
-        .
-      </p>
-    </form>
+    </div>
   );
 };
 
