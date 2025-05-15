@@ -46,9 +46,31 @@ const NicheBooking = () => {
             />
             
             <StyleProvider className="bg-white rounded-xl p-6 md:p-8 shadow-lg border border-gray-200 mt-12">
-              {/* Ensure we're using the standard DemoRequestForm across all niche pages */}
+              {/* Using the main site's DemoRequestForm to ensure consistent experience */}
               <DemoRequestForm onFormSubmit={() => console.log('Demo request submitted from niche page')} />
             </StyleProvider>
+          </div>
+        </div>
+      </section>
+      
+      {/* Add pricing section directly on the booking page for easier access */}
+      <section className="py-16 bg-gray-50">
+        <div className="container-custom">
+          <SectionTitle 
+            title={`${industryText.title} AI Voice Agent Pricing`}
+            subtitle="Choose the plan that's right for your business. All plans include a 7-day free trial."
+            centered={true}
+          />
+          
+          <div className="mt-8 text-center">
+            <motion.a
+              href={`/niches/${validIndustry}/pricing`}
+              className="inline-block px-8 py-3 bg-gradient-to-r from-brand-pink to-brand-aqua text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              View Full Pricing Details
+            </motion.a>
           </div>
         </div>
       </section>

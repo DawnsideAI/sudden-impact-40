@@ -1,6 +1,7 @@
-import React from 'react';
+
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Check, ArrowRight } from 'lucide-react';
+import { Check, ArrowRight, Calendar } from 'lucide-react';
 import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -17,6 +18,7 @@ interface NicheContactFormProps {
 const NicheContactForm = ({ industry }: NicheContactFormProps) => {
   const { toast } = useToast();
   const form = useForm();
+  const [showPricing, setShowPricing] = useState(true);
 
   // Define industry-specific form labels
   const getIndustryLabel = () => {
@@ -76,6 +78,29 @@ const NicheContactForm = ({ industry }: NicheContactFormProps) => {
     });
   };
 
+  // Basic pricing plans to display inline
+  const pricingPlans = [
+    {
+      name: "Starter",
+      price: 197,
+      monthlyFee: 97,
+      features: ["300 AI Minutes", "Calendar Integration", "24/7 Availability"]
+    },
+    {
+      name: "Professional",
+      price: 197,
+      monthlyFee: 297,
+      popular: true,
+      features: ["1000 AI Minutes", "CRM Integration", "Custom Workflows"]
+    },
+    {
+      name: "Enterprise",
+      price: 497,
+      monthlyFee: 597,
+      features: ["3000 AI Minutes", "White-labeled Solution", "Dedicated Manager"]
+    }
+  ];
+
   return (
     <section id="contact" className="py-20 bg-white">
       <div className="container-custom">
@@ -85,15 +110,76 @@ const NicheContactForm = ({ industry }: NicheContactFormProps) => {
           centered={true}
         />
         
+        {/* Display condensed pricing plans directly on the page */}
+        <div className="mt-8 mb-12 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {pricingPlans.map((plan, index) => (
+              <StyleProvider 
+                key={index} 
+                delay={index * 0.1} 
+                className={`bg-white p-4 rounded-xl border ${plan.popular ? 'border-brand-pink shadow-lg' : 'border-gray-200'}`}
+              >
+                {plan.popular && (
+                  <div className={`py-1 text-sm bg-gradient-to-r ${gradient} text-white text-center font-medium rounded-t-lg -mt-4 -mx-4 mb-3`}>
+                    Most Popular
+                  </div>
+                )}
+                <h3 className="text-lg font-semibold text-center">{plan.name}</h3>
+                <div className="text-center my-3">
+                  <p className="text-sm text-gray-500">One-time setup</p>
+                  <p className="text-xl font-bold">${plan.price}</p>
+                  <p className="text-sm text-gray-500">Monthly</p>
+                  <p className="text-xl font-bold">${plan.monthlyFee}/mo</p>
+                </div>
+                <ul className="text-sm space-y-2 mb-4">
+                  {plan.features.map((feature, i) => (
+                    <li key={i} className="flex items-center">
+                      <div className={`w-4 h-4 rounded-full bg-gradient-to-r ${gradient} flex items-center justify-center mr-2 flex-shrink-0`}>
+                        <Check size={10} className="text-white" />
+                      </div>
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="text-center">
+                  <Link 
+                    to={`/niches/${industry}/pricing`}
+                    className="text-sm text-brand-vibrantPurple hover:text-brand-pink transition-colors"
+                  >
+                    Full details
+                  </Link>
+                </div>
+              </StyleProvider>
+            ))}
+          </div>
+          <div className="text-center mt-4">
+            <Link 
+              to={`/niches/${industry}/pricing`}
+              className="inline-flex items-center font-medium text-brand-vibrantPurple hover:text-brand-pink transition-colors"
+            >
+              View detailed pricing plans <ArrowRight size={16} className="ml-1" />
+            </Link>
+          </div>
+        </div>
+        
         <div className="mt-12 max-w-3xl mx-auto">
           <StyleProvider className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
-            <div className="text-center mb-8">
+            <div className="text-center mb-6 flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link 
-                to={`/niches/${industry}/pricing`} 
-                className="inline-flex items-center text-brand-vibrantPurple hover:text-brand-pink transition-colors"
+                to={`/niches/${industry}/booking`} 
+                className="inline-flex items-center px-4 py-2 bg-brand-vibrantPurple/10 text-brand-vibrantPurple hover:bg-brand-vibrantPurple/20 rounded-lg transition-colors"
               >
-                View our pricing plans <ArrowRight size={16} className="ml-1" />
+                Try our AI voice agent <ArrowRight size={16} className="ml-1" />
               </Link>
+              
+              <a 
+                href="https://link.suddenimpactagency.io/widget/booking/MYRdt5Un7mP29erZS5rx" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center px-4 py-2 bg-brand-aqua/10 text-brand-aqua hover:bg-brand-aqua/20 rounded-lg transition-colors"
+              >
+                <Calendar size={16} className="mr-1" /> Schedule a consultation
+              </a>
             </div>
             
             <Form {...form}>
