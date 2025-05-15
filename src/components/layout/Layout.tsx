@@ -2,7 +2,6 @@
 import { ReactNode } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
-import CustomCursor from './CustomCursor';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 interface LayoutProps {
@@ -16,9 +15,6 @@ const Layout = ({ children, showBgEffects = true, lightMode = false }: LayoutPro
   
   return (
     <div className={`flex flex-col min-h-screen ${lightMode ? 'bg-white' : 'bg-background'}`}>
-      {/* Only show custom cursor on desktop */}
-      {!isMobile && <CustomCursor lightMode={lightMode} />}
-      
       {/* Background effects - only shown when requested, not in light mode, and reduced on mobile */}
       {showBgEffects && !lightMode && (
         <>
