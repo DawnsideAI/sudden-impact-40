@@ -19,7 +19,7 @@ const Footer: React.FC<FooterProps> = ({ lightMode = false }) => {
   return (
     <footer className={`${bgColor} border-t ${borderColor} pt-16 pb-8`}>
       <div className="container-custom">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           {/* Company Info */}
           <div>
             <motion.div
@@ -36,34 +36,6 @@ const Footer: React.FC<FooterProps> = ({ lightMode = false }) => {
               <p className={textColor}>
                 Transforming business communication through intelligent AI voice agents.
               </p>
-            </motion.div>
-          </div>
-
-          {/* Services */}
-          <div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              <h4 className={`font-bold mb-4 ${titleColor}`}>Services</h4>
-              <ul className="space-y-2">
-                {[
-                  { name: "Voice Automation", url: "/demo" },
-                  { name: "Lead Generation", url: "/demo" },
-                  { name: "Customer Support", url: "/demo" },
-                  { name: "Appointment Booking", url: "/demo" }
-                ].map(
-                  (item, i) => (
-                    <li key={i}>
-                      <Link to={item.url} className={`${textColor} ${linkHoverColor} transition-colors duration-200`}>
-                        {item.name}
-                      </Link>
-                    </li>
-                  )
-                )}
-              </ul>
             </motion.div>
           </div>
 
