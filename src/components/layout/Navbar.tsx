@@ -3,8 +3,17 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { 
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle
+} from "@/components/ui/navigation-menu";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -48,12 +57,17 @@ const Navbar = () => {
   const textColor = 'text-gray-800';
   const navItemClass = "text-gray-700 hover:text-brand-pink transition-colors duration-200";
 
-  const navLinks = [
-    { title: "Home", path: "/" },
-    { title: "Solutions", path: "/solutions" },
-    { title: "Industries", path: "/industries" },
-    { title: "Pricing", path: "/pricing" },
-    { title: "Contact", path: "/contact" },
+  const solutionsLinks = [
+    { title: "AI Voice Agent", description: "Convert more calls with our AI voice agent", path: "/solutions#voice-agent" },
+    { title: "Call Tracking", description: "Track and analyze your call performance", path: "/solutions#call-tracking" },
+    { title: "Lead Management", description: "Streamline your lead capture process", path: "/solutions#lead-management" },
+  ];
+
+  const industriesLinks = [
+    { title: "Real Estate", description: "Solutions for real estate agencies", path: "/industries/realestate" },
+    { title: "Healthcare", description: "Solutions for healthcare providers", path: "/industries/healthcare" },
+    { title: "Restaurants", description: "Solutions for restaurants and food services", path: "/industries/restaurants" },
+    { title: "Service Contractors", description: "Solutions for service contractors", path: "/industries/contractors" },
   ];
 
   return (
@@ -83,14 +97,80 @@ const Navbar = () => {
               </motion.div>
             </Link>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center gap-5">
-              {navLinks.map((link) => (
-                <Link key={link.path} to={link.path} className={navItemClass}>
-                  {link.title}
-                </Link>
-              ))}
-            </nav>
+            {/* Desktop Navigation with Dropdowns */}
+            <div className="hidden md:block">
+              <NavigationMenu>
+                <NavigationMenuList>
+                  <NavigationMenuItem>
+                    <Link to="/" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent")}>
+                      Home
+                    </Link>
+                  </NavigationMenuItem>
+                  
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger className={cn(navItemClass, "bg-transparent")}>
+                      Solutions
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                        {solutionsLinks.map((solution) => (
+                          <li key={solution.title} className="row-span-1">
+                            <NavigationMenuLink asChild>
+                              <Link
+                                to={solution.path}
+                                className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                              >
+                                <div className="text-sm font-medium leading-none">{solution.title}</div>
+                                <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                                  {solution.description}
+                                </p>
+                              </Link>
+                            </NavigationMenuLink>
+                          </li>
+                        ))}
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger className={cn(navItemClass, "bg-transparent")}>
+                      Industries
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                        {industriesLinks.map((industry) => (
+                          <li key={industry.title} className="row-span-1">
+                            <NavigationMenuLink asChild>
+                              <Link
+                                to={industry.path}
+                                className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                              >
+                                <div className="text-sm font-medium leading-none">{industry.title}</div>
+                                <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                                  {industry.description}
+                                </p>
+                              </Link>
+                            </NavigationMenuLink>
+                          </li>
+                        ))}
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+
+                  <NavigationMenuItem>
+                    <Link to="/pricing" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent")}>
+                      Pricing
+                    </Link>
+                  </NavigationMenuItem>
+
+                  <NavigationMenuItem>
+                    <Link to="/contact" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent")}>
+                      Contact
+                    </Link>
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+              </NavigationMenu>
+            </div>
 
             {/* Mobile Menu Trigger */}
             <div className="flex items-center gap-2">
@@ -125,20 +205,91 @@ const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-30 bg-white/95 backdrop-blur-xl pt-24 px-6 flex flex-col md:hidden"
+            className="fixed inset-0 z-30 bg-white/95 backdrop-blur-xl pt-24 px-6 flex flex-col md:hidden overflow-auto"
           >
             <nav className="flex flex-col gap-6 py-8">
-              {navLinks.map((link) => (
-                <Link 
-                  key={link.path}
-                  to={link.path} 
-                  className="text-xl font-medium text-gray-800 hover:text-brand-pink transition-colors"
-                  onClick={() => setMobileMenuOpen(false)}
+              <Link 
+                to="/" 
+                className="text-xl font-medium text-gray-800 hover:text-brand-pink transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Home
+              </Link>
+              
+              {/* Solutions dropdown for mobile */}
+              <div className="space-y-3">
+                <button 
+                  className="flex items-center justify-between w-full text-xl font-medium text-gray-800 hover:text-brand-pink transition-colors"
+                  onClick={(e) => {
+                    const target = e.currentTarget.nextElementSibling;
+                    if (target) {
+                      target.classList.toggle('hidden');
+                    }
+                  }}
                 >
-                  {link.title}
-                </Link>
-              ))}
+                  <span>Solutions</span>
+                  <ChevronDown className="h-5 w-5" />
+                </button>
+                <div className="hidden ml-4 pl-2 border-l border-gray-200 space-y-2">
+                  {solutionsLinks.map((solution) => (
+                    <Link
+                      key={solution.title}
+                      to={solution.path}
+                      className="block py-1 text-gray-600 hover:text-brand-pink"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {solution.title}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+              
+              {/* Industries dropdown for mobile */}
+              <div className="space-y-3">
+                <button 
+                  className="flex items-center justify-between w-full text-xl font-medium text-gray-800 hover:text-brand-pink transition-colors"
+                  onClick={(e) => {
+                    const target = e.currentTarget.nextElementSibling;
+                    if (target) {
+                      target.classList.toggle('hidden');
+                    }
+                  }}
+                >
+                  <span>Industries</span>
+                  <ChevronDown className="h-5 w-5" />
+                </button>
+                <div className="hidden ml-4 pl-2 border-l border-gray-200 space-y-2">
+                  {industriesLinks.map((industry) => (
+                    <Link
+                      key={industry.title}
+                      to={industry.path}
+                      className="block py-1 text-gray-600 hover:text-brand-pink"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {industry.title}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+              
+              <Link 
+                to="/pricing" 
+                className="text-xl font-medium text-gray-800 hover:text-brand-pink transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Pricing
+              </Link>
+              
+              <Link 
+                to="/contact" 
+                className="text-xl font-medium text-gray-800 hover:text-brand-pink transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Contact
+              </Link>
+              
               <hr className="border-gray-200 my-2" />
+              
               <Link 
                 to="/demo" 
                 className="bg-gradient-to-r from-brand-pink to-brand-aqua text-white text-center font-medium py-3 px-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
