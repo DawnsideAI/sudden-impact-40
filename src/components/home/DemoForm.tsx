@@ -124,11 +124,23 @@ const DemoForm = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="bg-white rounded-xl shadow-lg p-8 border border-gray-100"
+            className="bg-white rounded-xl shadow-lg p-6 md:p-8 border border-gray-100"
           >
             {!isSubmitted ? (
               <>
-                <h3 className="text-2xl font-bold mb-6 text-center text-gray-800">Try Our AI Voice Agent</h3>
+                <div className="text-center mb-4">
+                  <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-r from-brand-pink to-brand-aqua flex items-center justify-center text-white mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+                      <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                      <line x1="12" x2="12" y1="19" y2="22"></line>
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl font-bold mb-2 text-center text-gray-800">Try Our AI Voice Agent</h3>
+                  <p className="text-base text-gray-600 mb-4">
+                    Complete the form below to access our AI voice agent demo.
+                  </p>
+                </div>
                 
                 <div className="w-full iframe-container">
                   <iframe
