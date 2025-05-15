@@ -3,18 +3,18 @@ import { motion } from 'framer-motion';
 import StyleProvider from '../design/StyleProvider';
 import SectionTitle from '../design/SectionTitle';
 
+// Updated logos array to use Sudden Impact Agency branding images
 const logos = [
-  { id: 1, name: 'Slack', src: '/lovable-uploads/46b36e77-e44d-4dfd-8c35-6805698f485f.png', alt: 'Slack Logo' },
-  { id: 2, name: 'Microsoft', src: '/lovable-uploads/3094ebcc-0925-48b6-9f13-c4e025b7e67d.png', alt: 'Microsoft Logo' },
-  { id: 3, name: 'Google', src: '/lovable-uploads/a8ea11c6-eee2-4a72-9e98-851efb0bdc3d.png', alt: 'Google Logo' },
-  { id: 4, name: 'Apple', src: '/lovable-uploads/04e02938-36ca-4abc-adad-95afd668326b.png', alt: 'Apple Logo' },
-  { id: 5, name: 'Zoom', src: '/lovable-uploads/cf7822cb-c186-4075-9bc8-c04e61c0b9b0.png', alt: 'Zoom Logo' },
+  { id: 1, name: 'Sudden Impact 1', src: '/lovable-uploads/5cf2c10b-14ce-493b-af8b-4b89a496e362.png', alt: 'Sudden Impact Agency Logo 1', width: 'w-36 sm:w-44 md:w-56' },
+  { id: 2, name: 'Sudden Impact 2', src: '/lovable-uploads/5cf2c10b-14ce-493b-af8b-4b89a496e362.png', alt: 'Sudden Impact Agency Logo 2', width: 'w-36 sm:w-44 md:w-56' },
+  { id: 3, name: 'Sudden Impact 3', src: '/lovable-uploads/5cf2c10b-14ce-493b-af8b-4b89a496e362.png', alt: 'Sudden Impact Agency Logo 3', width: 'w-36 sm:w-44 md:w-56' },
+  { id: 4, name: 'Sudden Impact 4', src: '/lovable-uploads/5cf2c10b-14ce-493b-af8b-4b89a496e362.png', alt: 'Sudden Impact Agency Logo 4', width: 'w-36 sm:w-44 md:w-56' },
 ];
 
 const TrustedBy = () => {
   return (
-    <div className="py-20 bg-gradient-to-br from-white to-gray-50 rounded-3xl mx-4 md:mx-8 border border-brand-purple/5">
-      <StyleProvider className="text-center mb-12">
+    <div className="py-16 bg-gradient-to-br from-white to-gray-50 rounded-3xl mx-4 md:mx-8 border border-brand-purple/5">
+      <StyleProvider className="text-center mb-10">
         <SectionTitle
           title="Trusted by Leading Businesses"
           subtitle="Join hundreds of companies already using our AI voice agents to revolutionize their customer interactions"
@@ -25,7 +25,7 @@ const TrustedBy = () => {
 
       <StyleProvider
         delay={0.2}
-        className="flex flex-wrap justify-center items-center gap-10 md:gap-16"
+        className="flex flex-wrap justify-center items-center gap-8 md:gap-12 lg:gap-16"
       >
         {logos.map((logo, index) => (
           <motion.div
@@ -34,7 +34,7 @@ const TrustedBy = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
-            className="w-28 sm:w-36 md:w-44 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110"
+            className={`${logo.width} flex items-center justify-center transition-all duration-300 hover:scale-105`}
           >
             <img 
               src={logo.src} 
