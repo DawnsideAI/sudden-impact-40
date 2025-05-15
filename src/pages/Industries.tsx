@@ -6,6 +6,7 @@ import Layout from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import SectionTitle from '@/components/design/SectionTitle';
 import { Check } from 'lucide-react';
+import { toast } from '@/hooks/use-toast';
 
 const industries = [
   { id: "restaurants", label: "Restaurants & Hospitality", value: "restaurants" },
@@ -68,11 +69,15 @@ const Industries = () => {
   const handleSubmit = () => {
     if (selectedIndustry && selectedBusinessType) {
       // Map to appropriate industry page
-      // In a real implementation, you might have more complex routing logic
       const route = `/industries/${selectedIndustry}`;
       
       // Store the business type in session storage for the industry page to use
       sessionStorage.setItem('selectedBusinessType', selectedBusinessType);
+      
+      toast({
+        title: "Perfect match!",
+        description: "We're taking you to your customized industry solution.",
+      });
       
       setRedirect(route);
     }
@@ -85,11 +90,12 @@ const Industries = () => {
   return (
     <Layout lightMode={true}>
       <section className="py-24 relative overflow-hidden">
-        {/* Background with pink/aqua gradient */}
+        {/* Enhanced background with pink/aqua gradient */}
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-br from-brand-pink/5 via-white to-brand-aqua/5"></div>
-          <div className="absolute top-0 left-0 w-64 h-64 bg-brand-pink/5 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 right-0 w-80 h-80 bg-brand-aqua/5 rounded-full blur-3xl"></div>
+          <div className="absolute top-0 left-0 w-64 h-64 bg-brand-pink/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 right-0 w-80 h-80 bg-brand-aqua/10 rounded-full blur-3xl"></div>
+          <div className="absolute top-1/3 right-1/4 w-40 h-40 bg-brand-purple/10 rounded-full blur-2xl"></div>
         </div>
         
         <div className="container-custom relative z-10">
@@ -97,11 +103,20 @@ const Industries = () => {
             title="Find Your Industry-Specific AI Solution"
             subtitle="Our AI voice agents are tailored to meet the unique needs of your industry"
             centered={true}
+            className="mb-16"
           />
           
-          <div className="max-w-3xl mx-auto mt-12 rounded-xl bg-white p-8 shadow-lg border border-gray-100">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="max-w-3xl mx-auto rounded-xl bg-white p-8 shadow-lg border border-gray-100"
+          >
             <div className="mb-10">
-              <h3 className="text-xl font-semibold text-gray-800 mb-6">Step 1: Select Your Industry</h3>
+              <h3 className="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                <span className="w-8 h-8 rounded-full bg-brand-pink/10 text-brand-pink flex items-center justify-center mr-3 text-sm font-bold">1</span>
+                Select Your Industry
+              </h3>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {industries.map((industry) => (
@@ -112,7 +127,7 @@ const Industries = () => {
                     whileTap={{ scale: 0.98 }}
                     className={`p-4 rounded-lg text-left relative overflow-hidden ${
                       selectedIndustry === industry.value
-                        ? "border-2 border-brand-aqua shadow-md"
+                        ? "border-2 border-brand-aqua shadow-md bg-gradient-to-br from-brand-aqua/5 to-transparent"
                         : "border border-gray-200 hover:border-brand-pink/30"
                     }`}
                   >
@@ -135,7 +150,10 @@ const Industries = () => {
                 transition={{ duration: 0.3 }}
                 className="mb-10"
               >
-                <h3 className="text-xl font-semibold text-gray-800 mb-6">Step 2: Select Your Business Type</h3>
+                <h3 className="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                  <span className="w-8 h-8 rounded-full bg-brand-aqua/10 text-brand-aqua flex items-center justify-center mr-3 text-sm font-bold">2</span>
+                  Select Your Business Type
+                </h3>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {businessTypes[selectedIndustry].map((type) => (
@@ -146,7 +164,7 @@ const Industries = () => {
                       whileTap={{ scale: 0.98 }}
                       className={`p-4 rounded-lg text-left relative overflow-hidden ${
                         selectedBusinessType === type.id
-                          ? "border-2 border-brand-pink shadow-md"
+                          ? "border-2 border-brand-pink shadow-md bg-gradient-to-br from-brand-pink/5 to-transparent"
                           : "border border-gray-200 hover:border-brand-aqua/30"
                       }`}
                     >
@@ -167,12 +185,14 @@ const Industries = () => {
               <Button
                 onClick={handleSubmit}
                 disabled={!selectedIndustry || !selectedBusinessType}
-                className="bg-gradient-to-r from-brand-pink to-brand-aqua hover:opacity-90 px-8 py-6 rounded-lg font-medium text-white text-lg"
+                className={`pink-aqua-bg hover:opacity-90 px-8 py-6 rounded-lg font-medium text-white text-lg shadow-md transition-all duration-300 ${
+                  (!selectedIndustry || !selectedBusinessType) ? 'opacity-70' : 'hover:shadow-lg'
+                }`}
               >
                 See Your Tailored Solution
               </Button>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
     </Layout>

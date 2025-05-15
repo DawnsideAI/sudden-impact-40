@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { IndustryCard } from '@/components/solutions/IndustryCard';
@@ -134,7 +135,7 @@ const IndustrySolutions = () => {
 
   return (
     <div>
-      <StyleProvider className="text-center mb-12">
+      <StyleProvider className="text-center mb-16">
         <SectionTitle
           title="Industry Solutions"
           subtitle="Our AI voice agents are tailored to meet the specific needs of your industry"
@@ -142,32 +143,38 @@ const IndustrySolutions = () => {
         />
       </StyleProvider>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-        <div className="space-y-4">
-          {industries.slice(0, 6).map((industry, index) => (
-            <IndustryCard
-              key={industry.id}
-              id={industry.id}
-              icon={industry.icon}
-              title={industry.title}
-              description={industry.description}
-              isActive={selectedIndustry.id === industry.id}
-              onClick={() => setSelectedIndustry(industry)}
-              index={index}
-            />
-          ))}
-        </div>
+      {/* Background gradient decorations */}
+      <div className="relative">
+        <div className="absolute -top-20 -left-20 w-64 h-64 bg-brand-pink/5 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-brand-aqua/5 rounded-full blur-3xl"></div>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 relative z-10">
+          <div className="space-y-4">
+            {industries.slice(0, 6).map((industry, index) => (
+              <IndustryCard
+                key={industry.id}
+                id={industry.id}
+                icon={industry.icon}
+                title={industry.title}
+                description={industry.description}
+                isActive={selectedIndustry.id === industry.id}
+                onClick={() => setSelectedIndustry(industry)}
+                index={index}
+              />
+            ))}
+          </div>
 
-        <div className="lg:col-span-2">
-          <motion.div
-            key={selectedIndustry.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="h-full"
-          >
-            <IndustryDetails industry={selectedIndustry} />
-          </motion.div>
+          <div className="lg:col-span-2">
+            <motion.div
+              key={selectedIndustry.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="h-full"
+            >
+              <IndustryDetails industry={selectedIndustry} />
+            </motion.div>
+          </div>
         </div>
       </div>
     </div>
