@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 
 interface NicheLayoutProps {
   children: React.ReactNode;
-  industry: 'healthcare' | 'real-estate' | 'restaurants';
+  industry: 'healthcare' | 'real-estate' | 'restaurants' | 'service-contractors';
   title: string;
   subtitle: string;
 }
@@ -23,6 +23,8 @@ const NicheLayout = ({ children, industry, title, subtitle }: NicheLayoutProps) 
         return 'from-brand-purple to-brand-aqua';
       case 'restaurants':
         return 'from-brand-pink to-brand-aqua';
+      case 'service-contractors':
+        return 'from-brand-purple to-brand-pink';
       default:
         return 'from-brand-pink to-brand-aqua';
     }
@@ -36,6 +38,8 @@ const NicheLayout = ({ children, industry, title, subtitle }: NicheLayoutProps) 
         return 'Get Started Now';
       case 'restaurants':
         return 'Reserve Now';
+      case 'service-contractors':
+        return 'Schedule Service Now';
       default:
         return 'Get Started';
     }
@@ -84,10 +88,16 @@ const NicheLayout = ({ children, industry, title, subtitle }: NicheLayoutProps) 
                 <Button
                   variant="outline"
                   className="px-6 py-6 rounded-lg border border-gray-200 hover:border-brand-pink/30 text-gray-700 flex items-center gap-2 text-lg"
+                  onClick={() => window.location.href = `${industry === 'healthcare' ? '/niches/healthcare' : industry === 'real-estate' ? '/niches/real-estate' : industry === 'restaurants' ? '/niches/restaurants' : '/niches/service-contractors'}/booking`}
                 >
                   <Phone size={18} />
                   Schedule Demo
                 </Button>
+              </div>
+              <div className="mt-4 flex justify-center space-x-4">
+                <Link to={`/niches/${industry}/pricing`} className="text-gray-600 hover:text-gray-900 text-sm underline">Pricing</Link>
+                <Link to={`/niches/${industry}/about`} className="text-gray-600 hover:text-gray-900 text-sm underline">About Us</Link>
+                <Link to="/legal" className="text-gray-600 hover:text-gray-900 text-sm underline">Legal</Link>
               </div>
             </StyleProvider>
           </div>
@@ -103,6 +113,11 @@ const NicheLayout = ({ children, industry, title, subtitle }: NicheLayoutProps) 
           <div className="text-center">
             <p className="text-gray-600">© {new Date().getFullYear()} Sudden Impact Agency. All rights reserved.</p>
             <p className="text-gray-500 text-sm mt-2">AI Voice Agents for Business Communication</p>
+            <div className="mt-4 flex justify-center space-x-4">
+              <Link to={`/niches/${industry}/pricing`} className="text-gray-500 hover:text-gray-700 text-sm">Pricing</Link>
+              <Link to={`/niches/${industry}/about`} className="text-gray-500 hover:text-gray-700 text-sm">About Us</Link>
+              <Link to="/legal" className="text-gray-500 hover:text-gray-700 text-sm">Privacy Policy & Terms</Link>
+            </div>
           </div>
         </div>
       </footer>

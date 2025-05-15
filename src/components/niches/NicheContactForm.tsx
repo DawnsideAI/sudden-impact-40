@@ -11,7 +11,7 @@ import StyleProvider from '@/components/design/StyleProvider';
 import SectionTitle from '@/components/design/SectionTitle';
 
 interface NicheContactFormProps {
-  industry: 'healthcare' | 'real-estate' | 'restaurants';
+  industry: 'healthcare' | 'real-estate' | 'restaurants' | 'service-contractors';
 }
 
 const NicheContactForm = ({ industry }: NicheContactFormProps) => {
@@ -27,6 +27,8 @@ const NicheContactForm = ({ industry }: NicheContactFormProps) => {
         return 'Real Estate Agency';
       case 'restaurants':
         return 'Restaurant Name';
+      case 'service-contractors':
+        return 'Service Business Name';
       default:
         return 'Company Name';
     }
@@ -40,6 +42,8 @@ const NicheContactForm = ({ industry }: NicheContactFormProps) => {
         return 'Get Started Now';
       case 'restaurants':
         return 'Reserve Now';
+      case 'service-contractors':
+        return 'Schedule Service Now';
       default:
         return 'Submit';
     }
@@ -53,6 +57,8 @@ const NicheContactForm = ({ industry }: NicheContactFormProps) => {
         return 'from-brand-purple to-brand-aqua';
       case 'restaurants':
         return 'from-brand-pink to-brand-aqua';
+      case 'service-contractors':
+        return 'from-brand-purple to-brand-pink';
       default:
         return 'from-brand-pink to-brand-aqua';
     }

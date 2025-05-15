@@ -18,6 +18,12 @@ import NotFound from "./pages/NotFound";
 import HealthcareNiche from "./pages/niches/Healthcare";
 import RealEstateNiche from "./pages/niches/RealEstate";
 import RestaurantsNiche from "./pages/niches/Restaurants";
+import ServiceContractorsNiche from "./pages/niches/ServiceContractors";
+
+// Import niche common pages
+import NichePricing from "./pages/niches/common/NichePricing";
+import NicheAbout from "./pages/niches/common/NicheAbout";
+import NicheBooking from "./pages/niches/common/NicheBooking";
 
 import "./styles/iframe-container.css"; // Import the iframe container styles globally
 
@@ -44,6 +50,12 @@ const App = () => (
           <Route path="/niches/healthcare" element={<HealthcareNiche />} />
           <Route path="/niches/real-estate" element={<RealEstateNiche />} />
           <Route path="/niches/restaurants" element={<RestaurantsNiche />} />
+          <Route path="/niches/service-contractors" element={<ServiceContractorsNiche />} />
+          
+          {/* Common niche pages with dynamic industry parameter */}
+          <Route path="/niches/:industry/pricing" element={<NichePricing />} />
+          <Route path="/niches/:industry/about" element={<NicheAbout />} />
+          <Route path="/niches/:industry/booking" element={<NicheBooking />} />
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
