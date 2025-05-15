@@ -69,7 +69,7 @@ function PhoneIcon(props: React.SVGProps<SVGSVGElement>) {
 
 const CaseStudies = () => {
   const [activeCase, setActiveCase] = useState(caseStudies[0].id);
-  const demoVideoUrl = "https://www.youtube.com/embed/HuU_pxXVVqo";
+  const demoVideoUrl = "https://www.youtube.com/embed/HuU_pxXVVqo?si=qrMXYUDeg8m8zUzs";
   const currentCase = caseStudies.find(cs => cs.id === activeCase) || caseStudies[0];
 
   return (
