@@ -3,22 +3,28 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { Menu, X, ChevronDown, ChevronUp } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
+
+// Import required components for the popup approach
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+
 import { 
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
   navigationMenuTriggerStyle
 } from "@/components/ui/navigation-menu";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [expandedSection, setExpandedSection] = useState<string | null>(null);
   const isMobile = useIsMobile();
 
   useEffect(() => {
@@ -36,37 +42,10 @@ const Navbar = () => {
     };
   }, [scrolled]);
 
-  // Close mobile menu when route changes or screen size changes
-  useEffect(() => {
-    setMobileMenuOpen(false);
-    setExpandedSection(null);
-  }, [isMobile]);
-
-  // Handle body scroll when mobile menu is open
-  useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-    return () => {
-      document.body.style.overflow = 'auto';
-    };
-  }, [mobileMenuOpen]);
-
-  const toggleSection = (section: string) => {
-    setExpandedSection(prev => prev === section ? null : section);
-  };
-
   // Use consistent styling
   const bgColor = 'bg-white/90 backdrop-blur-xl';
   const textColor = 'text-gray-800';
   const navItemClass = "text-gray-700 hover:text-brand-pink transition-colors duration-200";
-
-  const toggleMobileMenu = () => {
-    console.log("Toggle mobile menu called, current state:", mobileMenuOpen);
-    setMobileMenuOpen(!mobileMenuOpen);
-  };
 
   return (
     <>
@@ -95,7 +74,7 @@ const Navbar = () => {
               </motion.div>
             </Link>
 
-            {/* Desktop Navigation with direct links instead of dropdowns */}
+            {/* Desktop Navigation with direct links */}
             <div className="hidden md:block">
               <NavigationMenu>
                 <NavigationMenuList>
@@ -142,7 +121,7 @@ const Navbar = () => {
               </NavigationMenu>
             </div>
 
-            {/* Mobile Menu Trigger */}
+            {/* Mobile Menu using Sheet component */}
             <div className="flex items-center gap-2">
               <Link 
                 to="/demo" 
@@ -151,87 +130,71 @@ const Navbar = () => {
                 Try AI Voice Agent
               </Link>
               
-              <button 
-                className="md:hidden ml-2 p-2 text-gray-700 focus:outline-none focus:ring-0"
-                onClick={toggleMobileMenu}
-                aria-label="Toggle mobile menu"
-                aria-expanded={mobileMenuOpen}
-              >
-                {mobileMenuOpen ? (
-                  <X className="h-6 w-6" />
-                ) : (
-                  <Menu className="h-6 w-6" />
-                )}
-              </button>
+              {/* Sheet component for mobile menu */}
+              <Sheet>
+                <SheetTrigger asChild className="md:hidden">
+                  <button 
+                    className="ml-2 p-2 text-gray-700 focus:outline-none focus:ring-0"
+                    aria-label="Open menu"
+                  >
+                    <Menu className="h-6 w-6" />
+                  </button>
+                </SheetTrigger>
+                <SheetContent side="right" className="md:hidden py-6 w-[85vw] sm:max-w-sm">
+                  <SheetHeader className="mb-5">
+                    <SheetTitle className="text-center font-bold text-xl">Menu</SheetTitle>
+                  </SheetHeader>
+                  <nav className="flex flex-col gap-6">
+                    <Link 
+                      to="/" 
+                      className="text-xl font-medium text-gray-800 hover:text-brand-pink transition-colors"
+                    >
+                      Home
+                    </Link>
+                    
+                    <Link 
+                      to="/solutions" 
+                      className="text-xl font-medium text-gray-800 hover:text-brand-pink transition-colors"
+                    >
+                      Solutions
+                    </Link>
+                    
+                    <Link 
+                      to="/industries" 
+                      className="text-xl font-medium text-gray-800 hover:text-brand-pink transition-colors"
+                    >
+                      Industries
+                    </Link>
+                    
+                    <Link 
+                      to="/pricing" 
+                      className="text-xl font-medium text-gray-800 hover:text-brand-pink transition-colors"
+                    >
+                      Pricing
+                    </Link>
+                    
+                    <Link 
+                      to="/contact" 
+                      className="text-xl font-medium text-gray-800 hover:text-brand-pink transition-colors"
+                    >
+                      Contact
+                    </Link>
+                    
+                    <hr className="border-gray-200 my-2" />
+                    
+                    <Link 
+                      to="/demo" 
+                      className="bg-gradient-to-r from-brand-pink to-brand-aqua text-white text-center font-medium py-3 px-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                    >
+                      Try AI Voice Agent
+                    </Link>
+                  </nav>
+                </SheetContent>
+              </Sheet>
             </div>
           </div>
         </div>
       </motion.div>
-
-      {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-50 bg-white/95 backdrop-blur-xl pt-24 px-6 flex flex-col md:hidden overflow-auto"
-          >
-            <nav className="flex flex-col gap-6 py-8">
-              <Link 
-                to="/" 
-                className="text-xl font-medium text-gray-800 hover:text-brand-pink transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Home
-              </Link>
-              
-              <Link 
-                to="/solutions" 
-                className="text-xl font-medium text-gray-800 hover:text-brand-pink transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Solutions
-              </Link>
-              
-              <Link 
-                to="/industries" 
-                className="text-xl font-medium text-gray-800 hover:text-brand-pink transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Industries
-              </Link>
-              
-              <Link 
-                to="/pricing" 
-                className="text-xl font-medium text-gray-800 hover:text-brand-pink transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Pricing
-              </Link>
-              
-              <Link 
-                to="/contact" 
-                className="text-xl font-medium text-gray-800 hover:text-brand-pink transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Contact
-              </Link>
-              
-              <hr className="border-gray-200 my-2" />
-              
-              <Link 
-                to="/demo" 
-                className="bg-gradient-to-r from-brand-pink to-brand-aqua text-white text-center font-medium py-3 px-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Try AI Voice Agent
-              </Link>
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </>
   );
 };
