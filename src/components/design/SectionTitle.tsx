@@ -21,7 +21,7 @@ const SectionTitle: React.FC<SectionTitleProps> = ({
 }) => {
   const titleClasses = light
     ? "text-white font-bold mb-4"
-    : "bg-gradient-to-br from-brand-indigo via-brand-purple to-brand-violet bg-clip-text text-transparent font-bold mb-4";
+    : "bg-gradient-to-r from-brand-pink via-brand-purple to-brand-aqua bg-clip-text text-transparent font-bold mb-4";
   
   const subtitleClasses = light
     ? "text-gray-300 text-xl"

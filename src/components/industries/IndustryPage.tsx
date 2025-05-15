@@ -381,7 +381,7 @@ const IndustryPage = () => {
         <div className="container-custom">
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-              AI Voice Solutions for <span className="gradient-text">{currentIndustry.title}</span>
+              AI Voice Solutions for <span className="pink-aqua-text">{currentIndustry.title}</span>
             </h1>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               {currentIndustry.intro}
@@ -407,7 +407,7 @@ const IndustryPage = () => {
               </motion.div>
             </div>
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">Key Benefits</h2>
+              <h2 className="text-2xl md:text-3xl font-bold mb-6 pink-aqua-text">Key Benefits</h2>
               <ul className="space-y-3">
                 {currentIndustry.benefits.map((benefit, index) => (
                   <motion.li 
@@ -418,7 +418,7 @@ const IndustryPage = () => {
                     className="flex items-start"
                   >
                     <div className="mt-1 mr-3 flex-shrink-0">
-                      <div className="w-5 h-5 rounded-full gradient-bg flex items-center justify-center">
+                      <div className="w-5 h-5 rounded-full pink-aqua-bg flex items-center justify-center">
                         <FiCheck className="text-white" size={12} />
                       </div>
                     </div>
@@ -430,7 +430,7 @@ const IndustryPage = () => {
           </div>
           
           <div className="mb-16">
-            <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center text-white">Pricing Options for {currentIndustry.title}</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center pink-aqua-text">Pricing Options for {currentIndustry.title}</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {currentIndustry.pricing.map((plan, index) => (
@@ -441,12 +441,12 @@ const IndustryPage = () => {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className={`glass-card p-6 rounded-xl border ${
                     plan.highlighted 
-                      ? 'border-agency-vibrantPurple gradient-bg relative overflow-hidden' 
+                      ? 'border-brand-pink pink-aqua-bg relative overflow-hidden' 
                       : 'border-white/10'
                   }`}
                 >
                   {plan.highlighted && (
-                    <div className="absolute top-0 right-0 bg-white text-agency-vibrantPurple text-xs font-bold px-3 py-1 uppercase">
+                    <div className="absolute top-0 right-0 bg-white text-brand-pink text-xs font-bold px-3 py-1 uppercase">
                       Most Popular
                     </div>
                   )}
@@ -454,7 +454,7 @@ const IndustryPage = () => {
                     {plan.title}
                   </h3>
                   <div className="flex items-baseline mb-4">
-                    <span className={`text-3xl font-bold ${plan.highlighted ? 'text-white' : 'text-white'}`}>
+                    <span className={`text-3xl font-bold ${plan.highlighted ? 'text-white' : 'aqua-pink-text'}`}>
                       {plan.price}
                     </span>
                     <span className={`ml-2 ${plan.highlighted ? 'text-white/80' : 'text-gray-400'}`}>
@@ -468,7 +468,7 @@ const IndustryPage = () => {
                     {plan.features.map((feature, fIndex) => (
                       <li key={fIndex} className="flex items-start">
                         <FiCheck 
-                          className={`mr-2 mt-1 ${plan.highlighted ? 'text-white' : 'text-agency-vibrantPurple'}`}
+                          className={`mr-2 mt-1 ${plan.highlighted ? 'text-white' : 'text-brand-aqua'}`}
                           size={16} 
                         />
                         <span className={plan.highlighted ? 'text-white/90' : 'text-gray-300'}>
@@ -481,8 +481,8 @@ const IndustryPage = () => {
                     to="/demo"
                     className={`w-full block text-center py-2 px-4 rounded-lg transition-colors ${
                       plan.highlighted 
-                        ? 'bg-white text-agency-vibrantPurple hover:bg-white/90' 
-                        : 'bg-agency-vibrantPurple text-white hover:bg-agency-vibrantPurple/90'
+                        ? 'bg-white text-brand-pink hover:bg-white/90' 
+                        : 'aqua-pink-bg text-white hover:opacity-90'
                     }`}
                   >
                     Get Started
@@ -497,7 +497,7 @@ const IndustryPage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="bg-agency-vibrantPurple rounded-xl p-8 md:p-12"
+              className="pink-aqua-bg rounded-xl p-8 md:p-12"
             >
               <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">
                 Ready to Transform Your {currentIndustry.title} Business?
@@ -507,7 +507,7 @@ const IndustryPage = () => {
               </p>
               <Link 
                 to="https://www.go.suddenimpact.agency/meetings/suddenimpact/30min" 
-                className="btn-primary bg-white text-agency-vibrantPurple hover:bg-white/90 inline-flex items-center"
+                className="btn-primary bg-white text-brand-pink hover:bg-white/90 inline-flex items-center"
                 target="_blank"
                 rel="noopener noreferrer"
               >

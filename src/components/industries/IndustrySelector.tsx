@@ -1,6 +1,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { FiChevronDown } from 'react-icons/fi';
+import { motion } from 'framer-motion';
 
 interface Industry {
   id: string;
@@ -34,17 +35,28 @@ const IndustrySelector = ({ industries, selectedId, onChange }: IndustrySelector
   }, []);
 
   return (
-    <div className="relative mb-8 max-w-md mx-auto" ref={dropdownRef}>
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="relative mb-8 max-w-md mx-auto" 
+      ref={dropdownRef}
+    >
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white hover:bg-white/15 transition-colors"
+        className="w-full flex items-center justify-between px-4 py-3 pink-aqua-bg backdrop-blur-lg border border-white/20 rounded-lg text-white hover:opacity-95 transition-all shadow-lg"
       >
         <span>{selectedIndustry.title}</span>
         <FiChevronDown className={`ml-2 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
       
       {isOpen && (
-        <div className="absolute z-20 mt-2 w-full bg-background border border-white/20 rounded-lg shadow-lg overflow-hidden">
+        <motion.div 
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.2 }}
+          className="absolute z-20 mt-2 w-full bg-background border border-white/20 rounded-lg shadow-xl overflow-hidden"
+        >
           <div className="max-h-60 overflow-y-auto">
             {industries.map(industry => (
               <button
@@ -53,17 +65,19 @@ const IndustrySelector = ({ industries, selectedId, onChange }: IndustrySelector
                   onChange(industry.id);
                   setIsOpen(false);
                 }}
-                className={`w-full text-left px-4 py-3 hover:bg-white/10 transition-colors ${
-                  industry.id === selectedId ? 'bg-white/10 text-white' : 'text-gray-300'
+                className={`w-full text-left px-4 py-3 hover:bg-brand-pink/10 transition-colors ${
+                  industry.id === selectedId 
+                    ? 'bg-gradient-to-r from-brand-pink/20 to-brand-aqua/20 text-white' 
+                    : 'text-gray-300'
                 }`}
               >
                 {industry.title}
               </button>
             ))}
           </div>
-        </div>
+        </motion.div>
       )}
-    </div>
+    </motion.div>
   );
 };
 

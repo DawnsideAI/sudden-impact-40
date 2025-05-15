@@ -67,7 +67,10 @@ export default {
           success: '#10B981',
           warning: '#F59E0B',
           error: '#EF4444',
-          info: '#3B82F6'
+          info: '#3B82F6',
+          pink: '#EC4899',
+          aqua: '#06B6D4',
+          teal: '#14B8A6',
         },
       },
       borderRadius: {
@@ -103,6 +106,11 @@ export default {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'hero-gradient': 'linear-gradient(to right bottom, rgba(79, 70, 229, 0.8), rgba(124, 58, 237, 0.8), rgba(139, 92, 246, 0.7))',
         'card-gradient': 'linear-gradient(to right bottom, rgba(79, 70, 229, 0.05), rgba(124, 58, 237, 0.05))',
+        'pink-aqua-gradient': 'linear-gradient(135deg, #EC4899 0%, #06B6D4 100%)',
+        'aqua-pink-gradient': 'linear-gradient(135deg, #06B6D4 0%, #EC4899 100%)',
+        'pink-purple-gradient': 'linear-gradient(135deg, #EC4899 0%, #8B5CF6 100%)',
+        'aqua-teal-gradient': 'linear-gradient(135deg, #06B6D4 0%, #14B8A6 100%)',
+        'modern-gradient': 'linear-gradient(to right, #EC4899, #8B5CF6, #06B6D4)',
       }
     },
   },

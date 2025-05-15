@@ -74,8 +74,32 @@
     @apply bg-gradient-to-r from-brand-indigo to-brand-violet;
   }
   
+  .pink-aqua-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-pink to-brand-aqua;
+  }
+  
+  .aqua-pink-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-aqua to-brand-pink;
+  }
+  
+  .modern-gradient-text {
+    @apply bg-clip-text text-transparent bg-modern-gradient;
+  }
+  
+  .pink-aqua-bg {
+    @apply bg-gradient-to-r from-brand-pink to-brand-aqua;
+  }
+  
+  .aqua-pink-bg {
+    @apply bg-gradient-to-r from-brand-aqua to-brand-pink;
+  }
+  
   .hero-gradient {
     @apply bg-gradient-to-br from-brand-darkPurple via-brand-purple to-brand-indigo/90;
+  }
+
+  .modern-hero-gradient {
+    @apply bg-gradient-to-br from-brand-pink via-brand-purple to-brand-aqua/90;
   }
   
   .feature-card {
@@ -87,7 +111,7 @@
   }
   
   .btn-primary {
-    @apply gradient-bg text-white font-medium py-2 px-3 md:py-2 md:px-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5;
+    @apply pink-aqua-bg text-white font-medium py-2 px-3 md:py-2 md:px-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5;
   }
   
   .btn-secondary {
@@ -133,15 +157,28 @@
 
   /* Card styles */
   .modern-card {
-    @apply relative bg-white rounded-2xl shadow-xl overflow-hidden border border-brand-purple/10 hover:border-brand-purple/20 transition-all duration-300;
+    @apply relative bg-white rounded-2xl shadow-xl overflow-hidden border border-brand-pink/10 hover:border-brand-aqua/20 transition-all duration-300;
   }
 
   .modern-card-gradient {
-    @apply absolute inset-0 bg-gradient-to-br from-brand-purple/5 to-brand-indigo/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300;
+    @apply absolute inset-0 bg-gradient-to-br from-brand-pink/5 to-brand-aqua/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300;
   }
 
   .modern-card-header {
-    @apply h-2 bg-gradient-to-r from-brand-indigo to-brand-violet;
+    @apply h-2 bg-gradient-to-r from-brand-pink to-brand-aqua;
+  }
+  
+  .gradient-border-card {
+    @apply relative p-6 rounded-xl bg-white before:absolute before:inset-0 before:p-[2px] before:bg-gradient-to-r before:from-brand-pink before:to-brand-aqua before:rounded-xl before:-z-10;
+  }
+  
+  .fancy-card {
+    @apply relative bg-white p-6 rounded-xl border border-transparent shadow-lg overflow-hidden;
+  }
+  
+  .fancy-card:before {
+    content: '';
+    @apply absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-brand-pink to-brand-aqua;
   }
 }
 
@@ -254,7 +291,11 @@
   }
 
   .modern-glow {
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+    box-shadow: 0 0 20px rgba(236, 72, 153, 0.2);
+  }
+  
+  .aqua-glow {
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
   }
   
   .glass-effect {
@@ -262,7 +303,7 @@
   }
 
   .gradient-border {
-    border-image: linear-gradient(to right, #4F46E5, #7C3AED) 1;
+    border-image: linear-gradient(to right, #EC4899, #06B6D4) 1;
   }
 
   .gradient-hover {
@@ -270,7 +311,7 @@
   }
 
   .gradient-hover::after {
-    @apply content-[''] absolute inset-0 bg-gradient-to-r from-brand-indigo/10 to-brand-violet/10 opacity-0 transition-opacity duration-300;
+    @apply content-[''] absolute inset-0 bg-gradient-to-r from-brand-pink/10 to-brand-aqua/10 opacity-0 transition-opacity duration-300;
   }
 
   .gradient-hover:hover::after {

@@ -37,8 +37,8 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
       delay={index * 0.1}
       className={`${bgClasses} transition-all duration-300 p-6 rounded-xl group ${className}`}
     >
-      <div className={`w-14 h-14 rounded-full bg-gradient-to-br from-brand-indigo/20 to-brand-violet/20 flex items-center justify-center mb-5 group-hover:from-brand-indigo/30 group-hover:to-brand-violet/30 transition-all duration-300`}>
-        <Icon className={`w-6 h-6 text-brand-indigo`} />
+      <div className={`w-14 h-14 rounded-full bg-gradient-to-br from-brand-pink/20 to-brand-aqua/20 flex items-center justify-center mb-5 group-hover:from-brand-pink/30 group-hover:to-brand-aqua/30 transition-all duration-300`}>
+        <Icon className={`w-6 h-6 text-brand-pink`} />
       </div>
       <h3 className={`text-xl font-semibold mb-3 ${titleClasses}`}>{title}</h3>
       <p className={textClasses}>{description}</p>

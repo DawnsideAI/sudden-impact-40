@@ -33,25 +33,25 @@ export const IndustryCard = ({
       className={cn(
         "w-full p-6 rounded-xl text-left transition-all duration-300 bg-white shadow-md hover:shadow-lg border",
         isActive 
-          ? "border-[1.5px] border-agency-vibrantPurple shadow-lg ring-1 ring-agency-vibrantPurple/30" 
-          : "border-gray-200 hover:border-agency-vibrantPurple/50"
+          ? "border-[1.5px] border-brand-pink shadow-lg ring-1 ring-brand-pink/30" 
+          : "border-gray-200 hover:border-brand-aqua/50"
       )}
       onClick={onClick}
     >
       <div className={cn(
         "w-12 h-12 rounded-full flex items-center justify-center mb-4",
         isActive 
-          ? "gradient-bg text-white" 
-          : "bg-gray-100 text-agency-vibrantPurple"
+          ? "pink-aqua-bg text-white" 
+          : "bg-gray-100 text-brand-aqua"
       )}>
         {icon}
       </div>
-      <h3 className="text-xl font-semibold mb-2 text-agency-dark">{title}</h3>
-      <p className="text-agency-gray line-clamp-2">{description}</p>
+      <h3 className="text-xl font-semibold mb-2 text-brand-dark">{title}</h3>
+      <p className="text-brand-gray line-clamp-2">{description}</p>
       
       {isActive && (
-        <div className="mt-2 text-agency-vibrantPurple font-medium flex items-center gap-1">
-          <span className="w-2 h-2 bg-agency-vibrantPurple rounded-full"></span>
+        <div className="mt-2 text-brand-pink font-medium flex items-center gap-1">
+          <span className="w-2 h-2 bg-brand-pink rounded-full"></span>
           Selected
         </div>
       )}
