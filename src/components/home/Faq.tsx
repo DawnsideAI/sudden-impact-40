@@ -40,7 +40,7 @@ const Faq = () => {
           title="Frequently Asked Questions"
           subtitle="Find answers to common questions about our AI voice agent solutions"
           centered={true}
-          light={true}
+          light={false}
           className="mb-16"
         />
 
@@ -48,20 +48,20 @@ const Faq = () => {
           delay={0.2}
           className="max-w-3xl mx-auto"
         >
-          <div className="bg-blue-600/80 backdrop-blur-lg rounded-xl overflow-hidden border border-white/10">
+          <div className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-md">
             <Accordion type="single" collapsible className="w-full">
               {faqs.map((faq, index) => (
                 <AccordionItem 
                   key={index} 
                   value={`item-${index}`}
-                  className="border-b border-white/10 last:border-0 px-6"
+                  className="border-b border-gray-200 last:border-0 px-6"
                 >
                   <AccordionTrigger className="hover:no-underline py-5">
-                    <span className="text-lg font-medium text-white hover:text-agency-vibrantPurple transition-colors text-left">
+                    <span className="text-lg font-medium text-gray-800 hover:text-agency-blue transition-colors text-left">
                       {faq.question}
                     </span>
                   </AccordionTrigger>
-                  <AccordionContent className="text-white/80 pb-5">
+                  <AccordionContent className="text-gray-600 pb-5">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>

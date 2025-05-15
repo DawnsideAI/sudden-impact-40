@@ -47,7 +47,7 @@ const Index = () => {
           <WhiteSection className="bg-white border-b border-gray-200">
             <DemoForm />
           </WhiteSection>
-          <WhiteSection className="bg-agency-blue text-white py-16">
+          <WhiteSection className="bg-white border-b border-gray-200">
             <Faq />
           </WhiteSection>
           <WhiteSection className="bg-white">
