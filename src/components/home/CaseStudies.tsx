@@ -126,8 +126,6 @@ const CaseStudies = () => {
             </div>
 
             <p className="text-gray-700">{currentCase.content}</p>
-
-            {/* Removed the "View full case study" button here */}
           </motion.div>
 
           {/* Right column - Dashboard mockup */}

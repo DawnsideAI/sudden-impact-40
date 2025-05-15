@@ -1,4 +1,5 @@
 
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
 
@@ -74,9 +75,12 @@ const IndustryDetails = ({ industry, lightMode }: IndustryDetailsProps) => {
         </div>
 
         <div className="mt-10 text-center">
-          <button className="px-6 py-3 pink-aqua-bg text-white rounded-lg hover:opacity-90 transition-colors shadow-md font-medium">
+          <Link 
+            to={`/industries/${industry.id}`} 
+            className="px-6 py-3 pink-aqua-bg text-white rounded-lg hover:opacity-90 transition-colors shadow-md font-medium"
+          >
             Learn More About {industry.title} Solutions
-          </button>
+          </Link>
         </div>
       </div>
     </div>

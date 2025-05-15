@@ -29,12 +29,8 @@ const Layout = ({ children, showBgEffects = true, lightMode = false }: LayoutPro
       {/* Content */}
       <div className="relative z-10 flex flex-col min-h-screen">
         {/* Semi-transparent header bar for better logo visibility */}
-        <div className={`sticky top-0 z-50 w-full ${
-          lightMode 
-            ? 'bg-white/80 backdrop-blur-lg border-b border-gray-200 shadow-sm' 
-            : 'backdrop-blur-lg bg-white/10 border-b border-white/10 shadow-md'
-        }`}>
-          <Navbar isSolid={true} lightMode={lightMode} />
+        <div className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-lg border-b border-gray-200 shadow-sm">
+          <Navbar />
         </div>
         
         <main className="flex-grow">
