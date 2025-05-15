@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
@@ -27,13 +26,14 @@ const Demo = () => {
     // Load booking script for the scheduler
     if (activeTab === "schedule" && !isBookingScriptLoaded) {
       const script = document.createElement('script');
-      script.src = "https://link.suddenimpactagency.io/js/booking_embed.js";
+      script.src = "https://link.suddenimpactagency.io/js/embed.js";
+      script.type = "text/javascript";
       script.async = true;
       script.onload = () => setIsBookingScriptLoaded(true);
       document.body.appendChild(script);
       
       return () => {
-        const existingScript = document.querySelector(`script[src="https://link.suddenimpactagency.io/js/booking_embed.js"]`);
+        const existingScript = document.querySelector(`script[src="https://link.suddenimpactagency.io/js/embed.js"]`);
         if (existingScript && existingScript.parentNode) {
           existingScript.parentNode.removeChild(existingScript);
         }
@@ -143,25 +143,14 @@ const Demo = () => {
                     </p>
                   </div>
 
-                  {/* Booking Widget - Updated with larger height to fill space better */}
-                  <div className="w-full" style={{ height: isMobile ? "700px" : "750px" }}>
-                    <iframe
-                      src="https://link.suddenimpactagency.io/widget/booking/MYRdt5Un7mP29erZS5rx"
-                      style={{ width: "100%", height: "100%", border: "none", borderRadius: "8px" }}
-                      id="booking-MYRdt5Un7mP29erZS5rx" 
-                      data-layout="{'id':'INLINE'}"
-                      data-trigger-type="alwaysShow"
-                      data-trigger-value=""
-                      data-activation-type="alwaysActivated"
-                      data-activation-value=""
-                      data-deactivation-type="neverDeactivate"
-                      data-deactivation-value=""
-                      data-form-name="Demo Scheduler"
-                      data-height={isMobile ? "700" : "750"}
-                      data-layout-iframe-id="booking-MYRdt5Un7mP29erZS5rx"
-                      data-form-id="MYRdt5Un7mP29erZS5rx"
-                      title="Demo Scheduler"
-                    />
+                  {/* Updated Booking Widget using the new embed code */}
+                  <div className="w-full" style={{ height: isMobile ? "700px" : "800px" }}>
+                    <iframe 
+                      src="https://link.suddenimpactagency.io/widget/booking/MYRdt5Un7mP29erZS5rx" 
+                      style={{ width: "100%", height: "100%", border: "none", overflow: "hidden" }} 
+                      scrolling="no" 
+                      id="msgsndr-calendar"
+                    ></iframe>
                   </div>
                 </StyleProvider>
               </motion.div>
