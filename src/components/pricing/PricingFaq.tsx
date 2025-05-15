@@ -8,6 +8,8 @@ import {
   AccordionTrigger
 } from "@/components/ui/accordion";
 import { cn } from "@/lib/utils";
+import SectionTitle from "@/components/design/SectionTitle";
+import StyleProvider from "@/components/design/StyleProvider";
 
 const faqItems = [
   {
@@ -41,34 +43,19 @@ const PricingFaq = () => {
       
       <div className="container-custom relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-3xl font-bold mb-4"
-          >
-            Frequently Asked <span className="gradient-text">Questions</span>
-          </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-xl text-gray-300"
-          >
-            Everything you need to know about our pricing and plans
-          </motion.p>
+          <SectionTitle
+            title="Frequently Asked Questions"
+            subtitle="Everything you need to know about our pricing and plans"
+            centered={true}
+            light={true}
+          />
         </div>
         
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+        <StyleProvider 
+          delay={0.2}
           className="max-w-3xl mx-auto"
         >
-          <div className="glass-card rounded-xl overflow-hidden">
+          <div className="bg-blue-600/80 backdrop-blur-lg rounded-xl overflow-hidden border border-white/10">
             <Accordion
               type="single"
               collapsible
@@ -80,18 +67,15 @@ const PricingFaq = () => {
                 <AccordionItem 
                   key={`item-${index}`}
                   value={`item-${index}`}
-                  className={cn(
-                    "border-b border-white/10 last:border-0",
-                    "transition-all duration-200"
-                  )}
+                  className="border-b border-white/10 last:border-0 px-6"
                 >
-                  <AccordionTrigger className="py-5 px-6 hover:no-underline group">
-                    <span className="text-lg font-medium text-white group-hover:text-agency-vibrantPurple transition-colors">
+                  <AccordionTrigger className="hover:no-underline py-5 group">
+                    <span className="text-lg font-medium text-white group-hover:text-agency-vibrantPurple transition-colors text-left">
                       {item.question}
                     </span>
                   </AccordionTrigger>
-                  <AccordionContent className="px-6 pb-5">
-                    <div className="text-gray-300 leading-relaxed">
+                  <AccordionContent className="text-white/80 pb-5">
+                    <div className="leading-relaxed">
                       {item.answer}
                     </div>
                   </AccordionContent>
@@ -99,7 +83,7 @@ const PricingFaq = () => {
               ))}
             </Accordion>
           </div>
-        </motion.div>
+        </StyleProvider>
       </div>
     </section>
   );

@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import Layout from "@/components/layout/Layout";
 import WhiteSection from "@/components/layout/WhiteSection";
@@ -122,7 +121,6 @@ const industries = [
 
 const Solutions = () => {
   const [selectedIndustry, setSelectedIndustry] = useState(industries[0]);
-  const [activeTab, setActiveTab] = useState("industries");
 
   return (
     <Layout lightMode={true}>
@@ -136,59 +134,36 @@ const Solutions = () => {
             />
           </StyleProvider>
 
-          <Tabs
-            defaultValue="industries"
-            value={activeTab}
-            onValueChange={setActiveTab}
-            className="w-full"
-          >
-            <TabsList className="grid w-full max-w-2xl mx-auto grid-cols-2">
-              <TabsTrigger value="industries">By Industry</TabsTrigger>
-              <TabsTrigger value="features">By Feature</TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="industries" className="mt-8">
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div>
-                  <div className="space-y-4">
-                    {industries.slice(0, 6).map((industry, index) => (
-                      <IndustryCard
-                        key={industry.id}
-                        id={industry.id}
-                        icon={industry.icon}
-                        title={industry.title}
-                        description={industry.description}
-                        isActive={selectedIndustry.id === industry.id}
-                        onClick={() => setSelectedIndustry(industry)}
-                        index={index}
-                      />
-                    ))}
-                  </div>
-                </div>
-                
-                <div className="lg:col-span-2">
-                  <motion.div
-                    key={selectedIndustry.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="h-full"
-                  >
-                    <IndustryDetails industry={selectedIndustry} />
-                  </motion.div>
-                </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div>
+              <div className="space-y-4">
+                {industries.slice(0, 6).map((industry, index) => (
+                  <IndustryCard
+                    key={industry.id}
+                    id={industry.id}
+                    icon={industry.icon}
+                    title={industry.title}
+                    description={industry.description}
+                    isActive={selectedIndustry.id === industry.id}
+                    onClick={() => setSelectedIndustry(industry)}
+                    index={index}
+                  />
+                ))}
               </div>
-            </TabsContent>
-
-            <TabsContent value="features" className="mt-8">
-              <StyleProvider className="text-center">
-                <h2 className="text-2xl font-bold mb-4 text-agency-dark">Coming Soon</h2>
-                <p className="text-agency-gray">
-                  Our features section is currently being developed.
-                </p>
-              </StyleProvider>
-            </TabsContent>
-          </Tabs>
+            </div>
+            
+            <div className="lg:col-span-2">
+              <motion.div
+                key={selectedIndustry.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="h-full"
+              >
+                <IndustryDetails industry={selectedIndustry} />
+              </motion.div>
+            </div>
+          </div>
         </WhiteSection>
       </div>
     </Layout>

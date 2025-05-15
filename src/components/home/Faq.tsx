@@ -34,7 +34,7 @@ const faqs = [
 
 const Faq = () => {
   return (
-    <section className="py-24 bg-background/50">
+    <section className="py-24">
       <StyleProvider className="container-custom">
         <SectionTitle
           title="Frequently Asked Questions"
@@ -48,7 +48,7 @@ const Faq = () => {
           delay={0.2}
           className="max-w-3xl mx-auto"
         >
-          <div className="glass-morphism rounded-xl overflow-hidden">
+          <div className="bg-blue-600/80 backdrop-blur-lg rounded-xl overflow-hidden border border-white/10">
             <Accordion type="single" collapsible className="w-full">
               {faqs.map((faq, index) => (
                 <AccordionItem 
@@ -61,7 +61,7 @@ const Faq = () => {
                       {faq.question}
                     </span>
                   </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground pb-5">
+                  <AccordionContent className="text-white/80 pb-5">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>
