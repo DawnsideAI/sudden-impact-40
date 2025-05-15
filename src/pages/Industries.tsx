@@ -13,7 +13,6 @@ const industries = [
   { id: "realestate", label: "Real Estate", value: "realestate" },
   { id: "healthcare", label: "Healthcare & Wellness", value: "healthcare" },
   { id: "contractors", label: "Service Contractors", value: "contractors" },
-  { id: "other", label: "Other Industry", value: "other" },
 ];
 
 const businessTypes = {
@@ -44,9 +43,6 @@ const businessTypes = {
     { id: "landscaping", label: "Landscaping" },
     { id: "cleaning", label: "Cleaning Service" },
     { id: "general", label: "General Contractor" },
-  ],
-  other: [
-    { id: "other", label: "Other Business Type" },
   ],
 };
 
@@ -118,7 +114,7 @@ const Industries = () => {
                 Select Your Industry
               </h3>
               
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {industries.map((industry) => (
                   <motion.button
                     key={industry.id}
