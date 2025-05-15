@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -52,14 +53,16 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        agency: {
+        brand: {
           blue: '#2563EB',
-          purple: '#7E69AB',
-          darkPurple: '#1A1F2C',
+          indigo: '#4F46E5',
+          purple: '#8B5CF6',
+          violet: '#7C3AED',
+          darkPurple: '#1E1B4B',
           lightPurple: '#D6BCFA',
           vibrantPurple: '#8B5CF6',
-          gray: '#8E9196',
-          dark: '#222222',
+          gray: '#64748B',
+          dark: '#0F172A',
           light: '#FFFFFF',
           success: '#10B981',
           warning: '#F59E0B',
@@ -96,6 +99,11 @@ export default {
         float: "float 6s ease-in-out infinite",
         glow: "glow 3s ease-in-out infinite",
       },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'hero-gradient': 'linear-gradient(to right bottom, rgba(79, 70, 229, 0.8), rgba(124, 58, 237, 0.8), rgba(139, 92, 246, 0.7))',
+        'card-gradient': 'linear-gradient(to right bottom, rgba(79, 70, 229, 0.05), rgba(124, 58, 237, 0.05))',
+      }
     },
   },
   plugins: [require("tailwindcss-animate")],

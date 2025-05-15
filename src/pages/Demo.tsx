@@ -25,7 +25,7 @@ const Demo = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-24 bg-background/50 border-b border-white/10">
+      <section className="pt-32 pb-16 md:pt-40 md:pb-24 bg-gradient-to-br from-brand-darkPurple via-brand-purple to-black border-b border-white/10">
         <StyleProvider className="container-custom">
           <div className="text-center max-w-3xl mx-auto">
             <SectionTitle
@@ -50,8 +50,8 @@ const Demo = () => {
               onClick={() => setActiveTab("live")}
               className={`py-4 px-6 text-lg font-medium border-b-2 transition-colors ${
                 activeTab === "live"
-                  ? "border-agency-vibrantPurple text-agency-vibrantPurple"
-                  : "border-transparent text-agency-gray hover:text-agency-dark"
+                  ? "border-brand-violet text-brand-violet"
+                  : "border-transparent text-brand-gray hover:text-brand-dark"
               }`}
             >
               <Mic className="inline-block mr-2 h-5 w-5" />
@@ -61,8 +61,8 @@ const Demo = () => {
               onClick={() => setActiveTab("schedule")}
               className={`py-4 px-6 text-lg font-medium border-b-2 transition-colors ${
                 activeTab === "schedule"
-                  ? "border-agency-vibrantPurple text-agency-vibrantPurple"
-                  : "border-transparent text-agency-gray hover:text-agency-dark"
+                  ? "border-brand-violet text-brand-violet"
+                  : "border-transparent text-brand-gray hover:text-brand-dark"
               }`}
             >
               <Calendar className="inline-block mr-2 h-5 w-5" />
@@ -72,13 +72,13 @@ const Demo = () => {
 
           {/* Live Demo Form */}
           {activeTab === "live" && (
-            <StyleProvider delay={0.2} className="bg-white rounded-xl p-8 shadow-md border border-gray-200">
+            <StyleProvider delay={0.2} className="bg-white rounded-xl p-8 shadow-md border border-brand-purple/10">
               <div className="text-center mb-8">
-                <div className="w-16 h-16 mx-auto rounded-full bg-agency-vibrantPurple/20 flex items-center justify-center text-agency-vibrantPurple mb-4">
+                <div className="w-16 h-16 mx-auto rounded-full bg-brand-purple/20 flex items-center justify-center text-brand-purple mb-4">
                   <Mic className="h-6 w-6" />
                 </div>
-                <h2 className="text-2xl font-bold mb-2 text-agency-dark">Live AI Voice Agent Demo</h2>
-                <p className="text-agency-gray">
+                <h2 className="text-2xl font-bold mb-2 text-brand-dark">Live AI Voice Agent Demo</h2>
+                <p className="text-brand-gray">
                   Complete the form below to access our AI voice agent demo.
                 </p>
               </div>
@@ -89,30 +89,30 @@ const Demo = () => {
 
           {/* Schedule Demo */}
           {activeTab === "schedule" && (
-            <StyleProvider delay={0.2} className="bg-white rounded-xl p-8 shadow-md border border-gray-200">
+            <StyleProvider delay={0.2} className="bg-white rounded-xl p-8 shadow-md border border-brand-purple/10">
               <div className="text-center mb-8">
-                <div className="w-16 h-16 mx-auto rounded-full bg-agency-vibrantPurple/20 flex items-center justify-center text-agency-vibrantPurple mb-4">
+                <div className="w-16 h-16 mx-auto rounded-full bg-brand-purple/20 flex items-center justify-center text-brand-purple mb-4">
                   <Calendar className="h-6 w-6" />
                 </div>
-                <h2 className="text-2xl font-bold mb-2 text-agency-dark">Schedule Your Demo</h2>
-                <p className="text-agency-gray">
+                <h2 className="text-2xl font-bold mb-2 text-brand-dark">Schedule Your Demo</h2>
+                <p className="text-brand-gray">
                   Pick a convenient time for your 10-minute AI voice agent demo.
                 </p>
               </div>
 
               <div className="space-y-8">
                 <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
-                  <h3 className="font-medium mb-4 text-agency-dark">How It Works:</h3>
+                  <h3 className="font-medium mb-4 text-brand-dark">How It Works:</h3>
                   <ul className="space-y-4">
                     {["Book a Time Slot", "Receive Confirmation", "Get Reminders", "Experience the Demo"].map((step, index) => (
                       <li key={index} className="flex items-start">
                         <div className="flex-shrink-0 mt-1">
-                          <div className="bg-agency-vibrantPurple/20 text-agency-vibrantPurple w-5 h-5 rounded-full flex items-center justify-center text-xs font-medium">
+                          <div className="bg-brand-purple/20 text-brand-purple w-5 h-5 rounded-full flex items-center justify-center text-xs font-medium">
                             {index + 1}
                           </div>
                         </div>
-                        <p className="ml-3 text-agency-gray">
-                          <strong className="text-agency-dark">{step}</strong>
+                        <p className="ml-3 text-brand-gray">
+                          <strong className="text-brand-dark">{step}</strong>
                         </p>
                       </li>
                     ))}
@@ -120,11 +120,11 @@ const Demo = () => {
                 </div>
 
                 <div className="bg-gray-50 p-8 rounded-lg border border-gray-200 text-center">
-                  <h3 className="text-xl font-medium mb-4 text-agency-dark">Demo Scheduler</h3>
-                  <p className="text-agency-gray mb-6">
+                  <h3 className="text-xl font-medium mb-4 text-brand-dark">Demo Scheduler</h3>
+                  <p className="text-brand-gray mb-6">
                     Select an available time slot for your interactive demo session.
                   </p>
-                  <button className="px-6 py-3 text-white bg-agency-vibrantPurple hover:bg-agency-vibrantPurple/90 rounded-lg transition-colors">
+                  <button className="px-6 py-3 text-white bg-gradient-to-r from-brand-indigo to-brand-violet hover:from-brand-indigo/90 hover:to-brand-violet/90 rounded-lg transition-colors">
                     View Available Time Slots
                   </button>
                 </div>
@@ -135,7 +135,7 @@ const Demo = () => {
       </WhiteSection>
 
       {/* Features Section */}
-      <section className="py-16 bg-background/50 border-y border-white/10">
+      <section className="py-16 bg-gradient-to-br from-brand-darkPurple via-brand-purple to-black border-y border-white/10">
         <StyleProvider className="container-custom">
           <SectionTitle
             title="What to Expect During Your Demo"
@@ -168,7 +168,7 @@ const Demo = () => {
                 delay={index * 0.1}
                 className="glass-morphism rounded-xl p-6 hover:bg-white/10 transition-colors group"
               >
-                <div className="w-12 h-12 rounded-full bg-agency-vibrantPurple/20 group-hover:bg-agency-vibrantPurple/30 flex items-center justify-center text-white mb-4 transition-colors">
+                <div className="w-12 h-12 rounded-full bg-brand-purple/20 group-hover:bg-brand-purple/30 flex items-center justify-center text-white mb-4 transition-colors">
                   {feature.icon}
                 </div>
                 <h3 className="text-xl font-bold mb-2 text-white">{feature.title}</h3>

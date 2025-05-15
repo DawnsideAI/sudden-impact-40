@@ -32,7 +32,7 @@ const ServiceFeatures = () => {
     <section className="py-24 relative overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-agency-vibrantPurple/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-purple/5 rounded-full blur-3xl" />
       </div>
       
       <StyleProvider className="container-custom relative z-10">
@@ -51,7 +51,7 @@ const ServiceFeatures = () => {
               title={feature.title}
               description={feature.description}
               index={index}
-              className="bg-gradient-to-br from-white to-gray-50 shadow-xl border-0 hover:-translate-y-2 transition-all duration-300"
+              className="bg-gradient-to-br from-white to-gray-50 shadow-xl border border-brand-purple/10 hover:border-brand-purple/20 hover:-translate-y-2 transition-all duration-300"
             />
           ))}
         </div>

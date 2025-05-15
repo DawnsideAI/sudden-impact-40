@@ -37,8 +37,11 @@ const Navbar: React.FC<NavbarProps> = ({ isSolid, lightMode = false }) => {
     ? scrolled ? 'bg-white shadow-md' : 'bg-white/80 backdrop-blur-xl' 
     : 'bg-gray-800/60 backdrop-blur-xl';
     
-  const textColor = lightMode ? 'text-agency-dark' : 'text-white';
+  const textColor = lightMode ? 'text-brand-dark' : 'text-white';
   const borderColor = lightMode ? 'border-gray-200' : 'border-white/10';
+  const navItemClass = lightMode 
+    ? "text-brand-dark hover:text-brand-purple transition-colors duration-200" 
+    : "text-gray-300 hover:text-white transition-colors duration-200";
 
   return (
     <motion.div
@@ -67,14 +70,14 @@ const Navbar: React.FC<NavbarProps> = ({ isSolid, lightMode = false }) => {
             </motion.div>
           </Link>
           <nav className="hidden md:flex items-center gap-6">
-            <Link to="/" className={lightMode ? "text-agency-dark hover:text-agency-blue transition-colors duration-200" : "nav-link"}>
+            <Link to="/" className={navItemClass}>
               Home
             </Link>
-            <Link to="/solutions" className={lightMode ? "text-agency-dark hover:text-agency-blue transition-colors duration-200" : "nav-link"}>
+            <Link to="/solutions" className={navItemClass}>
               Solutions
             </Link>
             <IndustriesDropdown />
-            <Link to="/pricing" className={lightMode ? "text-agency-dark hover:text-agency-blue transition-colors duration-200" : "nav-link"}>
+            <Link to="/pricing" className={navItemClass}>
               Pricing
             </Link>
           </nav>
@@ -82,7 +85,7 @@ const Navbar: React.FC<NavbarProps> = ({ isSolid, lightMode = false }) => {
             <Link 
               to="/demo" 
               className={lightMode 
-                ? "bg-agency-blue text-white font-medium py-2 px-3 md:py-2 md:px-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:bg-agency-blue/90" 
+                ? "bg-gradient-to-r from-brand-indigo to-brand-violet text-white font-medium py-2 px-3 md:py-2 md:px-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5" 
                 : "btn-primary"}
             >
               Request a Demo

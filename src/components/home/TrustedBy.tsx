@@ -13,7 +13,7 @@ const logos = [
 
 const TrustedBy = () => {
   return (
-    <div className="py-20 bg-gradient-to-br from-white to-gray-50 rounded-3xl mx-4 md:mx-8">
+    <div className="py-20 bg-gradient-to-br from-white to-gray-50 rounded-3xl mx-4 md:mx-8 border border-brand-purple/5">
       <StyleProvider className="text-center mb-12">
         <SectionTitle
           title="Trusted by Leading Businesses"

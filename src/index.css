@@ -1,33 +1,52 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
+    --background: 226 71% 98%;
+    --foreground: 226 100% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 226 100% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 226 100% 10%;
+    --primary: 252 56% 57%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 214 32% 91%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 214 32% 91%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 253 94% 67%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 252 56% 57%;
+    --radius: 0.75rem;
+  }
+
+  .dark {
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
     --card: 240 10% 3.9%;
     --card-foreground: 0 0% 98%;
     --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
+    --primary: 252 56% 57%;
+    --primary-foreground: 0 0% 98%;
     --secondary: 240 3.7% 15.9%;
     --secondary-foreground: 0 0% 98%;
     --muted: 240 3.7% 15.9%;
     --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
+    --accent: 253 94% 67%;
     --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
-    --radius: 0.75rem;
-    
-    --light-bg: 0 0% 100%;
-    --light-text: 240 10% 3.9%;
-    --light-border: 240 5.9% 90%;
+    --ring: 252 56% 57%;
   }
 }
 
@@ -37,7 +56,7 @@
   }
   
   * {
-    @apply border-border selection:bg-white/10 selection:text-white;
+    @apply border-border selection:bg-brand-purple/20 selection:text-brand-purple;
   }
   
   body {
@@ -48,21 +67,21 @@
 
 @layer components {
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-agency-blue to-agency-vibrantPurple;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-indigo to-brand-violet;
   }
   
   .gradient-bg {
-    @apply bg-gradient-to-r from-agency-blue to-agency-vibrantPurple;
+    @apply bg-gradient-to-r from-brand-indigo to-brand-violet;
   }
   
   .hero-gradient {
-    @apply bg-gradient-to-br from-agency-darkPurple via-agency-purple to-black;
+    @apply bg-gradient-to-br from-brand-darkPurple via-brand-purple to-brand-indigo/90;
   }
   
   .feature-card {
     @apply p-4 md:p-6 rounded-xl border border-white/10 backdrop-blur-lg bg-white/5 shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 hover:bg-white/10;
   }
-  
+
   .nav-link {
     @apply text-gray-300 hover:text-white transition-colors duration-200;
   }
@@ -111,6 +130,19 @@
   .text-responsive-sm {
     @apply text-base md:text-lg lg:text-xl;
   }
+
+  /* Card styles */
+  .modern-card {
+    @apply relative bg-white rounded-2xl shadow-xl overflow-hidden border border-brand-purple/10 hover:border-brand-purple/20 transition-all duration-300;
+  }
+
+  .modern-card-gradient {
+    @apply absolute inset-0 bg-gradient-to-br from-brand-purple/5 to-brand-indigo/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300;
+  }
+
+  .modern-card-header {
+    @apply h-2 bg-gradient-to-r from-brand-indigo to-brand-violet;
+  }
 }
 
 @keyframes float {
@@ -120,9 +152,9 @@
 }
 
 @keyframes glow {
-  0% { box-shadow: 0 0 5px rgba(156, 39, 176, 0.2); }
-  50% { box-shadow: 0 0 20px rgba(156, 39, 176, 0.6); }
-  100% { box-shadow: 0 0 5px rgba(156, 39, 176, 0.2); }
+  0% { box-shadow: 0 0 5px rgba(139, 92, 246, 0.2); }
+  50% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.6); }
+  100% { box-shadow: 0 0 5px rgba(139, 92, 246, 0.2); }
 }
 
 @keyframes pulse {
@@ -218,6 +250,30 @@
   
   .light-section-divider::before {
     content: '';
-    @apply absolute top-0 left-0 w-full h-12 bg-gradient-to-b from-black/20 to-transparent;
+    @apply absolute top-0 left-0 w-full h-12 bg-gradient-to-b from-black/5 to-transparent;
+  }
+
+  .modern-glow {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+  }
+  
+  .glass-effect {
+    @apply backdrop-blur-lg bg-white/10 border border-white/20;
+  }
+
+  .gradient-border {
+    border-image: linear-gradient(to right, #4F46E5, #7C3AED) 1;
+  }
+
+  .gradient-hover {
+    @apply relative overflow-hidden;
+  }
+
+  .gradient-hover::after {
+    @apply content-[''] absolute inset-0 bg-gradient-to-r from-brand-indigo/10 to-brand-violet/10 opacity-0 transition-opacity duration-300;
+  }
+
+  .gradient-hover:hover::after {
+    @apply opacity-100;
   }
 }

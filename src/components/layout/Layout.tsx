@@ -20,7 +20,7 @@ const Layout = ({ children, showBgEffects = true, lightMode = false }: LayoutPro
         <>
           <div className="fixed inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
           <div 
-            className="fixed inset-0 bg-background [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#8B5CF6_100%)]" 
+            className="fixed inset-0 bg-background [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#7C3AED_100%)]" 
             style={{ opacity: 0.15 }}
           />
         </>
