@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Facebook, Linkedin, Twitter } from 'lucide-react';
+import { Facebook, Linkedin, Twitter, TikTok } from 'lucide-react';
 
 interface FooterProps {
   lightMode?: boolean;
@@ -98,14 +98,14 @@ const Footer: React.FC<FooterProps> = ({ lightMode = false }) => {
               © {new Date().getFullYear()} Sudden Impact Agency. All rights reserved.
             </p>
             <div className="flex space-x-4">
-              <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" className={textColor} aria-label="Twitter">
-                <Twitter className="h-4 w-4" />
-              </a>
-              <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer" className={textColor} aria-label="Facebook">
+              <a href="https://www.facebook.com/suddenaiimpact/" target="_blank" rel="noopener noreferrer" className={textColor} aria-label="Facebook">
                 <Facebook className="h-4 w-4" />
               </a>
-              <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" className={textColor} aria-label="LinkedIn">
+              <a href="https://www.linkedin.com/company/suddenimpact/" target="_blank" rel="noopener noreferrer" className={textColor} aria-label="LinkedIn">
                 <Linkedin className="h-4 w-4" />
+              </a>
+              <a href="https://www.tiktok.com/@suddenimpactai" target="_blank" rel="noopener noreferrer" className={textColor} aria-label="TikTok">
+                <TikTok className="h-4 w-4" />
               </a>
             </div>
           </div>
