@@ -1,8 +1,8 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Check } from 'lucide-react';
+import { Check, ArrowRight } from 'lucide-react';
 import { useForm } from "react-hook-form";
+import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -87,6 +87,15 @@ const NicheContactForm = ({ industry }: NicheContactFormProps) => {
         
         <div className="mt-12 max-w-3xl mx-auto">
           <StyleProvider className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
+            <div className="text-center mb-8">
+              <Link 
+                to={`/niches/${industry}/pricing`} 
+                className="inline-flex items-center text-brand-vibrantPurple hover:text-brand-pink transition-colors"
+              >
+                View our pricing plans <ArrowRight size={16} className="ml-1" />
+              </Link>
+            </div>
+            
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -144,6 +153,15 @@ const NicheContactForm = ({ industry }: NicheContactFormProps) => {
                 </FormItem>
                 
                 <div className="pt-4">
+                  <div className="text-center mb-4">
+                    <Link 
+                      to={`/niches/${industry}/booking`} 
+                      className="text-brand-vibrantPurple hover:text-brand-pink transition-colors"
+                    >
+                      Or schedule a demo directly
+                    </Link>
+                  </div>
+                  
                   <Button
                     type="submit"
                     className={`w-full py-3 px-4 bg-gradient-to-r ${gradient} text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300`}

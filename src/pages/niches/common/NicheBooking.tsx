@@ -46,7 +46,8 @@ const NicheBooking = () => {
             />
             
             <StyleProvider className="bg-white rounded-xl p-6 md:p-8 shadow-lg border border-gray-200 mt-12">
-              <DemoRequestForm />
+              {/* Ensure we're using the standard DemoRequestForm across all niche pages */}
+              <DemoRequestForm onFormSubmit={() => console.log('Demo request submitted from niche page')} />
             </StyleProvider>
           </div>
         </div>
