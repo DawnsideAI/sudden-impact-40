@@ -7,7 +7,6 @@ import {
   AccordionItem,
   AccordionTrigger
 } from "@/components/ui/accordion";
-import { cn } from "@/lib/utils";
 import SectionTitle from "@/components/design/SectionTitle";
 import StyleProvider from "@/components/design/StyleProvider";
 
@@ -38,24 +37,19 @@ const PricingFaq = () => {
   const [openItem, setOpenItem] = useState<string | null>("item-0");
 
   return (
-    <section className="py-16 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background/80" />
-      
-      <div className="container-custom relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <SectionTitle
-            title="Frequently Asked Questions"
-            subtitle="Everything you need to know about our pricing and plans"
-            centered={true}
-            light={true}
-          />
-        </div>
+    <section className="py-16 md:py-24 bg-gradient-to-br from-gray-50 to-white">
+      <div className="container-custom">
+        <SectionTitle
+          title="Frequently Asked Questions"
+          subtitle="Everything you need to know about our pricing and plans"
+          centered={true}
+        />
         
         <StyleProvider 
           delay={0.2}
-          className="max-w-3xl mx-auto"
+          className="max-w-3xl mx-auto mt-16"
         >
-          <div className="bg-blue-600/80 backdrop-blur-lg rounded-xl overflow-hidden border border-white/10">
+          <div className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-lg">
             <Accordion
               type="single"
               collapsible
@@ -67,14 +61,14 @@ const PricingFaq = () => {
                 <AccordionItem 
                   key={`item-${index}`}
                   value={`item-${index}`}
-                  className="border-b border-white/10 last:border-0 px-6"
+                  className="border-b border-gray-200 last:border-0 px-6"
                 >
                   <AccordionTrigger className="hover:no-underline py-5 group">
-                    <span className="text-lg font-medium text-white group-hover:text-agency-vibrantPurple transition-colors text-left">
+                    <span className="text-lg font-medium text-gray-800 group-hover:text-brand-pink transition-colors text-left">
                       {item.question}
                     </span>
                   </AccordionTrigger>
-                  <AccordionContent className="text-white/80 pb-5">
+                  <AccordionContent className="text-gray-600 pb-5">
                     <div className="leading-relaxed">
                       {item.answer}
                     </div>

@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import SectionTitle from "../design/SectionTitle";
-import { ArrowRight, BarChart3, Calendar, MessageCircle, Users } from "lucide-react";
+import { BarChart3, Calendar, MessageCircle, Users } from "lucide-react";
 
 // Sample case study data
 const caseStudies = [
@@ -127,14 +127,7 @@ const CaseStudies = () => {
 
             <p className="text-gray-700">{currentCase.content}</p>
 
-            <div>
-              <button
-                onClick={() => window.location.href = `/industries/${activeCase}`}
-                className="inline-flex items-center text-brand-pink hover:underline"
-              >
-                View full case study <ArrowRight className="ml-2 h-4 w-4" />
-              </button>
-            </div>
+            {/* Removed the "View full case study" button here */}
           </motion.div>
 
           {/* Right column - Dashboard mockup */}

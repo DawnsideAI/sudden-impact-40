@@ -5,10 +5,13 @@ import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import AIPapersSection from "@/components/pricing/AIPapersSection";
 import LiveDemoDialog from "@/components/pricing/LiveDemoDialog";
+import PricingFaq from "@/components/pricing/PricingFaq";
 import { Calendar, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import DemoCalendarForm from "@/components/demo/DemoCalendarForm";
+import SectionTitle from "@/components/design/SectionTitle";
+import StyleProvider from "@/components/design/StyleProvider";
 
 const pricingPlans = [
   {
@@ -122,134 +125,136 @@ const Pricing = () => {
   };
 
   return (
-    <Layout>
-      {/* Hero Section with improved gradient */}
-      <section className="pt-24 pb-16 md:pt-32 md:pb-24 relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-pink/20 via-brand-purple/20 to-brand-aqua/20 backdrop-blur-3xl" />
-          <div className="absolute top-0 w-full h-64 bg-gradient-to-b from-black/20 to-transparent" />
+    <Layout lightMode={true}>
+      {/* Hero Section */}
+      <section className="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-br from-gray-50 via-white to-gray-100 relative overflow-hidden">
+        {/* Background elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-brand-pink/5 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-brand-aqua/5 rounded-full blur-3xl"></div>
         </div>
         
         <div className="container-custom relative z-10">
-          <div className="text-center max-w-3xl mx-auto">
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="text-4xl md:text-5xl font-bold mb-6"
-            >
-              Everything you need to launch, scale, and engage
-              <span className="bg-gradient-to-r from-brand-pink to-brand-aqua bg-clip-text text-transparent"> — powered by our AI</span>
-            </motion.h1>
-            <div className="bg-white/10 backdrop-blur-md p-6 rounded-xl border border-white/20 mt-8">
-              <div className="flex flex-col gap-3 items-center text-white">
-                <p className="flex items-center"><Check className="mr-2 h-4 w-4 text-brand-pink" /> 7-Day Free Trial (credit card required)</p>
-                <p className="flex items-center"><Check className="mr-2 h-4 w-4 text-brand-aqua" /> $197 one-time setup fee (auto-charged after trial ends)</p>
-                <p className="flex items-center"><Check className="mr-2 h-4 w-4 text-brand-pink" /> Credit card required for overage protection & compliance</p>
-                <p className="flex items-center"><Check className="mr-2 h-4 w-4 text-brand-aqua" /> Save 20% when billed annually</p>
+          <StyleProvider delay={0.1}>
+            <div className="text-center max-w-3xl mx-auto">
+              <h1 className="text-4xl md:text-5xl font-bold mb-6">
+                Everything you need to launch, scale, and engage
+                <span className="bg-gradient-to-r from-brand-pink to-brand-aqua bg-clip-text text-transparent"> — powered by our AI</span>
+              </h1>
+              <div className="max-w-2xl mx-auto mt-8 p-6 rounded-xl bg-white shadow-lg border border-gray-100">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-gray-700">
+                  <p className="flex items-center"><Check className="mr-2 h-4 w-4 text-brand-pink" /> 7-Day Free Trial (credit card required)</p>
+                  <p className="flex items-center"><Check className="mr-2 h-4 w-4 text-brand-aqua" /> $197 one-time setup fee</p>
+                  <p className="flex items-center"><Check className="mr-2 h-4 w-4 text-brand-pink" /> Cancel anytime during trial period</p>
+                  <p className="flex items-center"><Check className="mr-2 h-4 w-4 text-brand-aqua" /> Save 20% when billed annually</p>
+                </div>
               </div>
             </div>
-          </div>
+          </StyleProvider>
         </div>
       </section>
 
-      {/* Pricing Cards with improved contrast */}
-      <section className="py-16 md:py-24 relative bg-white">
-        {/* Background Elements */}
+      {/* Pricing Cards Section */}
+      <section className="py-16 md:py-24 bg-white relative">
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-brand-pink/5 to-transparent"></div>
-          <div className="absolute top-0 left-0 w-64 h-64 bg-brand-pink/5 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 right-0 w-80 h-80 bg-brand-aqua/5 rounded-full blur-3xl"></div>
+          <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-gray-100 to-transparent"></div>
+          <div className="absolute top-1/4 left-0 w-64 h-64 bg-brand-pink/5 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-1/4 right-0 w-80 h-80 bg-brand-aqua/5 rounded-full blur-3xl"></div>
         </div>
         
         <div className="container-custom relative z-10">
+          <SectionTitle
+            title="Choose Your Plan"
+            subtitle="Select the perfect plan for your business needs"
+            centered={true}
+            className="mb-16"
+          />
+          
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {pricingPlans.map((plan, index) => (
-              <motion.div
+              <StyleProvider 
                 key={plan.name}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 + (index * 0.1) }}
-                className={`bg-white rounded-2xl overflow-hidden relative shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border ${
-                  plan.mostPopular 
-                    ? 'border-transparent' 
-                    : plan.color === 'pink' 
-                      ? 'border-brand-pink/20' 
-                      : 'border-brand-aqua/20'
-                }`}
+                delay={0.1 + (index * 0.1)}
               >
-                {/* Gradient top bar */}
-                <div className={`h-2 w-full ${
-                  plan.color === 'gradient' 
-                    ? 'bg-gradient-to-r from-brand-pink to-brand-aqua' 
-                    : plan.color === 'pink' 
-                      ? 'bg-brand-pink' 
-                      : 'bg-brand-aqua'
-                }`}></div>
-                
-                {plan.mostPopular && (
-                  <div className="absolute top-4 right-4 bg-gradient-to-r from-brand-pink to-brand-aqua text-white py-1 px-3 text-sm font-medium rounded-full shadow-md">
-                    Most Popular
-                  </div>
-                )}
-
-                <div className="p-8">
-                  <h3 className="text-2xl font-bold mb-2 text-gray-800">{plan.name}</h3>
-                  <p className="text-gray-600 mb-6">{plan.description}</p>
+                <div className={`bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 ${
+                  plan.mostPopular 
+                    ? 'ring-2 ring-brand-pink' 
+                    : 'border border-gray-100'
+                }`}
+                >
+                  {/* Top gradient bar */}
+                  <div className={`h-2 w-full ${
+                    plan.color === 'gradient' 
+                      ? 'bg-gradient-to-r from-brand-pink to-brand-aqua' 
+                      : plan.color === 'pink' 
+                        ? 'bg-brand-pink' 
+                        : 'bg-brand-aqua'
+                  }`}></div>
                   
-                  <div className="mb-8">
-                    <div className="flex flex-col gap-2">
-                      <div className="flex items-baseline">
-                        <span className={`text-4xl font-bold ${
-                          plan.color === 'gradient' 
-                            ? 'bg-gradient-to-r from-brand-pink to-brand-aqua bg-clip-text text-transparent' 
-                            : plan.color === 'pink' 
-                              ? 'text-brand-pink' 
-                              : 'text-brand-aqua'
-                        }`}>
-                          ${plan.price}
-                        </span>
-                        <span className="text-gray-500 ml-2">/month</span>
-                      </div>
-                      <div className="text-sm text-gray-500">
-                        ${plan.annualPrice}/month billed annually
+                  {plan.mostPopular && (
+                    <div className="absolute top-4 right-4 bg-gradient-to-r from-brand-pink to-brand-aqua text-white py-1 px-3 text-sm font-medium rounded-full shadow-md">
+                      Most Popular
+                    </div>
+                  )}
+
+                  <div className="p-8">
+                    <h3 className="text-2xl font-bold mb-2 text-gray-800">{plan.name}</h3>
+                    <p className="text-gray-600 mb-6 h-12">{plan.description}</p>
+                    
+                    <div className="mb-8">
+                      <div className="flex flex-col gap-2">
+                        <div className="flex items-baseline">
+                          <span className={`text-4xl font-bold ${
+                            plan.color === 'gradient' 
+                              ? 'bg-gradient-to-r from-brand-pink to-brand-aqua bg-clip-text text-transparent' 
+                              : plan.color === 'pink' 
+                                ? 'text-brand-pink' 
+                                : 'text-brand-aqua'
+                          }`}>
+                            ${plan.price}
+                          </span>
+                          <span className="text-gray-500 ml-2">/month</span>
+                        </div>
+                        <div className="text-sm text-gray-500">
+                          ${plan.annualPrice}/month billed annually
+                        </div>
                       </div>
                     </div>
+                    
+                    <button
+                      onClick={() => handlePurchaseClick(plan.name)}
+                      className={`block w-full py-3 px-4 text-center rounded-lg font-medium mb-8 ${
+                        plan.color === 'gradient'
+                          ? "bg-gradient-to-r from-brand-pink to-brand-aqua text-white shadow-lg hover:shadow-xl transition-all"
+                          : plan.color === 'pink'
+                            ? "bg-brand-pink text-white hover:opacity-90 transition-all"
+                            : "bg-brand-aqua text-white hover:opacity-90 transition-all"
+                      }`}
+                    >
+                      {plan.ctaText}
+                    </button>
+                    
+                    <div className="space-y-4 max-h-80 overflow-y-auto pr-2 custom-scrollbar">
+                      {plan.features.map((feature, i) => (
+                        <div key={i} className="flex">
+                          <Check className={`mr-3 flex-shrink-0 ${
+                            plan.color === 'gradient' 
+                              ? 'text-brand-purple' 
+                              : plan.color === 'pink' 
+                                ? 'text-brand-pink' 
+                                : 'text-brand-aqua'
+                          }`} size={18} />
+                          <span className="text-gray-600">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                  
-                  <button
-                    onClick={() => handlePurchaseClick(plan.name)}
-                    className={`block w-full py-3 px-4 text-center rounded-lg font-medium mb-8 ${
-                      plan.color === 'gradient'
-                        ? "bg-gradient-to-r from-brand-pink to-brand-aqua text-white shadow-lg hover:shadow-xl transition-all"
-                        : plan.color === 'pink'
-                          ? "bg-brand-pink text-white hover:opacity-90 transition-all"
-                          : "bg-brand-aqua text-white hover:opacity-90 transition-all"
-                    }`}
-                  >
-                    {plan.ctaText}
-                  </button>
-                  
-                  <ul className="space-y-4">
-                    {plan.features.map((feature, i) => (
-                      <li key={i} className="flex">
-                        <span className={`mr-3 ${
-                          plan.color === 'gradient' 
-                            ? 'text-brand-purple' 
-                            : plan.color === 'pink' 
-                              ? 'text-brand-pink' 
-                              : 'text-brand-aqua'
-                        }`}>•</span>
-                        <span className="text-gray-600">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
                 </div>
-              </motion.div>
+              </StyleProvider>
             ))}
           </div>
           
-          <div className="mt-12 text-center">
+          <StyleProvider delay={0.4} className="mt-12 text-center">
             <p className="text-gray-700 mb-6 text-lg">Not sure which plan is right for you?</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
@@ -259,156 +264,131 @@ const Pricing = () => {
                 Try the AI Voice Agent
               </Button>
               <Button
-                onClick={handleDemoVideoClick}
-                variant="outline"
-                className="border-brand-purple/30 text-brand-purple hover:border-brand-purple hover:text-brand-purple hover:bg-brand-purple/5 py-6 px-6 text-lg"
-              >
-                Watch Demo Video
-              </Button>
-              <Button 
                 onClick={handleScheduleDemoClick}
                 variant="outline"
                 className="border-gray-300 text-gray-800 hover:bg-gray-100 py-6 px-6 text-lg"
               >
-                Schedule a Consultation
+                <Calendar className="mr-2" /> Schedule a Consultation
               </Button>
             </div>
-          </div>
+          </StyleProvider>
         </div>
       </section>
 
-      {/* Overage Pricing Section with improved contrast */}
-      <section className="py-16 md:py-24 relative bg-gradient-to-br from-brand-purple/90 to-black/90">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-5"></div>
-          <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-black/20 to-transparent"></div>
-          <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-black/20 to-transparent"></div>
-        </div>
-        
-        <div className="container-custom relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-white">
-              <span className="bg-gradient-to-r from-brand-pink to-brand-aqua bg-clip-text text-transparent">Overage Pricing</span>
-            </h2>
-          </motion.div>
+      {/* Overage Pricing Section */}
+      <section className="py-16 md:py-24 bg-gradient-to-br from-gray-50 to-white">
+        <div className="container-custom">
+          <SectionTitle
+            title="Overage Pricing"
+            subtitle="Transparent rates for when you need additional capacity"
+            centered={true}
+            className="mb-16"
+          />
           
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="backdrop-blur-lg bg-white/5 border border-white/10 rounded-2xl overflow-hidden p-8 md:p-12 max-w-4xl mx-auto mb-8 shadow-2xl"
-          >
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="text-center p-6 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 relative overflow-hidden group hover:bg-white/10 transition-colors">
-                <div className="absolute inset-0 bg-gradient-to-r from-brand-pink/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <h3 className="text-lg font-semibold mb-2 text-white">Outbound</h3>
+          <StyleProvider delay={0.1}>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+              <div className="text-center p-8 rounded-xl bg-white shadow-lg border border-gray-100 relative overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                <div className="absolute top-0 left-0 w-full h-1 bg-brand-pink"></div>
+                <h3 className="text-xl font-semibold mb-3 text-gray-800">Outbound</h3>
                 <p className="text-3xl font-bold text-brand-pink mb-1">$0.056</p>
-                <p className="text-sm text-gray-400">per minute</p>
+                <p className="text-sm text-gray-500">per minute</p>
               </div>
               
-              <div className="text-center p-6 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 relative overflow-hidden group hover:bg-white/10 transition-colors">
-                <div className="absolute inset-0 bg-gradient-to-r from-brand-purple/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <h3 className="text-lg font-semibold mb-2 text-white">Inbound</h3>
-                <p className="text-3xl font-bold text-brand-purple mb-1">$0.034</p>
-                <p className="text-sm text-gray-400">per minute</p>
+              <div className="text-center p-8 rounded-xl bg-white shadow-lg border border-gray-100 relative overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-pink to-brand-aqua"></div>
+                <h3 className="text-xl font-semibold mb-3 text-gray-800">Inbound</h3>
+                <p className="text-3xl font-bold bg-gradient-to-r from-brand-pink to-brand-aqua bg-clip-text text-transparent mb-1">$0.034</p>
+                <p className="text-sm text-gray-500">per minute</p>
               </div>
               
-              <div className="text-center p-6 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 relative overflow-hidden group hover:bg-white/10 transition-colors">
-                <div className="absolute inset-0 bg-gradient-to-r from-brand-aqua/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <h3 className="text-lg font-semibold mb-2 text-white">SMS</h3>
+              <div className="text-center p-8 rounded-xl bg-white shadow-lg border border-gray-100 relative overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                <div className="absolute top-0 left-0 w-full h-1 bg-brand-aqua"></div>
+                <h3 className="text-xl font-semibold mb-3 text-gray-800">SMS</h3>
                 <p className="text-3xl font-bold text-brand-aqua mb-1">$0.0316</p>
-                <p className="text-sm text-gray-400">per segment</p>
+                <p className="text-sm text-gray-500">per segment</p>
               </div>
             </div>
             
-            <div className="mt-8 pt-6 border-t border-white/10 text-center">
-              <p className="text-white/80">
+            <div className="mt-8 text-center max-w-2xl mx-auto">
+              <p className="text-gray-600">
                 Overage minutes are automatically charged to your card on file when you exceed your plan's limits.
               </p>
             </div>
-          </motion.div>
+          </StyleProvider>
         </div>
       </section>
 
       {/* Custom Solutions Section */}
-      <section className="py-16 md:py-24 relative bg-white">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-brand-purple/5 to-transparent"></div>
-          <div className="absolute top-0 right-0 w-64 h-64 bg-brand-pink/5 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 left-0 w-80 h-80 bg-brand-aqua/5 rounded-full blur-3xl"></div>
-        </div>
-        
-        <div className="container-custom relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="max-w-4xl mx-auto"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-gray-800">
-              Custom <span className="bg-gradient-to-r from-brand-pink to-brand-aqua bg-clip-text text-transparent">AI Solutions</span>
-            </h2>
-            
-            <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-brand-purple/10 relative">
-              {/* Top gradient bar */}
-              <div className="h-2 w-full bg-gradient-to-r from-brand-purple via-brand-pink to-brand-aqua"></div>
+      <section className="py-16 md:py-24 bg-white">
+        <div className="container-custom">
+          <StyleProvider>
+            <div className="max-w-4xl mx-auto">
+              <SectionTitle
+                title="Custom AI Solutions"
+                subtitle="For healthcare, call centers, or multi-brand teams needing high-complexity builds"
+                centered={true}
+                className="mb-16"
+              />
               
-              <div className="p-8 md:p-12">
-                <h3 className="text-2xl font-bold mb-4 text-gray-800">Custom AI Solutions</h3>
-                <p className="text-gray-600 mb-8 text-lg">For healthcare, call centers, or multi-brand teams needing high-complexity builds</p>
+              <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 relative">
+                {/* Top gradient bar */}
+                <div className="h-2 w-full bg-gradient-to-r from-brand-purple via-brand-pink to-brand-aqua"></div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-                  {[
-                    "Custom AI Voice Agent Development",
-                    "HIPAA-Compliance Ready Workflows",
-                    "Complex Multi-Step Voice Logic",
-                    "Industry-Tailored Automations",
-                    "Full Implementation + Strategy Buildout",
-                    "POS System Integrations",
-                    "EMR/CRM Sync via API or Webhooks",
-                    "AI Scheduling with Staff/Provider Matching",
-                    "Multi-Location Call Routing by Intent",
-                    "Custom Data Capture + Validation",
-                    "Bilingual/Multilingual Voice Agent Support",
-                    "Post-Call Summarization + CRM Logging",
-                    "Escalation to Live Agents with Handoff",
-                    "Secure Call Recording + Compliance Tracking"
-                  ].map((feature, index) => (
-                    <div key={index} className="flex items-start">
-                      <div className="flex-shrink-0 mt-1 mr-2">
-                        <div className="w-5 h-5 rounded-full bg-gradient-to-r from-brand-pink to-brand-aqua flex items-center justify-center">
-                          <Check className="h-3 w-3 text-white" />
+                <div className="p-8 md:p-12">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+                    {[
+                      "Custom AI Voice Agent Development",
+                      "HIPAA-Compliance Ready Workflows",
+                      "Complex Multi-Step Voice Logic",
+                      "Industry-Tailored Automations",
+                      "Full Implementation + Strategy Buildout",
+                      "POS System Integrations",
+                      "EMR/CRM Sync via API or Webhooks",
+                      "AI Scheduling with Staff/Provider Matching",
+                      "Multi-Location Call Routing by Intent",
+                      "Custom Data Capture + Validation",
+                      "Bilingual/Multilingual Voice Agent Support",
+                      "Post-Call Summarization + CRM Logging",
+                      "Escalation to Live Agents with Handoff",
+                      "Secure Call Recording + Compliance Tracking"
+                    ].map((feature, index) => (
+                      <div key={index} className="flex items-start">
+                        <div className="flex-shrink-0 mt-1 mr-2">
+                          <div className="w-5 h-5 rounded-full bg-gradient-to-r from-brand-pink to-brand-aqua flex items-center justify-center">
+                            <Check className="h-3 w-3 text-white" />
+                          </div>
                         </div>
+                        <span className="text-gray-700">{feature}</span>
                       </div>
-                      <span className="text-gray-700">{feature}</span>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
+                  
+                  <div className="text-center">
+                    <Link
+                      to="https://www.go.suddenimpact.agency/meetings/suddenimpact/30min"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block py-4 px-8 text-center rounded-lg bg-gradient-to-r from-brand-purple via-brand-pink to-brand-aqua text-white hover:opacity-90 transition-all font-medium text-lg shadow-lg hover:shadow-xl"
+                    >
+                      Schedule a Consultation
+                    </Link>
+                  </div>
                 </div>
                 
-                <Link
-                  to="https://www.go.suddenimpact.agency/meetings/suddenimpact/30min"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full py-4 px-4 text-center rounded-lg bg-gradient-to-r from-brand-purple via-brand-pink to-brand-aqua text-white hover:opacity-90 transition-all font-medium text-lg shadow-lg hover:shadow-xl"
-                >
-                  Schedule a Consultation
-                </Link>
-              </div>
-              
-              <div className="text-center p-4 text-sm text-white bg-gradient-to-r from-brand-pink/90 to-brand-aqua/90">
-                ⚠️ Enterprise solutions are billed at $0.15/minute — auto-charged to card on file
+                <div className="text-center p-4 text-sm text-white bg-gradient-to-r from-brand-pink/90 to-brand-aqua/90">
+                  ⚠️ Enterprise solutions are billed at $0.15/minute — auto-charged to card on file
+                </div>
               </div>
             </div>
-          </motion.div>
+          </StyleProvider>
         </div>
       </section>
+
+      {/* FAQ Section - Using the PricingFaq component */}
+      <PricingFaq />
+
+      {/* Additional Paper Section */}
+      <AIPapersSection />
 
       {/* Demo Dialogs */}
       <LiveDemoDialog 
