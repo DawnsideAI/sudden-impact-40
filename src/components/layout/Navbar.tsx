@@ -108,17 +108,19 @@ const Navbar = () => {
               <NavigationMenu>
                 <NavigationMenuList>
                   <NavigationMenuItem>
-                    <Link to="/" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent")}>
-                      Home
-                    </Link>
+                    <NavigationMenuLink asChild>
+                      <Link to="/" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent")}>
+                        Home
+                      </Link>
+                    </NavigationMenuLink>
                   </NavigationMenuItem>
                   
                   <NavigationMenuItem>
-                    <NavigationMenuTrigger className={cn(navItemClass, "bg-transparent")}>
+                    <NavigationMenuTrigger className={cn(navItemClass, "bg-transparent hover:bg-transparent/5")}>
                       Solutions
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
-                      <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                      <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] bg-white">
                         {solutionsLinks.map((solution) => (
                           <li key={solution.title} className="row-span-1">
                             <NavigationMenuLink asChild>
@@ -139,11 +141,11 @@ const Navbar = () => {
                   </NavigationMenuItem>
 
                   <NavigationMenuItem>
-                    <NavigationMenuTrigger className={cn(navItemClass, "bg-transparent")}>
+                    <NavigationMenuTrigger className={cn(navItemClass, "bg-transparent hover:bg-transparent/5")}>
                       Industries
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
-                      <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                      <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] bg-white">
                         {industriesLinks.map((industry) => (
                           <li key={industry.title} className="row-span-1">
                             <NavigationMenuLink asChild>
@@ -164,15 +166,19 @@ const Navbar = () => {
                   </NavigationMenuItem>
 
                   <NavigationMenuItem>
-                    <Link to="/pricing" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent")}>
-                      Pricing
-                    </Link>
+                    <NavigationMenuLink asChild>
+                      <Link to="/pricing" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent")}>
+                        Pricing
+                      </Link>
+                    </NavigationMenuLink>
                   </NavigationMenuItem>
 
                   <NavigationMenuItem>
-                    <Link to="/contact" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent")}>
-                      Contact
-                    </Link>
+                    <NavigationMenuLink asChild>
+                      <Link to="/contact" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent")}>
+                        Contact
+                      </Link>
+                    </NavigationMenuLink>
                   </NavigationMenuItem>
                 </NavigationMenuList>
               </NavigationMenu>
@@ -235,29 +241,29 @@ const Navbar = () => {
                     <ChevronDown className="h-5 w-5" />
                   )}
                 </button>
-                <motion.div 
-                  className={cn(
-                    "ml-4 pl-2 border-l border-gray-200 space-y-2",
-                    expandedSection !== 'solutions' && "hidden"
-                  )}
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ 
-                    height: expandedSection === 'solutions' ? 'auto' : 0,
-                    opacity: expandedSection === 'solutions' ? 1 : 0
-                  }}
-                  transition={{ duration: 0.2 }}
-                >
-                  {solutionsLinks.map((solution) => (
-                    <Link
-                      key={solution.title}
-                      to={solution.path}
-                      className="block py-2 text-gray-600 hover:text-brand-pink transition-colors"
-                      onClick={() => setMobileMenuOpen(false)}
+                
+                <AnimatePresence>
+                  {expandedSection === 'solutions' && (
+                    <motion.div 
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="ml-4 pl-2 border-l border-gray-200 space-y-2 overflow-hidden"
                     >
-                      {solution.title}
-                    </Link>
-                  ))}
-                </motion.div>
+                      {solutionsLinks.map((solution) => (
+                        <Link
+                          key={solution.title}
+                          to={solution.path}
+                          className="block py-2 text-gray-600 hover:text-brand-pink transition-colors"
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          {solution.title}
+                        </Link>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
               
               {/* Industries dropdown for mobile */}
@@ -273,29 +279,29 @@ const Navbar = () => {
                     <ChevronDown className="h-5 w-5" />
                   )}
                 </button>
-                <motion.div 
-                  className={cn(
-                    "ml-4 pl-2 border-l border-gray-200 space-y-2",
-                    expandedSection !== 'industries' && "hidden"
-                  )}
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ 
-                    height: expandedSection === 'industries' ? 'auto' : 0,
-                    opacity: expandedSection === 'industries' ? 1 : 0
-                  }}
-                  transition={{ duration: 0.2 }}
-                >
-                  {industriesLinks.map((industry) => (
-                    <Link
-                      key={industry.title}
-                      to={industry.path}
-                      className="block py-2 text-gray-600 hover:text-brand-pink transition-colors"
-                      onClick={() => setMobileMenuOpen(false)}
+                
+                <AnimatePresence>
+                  {expandedSection === 'industries' && (
+                    <motion.div 
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="ml-4 pl-2 border-l border-gray-200 space-y-2 overflow-hidden"
                     >
-                      {industry.title}
-                    </Link>
-                  ))}
-                </motion.div>
+                      {industriesLinks.map((industry) => (
+                        <Link
+                          key={industry.title}
+                          to={industry.path}
+                          className="block py-2 text-gray-600 hover:text-brand-pink transition-colors"
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          {industry.title}
+                        </Link>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
               
               <Link 
