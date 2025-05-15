@@ -1,10 +1,16 @@
 
 import { motion } from "framer-motion";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Calendar } from "lucide-react";
 import SectionTitle from "../design/SectionTitle";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const CallToAction = () => {
+  const [showScheduleDialog, setShowScheduleDialog] = useState(false);
+  const isMobile = useIsMobile();
+
   return (
     <section className="section-padding relative overflow-hidden">
       {/* Enhanced background elements */}
@@ -52,10 +58,45 @@ const CallToAction = () => {
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </motion.div>
+              
+              <motion.div
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                <button 
+                  onClick={() => setShowScheduleDialog(true)}
+                  className="inline-flex items-center justify-center px-6 py-3 text-white bg-brand-pink/80 hover:bg-brand-pink rounded-lg transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
+                >
+                  Schedule Demo
+                  <Calendar className="ml-2 h-5 w-5" />
+                </button>
+              </motion.div>
             </div>
           </div>
         </motion.div>
       </div>
+
+      {/* Schedule Dialog - Using the same booking widget as Demo page */}
+      <Dialog open={showScheduleDialog} onOpenChange={setShowScheduleDialog}>
+        <DialogContent className="sm:max-w-[800px] max-h-[90vh] overflow-y-auto bg-gray-900 border-white/10">
+          <DialogTitle className="text-xl font-bold text-center mb-4">Schedule Your Demo</DialogTitle>
+          <div className="w-full calendar-container">
+            <div className="iframe-container">
+              <iframe 
+                src="https://link.suddenimpactagency.io/widget/booking/MYRdt5Un7mP29erZS5rx" 
+                style={{ 
+                  width: "100%",
+                  height: isMobile ? "600px" : "700px", 
+                  border: "none",
+                }}
+                scrolling="no" 
+                id="msgsndr-calendar-cta"
+                className="no-scrollbar"
+              ></iframe>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };
