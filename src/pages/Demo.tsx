@@ -81,7 +81,7 @@ const Demo = () => {
                 }`}
               >
                 <Calendar className="inline-block mr-2 h-4 w-4 md:h-5 md:w-5" />
-                Schedule for Later
+                Schedule For Later
               </button>
             </div>
 
@@ -162,8 +162,8 @@ const Demo = () => {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-12 md:py-16 bg-gradient-to-br from-brand-darkPurple via-brand-purple to-black border-y border-white/10 relative overflow-hidden">
+      {/* Features Section - Updated to match the reference image */}
+      <section className="py-12 md:py-20 bg-gradient-to-br from-brand-darkPurple via-brand-purple to-brand-violet border-y border-white/10 relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-0 left-0 w-full h-full bg-[url('/grid.svg')] bg-center opacity-10"></div>
         </div>
@@ -175,41 +175,40 @@ const Demo = () => {
               subtitle="Get a glimpse of how our AI voice agents can transform your business operations"
               centered={true}
               light={true}
-              className="mb-8 md:mb-12"
+              className="mb-12 md:mb-16"
             />
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-8 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 max-w-6xl mx-auto">
               {[
                 {
-                  icon: <MessageSquare className="h-5 w-5" />,
+                  icon: <MessageSquare className="h-6 w-6" />,
                   title: "Interactive Conversation",
                   description: "Experience natural, human-like conversations with our AI voice agent."
                 },
                 {
-                  icon: <Calendar className="h-5 w-5" />,
+                  icon: <Calendar className="h-6 w-6" />,
                   title: "Appointment Scheduling",
                   description: "See how the AI agent handles appointment scheduling and follow-ups."
                 },
                 {
-                  icon: <Check className="h-5 w-5" />,
+                  icon: <Check className="h-6 w-6" />,
                   title: "Lead Qualification",
                   description: "Witness how our AI agents qualify leads by gathering important information."
                 }
               ].map((feature, index) => (
                 <StyleProvider
                   key={index}
-                  delay={index * 0.1}
+                  delay={index * 0.15}
                 >
-                  <motion.div 
-                    className="glass-morphism rounded-xl p-5 md:p-6 hover:bg-white/10 transition-colors group h-full"
-                    whileHover={{ y: -5, transition: { duration: 0.2 } }}
-                  >
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-brand-pink to-brand-aqua/70 flex items-center justify-center text-white mb-4 transition-colors">
-                      {feature.icon}
+                  <div className="text-center">
+                    <div className="w-20 h-20 bg-pink-600/30 rounded-full flex items-center justify-center mx-auto mb-6 backdrop-blur-sm">
+                      <div className="w-14 h-14 bg-gradient-to-br from-brand-pink to-brand-aqua rounded-full flex items-center justify-center text-white">
+                        {feature.icon}
+                      </div>
                     </div>
-                    <h3 className="text-lg md:text-xl font-bold mb-2 text-white">{feature.title}</h3>
-                    <p className="text-sm md:text-base text-muted-foreground">{feature.description}</p>
-                  </motion.div>
+                    <h3 className="text-xl md:text-2xl font-bold mb-3 text-white">{feature.title}</h3>
+                    <p className="text-base text-gray-300 max-w-xs mx-auto">{feature.description}</p>
+                  </div>
                 </StyleProvider>
               ))}
             </div>
@@ -265,3 +264,4 @@ const Demo = () => {
 };
 
 export default Demo;
+
