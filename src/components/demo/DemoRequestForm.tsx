@@ -53,10 +53,6 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
     if (onFormSubmit) {
       onFormSubmit();
     }
-    toast({
-      title: "Demo Request Submitted!",
-      description: "Call our AI voice agent at the number below.",
-    });
   };
 
   // For demo testing purposes
@@ -111,20 +107,20 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
-          className="py-8 px-4 flex flex-col items-center justify-center bg-white rounded-xl shadow-md"
+          className="flex flex-col items-center justify-center py-8 px-4 bg-white rounded-xl shadow-md"
         >
           <motion.div 
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ type: "spring", stiffness: 260, damping: 20 }}
-            className="bg-gradient-to-r from-brand-pink to-brand-aqua w-16 h-16 rounded-full flex items-center justify-center mb-6"
+            className="bg-gradient-to-r from-brand-pink to-brand-aqua w-16 h-16 rounded-full flex items-center justify-center mb-4"
           >
             <PhoneCall size={30} className="text-white" />
           </motion.div>
           
           <motion.a
             href={`tel:${phoneNumber.replace(/\D/g, '')}`}
-            className="text-3xl font-bold mb-6 text-brand-aqua"
+            className="text-3xl font-bold mb-5 text-brand-aqua"
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
@@ -139,10 +135,6 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
           >
             <PhoneCall className="mr-2" /> Call Now
           </Button>
-          
-          <p className="text-sm text-gray-500 mt-4">
-            Available 24/7 for demonstration purposes
-          </p>
         </motion.div>
       )}
     </div>
