@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Check, ArrowRight, Calendar } from 'lucide-react';
@@ -83,7 +84,7 @@ const NicheContactForm = ({ industry }: NicheContactFormProps) => {
         setShowCallDialog(true);
         toast({
           title: "Form submitted successfully!",
-          description: "Check the popup for the AI demo number.",
+          description: "Call our AI demo number now.",
         });
       }
     };
@@ -229,7 +230,7 @@ const NicheContactForm = ({ industry }: NicheContactFormProps) => {
         </div>
       </div>
       
-      {/* AI Demo Call Dialog */}
+      {/* AI Demo Call Dialog - Shows automatically after form submission */}
       <AIDemoCallDialog 
         open={showCallDialog}
         onOpenChange={setShowCallDialog}

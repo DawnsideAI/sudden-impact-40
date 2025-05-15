@@ -1,16 +1,22 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import NicheLayout from '@/components/niches/NicheLayout';
 import StyleProvider from '@/components/design/StyleProvider';
 import SectionTitle from '@/components/design/SectionTitle';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
+import AIDemoCallDialog from '@/components/niches/AIDemoCallDialog';
+import { useToast } from '@/hooks/use-toast';
 import '@/styles/iframe-container.css';
 
 const NicheBooking = () => {
   const { industry = 'healthcare' } = useParams();
   const [showDemoVideo, setShowDemoVideo] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [showCallDialog, setShowCallDialog] = useState(false);
+  const { toast } = useToast();
+  
   const validIndustry = ['healthcare', 'real-estate', 'restaurants', 'service-contractors'].includes(industry) 
     ? industry 
     : 'healthcare';
@@ -31,6 +37,29 @@ const NicheBooking = () => {
   };
   
   const industryText = getIndustryText();
+
+  // Listen for form submission events from the iframe
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      // Check if the message is from our form iframe
+      if (
+        event.data && 
+        typeof event.data === 'object' && 
+        event.data.formId === 'Gf3ORV8Uba4HRiXoml5L' && 
+        event.data.type === 'form:submit'
+      ) {
+        setFormSubmitted(true);
+        setShowCallDialog(true);
+        toast({
+          title: "Form submitted successfully!",
+          description: "Call our AI demo number now.",
+        });
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, [toast]);
 
   return (
     <NicheLayout 
@@ -60,6 +89,19 @@ const NicheBooking = () => {
                       title="AI Voice Agent Demo Form"
                       loading="lazy"
                     ></iframe>
+                  </div>
+                  
+                  {/* For demo testing purposes */}
+                  <div className="text-right">
+                    <button 
+                      onClick={() => {
+                        setFormSubmitted(true);
+                        setShowCallDialog(true);
+                      }}
+                      className="text-xs text-gray-400 hover:text-gray-500"
+                    >
+                      (Demo Submit)
+                    </button>
                   </div>
                 </div>
                 
@@ -117,6 +159,13 @@ const NicheBooking = () => {
           </div>
         </DialogContent>
       </Dialog>
+      
+      {/* AI Demo Call Dialog - Shows automatically after form submission */}
+      <AIDemoCallDialog 
+        open={showCallDialog} 
+        onOpenChange={setShowCallDialog}
+        phoneNumber="+1 (302) 618-3977"
+      />
       
       {/* Add pricing section directly on the booking page for easier access */}
       <section className="py-16 bg-gray-50">

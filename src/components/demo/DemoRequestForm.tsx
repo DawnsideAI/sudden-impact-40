@@ -52,6 +52,10 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
   const handleFormSubmission = () => {
     console.log("Form submission handler called");
     setIsSubmitted(true);
+    toast({
+      title: "Form submitted!",
+      description: "You can now call our AI demo.",
+    });
     if (onFormSubmit) {
       onFormSubmit();
     }
@@ -128,13 +132,13 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
-          className="flex flex-col items-center justify-center py-8 px-4 bg-white rounded-xl shadow-md"
+          className="p-8 flex flex-col items-center justify-center text-center"
         >
           <motion.div 
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ type: "spring", stiffness: 260, damping: 20 }}
-            className="bg-gradient-to-r from-brand-pink to-brand-aqua w-16 h-16 rounded-full flex items-center justify-center mb-4"
+            className="bg-gradient-to-r from-brand-pink to-brand-aqua w-16 h-16 rounded-full flex items-center justify-center mb-6"
           >
             <PhoneCall size={30} className="text-white" />
           </motion.div>
