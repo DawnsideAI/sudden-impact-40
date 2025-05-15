@@ -7,11 +7,13 @@ import { toast } from "@/hooks/use-toast";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import DemoCalendarForm from "@/components/demo/DemoCalendarForm";
 import { useIsMobile } from '@/hooks/use-mobile';
+import AIDemoCallDialog from "@/components/niches/AIDemoCallDialog";
 
 const DemoForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
   const [showDemoVideo, setShowDemoVideo] = useState(false);
+  const [showCallDialog, setShowCallDialog] = useState(false);
   const isMobile = useIsMobile();
   
   // Add the script tag for the form embed.js after component mounts
@@ -30,6 +32,29 @@ const DemoForm = () => {
     };
   }, []);
 
+  // Listen for form submission events from the iframe
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      // Check if the message is from our form iframe
+      if (
+        event.data && 
+        typeof event.data === 'object' && 
+        event.data.formId === 'Gf3ORV8Uba4HRiXoml5L' && 
+        event.data.type === 'form:submit'
+      ) {
+        setIsSubmitted(true);
+        setShowCallDialog(true);
+        toast({
+          title: "Demo Request Submitted!",
+          description: "You'll be connected to our AI voice agent shortly.",
+        });
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, []);
+
   const handleScheduleClick = () => {
     setShowCalendar(true);
   };
@@ -41,9 +66,10 @@ const DemoForm = () => {
   // For demo purposes - simulates form submission
   const handleFormSubmitted = () => {
     setIsSubmitted(true);
+    setShowCallDialog(true);
     toast({
       title: "Demo Request Submitted!",
-      description: "You'll be connected to our AI voice agent shortly.",
+      description: "Call the AI demo number shown in the popup.",
     });
   };
 
@@ -167,13 +193,12 @@ const DemoForm = () => {
                   />
                   
                   {/* Demo-only submit button - for testing the success state */}
-                  <div className="absolute bottom-0 right-0 opacity-0">
+                  <div className="absolute bottom-0 right-0 p-2">
                     <button 
                       onClick={handleFormSubmitted}
-                      aria-hidden="true" 
-                      className="sr-only"
+                      className="text-xs text-gray-400 hover:text-gray-500"
                     >
-                      Test Submit
+                      (Demo Submit)
                     </button>
                   </div>
                 </div>
@@ -192,6 +217,10 @@ const DemoForm = () => {
                   <a 
                     href="tel:+13026183977"
                     className="text-lg font-medium text-brand-aqua hover:underline"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setShowCallDialog(true);
+                    }}
                   >
                     +1 (302) 618-3977
                   </a>
@@ -246,6 +275,13 @@ const DemoForm = () => {
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* AI Demo Call Dialog */}
+      <AIDemoCallDialog 
+        open={showCallDialog} 
+        onOpenChange={setShowCallDialog}
+        phoneNumber="+1 (302) 618-3977"
+      />
     </section>
   );
 };

@@ -1,12 +1,12 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Check, ArrowRight, Calendar } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import StyleProvider from '@/components/design/StyleProvider';
 import SectionTitle from '@/components/design/SectionTitle';
+import AIDemoCallDialog from './AIDemoCallDialog';
 import '@/styles/iframe-container.css';
 
 interface NicheContactFormProps {
@@ -16,6 +16,8 @@ interface NicheContactFormProps {
 const NicheContactForm = ({ industry }: NicheContactFormProps) => {
   const { toast } = useToast();
   const [showPricing, setShowPricing] = useState(true);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [showCallDialog, setShowCallDialog] = useState(false);
 
   // Define industry-specific form labels
   const getIndustryLabel = () => {
@@ -66,6 +68,39 @@ const NicheContactForm = ({ industry }: NicheContactFormProps) => {
   const industryLabel = getIndustryLabel();
   const buttonText = getButtonText();
   const gradient = getGradient();
+
+  // Listen for form submission message from iframe
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      // Check if the message is from our form iframe
+      if (
+        event.data && 
+        typeof event.data === 'object' && 
+        event.data.formId === 'Gf3ORV8Uba4HRiXoml5L' && 
+        event.data.type === 'form:submit'
+      ) {
+        setFormSubmitted(true);
+        setShowCallDialog(true);
+        toast({
+          title: "Form submitted successfully!",
+          description: "Check the popup for the AI demo number.",
+        });
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, [toast]);
+
+  // For demo purposes - manual trigger (will be removed in production)
+  const handleDemoSubmit = () => {
+    setFormSubmitted(true);
+    setShowCallDialog(true);
+    toast({
+      title: "Demo Request Submitted!",
+      description: "Call the AI demo number shown in the popup.",
+    });
+  };
 
   // Basic pricing plans to display inline
   const pricingPlans = [
@@ -145,7 +180,7 @@ const NicheContactForm = ({ industry }: NicheContactFormProps) => {
           </div>
           <div className="text-center mt-4">
             <Link 
-              to={`/niches/${industry}/pricing`}
+              to="/pricing"
               className="inline-flex items-center font-medium text-brand-vibrantPurple hover:text-brand-pink transition-colors"
             >
               View detailed pricing plans <ArrowRight size={16} className="ml-1" />
@@ -169,6 +204,16 @@ const NicheContactForm = ({ industry }: NicheContactFormProps) => {
               ></iframe>
             </div>
             
+            {/* For demo/testing purposes only - simulates form submission */}
+            <div className="text-center mt-2">
+              <button 
+                onClick={handleDemoSubmit}
+                className="text-xs text-gray-400 hover:text-gray-500"
+              >
+                (Demo Submit)
+              </button>
+            </div>
+            
             <div className="text-center mt-8">
               <p className="font-medium text-gray-700 mb-2">Prefer to speak with our team?</p>
               <a 
@@ -183,6 +228,13 @@ const NicheContactForm = ({ industry }: NicheContactFormProps) => {
           </StyleProvider>
         </div>
       </div>
+      
+      {/* AI Demo Call Dialog */}
+      <AIDemoCallDialog 
+        open={showCallDialog}
+        onOpenChange={setShowCallDialog}
+        phoneNumber="+1 (302) 618-3977"
+      />
     </section>
   );
 };
