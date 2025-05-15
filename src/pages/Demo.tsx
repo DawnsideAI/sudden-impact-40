@@ -14,6 +14,7 @@ const Demo = () => {
   const [activeTab, setActiveTab] = useState("live");
   const [showAIDemo, setShowAIDemo] = useState(false);
   const isMobile = useIsMobile();
+  const [isBookingScriptLoaded, setIsBookingScriptLoaded] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -22,7 +23,23 @@ const Demo = () => {
     if (window.location.hash === "#schedule") {
       setActiveTab("schedule");
     }
-  }, []);
+
+    // Load booking script for the scheduler
+    if (activeTab === "schedule" && !isBookingScriptLoaded) {
+      const script = document.createElement('script');
+      script.src = "https://link.suddenimpactagency.io/js/booking_embed.js";
+      script.async = true;
+      script.onload = () => setIsBookingScriptLoaded(true);
+      document.body.appendChild(script);
+      
+      return () => {
+        const existingScript = document.querySelector(`script[src="https://link.suddenimpactagency.io/js/booking_embed.js"]`);
+        if (existingScript && existingScript.parentNode) {
+          existingScript.parentNode.removeChild(existingScript);
+        }
+      };
+    }
+  }, [activeTab, isBookingScriptLoaded]);
 
   return (
     <Layout lightMode={true}>
@@ -121,39 +138,30 @@ const Demo = () => {
                       <CalendarClock className="h-6 w-6" />
                     </div>
                     <h2 className="text-xl md:text-2xl font-bold mb-2 text-brand-dark">Schedule Your Demo</h2>
-                    <p className="text-sm md:text-base text-brand-gray">
+                    <p className="text-sm md:text-base text-brand-gray mb-6">
                       Pick a convenient time for your 10-minute AI voice agent demo.
                     </p>
                   </div>
 
-                  <div className="space-y-6 md:space-y-8">
-                    <div className="bg-gray-50 p-4 md:p-6 rounded-lg border border-gray-200">
-                      <h3 className="font-medium mb-3 md:mb-4 text-brand-dark">How It Works:</h3>
-                      <ul className="space-y-3 md:space-y-4">
-                        {["Book a Time Slot", "Receive Confirmation", "Get Reminders", "Experience the Demo"].map((step, index) => (
-                          <li key={index} className="flex items-start">
-                            <div className="flex-shrink-0 mt-1">
-                              <div className="bg-gradient-to-r from-brand-pink to-brand-aqua/70 text-white w-5 h-5 rounded-full flex items-center justify-center text-xs font-medium">
-                                {index + 1}
-                              </div>
-                            </div>
-                            <p className="ml-3 text-sm md:text-base text-brand-gray">
-                              <strong className="text-brand-dark">{step}</strong>
-                            </p>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div className="bg-gray-50 p-5 md:p-8 rounded-lg border border-gray-200 text-center">
-                      <h3 className="text-lg md:text-xl font-medium mb-3 md:mb-4 text-brand-dark">Demo Scheduler</h3>
-                      <p className="text-sm md:text-base text-brand-gray mb-4 md:mb-6">
-                        Select an available time slot for your interactive demo session.
-                      </p>
-                      <button className="px-4 md:px-6 py-2 md:py-3 text-white bg-gradient-to-r from-brand-indigo to-brand-violet hover:from-brand-indigo/90 hover:to-brand-violet/90 rounded-lg transition-colors shadow-md hover:shadow-lg">
-                        View Available Time Slots
-                      </button>
-                    </div>
+                  {/* Booking Widget */}
+                  <div className="w-full" style={{ height: "630px" }}>
+                    <iframe
+                      src="https://link.suddenimpactagency.io/widget/booking/MYRdt5Un7mP29erZS5rx"
+                      style={{ width: "100%", height: "100%", border: "none", borderRadius: "8px" }}
+                      id="booking-MYRdt5Un7mP29erZS5rx" 
+                      data-layout="{'id':'INLINE'}"
+                      data-trigger-type="alwaysShow"
+                      data-trigger-value=""
+                      data-activation-type="alwaysActivated"
+                      data-activation-value=""
+                      data-deactivation-type="neverDeactivate"
+                      data-deactivation-value=""
+                      data-form-name="Demo Scheduler"
+                      data-height="630"
+                      data-layout-iframe-id="booking-MYRdt5Un7mP29erZS5rx"
+                      data-form-id="MYRdt5Un7mP29erZS5rx"
+                      title="Demo Scheduler"
+                    />
                   </div>
                 </StyleProvider>
               </motion.div>
@@ -264,4 +272,3 @@ const Demo = () => {
 };
 
 export default Demo;
-
