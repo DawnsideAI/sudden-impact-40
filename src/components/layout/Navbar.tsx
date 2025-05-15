@@ -63,19 +63,6 @@ const Navbar = () => {
   const textColor = 'text-gray-800';
   const navItemClass = "text-gray-700 hover:text-brand-pink transition-colors duration-200";
 
-  const solutionsLinks = [
-    { title: "AI Voice Agent", description: "Convert more calls with our AI voice agent", path: "/solutions#voice-agent" },
-    { title: "Call Tracking", description: "Track and analyze your call performance", path: "/solutions#call-tracking" },
-    { title: "Lead Management", description: "Streamline your lead capture process", path: "/solutions#lead-management" },
-  ];
-
-  const industriesLinks = [
-    { title: "Real Estate", description: "Solutions for real estate agencies", path: "/industries/realestate" },
-    { title: "Healthcare", description: "Solutions for healthcare providers", path: "/industries/healthcare" },
-    { title: "Restaurants", description: "Solutions for restaurants and food services", path: "/industries/restaurants" },
-    { title: "Service Contractors", description: "Solutions for service contractors", path: "/industries/contractors" },
-  ];
-
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
@@ -107,7 +94,7 @@ const Navbar = () => {
               </motion.div>
             </Link>
 
-            {/* Desktop Navigation with Dropdowns */}
+            {/* Desktop Navigation with direct links instead of dropdowns */}
             <div className="hidden md:block">
               <NavigationMenu>
                 <NavigationMenuList>
@@ -120,53 +107,19 @@ const Navbar = () => {
                   </NavigationMenuItem>
                   
                   <NavigationMenuItem>
-                    <NavigationMenuTrigger className={cn(navItemClass, "bg-transparent hover:bg-transparent/5")}>
-                      Solutions
-                    </NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                      <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] bg-white">
-                        {solutionsLinks.map((solution) => (
-                          <li key={solution.title} className="row-span-1">
-                            <NavigationMenuLink asChild>
-                              <Link
-                                to={solution.path}
-                                className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                              >
-                                <div className="text-sm font-medium leading-none">{solution.title}</div>
-                                <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                                  {solution.description}
-                                </p>
-                              </Link>
-                            </NavigationMenuLink>
-                          </li>
-                        ))}
-                      </ul>
-                    </NavigationMenuContent>
+                    <NavigationMenuLink asChild>
+                      <Link to="/solutions" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent")}>
+                        Solutions
+                      </Link>
+                    </NavigationMenuLink>
                   </NavigationMenuItem>
 
                   <NavigationMenuItem>
-                    <NavigationMenuTrigger className={cn(navItemClass, "bg-transparent hover:bg-transparent/5")}>
-                      Industries
-                    </NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                      <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] bg-white">
-                        {industriesLinks.map((industry) => (
-                          <li key={industry.title} className="row-span-1">
-                            <NavigationMenuLink asChild>
-                              <Link
-                                to={industry.path}
-                                className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                              >
-                                <div className="text-sm font-medium leading-none">{industry.title}</div>
-                                <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                                  {industry.description}
-                                </p>
-                              </Link>
-                            </NavigationMenuLink>
-                          </li>
-                        ))}
-                      </ul>
-                    </NavigationMenuContent>
+                    <NavigationMenuLink asChild>
+                      <Link to="/industries" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent")}>
+                        Industries
+                      </Link>
+                    </NavigationMenuLink>
                   </NavigationMenuItem>
 
                   <NavigationMenuItem>
@@ -232,81 +185,21 @@ const Navbar = () => {
                 Home
               </Link>
               
-              {/* Solutions dropdown for mobile */}
-              <div className="space-y-3">
-                <button 
-                  className="flex items-center justify-between w-full text-xl font-medium text-gray-800 hover:text-brand-pink transition-colors"
-                  onClick={() => toggleSection('solutions')}
-                >
-                  <span>Solutions</span>
-                  {expandedSection === 'solutions' ? (
-                    <ChevronUp className="h-5 w-5" />
-                  ) : (
-                    <ChevronDown className="h-5 w-5" />
-                  )}
-                </button>
-                
-                <AnimatePresence>
-                  {expandedSection === 'solutions' && (
-                    <motion.div 
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                      className="ml-4 pl-2 border-l border-gray-200 space-y-2 overflow-hidden"
-                    >
-                      {solutionsLinks.map((solution) => (
-                        <Link
-                          key={solution.title}
-                          to={solution.path}
-                          className="block py-2 text-gray-600 hover:text-brand-pink transition-colors"
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          {solution.title}
-                        </Link>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
+              <Link 
+                to="/solutions" 
+                className="text-xl font-medium text-gray-800 hover:text-brand-pink transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Solutions
+              </Link>
               
-              {/* Industries dropdown for mobile */}
-              <div className="space-y-3">
-                <button 
-                  className="flex items-center justify-between w-full text-xl font-medium text-gray-800 hover:text-brand-pink transition-colors"
-                  onClick={() => toggleSection('industries')}
-                >
-                  <span>Industries</span>
-                  {expandedSection === 'industries' ? (
-                    <ChevronUp className="h-5 w-5" />
-                  ) : (
-                    <ChevronDown className="h-5 w-5" />
-                  )}
-                </button>
-                
-                <AnimatePresence>
-                  {expandedSection === 'industries' && (
-                    <motion.div 
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                      className="ml-4 pl-2 border-l border-gray-200 space-y-2 overflow-hidden"
-                    >
-                      {industriesLinks.map((industry) => (
-                        <Link
-                          key={industry.title}
-                          to={industry.path}
-                          className="block py-2 text-gray-600 hover:text-brand-pink transition-colors"
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          {industry.title}
-                        </Link>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
+              <Link 
+                to="/industries" 
+                className="text-xl font-medium text-gray-800 hover:text-brand-pink transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Industries
+              </Link>
               
               <Link 
                 to="/pricing" 
