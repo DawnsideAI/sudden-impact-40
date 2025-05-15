@@ -76,11 +76,11 @@ const CallToAction = () => {
         </motion.div>
       </div>
 
-      {/* Schedule Dialog - Using the same booking widget as Demo page */}
+      {/* Schedule Dialog - Updated styling to match brand colors */}
       <Dialog open={showScheduleDialog} onOpenChange={setShowScheduleDialog}>
-        <DialogContent className="sm:max-w-[800px] max-h-[90vh] overflow-y-auto bg-gray-900 border-white/10">
-          <DialogTitle className="text-xl font-bold text-center mb-4">Schedule Your Demo</DialogTitle>
-          <div className="w-full calendar-container">
+        <DialogContent className="sm:max-w-[800px] max-h-[90vh] overflow-y-auto bg-white border border-brand-pink/10 shadow-xl">
+          <DialogTitle className="text-xl font-bold text-center mb-4 text-gray-800">Schedule Your Demo</DialogTitle>
+          <div className="w-full calendar-container p-1 md:p-4 bg-gradient-to-br from-brand-pink/5 to-brand-aqua/5 rounded-lg">
             <div className="iframe-container">
               <iframe 
                 src="https://link.suddenimpactagency.io/widget/booking/MYRdt5Un7mP29erZS5rx" 
@@ -88,10 +88,11 @@ const CallToAction = () => {
                   width: "100%",
                   height: isMobile ? "600px" : "700px", 
                   border: "none",
+                  borderRadius: "8px",
                 }}
                 scrolling="no" 
                 id="msgsndr-calendar-cta"
-                className="no-scrollbar"
+                className="no-scrollbar bg-white shadow-md"
               ></iframe>
             </div>
           </div>

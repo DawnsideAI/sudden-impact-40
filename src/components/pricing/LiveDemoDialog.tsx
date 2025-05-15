@@ -16,19 +16,19 @@ interface LiveDemoDialogProps {
 const LiveDemoDialog = ({ open, onOpenChange }: LiveDemoDialogProps) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md bg-white border border-brand-pink/10 shadow-xl">
         <DialogHeader>
-          <DialogTitle>Call our AI Voice Agent</DialogTitle>
-          <DialogDescription>
+          <DialogTitle className="text-xl font-bold text-center text-gray-800">Call our AI Voice Agent</DialogTitle>
+          <DialogDescription className="text-center text-gray-600">
             Experience our AI voice technology firsthand by calling the number below.
           </DialogDescription>
         </DialogHeader>
-        <div className="flex flex-col items-center justify-center gap-4 py-6">
-          <div className="w-16 h-16 rounded-full bg-agency-vibrantPurple/20 flex items-center justify-center">
-            <Phone className="h-8 w-8 text-agency-vibrantPurple" />
+        <div className="flex flex-col items-center justify-center gap-4 py-6 bg-gradient-to-br from-brand-pink/5 to-brand-aqua/5 rounded-lg px-4">
+          <div className="w-16 h-16 rounded-full bg-gradient-to-r from-brand-pink to-brand-aqua flex items-center justify-center text-white">
+            <Phone className="h-8 w-8" />
           </div>
-          <p className="text-2xl font-semibold text-center">1-800-123-4567</p>
-          <p className="text-sm text-muted-foreground text-center">
+          <p className="text-2xl font-semibold text-center text-gray-800">1-800-123-4567</p>
+          <p className="text-sm text-gray-500 text-center">
             Available 24/7 - Toll Free
           </p>
         </div>
