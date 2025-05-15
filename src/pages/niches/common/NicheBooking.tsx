@@ -36,6 +36,7 @@ const NicheBooking = () => {
   
   const industryText = getIndustryText();
   const phoneNumber = "+1 (302) 618-3977";
+  const demoVideoUrl = "https://www.youtube.com/embed/HuU_pxXVVqo?si=qrMXYUDeg8m8zUzs";
 
   return (
     <NicheLayout 
@@ -139,7 +140,7 @@ const NicheBooking = () => {
           <DialogTitle className="text-xl font-bold text-center mb-4 text-gray-800">AI Voice Agent Demo</DialogTitle>
           <div className="aspect-video relative bg-gradient-to-br from-brand-pink/5 to-brand-aqua/5 rounded-lg overflow-hidden">
             <iframe 
-              src="https://www.youtube.com/embed/HuU_pxXVVqo" 
+              src={demoVideoUrl}
               className="w-full h-full"
               title="AI Voice Agent Demo"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -11,7 +10,7 @@ const CallToAction = () => {
   const [showScheduleDialog, setShowScheduleDialog] = useState(false);
   const [showDemoVideo, setShowDemoVideo] = useState(false);
   const isMobile = useIsMobile();
-  const demoVideoUrl = "https://www.youtube.com/embed/HuU_pxXVVqo";
+  const demoVideoUrl = "https://www.youtube.com/embed/HuU_pxXVVqo?si=qrMXYUDeg8m8zUzs";
 
   return (
     <section className="section-padding relative overflow-hidden">
