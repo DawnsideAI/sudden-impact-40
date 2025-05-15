@@ -68,7 +68,7 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
   const phoneNumber = "+1 (302) 618-3977";
 
   return (
-    <div className="relative iframe-container" style={{ height: isSubmitted ? "auto" : "auto" }}>
+    <div className="relative iframe-container" style={{ height: "auto" }}>
       {!isSubmitted ? (
         <>
           <iframe
@@ -110,50 +110,35 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="flex flex-col items-center justify-center py-12 px-4 text-center bg-white rounded-xl shadow-md"
+          transition={{ duration: 0.3 }}
+          className="py-8 px-4 flex flex-col items-center justify-center bg-white rounded-xl shadow-md"
         >
           <motion.div 
-            initial={{ scale: 0.8 }}
+            initial={{ scale: 0 }}
             animate={{ scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="w-20 h-20 rounded-full bg-gradient-to-r from-brand-pink to-brand-aqua flex items-center justify-center text-white mb-6"
+            transition={{ type: "spring", stiffness: 260, damping: 20 }}
+            className="bg-gradient-to-r from-brand-pink to-brand-aqua w-16 h-16 rounded-full flex items-center justify-center mb-6"
           >
-            <PhoneCall size={32} />
+            <PhoneCall size={30} className="text-white" />
           </motion.div>
           
-          <h3 className="text-3xl font-bold mb-3 text-gray-800">Thank you for taking the time to complete this form.</h3>
-          
-          <p className="text-xl text-gray-600 mb-8">
-            Call our AI voice agent to experience our technology:
-          </p>
-          
-          <div className="mb-6">
-            <motion.a 
-              href={`tel:${phoneNumber.replace(/\D/g, '')}`}
-              className="text-3xl font-semibold text-brand-aqua hover:underline flex items-center justify-center mb-2"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <PhoneCall className="h-6 w-6 mr-3 text-brand-pink" />
-              {phoneNumber}
-            </motion.a>
-          </div>
-          
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.3 }}
+          <motion.a
+            href={`tel:${phoneNumber.replace(/\D/g, '')}`}
+            className="text-3xl font-bold mb-6 text-brand-aqua"
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
-            <Button
-              variant="action"
-              size="xl"
-              className="shadow-lg bg-gradient-to-r from-brand-pink to-brand-aqua hover:shadow-xl transition-all duration-300"
-              onClick={() => window.location.href = `tel:${phoneNumber.replace(/\D/g, '')}`}
-            >
-              <PhoneCall className="mr-2" /> Call Now
-            </Button>
-          </motion.div>
+            {phoneNumber}
+          </motion.a>
+          
+          <Button
+            variant="action"
+            size="xl"
+            className="shadow-lg bg-gradient-to-r from-brand-pink to-brand-aqua hover:shadow-xl transition-all duration-300"
+            onClick={() => window.location.href = `tel:${phoneNumber.replace(/\D/g, '')}`}
+          >
+            <PhoneCall className="mr-2" /> Call Now
+          </Button>
           
           <p className="text-sm text-gray-500 mt-4">
             Available 24/7 for demonstration purposes
