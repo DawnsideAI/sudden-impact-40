@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { IndustryCard } from '@/components/solutions/IndustryCard';
 import IndustryDetails from '@/components/solutions/IndustryDetails';
-import { Calendar, Building, Utensils, Car, Home, Briefcase, BookOpen, Stethoscope } from 'lucide-react';
+import { Calendar, Building, Utensils, Music, Home, Briefcase, Palette, Stethoscope } from 'lucide-react';
 import SectionTitle from '../design/SectionTitle';
 import StyleProvider from '../design/StyleProvider';
 
@@ -49,23 +49,23 @@ const industries = [
     ]
   },
   {
-    id: "auto-dealerships",
-    icon: <Car className="h-5 w-5" />,
-    title: "Auto Dealerships",
-    description: "Lead qualification and appointment setting",
-    detailsTitle: "AI Voice Agents for Auto Dealerships",
-    detailsDescription: "Our AI voice agents qualify leads, schedule test drives, and follow up with potential buyers, helping your sales team focus on closing deals.",
+    id: "music",
+    icon: <Music className="h-5 w-5" />,
+    title: "Music Industry",
+    description: "Booking and fan engagement solutions",
+    detailsTitle: "AI Voice Agents for Music Industry",
+    detailsDescription: "Our AI voice agents handle booking inquiries, merchandise sales, and fan engagement, allowing artists and managers to focus on creative work.",
     features: [
-      "24/7 vehicle inquiry handling",
-      "Test drive scheduling",
-      "Pre-qualification of buyers",
-      "Trade-in value estimations",
-      "Automated follow-ups"
+      "24/7 booking inquiry handling",
+      "Merchandise order processing",
+      "Fan club membership management",
+      "Event information distribution",
+      "VIP package coordination"
     ],
     results: [
-      "45% increase in qualified leads",
-      "37% more test drives scheduled",
-      "28% improvement in sales team efficiency"
+      "45% increase in merchandise sales",
+      "37% more efficient booking process",
+      "42% improvement in fan engagement"
     ]
   },
   {
@@ -89,23 +89,23 @@ const industries = [
     ]
   },
   {
-    id: "education",
-    icon: <BookOpen className="h-5 w-5" />,
-    title: "Education",
-    description: "Student inquiries and enrollment",
-    detailsTitle: "AI Voice Agents for Education",
-    detailsDescription: "Our AI voice agents handle admissions inquiries, scheduling, and follow-ups, allowing education staff to focus on current students.",
+    id: "artists",
+    icon: <Palette className="h-5 w-5" />,
+    title: "Artists",
+    description: "Gallery management and commission handling",
+    detailsTitle: "AI Voice Agents for Artists",
+    detailsDescription: "Our AI voice agents manage gallery inquiries, commission requests, and art sales, allowing artists to focus on their creative process.",
     features: [
-      "24/7 program information",
-      "Application process assistance",
-      "Campus tour scheduling",
-      "Financial aid information",
-      "Enrollment follow-ups"
+      "24/7 gallery information",
+      "Commission request handling",
+      "Art sales processing",
+      "Exhibition scheduling",
+      "Client follow-ups"
     ],
     results: [
-      "48% increase in enrollment inquiries handled",
-      "35% reduction in administrative workload",
-      "42% more campus tours scheduled"
+      "48% increase in commission requests",
+      "35% reduction in administrative time",
+      "42% more gallery visits scheduled"
     ]
   },
   {

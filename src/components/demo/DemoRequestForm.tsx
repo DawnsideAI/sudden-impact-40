@@ -16,6 +16,7 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
   const isMobile = useIsMobile();
   
   const phoneNumber = "+1 (302) 618-3977";
+  const demoVideoUrl = "https://www.youtube.com/embed/HuU_pxXVVqo";
 
   // Render demo video if showVideo prop is true
   if (showVideo) {
@@ -24,7 +25,7 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
         <CardContent className="p-0">
           <div className="aspect-video w-full">
             <iframe
-              src="https://www.youtube.com/embed/HuU_pxXVVqo"
+              src={demoVideoUrl}
               title="AI Voice Agent Demo"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
@@ -75,7 +76,7 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
           <h3 className="text-xl font-bold mb-4">Watch Demo Video</h3>
           <div className="aspect-video w-full max-w-lg mx-auto overflow-hidden rounded-lg shadow-md">
             <iframe
-              src="https://www.youtube.com/embed/HuU_pxXVVqo"
+              src={demoVideoUrl}
               title="AI Voice Agent Demo"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen

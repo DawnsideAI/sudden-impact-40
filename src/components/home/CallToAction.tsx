@@ -9,7 +9,9 @@ import { useIsMobile } from '@/hooks/use-mobile';
 
 const CallToAction = () => {
   const [showScheduleDialog, setShowScheduleDialog] = useState(false);
+  const [showDemoVideo, setShowDemoVideo] = useState(false);
   const isMobile = useIsMobile();
+  const demoVideoUrl = "https://www.youtube.com/embed/HuU_pxXVVqo";
 
   return (
     <section className="section-padding relative overflow-hidden">
@@ -64,10 +66,10 @@ const CallToAction = () => {
                 whileTap={{ scale: 0.97 }}
               >
                 <button 
-                  onClick={() => setShowScheduleDialog(true)}
+                  onClick={() => setShowDemoVideo(true)}
                   className="inline-flex items-center justify-center px-6 py-3 text-white bg-brand-pink/80 hover:bg-brand-pink rounded-lg transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
                 >
-                  Schedule Demo
+                  Watch Demo
                   <Calendar className="ml-2 h-5 w-5" />
                 </button>
               </motion.div>
@@ -95,6 +97,22 @@ const CallToAction = () => {
                 className="no-scrollbar bg-white shadow-md"
               ></iframe>
             </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+      
+      {/* Video demo dialog */}
+      <Dialog open={showDemoVideo} onOpenChange={setShowDemoVideo}>
+        <DialogContent className="sm:max-w-[800px] bg-white border border-brand-pink/10 shadow-xl">
+          <DialogTitle className="text-xl font-bold text-center mb-4 text-gray-800">AI Voice Agent Demo</DialogTitle>
+          <div className="aspect-video relative bg-gradient-to-br from-brand-pink/5 to-brand-aqua/5 rounded-lg overflow-hidden">
+            <iframe 
+              src={demoVideoUrl}
+              className="w-full h-full"
+              title="AI Voice Agent Demo"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
           </div>
         </DialogContent>
       </Dialog>

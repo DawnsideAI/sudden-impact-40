@@ -69,7 +69,7 @@ function PhoneIcon(props: React.SVGProps<SVGSVGElement>) {
 
 const CaseStudies = () => {
   const [activeCase, setActiveCase] = useState(caseStudies[0].id);
-
+  const demoVideoUrl = "https://www.youtube.com/embed/HuU_pxXVVqo";
   const currentCase = caseStudies.find(cs => cs.id === activeCase) || caseStudies[0];
 
   return (
@@ -146,10 +146,14 @@ const CaseStudies = () => {
                 <p className="text-sm text-gray-400">AI Voice Agent Dashboard</p>
               </div>
               <div className="bg-gray-100 rounded overflow-hidden aspect-video">
-                {/* Replace with actual dashboard screenshots when available */}
-                <div className="h-full w-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
-                  <p className="text-gray-500">Dashboard preview will be placed here</p>
-                </div>
+                {/* Demo video display */}
+                <iframe
+                  src={demoVideoUrl}
+                  title="AI Voice Agent Demo"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="h-full w-full"
+                ></iframe>
               </div>
               <div className="mt-4 flex justify-between">
                 <div className="text-xs text-gray-400">Powered by Sudden Impact Agency</div>
