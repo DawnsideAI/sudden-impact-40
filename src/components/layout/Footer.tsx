@@ -61,7 +61,7 @@ const Footer: React.FC<FooterProps> = ({ lightMode = false }) => {
               <h4 className={`font-bold text-sm mb-3 ${titleColor}`}>Case Studies</h4>
               <ul className="space-y-1.5 text-sm">
                 {[
-                  { name: "Real Estate", url: "/industries/real-estate" },
+                  { name: "Real Estate", url: "/industries/realestate" },
                   { name: "Healthcare", url: "/industries/healthcare" },
                   { name: "Restaurants", url: "/industries/restaurants" },
                   { name: "Service Contractors", url: "/industries/contractors" },
