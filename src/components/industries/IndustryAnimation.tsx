@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import { FiHome } from 'react-icons/fi';
 import { RiRestaurantLine, RiBuilding2Line, RiHealthBookLine } from 'react-icons/ri';
-import { Tools } from 'lucide-react';
+import { Wrench } from 'lucide-react';
 
 interface IndustryAnimationProps {
   industry: string;
@@ -310,7 +310,7 @@ const IndustryAnimation = ({ industry }: IndustryAnimationProps) => {
                   className="w-28 h-28 bg-gradient-to-br from-brand-blue to-brand-purple rounded-full flex items-center justify-center text-white shadow-lg"
                   variants={itemVariants}
                 >
-                  <Tools size={64} />
+                  <Wrench size={64} />
                 </motion.div>
               </motion.div>
               
