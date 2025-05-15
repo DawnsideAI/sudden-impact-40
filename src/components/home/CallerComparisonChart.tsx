@@ -82,31 +82,71 @@ const metrics = [
   }
 ];
 
-// Transform data for mobile view to show side-by-side comparison
-const transformDataForMobile = (data) => {
-  const result = [];
-  data.forEach(item => {
-    result.push({
-      name: item.category,
-      type: 'Human',
-      value: item.human,
-      color: item.humanColor,
-      label: item.label,
-      description: item.description
-    });
-    result.push({
-      name: item.category,
-      type: 'AI',
-      value: item.ai,
-      color: item.aiColor,
-      label: item.label,
-      description: item.description,
-      percentage: item.percentage
-    });
-  });
-  return result;
+// Mobile representation of data as cards instead of a chart
+const MobileComparisonView = ({ data }) => {
+  return (
+    <div className="space-y-4">
+      {data.map((item, index) => (
+        <motion.div 
+          key={index}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: index * 0.1 }}
+          className="bg-white rounded-lg shadow-md border border-gray-100 overflow-hidden"
+        >
+          <div className="bg-gradient-to-r from-brand-purple/10 to-brand-aqua/10 px-4 py-3 border-b border-gray-100">
+            <h3 className="font-bold text-lg text-brand-dark">{item.category}</h3>
+            <p className="text-xs text-brand-gray">{item.description}</p>
+          </div>
+          
+          <div className="p-4">
+            <div className="flex justify-between items-center mb-4">
+              <div className="flex flex-col">
+                <span className="text-sm text-brand-gray">Human</span>
+                <span className="text-xl font-bold text-brand-dark">
+                  {item.human} <span className="text-xs">{item.label}</span>
+                </span>
+              </div>
+              
+              <div className="flex flex-col items-end">
+                <span className="text-sm text-brand-vibrantPurple">AI Voice Agent</span>
+                <span className="text-xl font-bold text-brand-vibrantPurple">
+                  {item.ai} <span className="text-xs">{item.label}</span>
+                </span>
+              </div>
+            </div>
+            
+            <div className="w-full bg-gray-200 rounded-full h-2.5 relative">
+              <div 
+                className="absolute top-0 left-0 h-2.5 rounded-full bg-gray-400"
+                style={{ 
+                  width: `${(item.human / Math.max(item.human, item.ai)) * 100}%`,
+                  backgroundColor: item.humanColor 
+                }}
+              ></div>
+              <div 
+                className="absolute top-0 left-0 h-2.5 rounded-full bg-gradient-to-r from-brand-pink to-brand-aqua"
+                style={{ 
+                  width: `${(item.ai / Math.max(item.human, item.ai)) * 100}%`,
+                  transform: `translateX(${item.human > item.ai ? '0%' : '100%'})`,
+                  left: item.human > item.ai ? `${(item.human / Math.max(item.human, item.ai)) * 100}%` : '0'
+                }}
+              ></div>
+            </div>
+            
+            <div className="mt-2 text-center">
+              <span className="text-sm font-medium text-brand-vibrantPurple">
+                {item.percentage}
+              </span>
+            </div>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  );
 };
 
+// Original chart tooltip
 const ChartTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
     const data = payload[0].payload;
@@ -151,7 +191,6 @@ const safeLabelFormatter = (value, entry) => {
 
 const CallerComparisonChart = () => {
   const isMobile = useIsMobile();
-  const mobileData = transformDataForMobile(metrics);
 
   return (
     <StyleProvider
@@ -166,65 +205,8 @@ const CallerComparisonChart = () => {
         />
 
         <Card className="p-6 bg-white shadow-lg border border-gray-100 relative overflow-hidden">
-          {/* Mobile Chart View */}
-          {isMobile && (
-            <div className="overflow-x-auto pb-4">
-              <div className="h-[500px] min-w-[600px] relative z-10">
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart
-                    data={mobileData}
-                    layout="vertical"
-                    margin={{ top: 20, right: 30, bottom: 20, left: 120 }}
-                    barGap={0}
-                    barSize={25}
-                  >
-                    <CartesianGrid strokeDasharray="3 3" opacity={0.3} horizontal={true} vertical={false} />
-                    <XAxis 
-                      type="number" 
-                      tick={{ fill: '#333', fontSize: 13 }}
-                    />
-                    <YAxis 
-                      type="category"
-                      dataKey="name"
-                      tick={{ fill: '#333', fontSize: 14, fontWeight: 'bold' }}
-                      width={110}
-                    />
-                    <Tooltip content={ChartTooltip} />
-                    <Bar 
-                      dataKey="value" 
-                      fill="#CBD5E1"
-                      radius={[4, 4, 4, 4]}
-                    >
-                      {mobileData.map((entry, index) => (
-                        <Cell 
-                          key={`cell-${index}`} 
-                          fill={entry.color}
-                        />
-                      ))}
-                      <LabelList 
-                        dataKey="value" 
-                        position="right" 
-                        fill="#333" 
-                        fontSize={14}
-                        fontWeight="bold"
-                        formatter={safeLabelFormatter}
-                      />
-                    </Bar>
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
-              <div className="flex justify-center items-center gap-6 mt-4 pt-4 border-t border-gray-100">
-                <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 bg-[#CBD5E1] rounded-sm"></div>
-                  <span className="text-agency-gray">Human Agents</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 bg-agency-vibrantPurple rounded-sm"></div>
-                  <span className="text-agency-gray">AI Voice Agents</span>
-                </div>
-              </div>
-            </div>
-          )}
+          {/* Mobile View - Card-based comparison */}
+          {isMobile && <MobileComparisonView data={metrics} />}
 
           {/* Desktop Chart View */}
           {!isMobile && (
