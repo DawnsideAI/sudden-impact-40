@@ -126,7 +126,7 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
         src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
         style={{ 
           width: "100%", 
-          height: isMobile ? "800px" : "735px", 
+          height: isMobile ? "1000px" : "735px", 
           border: "none", 
           borderRadius: "8px" 
         }}
@@ -139,7 +139,7 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
         data-deactivation-type="neverDeactivate"
         data-deactivation-value=""
         data-form-name="A2P Form - New"
-        data-height={isMobile ? "800" : "735"}
+        data-height={isMobile ? "1000" : "735"}
         data-layout-iframe-id="inline-Gf3ORV8Uba4HRiXoml5L"
         data-form-id="Gf3ORV8Uba4HRiXoml5L"
         title="A2P Form - New"

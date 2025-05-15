@@ -22,12 +22,12 @@
   .iframe-container {
     overflow: visible;
     height: auto !important;
-    min-height: 600px;
+    min-height: 700px;
   }
   
   .iframe-container iframe {
     position: relative;
-    height: 800px !important; /* Further increased height to prevent cut-off */
+    height: 1000px !important; /* Significantly increased height to show all content including submit buttons */
     -webkit-overflow-scrolling: touch;
   }
   

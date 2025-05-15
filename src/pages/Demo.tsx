@@ -152,7 +152,7 @@ const Demo = () => {
                         src="https://link.suddenimpactagency.io/widget/booking/MYRdt5Un7mP29erZS5rx" 
                         style={{ 
                           width: "100%",
-                          height: isMobile ? "800px" : "800px", 
+                          height: isMobile ? "1000px" : "800px", 
                           border: "none",
                         }}
                         scrolling="no" 

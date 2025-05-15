@@ -6,11 +6,13 @@ import { Link } from "react-router-dom";
 import { toast } from "@/hooks/use-toast";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import DemoCalendarForm from "@/components/demo/DemoCalendarForm";
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const DemoForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
   const [showDemoVideo, setShowDemoVideo] = useState(false);
+  const isMobile = useIsMobile();
   
   // Add the script tag for the form embed.js after component mounts
   useEffect(() => {
@@ -130,7 +132,12 @@ const DemoForm = () => {
                 <div className="w-full iframe-container">
                   <iframe
                     src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
-                    style={{width:"100%", height:"100%", border:"none", borderRadius:"8px"}}
+                    style={{
+                      width: "100%", 
+                      height: isMobile ? "1000px" : "735px",
+                      border: "none", 
+                      borderRadius: "8px"
+                    }}
                     id="inline-Gf3ORV8Uba4HRiXoml5L" 
                     data-layout="{'id':'INLINE'}"
                     data-trigger-type="alwaysShow"
@@ -140,7 +147,7 @@ const DemoForm = () => {
                     data-deactivation-type="neverDeactivate"
                     data-deactivation-value=""
                     data-form-name="A2P Form - New"
-                    data-height="735"
+                    data-height={isMobile ? "1000" : "735"}
                     data-layout-iframe-id="inline-Gf3ORV8Uba4HRiXoml5L"
                     data-form-id="Gf3ORV8Uba4HRiXoml5L"
                     title="A2P Form - New"
