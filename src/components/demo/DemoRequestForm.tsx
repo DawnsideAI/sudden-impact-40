@@ -68,7 +68,7 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
   const phoneNumber = "+1 (302) 618-3977";
 
   return (
-    <div className="relative iframe-container" style={{ height: "auto" }}>
+    <div className="relative iframe-container" style={{ height: isSubmitted ? "auto" : "auto" }}>
       {!isSubmitted ? (
         <>
           <iframe
@@ -111,7 +111,7 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="flex flex-col items-center justify-center py-12 px-4 text-center"
+          className="flex flex-col items-center justify-center py-12 px-4 text-center bg-white rounded-xl shadow-md"
         >
           <motion.div 
             initial={{ scale: 0.8 }}
