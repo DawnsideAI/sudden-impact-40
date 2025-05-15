@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
@@ -45,7 +44,7 @@ const Demo = () => {
   return (
     <Layout lightMode={true}>
       {/* Hero Section - Mobile optimized */}
-      <section className="pt-20 md:pt-32 pb-8 md:pb-20 bg-gradient-to-br from-brand-darkPurple via-brand-purple to-black border-b border-white/10 relative overflow-hidden">
+      <section className="pt-16 md:pt-32 pb-6 md:pb-20 bg-gradient-to-br from-brand-darkPurple via-brand-purple to-black border-b border-white/10 relative overflow-hidden">
         {/* Background elements */}
         <div className="absolute inset-0">
           <div className="absolute top-0 left-0 w-full h-full bg-[url('/grid.svg')] bg-center opacity-10"></div>
@@ -74,14 +73,14 @@ const Demo = () => {
       {showAIDemo && <AIDemoContact />}
 
       {/* Demo Options - Mobile optimized */}
-      <section className="py-6 md:py-16 bg-white">
-        <div className="container-custom px-4 md:px-8">
+      <section className="py-4 md:py-16 bg-white">
+        <div className="container-custom px-2 md:px-8">
           <StyleProvider className="max-w-4xl mx-auto">
             {/* Tab Navigation - Mobile friendly with overflow handling */}
             <div className="flex border-b border-gray-300 mb-4 md:mb-12 overflow-x-auto no-scrollbar">
               <button
                 onClick={() => setActiveTab("live")}
-                className={`py-3 md:py-4 px-4 md:px-6 text-sm md:text-lg font-medium border-b-2 transition-colors whitespace-nowrap flex-1 ${
+                className={`py-2 md:py-4 px-3 md:px-6 text-sm md:text-lg font-medium border-b-2 transition-colors whitespace-nowrap flex-1 ${
                   activeTab === "live"
                     ? "border-brand-violet text-brand-violet"
                     : "border-transparent text-brand-gray hover:text-brand-dark"
@@ -92,7 +91,7 @@ const Demo = () => {
               </button>
               <button
                 onClick={() => setActiveTab("schedule")}
-                className={`py-3 md:py-4 px-4 md:px-6 text-sm md:text-lg font-medium border-b-2 transition-colors whitespace-nowrap flex-1 ${
+                className={`py-2 md:py-4 px-3 md:px-6 text-sm md:text-lg font-medium border-b-2 transition-colors whitespace-nowrap flex-1 ${
                   activeTab === "schedule"
                     ? "border-brand-violet text-brand-violet"
                     : "border-transparent text-brand-gray hover:text-brand-dark"
@@ -110,10 +109,10 @@ const Demo = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
               >
-                <StyleProvider delay={0.2} className="bg-white rounded-xl p-4 md:p-8 shadow-md border border-brand-purple/10">
-                  <div className="text-center mb-4 md:mb-8">
-                    <div className="w-14 h-14 md:w-16 md:h-16 mx-auto rounded-full bg-gradient-to-br from-brand-pink to-brand-aqua/70 flex items-center justify-center text-white mb-3 md:mb-4">
-                      <Mic className="h-5 w-5 md:h-6 md:w-6" />
+                <StyleProvider delay={0.2} className="bg-white rounded-xl p-2 md:p-8 shadow-md border border-brand-purple/10">
+                  <div className="text-center mb-3 md:mb-8">
+                    <div className="w-12 h-12 md:w-16 md:h-16 mx-auto rounded-full bg-gradient-to-br from-brand-pink to-brand-aqua/70 flex items-center justify-center text-white mb-2 md:mb-4">
+                      <Mic className="h-4 w-4 md:h-6 md:w-6" />
                     </div>
                     <h2 className="text-lg md:text-2xl font-bold mb-1 md:mb-2 text-brand-dark">Live AI Voice Agent Demo</h2>
                     <p className="text-xs md:text-base text-brand-gray">
@@ -133,10 +132,10 @@ const Demo = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
               >
-                <StyleProvider delay={0.2} className="bg-white rounded-xl p-4 md:p-8 shadow-md border border-brand-purple/10">
-                  <div className="text-center mb-3 md:mb-4">
-                    <div className="w-14 h-14 md:w-16 md:h-16 mx-auto rounded-full bg-gradient-to-br from-brand-pink to-brand-aqua/70 flex items-center justify-center text-white mb-3 md:mb-4">
-                      <CalendarClock className="h-5 w-5 md:h-6 md:w-6" />
+                <StyleProvider delay={0.2} className="bg-white rounded-xl p-2 md:p-8 shadow-md border border-brand-purple/10">
+                  <div className="text-center mb-2 md:mb-4">
+                    <div className="w-12 h-12 md:w-16 md:h-16 mx-auto rounded-full bg-gradient-to-br from-brand-pink to-brand-aqua/70 flex items-center justify-center text-white mb-2 md:mb-4">
+                      <CalendarClock className="h-4 w-4 md:h-6 md:w-6" />
                     </div>
                     <h2 className="text-lg md:text-2xl font-bold mb-1 md:mb-2 text-brand-dark">Schedule Your Demo</h2>
                     <p className="text-xs md:text-base text-brand-gray mb-2 md:mb-4">
@@ -144,19 +143,19 @@ const Demo = () => {
                     </p>
                   </div>
 
-                  {/* Updated Booking Widget using the new embed code - Mobile optimized */}
-                  <div className="w-full overflow-hidden">
-                    <div style={{ height: isMobile ? "650px" : "800px" }} className="iframe-container">
+                  {/* Updated Booking Widget with improved mobile handling */}
+                  <div className="w-full calendar-container">
+                    <div className="iframe-container">
                       <iframe 
                         src="https://link.suddenimpactagency.io/widget/booking/MYRdt5Un7mP29erZS5rx" 
                         style={{ 
-                          width: "100%", 
-                          height: "100%", 
-                          border: "none", 
-                          overflow: "hidden" 
+                          width: "100%",
+                          height: isMobile ? "680px" : "800px", 
+                          border: "none",
                         }}
                         scrolling="no" 
                         id="msgsndr-calendar"
+                        className="no-scrollbar"
                       ></iframe>
                     </div>
                   </div>
@@ -167,7 +166,7 @@ const Demo = () => {
         </div>
       </section>
 
-      {/* Features Section - Updated to be mobile friendly */}
+      {/* Features Section */}
       <section className="py-10 md:py-20 bg-gradient-to-br from-brand-darkPurple via-brand-purple to-brand-violet border-y border-white/10 relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-0 left-0 w-full h-full bg-[url('/grid.svg')] bg-center opacity-10"></div>
@@ -221,7 +220,7 @@ const Demo = () => {
         </div>
       </section>
 
-      {/* Call to Action - Mobile optimized */}
+      {/* Call to Action */}
       {!showAIDemo && (
         <section className="py-8 md:py-16 bg-white">
           <div className="container-custom px-4 md:px-8">
