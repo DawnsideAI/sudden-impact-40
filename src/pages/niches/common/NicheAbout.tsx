@@ -77,33 +77,6 @@ const NicheAbout = () => {
     }
   ];
 
-  const team = [
-    {
-      name: "Alexandra Richards",
-      title: "Founder & CEO",
-      image: "https://i.pravatar.cc/300?img=1",
-      initials: "AR"
-    },
-    {
-      name: "Michael Chen",
-      title: "Chief Technology Officer",
-      image: "https://i.pravatar.cc/300?img=2",
-      initials: "MC"
-    },
-    {
-      name: "Sarah Johnson",
-      title: "Head of Customer Success",
-      image: "https://i.pravatar.cc/300?img=3",
-      initials: "SJ"
-    },
-    {
-      name: "Daniel Martinez",
-      title: `${industryTitle} Solutions Specialist`,
-      image: "https://i.pravatar.cc/300?img=4",
-      initials: "DM"
-    }
-  ];
-
   return (
     <NicheLayout 
       industry={validIndustry as any}
@@ -139,28 +112,6 @@ const NicheAbout = () => {
                 </StyleProvider>
               ))}
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 bg-gray-50">
-        <div className="container-custom">
-          <SectionTitle 
-            title="Meet Our Team"
-            subtitle="The experts behind our AI voice technology"
-            centered={true}
-          />
-          
-          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
-            {team.map((member, index) => (
-              <StyleProvider key={index} delay={index * 0.1} className="text-center">
-                <div className="w-32 h-32 rounded-full bg-gradient-to-br from-brand-pink to-brand-aqua mx-auto flex items-center justify-center text-white text-2xl font-bold">
-                  {member.initials}
-                </div>
-                <h3 className="mt-4 text-xl font-semibold text-gray-800">{member.name}</h3>
-                <p className="text-gray-600">{member.title}</p>
-              </StyleProvider>
-            ))}
           </div>
         </div>
       </section>
