@@ -1,24 +1,21 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Check, ArrowRight, Calendar } from 'lucide-react';
+import { Check, ArrowRight, Calendar, PhoneCall } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/hooks/use-toast";
 import StyleProvider from '@/components/design/StyleProvider';
 import SectionTitle from '@/components/design/SectionTitle';
 import AIDemoCallDialog from './AIDemoCallDialog';
-import '@/styles/iframe-container.css';
 
 interface NicheContactFormProps {
   industry: 'healthcare' | 'real-estate' | 'restaurants' | 'service-contractors';
 }
 
 const NicheContactForm = ({ industry }: NicheContactFormProps) => {
-  const { toast } = useToast();
   const [showPricing, setShowPricing] = useState(true);
-  const [formSubmitted, setFormSubmitted] = useState(false);
   const [showCallDialog, setShowCallDialog] = useState(false);
+  const phoneNumber = "+1 (302) 618-3977";
 
   // Define industry-specific form labels
   const getIndustryLabel = () => {
@@ -33,21 +30,6 @@ const NicheContactForm = ({ industry }: NicheContactFormProps) => {
         return 'Service Business Name';
       default:
         return 'Company Name';
-    }
-  };
-
-  const getButtonText = () => {
-    switch(industry) {
-      case 'healthcare':
-        return 'Book Your Appointment';
-      case 'real-estate':
-        return 'Get Started Now';
-      case 'restaurants':
-        return 'Reserve Now';
-      case 'service-contractors':
-        return 'Schedule Service Now';
-      default:
-        return 'Submit';
     }
   };
 
@@ -67,41 +49,7 @@ const NicheContactForm = ({ industry }: NicheContactFormProps) => {
   };
 
   const industryLabel = getIndustryLabel();
-  const buttonText = getButtonText();
   const gradient = getGradient();
-
-  // Listen for form submission message from iframe
-  useEffect(() => {
-    const handleMessage = (event: MessageEvent) => {
-      // Check if the message is from our form iframe
-      if (
-        event.data && 
-        typeof event.data === 'object' && 
-        event.data.formId === 'Gf3ORV8Uba4HRiXoml5L' && 
-        event.data.type === 'form:submit'
-      ) {
-        setFormSubmitted(true);
-        setShowCallDialog(true);
-        toast({
-          title: "Form submitted successfully!",
-          description: "Call our AI demo number now.",
-        });
-      }
-    };
-
-    window.addEventListener('message', handleMessage);
-    return () => window.removeEventListener('message', handleMessage);
-  }, [toast]);
-
-  // For demo purposes - manual trigger (will be removed in production)
-  const handleDemoSubmit = () => {
-    setFormSubmitted(true);
-    setShowCallDialog(true);
-    toast({
-      title: "Demo Request Submitted!",
-      description: "Call the AI demo number shown in the popup.",
-    });
-  };
 
   // Basic pricing plans to display inline
   const pricingPlans = [
@@ -131,7 +79,7 @@ const NicheContactForm = ({ industry }: NicheContactFormProps) => {
       <div className="container-custom">
         <SectionTitle
           title="Get Started Today"
-          subtitle={`Complete this form to begin your ${industry.replace('-', ' ')} automation journey`}
+          subtitle={`Begin your ${industry.replace('-', ' ')} automation journey`}
           centered={true}
         />
         
@@ -192,27 +140,49 @@ const NicheContactForm = ({ industry }: NicheContactFormProps) => {
         <div id="ai-demo-form" className="mt-12 max-w-3xl mx-auto">
           <StyleProvider className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
             <h3 className="text-xl font-semibold text-center mb-4">Try Our AI Voice Agent</h3>
-            <p className="text-center text-gray-600 mb-6">Fill out the form to get immediate access to our AI voice agent</p>
+            <p className="text-center text-gray-600 mb-6">Call our demo number to experience our AI voice agent</p>
             
-            {/* Embedded form to access AI's number */}
-            <div className="iframe-container" style={{ height: "450px" }}>
-              <iframe 
-                src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
-                id="inline-Gf3ORV8Uba4HRiXoml5L" 
-                className="w-full h-full border-0 no-scrollbar"
-                title="AI Voice Agent Demo Form"
-                loading="lazy"
-              ></iframe>
-            </div>
-            
-            {/* For demo/testing purposes only - simulates form submission */}
-            <div className="text-center mt-2">
-              <button 
-                onClick={handleDemoSubmit}
-                className="text-xs text-gray-400 hover:text-gray-500"
+            {/* Direct call section */}
+            <div className="text-center py-8">
+              <motion.div 
+                initial={{ scale: 1 }}
+                animate={{ scale: [1, 1.05, 1] }}
+                transition={{ type: "spring", stiffness: 260, damping: 20, repeat: Infinity, repeatType: "reverse", duration: 2 }}
+                className="bg-gradient-to-r from-brand-pink to-brand-aqua w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-6"
               >
-                (Demo Submit)
-              </button>
+                <PhoneCall size={30} className="text-white" />
+              </motion.div>
+              
+              <motion.a
+                href={`tel:${phoneNumber.replace(/\D/g, '')}`}
+                className="text-3xl font-bold mb-5 text-brand-aqua block"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
+                {phoneNumber}
+              </motion.a>
+              
+              <Button
+                variant="action"
+                size="lg"
+                className="shadow-lg bg-gradient-to-r from-brand-pink to-brand-aqua hover:shadow-xl transition-all duration-300 my-4"
+                onClick={() => window.location.href = `tel:${phoneNumber.replace(/\D/g, '')}`}
+              >
+                <PhoneCall className="mr-2" /> Call Now
+              </Button>
+              
+              <div className="mt-8">
+                <h3 className="text-lg font-bold mb-4">Watch Demo Video</h3>
+                <div className="aspect-video max-w-lg mx-auto overflow-hidden rounded-lg shadow-md">
+                  <iframe
+                    src="https://www.youtube.com/embed/HuU_pxXVVqo"
+                    title="AI Voice Agent Demo"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full"
+                  ></iframe>
+                </div>
+              </div>
             </div>
             
             <div className="text-center mt-8">
@@ -234,7 +204,7 @@ const NicheContactForm = ({ industry }: NicheContactFormProps) => {
       <AIDemoCallDialog 
         open={showCallDialog}
         onOpenChange={setShowCallDialog}
-        phoneNumber="+1 (302) 618-3977"
+        phoneNumber={phoneNumber}
       />
     </section>
   );

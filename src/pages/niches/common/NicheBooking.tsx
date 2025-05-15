@@ -1,21 +1,19 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { PhoneCall } from 'lucide-react';
 import NicheLayout from '@/components/niches/NicheLayout';
 import StyleProvider from '@/components/design/StyleProvider';
 import SectionTitle from '@/components/design/SectionTitle';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
 import AIDemoCallDialog from '@/components/niches/AIDemoCallDialog';
-import { useToast } from '@/hooks/use-toast';
 import '@/styles/iframe-container.css';
 
 const NicheBooking = () => {
   const { industry = 'healthcare' } = useParams();
   const [showDemoVideo, setShowDemoVideo] = useState(false);
-  const [formSubmitted, setFormSubmitted] = useState(false);
   const [showCallDialog, setShowCallDialog] = useState(false);
-  const { toast } = useToast();
   
   const validIndustry = ['healthcare', 'real-estate', 'restaurants', 'service-contractors'].includes(industry) 
     ? industry 
@@ -24,47 +22,25 @@ const NicheBooking = () => {
   const getIndustryText = () => {
     switch(validIndustry) {
       case 'healthcare':
-        return { title: "Healthcare", subtitle: "Schedule a personalized AI agent demo to see how we can streamline your patient communications" };
+        return { title: "Healthcare", subtitle: "Experience our AI agent demo to see how we can streamline your patient communications" };
       case 'real-estate':
-        return { title: "Real Estate", subtitle: "Schedule a personalized AI agent demo to see how we can boost your property showings and client engagement" };
+        return { title: "Real Estate", subtitle: "Experience our AI agent demo to see how we can boost your property showings and client engagement" };
       case 'restaurants':
-        return { title: "Restaurant", subtitle: "Schedule a personalized AI agent demo to see how we can enhance your reservation system and guest experience" };
+        return { title: "Restaurant", subtitle: "Experience our AI agent demo to see how we can enhance your reservation system and guest experience" };
       case 'service-contractors':
-        return { title: "Service", subtitle: "Schedule a personalized AI agent demo to see how we can optimize your booking system and customer follow-ups" };
+        return { title: "Service", subtitle: "Experience our AI agent demo to see how we can optimize your booking system and customer follow-ups" };
       default:
-        return { title: "Your", subtitle: "Schedule a personalized demo to see our AI voice agents in action" };
+        return { title: "Your", subtitle: "Experience our AI voice agents in action" };
     }
   };
   
   const industryText = getIndustryText();
-
-  // Listen for form submission events from the iframe
-  useEffect(() => {
-    const handleMessage = (event: MessageEvent) => {
-      // Check if the message is from our form iframe
-      if (
-        event.data && 
-        typeof event.data === 'object' && 
-        event.data.formId === 'Gf3ORV8Uba4HRiXoml5L' && 
-        event.data.type === 'form:submit'
-      ) {
-        setFormSubmitted(true);
-        setShowCallDialog(true);
-        toast({
-          title: "Form submitted successfully!",
-          description: "Call our AI demo number now.",
-        });
-      }
-    };
-
-    window.addEventListener('message', handleMessage);
-    return () => window.removeEventListener('message', handleMessage);
-  }, [toast]);
+  const phoneNumber = "+1 (302) 618-3977";
 
   return (
     <NicheLayout 
       industry={validIndustry as any}
-      title={`Book Your ${industryText.title} AI Demo`}
+      title={`${industryText.title} AI Demo`}
       subtitle={industryText.subtitle}
     >
       <section className="py-20 bg-white">
@@ -72,35 +48,48 @@ const NicheBooking = () => {
           <div className="max-w-4xl mx-auto">
             <SectionTitle 
               title="Experience Our AI Voice Agent Live"
-              subtitle="Complete the form below to schedule your personalized demo"
+              subtitle="Call our demo number to speak with our AI voice agent"
               centered={true}
             />
             
             <StyleProvider className="bg-white rounded-xl p-6 md:p-8 shadow-lg border border-gray-200 mt-12">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="space-y-6">
-                  <h3 className="text-xl font-bold text-gray-800">Schedule a Live Demo</h3>
-                  {/* Embedding the external form to access AI's number */}
-                  <div className="iframe-container" style={{ height: "500px" }}>
-                    <iframe 
-                      src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
-                      id="inline-Gf3ORV8Uba4HRiXoml5L" 
-                      className="w-full h-full border-0 no-scrollbar"
-                      title="AI Voice Agent Demo Form"
-                      loading="lazy"
-                    ></iframe>
-                  </div>
+                <div className="space-y-6 flex flex-col items-center justify-center text-center">
+                  <h3 className="text-xl font-bold text-gray-800">Call Our AI Demo</h3>
                   
-                  {/* For demo testing purposes */}
-                  <div className="text-right">
+                  <motion.div 
+                    initial={{ scale: 1 }}
+                    animate={{ scale: [1, 1.05, 1] }}
+                    transition={{ type: "spring", stiffness: 260, damping: 20, repeat: Infinity, repeatType: "reverse", duration: 2 }}
+                    className="bg-gradient-to-r from-brand-pink to-brand-aqua w-16 h-16 rounded-full flex items-center justify-center mb-6"
+                  >
+                    <PhoneCall size={30} className="text-white" />
+                  </motion.div>
+                  
+                  <motion.a
+                    href={`tel:${phoneNumber.replace(/\D/g, '')}`}
+                    className="text-3xl font-bold mb-5 text-brand-aqua"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  >
+                    {phoneNumber}
+                  </motion.a>
+                  
+                  <Button
+                    variant="action"
+                    size="lg"
+                    className="shadow-lg bg-gradient-to-r from-brand-pink to-brand-aqua hover:shadow-xl transition-all duration-300"
+                    onClick={() => window.location.href = `tel:${phoneNumber.replace(/\D/g, '')}`}
+                  >
+                    <PhoneCall className="mr-2" /> Call Now
+                  </Button>
+                  
+                  <div className="text-right mt-12">
                     <button 
-                      onClick={() => {
-                        setFormSubmitted(true);
-                        setShowCallDialog(true);
-                      }}
-                      className="text-xs text-gray-400 hover:text-gray-500"
+                      onClick={() => setShowCallDialog(true)}
+                      className="text-sm text-brand-aqua hover:text-brand-pink"
                     >
-                      (Demo Submit)
+                      Show in popup
                     </button>
                   </div>
                 </div>
@@ -164,7 +153,7 @@ const NicheBooking = () => {
       <AIDemoCallDialog 
         open={showCallDialog} 
         onOpenChange={setShowCallDialog}
-        phoneNumber="+1 (302) 618-3977"
+        phoneNumber={phoneNumber}
       />
       
       {/* Add pricing section directly on the booking page for easier access */}

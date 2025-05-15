@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -19,8 +20,9 @@ import RealEstateNiche from "./pages/niches/RealEstate";
 import RestaurantsNiche from "./pages/niches/Restaurants";
 import ServiceContractorsNiche from "./pages/niches/ServiceContractors";
 
-// Import niche common pages - keeping About for compatibility with current user URL
+// Import niche common pages
 import NicheAbout from "./pages/niches/common/NicheAbout";
+import NicheBooking from "./pages/niches/common/NicheBooking";
 
 import "./styles/iframe-container.css"; // Import the iframe container styles globally
 
@@ -49,8 +51,9 @@ const App = () => (
           <Route path="/niches/restaurants" element={<RestaurantsNiche />} />
           <Route path="/niches/service-contractors" element={<ServiceContractorsNiche />} />
           
-          {/* Keep About page for compatibility with current user URL */}
+          {/* Common niche page routes */}
           <Route path="/niches/:industry/about" element={<NicheAbout />} />
+          <Route path="/niches/:industry/booking" element={<NicheBooking />} />
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
