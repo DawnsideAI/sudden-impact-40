@@ -7,9 +7,20 @@ import SectionTitle from "../design/SectionTitle";
 const CallToAction = () => {
   return (
     <section className="section-padding relative overflow-hidden">
-      {/* Background elements */}
+      {/* Enhanced background elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-purple/10 rounded-full blur-3xl" />
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.5 }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-purple/10 rounded-full blur-3xl"
+        />
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.5, delay: 0.2 }}
+          className="absolute top-1/3 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-brand-pink/10 rounded-full blur-3xl"
+        />
       </div>
       
       <div className="container-custom relative z-10">
@@ -29,19 +40,30 @@ const CallToAction = () => {
             />
             
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center mt-8">
-              <Link 
-                to="/pricing" 
-                className="inline-flex items-center justify-center px-6 py-3 text-brand-indigo bg-white hover:bg-gray-100 rounded-lg transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
+              <motion.div
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
               >
-                Start Free Trial
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-              <Link 
-                to="/demo" 
-                className="inline-flex items-center justify-center px-6 py-3 text-white bg-white/10 hover:bg-white/20 rounded-lg transition-colors border border-white/20 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
+                <Link 
+                  to="/pricing" 
+                  className="inline-flex items-center justify-center px-6 py-3 text-brand-indigo bg-white hover:bg-gray-100 rounded-lg transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
+                >
+                  Start Free Trial
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
+              </motion.div>
+              
+              <motion.div
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
               >
-                See Live Demo
-              </Link>
+                <Link 
+                  to="/demo" 
+                  className="inline-flex items-center justify-center px-6 py-3 text-white bg-white/10 hover:bg-white/20 rounded-lg transition-colors border border-white/20 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
+                >
+                  See Live Demo
+                </Link>
+              </motion.div>
             </div>
           </div>
         </motion.div>
