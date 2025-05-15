@@ -36,8 +36,8 @@ const Stats = () => {
     <div className="py-16 lg:py-24 relative overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute h-[300px] w-[300px] rounded-full bg-agency-vibrantPurple/5 blur-3xl -top-10 -left-10"></div>
-        <div className="absolute h-[400px] w-[400px] rounded-full bg-agency-blue/5 blur-3xl bottom-10 right-10"></div>
+        <div className="absolute h-[300px] w-[300px] rounded-full bg-agency-vibrantPurple/10 blur-3xl -top-10 -left-10"></div>
+        <div className="absolute h-[400px] w-[400px] rounded-full bg-agency-blue/10 blur-3xl bottom-10 right-10"></div>
       </div>
       
       <div className="relative z-10">
