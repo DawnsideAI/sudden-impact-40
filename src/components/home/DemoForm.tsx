@@ -7,11 +7,18 @@ import { toast } from "@/hooks/use-toast";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import DemoCalendarForm from "@/components/demo/DemoCalendarForm";
 import { useIsMobile } from '@/hooks/use-mobile';
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { format } from "date-fns";
+import { Button } from "@/components/ui/button";
+import { CalendarIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Calendar as CalendarComponent } from "@/components/ui/calendar";
 
 const DemoForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
   const [showDemoVideo, setShowDemoVideo] = useState(false);
+  const [date, setDate] = useState<Date>();
   const isMobile = useIsMobile();
   
   // Add the script tag for the form embed.js after component mounts
@@ -45,6 +52,16 @@ const DemoForm = () => {
       title: "Demo Request Submitted!",
       description: "You'll be connected to our AI voice agent shortly.",
     });
+  };
+
+  const handleDateSelect = (selectedDate: Date | undefined) => {
+    setDate(selectedDate);
+    if (selectedDate) {
+      toast({
+        title: "Date Selected!",
+        description: `You've selected ${format(selectedDate, "PPP")} for your demo. Our team will contact you to confirm the time.`,
+      });
+    }
   };
 
   return (
@@ -108,12 +125,30 @@ const DemoForm = () => {
                   Watch Demo Video
                 </button>
                 
-                <button
-                  onClick={handleScheduleClick}
-                  className="bg-white border border-brand-aqua/30 text-brand-aqua hover:bg-gray-50 font-medium py-3 px-6 rounded-lg shadow-sm hover:shadow-md transition-all"
-                >
-                  Schedule For Later
-                </button>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <button
+                      className="bg-white border border-brand-aqua/30 text-brand-aqua hover:bg-gray-50 font-medium py-3 px-6 rounded-lg shadow-sm hover:shadow-md transition-all"
+                    >
+                      <Calendar className="inline-block mr-2 h-4 w-4" />
+                      Schedule For Later
+                    </button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0 bg-white shadow-xl border border-gray-100" align="center">
+                    <div className="p-4 border-b border-gray-100">
+                      <h4 className="font-medium text-lg text-gray-800">Select a Demo Date</h4>
+                      <p className="text-gray-600 text-sm">Choose your preferred date</p>
+                    </div>
+                    <CalendarComponent
+                      mode="single"
+                      selected={date}
+                      onSelect={handleDateSelect}
+                      className={cn("p-3 pointer-events-auto")}
+                      disabled={(date) => date < new Date()}
+                      initialFocus
+                    />
+                  </PopoverContent>
+                </Popover>
               </div>
             </div>
           </motion.div>
