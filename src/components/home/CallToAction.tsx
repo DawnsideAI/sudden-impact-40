@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Calendar } from "lucide-react";
+import { ArrowRight, Calendar, Play } from "lucide-react";
 import SectionTitle from "../design/SectionTitle";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -67,10 +67,10 @@ const CallToAction = () => {
               >
                 <button 
                   onClick={() => setShowDemoVideo(true)}
-                  className="inline-flex items-center justify-center px-6 py-3 text-white bg-brand-pink/80 hover:bg-brand-pink rounded-lg transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
+                  className="inline-flex items-center justify-center px-6 py-3 text-brand-pink bg-white hover:bg-gray-100 rounded-lg transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 border border-brand-pink/20"
                 >
-                  Watch Demo
-                  <Calendar className="ml-2 h-5 w-5" />
+                  <Play className="mr-2 h-5 w-5 text-brand-pink" fill="currentColor" />
+                  Watch Demo Video
                 </button>
               </motion.div>
             </div>
