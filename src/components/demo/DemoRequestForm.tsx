@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Check, PhoneCall } from "lucide-react";
@@ -120,7 +119,7 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
   }
 
   return (
-    <div className="relative iframe-container" style={{ height: isMobile ? "680px" : "735px" }}>
+    <div className="relative iframe-container" style={{ height: isMobile ? "700px" : "735px" }}>
       <iframe
         ref={iframeRef}
         src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
@@ -139,7 +138,7 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
         data-deactivation-type="neverDeactivate"
         data-deactivation-value=""
         data-form-name="A2P Form - New"
-        data-height={isMobile ? "680" : "735"}
+        data-height={isMobile ? "700" : "735"}
         data-layout-iframe-id="inline-Gf3ORV8Uba4HRiXoml5L"
         data-form-id="Gf3ORV8Uba4HRiXoml5L"
         title="A2P Form - New"

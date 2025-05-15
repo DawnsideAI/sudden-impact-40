@@ -8,6 +8,7 @@ import WhiteSection from "@/components/layout/WhiteSection";
 import StyleProvider from "@/components/design/StyleProvider";
 import SectionTitle from "@/components/design/SectionTitle";
 import { useIsMobile } from '@/hooks/use-mobile';
+import "../styles/iframe-container.css"; // Import the iframe-container CSS
 
 const Demo = () => {
   const [activeTab, setActiveTab] = useState("live");
@@ -150,7 +151,7 @@ const Demo = () => {
                         src="https://link.suddenimpactagency.io/widget/booking/MYRdt5Un7mP29erZS5rx" 
                         style={{ 
                           width: "100%",
-                          height: isMobile ? "680px" : "800px", 
+                          height: isMobile ? "700px" : "800px", 
                           border: "none",
                         }}
                         scrolling="no" 
