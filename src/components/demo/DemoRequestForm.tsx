@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Check, PhoneCall } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { Link } from "react-router-dom";
+import { Checkbox } from "@/components/ui/checkbox";
 
 interface FormState {
   name: string;
@@ -11,6 +12,7 @@ interface FormState {
   phone: string;
   company: string;
   message: string;
+  smsConsent: boolean;
 }
 
 interface DemoRequestFormProps {
@@ -24,6 +26,7 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
     phone: "",
     company: "",
     message: "",
+    smsConsent: false,
   });
   
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -40,6 +43,13 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
     if (formError) setFormError("");
   };
 
+  const handleCheckboxChange = (checked: boolean) => {
+    setFormState((prev) => ({
+      ...prev,
+      smsConsent: checked,
+    }));
+  };
+
   const validateForm = () => {
     // Basic email validation
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -52,6 +62,12 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
     const phoneDigits = formState.phone.replace(/\D/g, '');
     if (phoneDigits.length < 10) {
       setFormError("Please enter a valid phone number with at least 10 digits.");
+      return false;
+    }
+    
+    // SMS consent validation
+    if (!formState.smsConsent) {
+      setFormError("Please consent to receive SMS messages to continue.");
       return false;
     }
     
@@ -82,6 +98,7 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
       formData.append('phone', formState.phone);
       formData.append('company', formState.company);
       formData.append('message', formState.message);
+      formData.append('smsConsent', formState.smsConsent ? 'yes' : 'no');
       
       // Submit to GHL form
       await fetch(ghlFormEndpoint, {
@@ -122,7 +139,7 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
             className="glass-card rounded-xl p-8 max-w-2xl mx-auto relative overflow-hidden"
           >
             <div className="absolute inset-0">
-              <div className="absolute inset-0 bg-gradient-to-r from-agency-vibrantPurple/10 via-transparent to-agency-blue/10 animate-pulse-slow" />
+              <div className="absolute inset-0 bg-gradient-to-r from-brand-pink/10 via-transparent to-brand-aqua/10 animate-pulse-slow" />
             </div>
 
             <motion.div 
@@ -132,7 +149,7 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
               transition={{ delay: 0.2, duration: 0.5 }}
               className="text-center mb-8 relative z-10"
             >
-              <div className="w-16 h-16 mx-auto rounded-full bg-agency-vibrantPurple flex items-center justify-center text-white mb-4">
+              <div className="w-16 h-16 mx-auto rounded-full bg-brand-vibrantPurple flex items-center justify-center text-white mb-4">
                 <Check className="h-8 w-8" />
               </div>
               <h3 className="text-2xl font-bold text-white mb-3">
@@ -158,11 +175,11 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
                   animate={{ scale: [1, 1.1, 1] }}
                   transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
                 >
-                  <PhoneCall className="w-6 h-6 text-agency-vibrantPurple" />
+                  <PhoneCall className="w-6 h-6 text-brand-vibrantPurple" />
                 </motion.div>
                 <a 
                   href="tel:+13026183977"
-                  className="text-xl font-medium text-white hover:text-agency-vibrantPurple transition-colors"
+                  className="text-xl font-medium text-white hover:text-brand-vibrantPurple transition-colors"
                 >
                   +1 (302) 618-3977
                 </a>
@@ -179,13 +196,13 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 0.5, scale: 1 }}
               transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse" }}
-              className="absolute -top-4 -right-4 w-24 h-24 bg-agency-vibrantPurple/20 rounded-full blur-xl"
+              className="absolute -top-4 -right-4 w-24 h-24 bg-brand-vibrantPurple/20 rounded-full blur-xl"
             />
             <motion.div 
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 0.5, scale: 1 }}
               transition={{ duration: 2, repeat: Infinity, repeatType: "reverse", delay: 0.5 }}
-              className="absolute -bottom-4 -left-4 w-32 h-32 bg-agency-blue/20 rounded-full blur-xl"
+              className="absolute -bottom-4 -left-4 w-32 h-32 bg-brand-blue/20 rounded-full blur-xl"
             />
           </motion.div>
         </div>
@@ -212,7 +229,7 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
           value={formState.name}
           onChange={handleChange}
           required
-          className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-white/5 border border-white/10 focus:outline-none focus:ring-2 focus:ring-agency-vibrantPurple focus:border-agency-vibrantPurple text-white text-sm sm:text-base"
+          className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-white/5 border border-white/10 focus:outline-none focus:ring-2 focus:ring-brand-vibrantPurple focus:border-brand-vibrantPurple text-white text-sm sm:text-base"
           placeholder="Enter your full name"
         />
       </div>
@@ -228,7 +245,7 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
           value={formState.company}
           onChange={handleChange}
           required
-          className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-white/5 border border-white/10 focus:outline-none focus:ring-2 focus:ring-agency-vibrantPurple focus:border-agency-vibrantPurple text-white text-sm sm:text-base"
+          className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-white/5 border border-white/10 focus:outline-none focus:ring-2 focus:ring-brand-vibrantPurple focus:border-brand-vibrantPurple text-white text-sm sm:text-base"
           placeholder="Your company name"
         />
       </div>
@@ -244,7 +261,7 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
           value={formState.email}
           onChange={handleChange}
           required
-          className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-white/5 border border-white/10 focus:outline-none focus:ring-2 focus:ring-agency-vibrantPurple focus:border-agency-vibrantPurple text-white text-sm sm:text-base"
+          className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-white/5 border border-white/10 focus:outline-none focus:ring-2 focus:ring-brand-vibrantPurple focus:border-brand-vibrantPurple text-white text-sm sm:text-base"
           placeholder="you@company.com"
         />
       </div>
@@ -260,7 +277,7 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
           value={formState.phone}
           onChange={handleChange}
           required
-          className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-white/5 border border-white/10 focus:outline-none focus:ring-2 focus:ring-agency-vibrantPurple focus:border-agency-vibrantPurple text-white text-sm sm:text-base"
+          className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-white/5 border border-white/10 focus:outline-none focus:ring-2 focus:ring-brand-vibrantPurple focus:border-brand-vibrantPurple text-white text-sm sm:text-base"
           placeholder="(123) 456-7890"
         />
       </div>
@@ -275,28 +292,44 @@ const DemoRequestForm = ({ onFormSubmit }: DemoRequestFormProps) => {
           value={formState.message}
           onChange={handleChange}
           rows={3}
-          className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-white/5 border border-white/10 focus:outline-none focus:ring-2 focus:ring-agency-vibrantPurple focus:border-agency-vibrantPurple text-white text-sm sm:text-base"
+          className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-white/5 border border-white/10 focus:outline-none focus:ring-2 focus:ring-brand-vibrantPurple focus:border-brand-vibrantPurple text-white text-sm sm:text-base"
           placeholder="Tell us about your business needs"
         />
+      </div>
+      
+      {/* A2P Compliance SMS Consent Checkbox */}
+      <div className="flex items-start space-x-2">
+        <Checkbox 
+          id="smsConsent" 
+          checked={formState.smsConsent}
+          onCheckedChange={handleCheckboxChange}
+          className="border-brand-vibrantPurple data-[state=checked]:bg-brand-vibrantPurple data-[state=checked]:border-brand-vibrantPurple mt-1"
+        />
+        <label
+          htmlFor="smsConsent"
+          className="text-sm text-white/90 cursor-pointer"
+        >
+          I consent to receive SMS messages from Sudden Impact Agency regarding my demo request and follow-ups. Message and data rates may apply.
+        </label>
       </div>
       
       <button
         type="submit"
         disabled={isLoading}
-        className={`w-full px-4 sm:px-6 py-2 sm:py-3 text-white bg-agency-vibrantPurple hover:bg-agency-vibrantPurple/90 rounded-lg transition-colors flex items-center justify-center text-sm sm:text-base ${
+        className={`w-full px-4 sm:px-6 py-2 sm:py-3 text-white bg-gradient-to-r from-brand-pink to-brand-aqua hover:opacity-90 rounded-lg transition-colors flex items-center justify-center text-sm sm:text-base ${
           isLoading ? "opacity-70 cursor-not-allowed" : ""
         }`}
       >
-        {isLoading ? "Processing..." : "Start Live Demo"}
+        {isLoading ? "Processing..." : "Try the AI Voice Agent"}
       </button>
       
       <p className="text-xs sm:text-sm text-center text-muted-foreground mt-4">
         By submitting, you agree to our{" "}
-        <Link to="/legal" className="text-agency-vibrantPurple hover:underline">
+        <Link to="/legal" className="text-brand-vibrantPurple hover:underline">
           Terms & Conditions
         </Link>{" "}
         and{" "}
-        <Link to="/legal" className="text-agency-vibrantPurple hover:underline">
+        <Link to="/legal" className="text-brand-vibrantPurple hover:underline">
           Privacy Policy
         </Link>
         .

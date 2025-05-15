@@ -11,6 +11,8 @@ import StyleProvider from "@/components/design/StyleProvider";
 // Lazy load non-critical components
 const CallerComparisonChart = lazy(() => import("@/components/home/CallerComparisonChart"));
 const IndustrySolutions = lazy(() => import("@/components/home/IndustrySolutions"));
+const Testimonials = lazy(() => import("@/components/home/Testimonials"));
+const CaseStudies = lazy(() => import("@/components/home/CaseStudies"));
 const AIPapersSection = lazy(() => import("@/components/pricing/AIPapersSection"));
 const DemoForm = lazy(() => import("@/components/home/DemoForm"));
 const Faq = lazy(() => import("@/components/home/Faq"));
@@ -24,33 +26,62 @@ const Index = () => {
   return (
     <Layout lightMode={true}>
       <div className="flex flex-col gap-0">
+        {/* Hero - White background with gradient accents */}
         <Hero />
+        
+        {/* Stats Section - White Background */}
         <WhiteSection className="bg-white border-b border-gray-100">
           <Stats />
         </WhiteSection>
-        <WhiteSection className="bg-gradient-to-br from-white via-white to-gray-50 border-b border-gray-100">
+        
+        {/* Service Features - Gradient Background */}
+        <WhiteSection className="bg-gradient-to-br from-brand-pink/5 via-white to-brand-aqua/5 border-b border-gray-100">
           <ServiceFeatures />
         </WhiteSection>
+        
+        {/* Trusted By - White Background */}
         <WhiteSection className="bg-white border-b border-gray-100">
           <TrustedBy />
         </WhiteSection>
+        
         <Suspense fallback={<div className="h-96 flex items-center justify-center">Loading...</div>}>
-          <WhiteSection className="bg-gradient-to-br from-white via-white to-gray-50 border-b border-gray-100">
+          {/* Comparison Chart - Gradient Background */}
+          <WhiteSection className="bg-gradient-to-br from-brand-aqua/5 via-white to-brand-pink/5 border-b border-gray-100">
             <CallerComparisonChart />
           </WhiteSection>
+          
+          {/* Case Studies - White Background */}
           <WhiteSection className="bg-white border-b border-gray-100">
+            <CaseStudies />
+          </WhiteSection>
+          
+          {/* Industry Solutions - Gradient Background */}
+          <WhiteSection className="bg-gradient-to-br from-brand-purple/5 via-white to-brand-pink/5 border-b border-gray-100">
             <IndustrySolutions />
           </WhiteSection>
-          <WhiteSection className="bg-gradient-to-br from-white via-white to-gray-50 border-b border-gray-100">
+          
+          {/* Testimonials - White Background */}
+          <WhiteSection className="bg-white border-b border-gray-100">
+            <Testimonials />
+          </WhiteSection>
+          
+          {/* AI Papers - Gradient Background */}
+          <WhiteSection className="bg-gradient-to-br from-brand-pink/5 via-white to-brand-aqua/5 border-b border-gray-100">
             <AIPapersSection />
           </WhiteSection>
+          
+          {/* Demo Form - White Background */}
           <WhiteSection className="bg-white border-b border-gray-100">
             <DemoForm />
           </WhiteSection>
-          <WhiteSection className="bg-white border-b border-gray-100">
+          
+          {/* FAQ - Gradient Background */}
+          <WhiteSection className="bg-gradient-to-br from-brand-aqua/5 via-white to-brand-pink/5 border-b border-gray-100">
             <Faq />
           </WhiteSection>
-          <WhiteSection className="bg-gradient-to-br from-white via-white to-gray-50">
+          
+          {/* Call to Action - Bold Gradient Background */}
+          <WhiteSection className="bg-gradient-to-br from-brand-purple/5 via-white to-brand-aqua/5">
             <CallToAction />
           </WhiteSection>
         </Suspense>

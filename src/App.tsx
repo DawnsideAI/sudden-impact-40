@@ -13,6 +13,7 @@ import Demo from "./pages/Demo";
 import Legal from "./pages/Legal";
 import NotFound from "./pages/NotFound";
 
+// Create the client
 const queryClient = new QueryClient();
 
 const App = () => (
