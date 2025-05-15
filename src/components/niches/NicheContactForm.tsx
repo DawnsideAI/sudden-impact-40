@@ -2,14 +2,12 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Check, ArrowRight, Calendar } from 'lucide-react';
-import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 import StyleProvider from '@/components/design/StyleProvider';
 import SectionTitle from '@/components/design/SectionTitle';
+import '@/styles/iframe-container.css';
 
 interface NicheContactFormProps {
   industry: 'healthcare' | 'real-estate' | 'restaurants' | 'service-contractors';
@@ -17,7 +15,6 @@ interface NicheContactFormProps {
 
 const NicheContactForm = ({ industry }: NicheContactFormProps) => {
   const { toast } = useToast();
-  const form = useForm();
   const [showPricing, setShowPricing] = useState(true);
 
   // Define industry-specific form labels
@@ -69,14 +66,6 @@ const NicheContactForm = ({ industry }: NicheContactFormProps) => {
   const industryLabel = getIndustryLabel();
   const buttonText = getButtonText();
   const gradient = getGradient();
-
-  const onSubmit = (data: any) => {
-    console.log(data);
-    toast({
-      title: "Form submitted!",
-      description: "We'll contact you shortly to confirm your request.",
-    });
-  };
 
   // Basic pricing plans to display inline
   const pricingPlans = [
@@ -142,12 +131,14 @@ const NicheContactForm = ({ industry }: NicheContactFormProps) => {
                   ))}
                 </ul>
                 <div className="text-center">
-                  <Link 
-                    to={`/niches/${industry}/pricing`}
-                    className="text-sm text-brand-vibrantPurple hover:text-brand-pink transition-colors"
+                  <motion.button
+                    className="w-full text-sm py-2 bg-gradient-to-r from-brand-pink to-brand-aqua text-white rounded-md hover:shadow-md transition-all duration-300"
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    onClick={() => document.getElementById('ai-demo-form')?.scrollIntoView({ behavior: 'smooth' })}
                   >
-                    Full details
-                  </Link>
+                    Get Started
+                  </motion.button>
                 </div>
               </StyleProvider>
             ))}
@@ -162,16 +153,24 @@ const NicheContactForm = ({ industry }: NicheContactFormProps) => {
           </div>
         </div>
         
-        <div className="mt-12 max-w-3xl mx-auto">
+        <div id="ai-demo-form" className="mt-12 max-w-3xl mx-auto">
           <StyleProvider className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
-            <div className="text-center mb-6 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link 
-                to={`/niches/${industry}/booking`} 
-                className="inline-flex items-center px-4 py-2 bg-brand-vibrantPurple/10 text-brand-vibrantPurple hover:bg-brand-vibrantPurple/20 rounded-lg transition-colors"
-              >
-                Try our AI voice agent <ArrowRight size={16} className="ml-1" />
-              </Link>
-              
+            <h3 className="text-xl font-semibold text-center mb-4">Try Our AI Voice Agent</h3>
+            <p className="text-center text-gray-600 mb-6">Fill out the form to get immediate access to our AI voice agent</p>
+            
+            {/* Embedded form to access AI's number */}
+            <div className="iframe-container" style={{ height: "450px" }}>
+              <iframe 
+                src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
+                id="inline-Gf3ORV8Uba4HRiXoml5L" 
+                className="w-full h-full border-0 no-scrollbar"
+                title="AI Voice Agent Demo Form"
+                loading="lazy"
+              ></iframe>
+            </div>
+            
+            <div className="text-center mt-8">
+              <p className="font-medium text-gray-700 mb-2">Prefer to speak with our team?</p>
               <a 
                 href="https://link.suddenimpactagency.io/widget/booking/MYRdt5Un7mP29erZS5rx" 
                 target="_blank"
@@ -181,85 +180,6 @@ const NicheContactForm = ({ industry }: NicheContactFormProps) => {
                 <Calendar size={16} className="mr-1" /> Schedule a consultation
               </a>
             </div>
-            
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <FormItem>
-                    <FormLabel className="text-gray-700 font-medium">First Name</FormLabel>
-                    <FormControl>
-                      <Input 
-                        placeholder="Your first name" 
-                        className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-pink/20 focus:border-brand-pink outline-none transition"
-                      />
-                    </FormControl>
-                  </FormItem>
-                  
-                  <FormItem>
-                    <FormLabel className="text-gray-700 font-medium">Last Name</FormLabel>
-                    <FormControl>
-                      <Input 
-                        placeholder="Your last name"
-                        className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-pink/20 focus:border-brand-pink outline-none transition"
-                      />
-                    </FormControl>
-                  </FormItem>
-                </div>
-                
-                <FormItem>
-                  <FormLabel className="text-gray-700 font-medium">{industryLabel}</FormLabel>
-                  <FormControl>
-                    <Input 
-                      placeholder={`Enter your ${industryLabel.toLowerCase()}`}
-                      className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-pink/20 focus:border-brand-pink outline-none transition"
-                    />
-                  </FormControl>
-                </FormItem>
-                
-                <FormItem>
-                  <FormLabel className="text-gray-700 font-medium">Email</FormLabel>
-                  <FormControl>
-                    <Input 
-                      type="email"
-                      placeholder="your@email.com"
-                      className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-pink/20 focus:border-brand-pink outline-none transition"
-                    />
-                  </FormControl>
-                </FormItem>
-                
-                <FormItem>
-                  <FormLabel className="text-gray-700 font-medium">Phone Number</FormLabel>
-                  <FormControl>
-                    <Input 
-                      type="tel"
-                      placeholder="(123) 456-7890"
-                      className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-pink/20 focus:border-brand-pink outline-none transition"
-                    />
-                  </FormControl>
-                </FormItem>
-                
-                <div className="pt-4">
-                  <div className="text-center mb-4">
-                    <Link 
-                      to={`/niches/${industry}/booking`} 
-                      className="text-brand-vibrantPurple hover:text-brand-pink transition-colors"
-                    >
-                      Or schedule a demo directly
-                    </Link>
-                  </div>
-                  
-                  <Button
-                    type="submit"
-                    className={`w-full py-3 px-4 bg-gradient-to-r ${gradient} text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300`}
-                  >
-                    {buttonText}
-                  </Button>
-                  <p className="text-gray-500 text-sm text-center mt-4">
-                    We'll contact you within 24 hours to get you started.
-                  </p>
-                </div>
-              </form>
-            </Form>
           </StyleProvider>
         </div>
       </div>

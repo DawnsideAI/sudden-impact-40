@@ -1,11 +1,12 @@
 
 import React from 'react';
-import { ArrowRight, Check } from 'lucide-react';
+import { ArrowRight, Check, Calendar } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import NicheLayout from '@/components/niches/NicheLayout';
 import StyleProvider from '@/components/design/StyleProvider';
 import SectionTitle from '@/components/design/SectionTitle';
+import '@/styles/iframe-container.css';
 
 const NichePricing = () => {
   const { industry = 'healthcare' } = useParams();
@@ -139,7 +140,7 @@ const NichePricing = () => {
                   
                   <Button 
                     className={`w-full bg-gradient-to-r ${gradient} text-white py-2.5`}
-                    onClick={() => window.location.href = `/niches/${validIndustry}/booking`}
+                    onClick={() => document.getElementById('try-agent-form')?.scrollIntoView({ behavior: 'smooth' })}
                   >
                     Get Started
                     <ArrowRight size={16} className="ml-1" />
@@ -165,9 +166,45 @@ const NichePricing = () => {
                 <p className="text-gray-600 mt-1">No, all plans are month-to-month and you can cancel anytime. The setup fee is a one-time charge.</p>
               </div>
             </div>
-            <div className="mt-6 text-center">
-              <Link to="/legal" className="text-sm text-blue-600 hover:underline">View full pricing details and policies</Link>
-            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Add AI agent form section */}
+      <section id="try-agent-form" className="py-16 bg-gray-50">
+        <div className="container-custom">
+          <div className="max-w-3xl mx-auto">
+            <SectionTitle 
+              title="Try Our AI Voice Agent Now"
+              subtitle="Fill out the form below to access our AI voice agent"
+              centered={true}
+            />
+            
+            <StyleProvider className="bg-white rounded-xl p-6 md:p-8 shadow-lg border border-gray-200 mt-12">
+              {/* Form to access AI's number */}
+              <div className="iframe-container" style={{ height: "450px" }}>
+                <iframe 
+                  src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
+                  id="inline-Gf3ORV8Uba4HRiXoml5L" 
+                  className="w-full h-full border-0 no-scrollbar"
+                  title="AI Voice Agent Demo Form"
+                  loading="lazy"
+                ></iframe>
+              </div>
+              
+              <div className="text-center mt-8">
+                <p className="text-gray-600 mb-4">Alternatively, schedule a consultation with our team:</p>
+                <a 
+                  href="https://link.suddenimpactagency.io/widget/booking/MYRdt5Un7mP29erZS5rx"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center px-5 py-3 bg-gradient-to-r from-brand-purple to-brand-aqua text-white rounded-lg hover:shadow-lg transition-all duration-300"
+                >
+                  <Calendar size={16} className="mr-2" /> 
+                  Schedule a Consultation
+                </a>
+              </div>
+            </StyleProvider>
           </div>
         </div>
       </section>
