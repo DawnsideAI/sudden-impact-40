@@ -76,6 +76,10 @@ const Navbar = () => {
     { title: "Service Contractors", description: "Solutions for service contractors", path: "/industries/contractors" },
   ];
 
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
   return (
     <>
       <motion.div
@@ -195,7 +199,7 @@ const Navbar = () => {
               
               <button 
                 className="md:hidden ml-2 p-2 text-gray-700 focus:outline-none focus:ring-0"
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                onClick={toggleMobileMenu}
                 aria-label="Toggle mobile menu"
               >
                 {mobileMenuOpen ? (
