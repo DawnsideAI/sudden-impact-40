@@ -64,6 +64,7 @@ const Navbar = () => {
   const navItemClass = "text-gray-700 hover:text-brand-pink transition-colors duration-200";
 
   const toggleMobileMenu = () => {
+    console.log("Toggle mobile menu called, current state:", mobileMenuOpen);
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
@@ -154,6 +155,7 @@ const Navbar = () => {
                 className="md:hidden ml-2 p-2 text-gray-700 focus:outline-none focus:ring-0"
                 onClick={toggleMobileMenu}
                 aria-label="Toggle mobile menu"
+                aria-expanded={mobileMenuOpen}
               >
                 {mobileMenuOpen ? (
                   <X className="h-6 w-6" />
@@ -174,7 +176,7 @@ const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-30 bg-white/95 backdrop-blur-xl pt-24 px-6 flex flex-col md:hidden overflow-auto"
+            className="fixed inset-0 z-50 bg-white/95 backdrop-blur-xl pt-24 px-6 flex flex-col md:hidden overflow-auto"
           >
             <nav className="flex flex-col gap-6 py-8">
               <Link 
