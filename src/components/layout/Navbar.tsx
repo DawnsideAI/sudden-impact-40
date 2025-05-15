@@ -6,7 +6,6 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { Icons } from '@/components/icons';
-import IndustriesDropdown from './IndustriesDropdown';
 
 interface NavbarProps {
   isSolid: boolean;
@@ -34,7 +33,7 @@ const Navbar: React.FC<NavbarProps> = ({ isSolid, lightMode = false }) => {
 
   // Use theme-appropriate styling
   const bgColor = lightMode 
-    ? scrolled ? 'bg-white shadow-md' : 'bg-white/80 backdrop-blur-xl' 
+    ? scrolled ? 'bg-white shadow-md' : 'bg-white/90 backdrop-blur-xl' 
     : scrolled ? 'bg-gray-800/90 backdrop-blur-xl' : 'bg-white/10 backdrop-blur-xl';
     
   const textColor = lightMode ? 'text-gray-800' : 'text-white';
@@ -76,7 +75,9 @@ const Navbar: React.FC<NavbarProps> = ({ isSolid, lightMode = false }) => {
             <Link to="/solutions" className={navItemClass}>
               Solutions
             </Link>
-            <IndustriesDropdown />
+            <Link to="/industries" className={navItemClass}>
+              Industries
+            </Link>
             <Link to="/pricing" className={navItemClass}>
               Pricing
             </Link>
