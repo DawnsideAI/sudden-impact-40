@@ -32,7 +32,7 @@ const ServiceFeatures = () => {
     <section className="py-24 relative overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-agency-vibrantPurple/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-agency-vibrantPurple/5 rounded-full blur-3xl" />
       </div>
       
       <StyleProvider className="container-custom relative z-10">
@@ -40,9 +40,10 @@ const ServiceFeatures = () => {
           title="Plug-and-Play AI Voice Agents for Service Pros"
           subtitle="Our ready-to-deploy AI voice agents are designed to streamline your operations and enhance customer interactions."
           centered={true}
+          maxWidth="max-w-4xl"
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
           {features.map((feature, index) => (
             <FeatureCard
               key={index}
@@ -50,6 +51,7 @@ const ServiceFeatures = () => {
               title={feature.title}
               description={feature.description}
               index={index}
+              className="bg-gradient-to-br from-white to-gray-50 shadow-xl border-0 hover:-translate-y-2 transition-all duration-300"
             />
           ))}
         </div>

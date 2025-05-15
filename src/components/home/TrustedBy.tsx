@@ -13,10 +13,10 @@ const logos = [
 
 const TrustedBy = () => {
   return (
-    <div className="py-16">
+    <div className="py-20 bg-gradient-to-br from-white to-gray-50 rounded-3xl mx-4 md:mx-8">
       <StyleProvider className="text-center mb-12">
         <SectionTitle
-          title="Trusted by Businesses"
+          title="Trusted by Leading Businesses"
           subtitle="Join hundreds of companies already using our AI voice agents to revolutionize their customer interactions"
           centered={true}
           maxWidth="max-w-3xl"
@@ -34,7 +34,7 @@ const TrustedBy = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
-            className="w-28 sm:w-36 md:w-44 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300"
+            className="w-28 sm:w-36 md:w-44 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110"
           >
             <img 
               src={logo.src} 

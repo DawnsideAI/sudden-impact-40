@@ -25,32 +25,32 @@ const Index = () => {
     <Layout lightMode={true}>
       <div className="flex flex-col gap-0">
         <Hero />
-        <WhiteSection className="bg-white border-b border-gray-200">
+        <WhiteSection className="bg-white border-b border-gray-100">
           <Stats />
         </WhiteSection>
-        <WhiteSection className="bg-gray-50 border-b border-gray-200">
+        <WhiteSection className="bg-gradient-to-br from-white via-white to-gray-50 border-b border-gray-100">
           <ServiceFeatures />
         </WhiteSection>
-        <WhiteSection className="bg-white border-b border-gray-200">
+        <WhiteSection className="bg-white border-b border-gray-100">
           <TrustedBy />
         </WhiteSection>
         <Suspense fallback={<div className="h-96 flex items-center justify-center">Loading...</div>}>
-          <WhiteSection className="bg-gray-50 border-b border-gray-200">
+          <WhiteSection className="bg-gradient-to-br from-white via-white to-gray-50 border-b border-gray-100">
             <CallerComparisonChart />
           </WhiteSection>
-          <WhiteSection className="bg-white border-b border-gray-200">
+          <WhiteSection className="bg-white border-b border-gray-100">
             <IndustrySolutions />
           </WhiteSection>
-          <WhiteSection className="bg-gray-50 border-b border-gray-200">
+          <WhiteSection className="bg-gradient-to-br from-white via-white to-gray-50 border-b border-gray-100">
             <AIPapersSection />
           </WhiteSection>
-          <WhiteSection className="bg-white border-b border-gray-200">
+          <WhiteSection className="bg-white border-b border-gray-100">
             <DemoForm />
           </WhiteSection>
-          <WhiteSection className="bg-white border-b border-gray-200">
+          <WhiteSection className="bg-white border-b border-gray-100">
             <Faq />
           </WhiteSection>
-          <WhiteSection className="bg-white">
+          <WhiteSection className="bg-gradient-to-br from-white via-white to-gray-50">
             <CallToAction />
           </WhiteSection>
         </Suspense>

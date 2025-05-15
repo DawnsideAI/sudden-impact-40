@@ -1,6 +1,7 @@
 
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 interface HeroPreviewProps {
   lightMode?: boolean;
@@ -14,11 +15,11 @@ const HeroPreview = ({ lightMode = false }: HeroPreviewProps) => {
       transition={{ duration: 0.5, delay: 0.3 }}
       className="relative"
     >
-      <div className={`${lightMode ? 'bg-white shadow-lg border border-gray-200' : 'glass-morphism'} rounded-xl p-6`}>
-        <div className={`aspect-video rounded-lg ${lightMode ? 'bg-gray-50' : 'bg-background/50'} overflow-hidden flex items-center justify-center ${lightMode ? 'border border-gray-200' : 'border border-white/10'}`}>
+      <div className="bg-white shadow-xl border border-gray-100 rounded-2xl p-6 relative z-10">
+        <div className="aspect-video rounded-xl bg-gradient-to-br from-agency-blue/5 to-agency-vibrantPurple/5 overflow-hidden flex items-center justify-center border border-gray-100">
           <div className="text-center p-8">
-            <div className={`animate-float w-24 h-24 mx-auto mb-4 rounded-full ${lightMode ? 'bg-agency-blue/10' : 'bg-agency-vibrantPurple/30'} flex items-center justify-center`}>
-              <div className={`w-16 h-16 rounded-full ${lightMode ? 'bg-agency-blue' : 'bg-agency-vibrantPurple'} flex items-center justify-center`}>
+            <div className="animate-float w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-agency-blue/20 to-agency-vibrantPurple/20 flex items-center justify-center">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-agency-blue to-agency-vibrantPurple flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
                   <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
                   <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
@@ -26,11 +27,11 @@ const HeroPreview = ({ lightMode = false }: HeroPreviewProps) => {
                 </svg>
               </div>
             </div>
-            <h3 className={`text-xl font-semibold mb-2 ${lightMode ? 'text-agency-dark' : 'text-white'}`}>AI Voice Assistant Preview</h3>
-            <p className={`${lightMode ? 'text-agency-gray' : 'text-muted-foreground'} mb-4`}>Experience our AI voice agent in action</p>
+            <h3 className="text-xl font-semibold mb-2 text-agency-dark">AI Voice Assistant Preview</h3>
+            <p className="text-agency-gray mb-4">Experience our AI voice agent in action</p>
             <Link 
               to="/demo" 
-              className={`inline-flex items-center justify-center px-6 py-2 text-sm font-medium text-white ${lightMode ? 'bg-agency-blue hover:bg-agency-blue/90' : 'bg-agency-vibrantPurple hover:bg-agency-vibrantPurple/90'} rounded-lg transition-colors`}
+              className="inline-flex items-center justify-center px-6 py-2 text-sm font-medium text-white bg-gradient-to-r from-agency-blue to-agency-vibrantPurple hover:from-agency-blue/90 hover:to-agency-vibrantPurple/90 rounded-lg transition-all duration-300"
             >
               Try Demo
             </Link>
@@ -38,9 +39,9 @@ const HeroPreview = ({ lightMode = false }: HeroPreviewProps) => {
         </div>
       </div>
       
-      {/* Floating elements - more subtle in light mode */}
-      <div className={`absolute -top-4 -right-4 w-24 h-24 ${lightMode ? 'bg-agency-blue/10' : 'bg-agency-vibrantPurple/30'} rounded-lg rotate-12 animate-float delay-200`}></div>
-      <div className={`absolute -bottom-4 -left-4 w-16 h-16 ${lightMode ? 'bg-agency-blue/20' : 'bg-agency-blue/30'} rounded-lg -rotate-12 animate-float delay-300`}></div>
+      {/* Floating elements with enhanced design */}
+      <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-agency-blue/20 to-agency-vibrantPurple/20 rounded-lg rotate-12 animate-float delay-200"></div>
+      <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-br from-agency-vibrantPurple/20 to-agency-blue/20 rounded-lg -rotate-12 animate-float delay-300"></div>
     </motion.div>
   );
 };

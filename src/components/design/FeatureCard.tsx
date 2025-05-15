@@ -22,7 +22,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
 }) => {
   const bgClasses = light
     ? "glass-morphism"
-    : "bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md";
+    : "bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md";
   
   const titleClasses = light
     ? "text-white"
@@ -31,20 +31,16 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
   const textClasses = light
     ? "text-gray-300"
     : "text-agency-gray";
-  
-  const iconClasses = light
-    ? "text-white"
-    : "text-agency-blue";
 
   return (
     <StyleProvider
       delay={index * 0.1}
-      className={`${bgClasses} transition-all duration-300 ${className}`}
+      className={`${bgClasses} transition-all duration-300 p-6 rounded-xl ${className}`}
     >
-      <div className={`w-12 h-12 rounded-full ${light ? 'bg-white/10' : 'bg-agency-vibrantPurple/20'} flex items-center justify-center mb-4`}>
-        <Icon className={`w-6 h-6 ${iconClasses}`} />
+      <div className={`w-14 h-14 rounded-full bg-gradient-to-br from-agency-blue/20 to-agency-vibrantPurple/20 flex items-center justify-center mb-5`}>
+        <Icon className={`w-6 h-6 text-agency-blue`} />
       </div>
-      <h3 className={`text-xl font-semibold mb-2 ${titleClasses}`}>{title}</h3>
+      <h3 className={`text-xl font-semibold mb-3 ${titleClasses}`}>{title}</h3>
       <p className={textClasses}>{description}</p>
     </StyleProvider>
   );
