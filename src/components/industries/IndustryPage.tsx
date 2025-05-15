@@ -1,4 +1,3 @@
-
 import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Layout from '@/components/layout/Layout';
@@ -419,13 +418,9 @@ const IndustryPage = () => {
                   transition={{ duration: 0.6 }}
                   className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 transform hover:scale-[1.02] transition-transform duration-300"
                 >
+                  {/* Show only the animation and remove the background image */}
                   <div className="relative">
                     <IndustryAnimation industry={animationType} />
-                    <img 
-                      src={currentIndustry.image} 
-                      alt={`${currentIndustry.title} illustration`} 
-                      className="w-full h-auto rounded-lg opacity-50 absolute top-0 left-0 z-0" 
-                    />
                   </div>
                 </motion.div>
               </div>
