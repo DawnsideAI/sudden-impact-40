@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Phone, ArrowRight, Check, HelpCircle, DollarSign, Star } from 'lucide-react';
@@ -13,6 +13,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Slider } from "@/components/ui/slider";
 
 interface NicheLayoutProps {
   children: React.ReactNode;
@@ -22,6 +23,11 @@ interface NicheLayoutProps {
 }
 
 const NicheLayout = ({ children, industry, title, subtitle }: NicheLayoutProps) => {
+  // ROI Calculator state
+  const [monthlyCalls, setMonthlyCalls] = useState<number>(500);
+  const [avgTransactionValue, setAvgTransactionValue] = useState<number>(150);
+  const [conversionRate, setConversionRate] = useState<number>(0.2); // 20% conversion rate
+  
   // Define industry-specific gradients and colors
   const getGradient = () => {
     switch(industry) {
@@ -117,6 +123,24 @@ const NicheLayout = ({ children, industry, title, subtitle }: NicheLayoutProps) 
   const buttonText = getButtonText();
   const industryBenefits = getIndustryBenefits();
   
+  // Calculate ROI based on current state
+  const calculateMonthlySavings = () => {
+    // Base monthly savings from call handling
+    const callHandlingSavings = monthlyCalls * 3; // $3 saved per call handled by AI
+    
+    // Additional revenue from improved conversion rate (assuming 5% improvement)
+    const improvedConversionRate = conversionRate * 1.05;
+    const additionalConversions = monthlyCalls * (improvedConversionRate - conversionRate);
+    const additionalRevenue = additionalConversions * avgTransactionValue;
+    
+    // Estimate staff time savings (assuming $25/hour labor cost)
+    const hoursSaved = monthlyCalls * 0.08; // 5 minutes (0.08 hours) saved per call
+    const laborSavings = hoursSaved * 25;
+    
+    // Total monthly savings
+    return Math.round(callHandlingSavings + additionalRevenue * 0.3 + laborSavings); // 30% profit margin on additional revenue
+  };
+  
   return (
     <div className="min-h-screen bg-white">
       {/* Simple header without any navigation to main site */}
@@ -126,7 +150,7 @@ const NicheLayout = ({ children, industry, title, subtitle }: NicheLayoutProps) 
             <motion.img 
               src="/lovable-uploads/293aebbf-1435-4e16-867f-2a95f52ef685.png" 
               alt="Sudden Impact Agency Logo" 
-              className="h-24 md:h-32 w-auto" 
+              className="h-32 md:h-40 w-auto" // Increased logo size
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
             />
@@ -147,30 +171,6 @@ const NicheLayout = ({ children, industry, title, subtitle }: NicheLayoutProps) 
               <p className="text-xl text-gray-600 mt-6">
                 {subtitle}
               </p>
-              
-              {/* Interactive Video or Demo Section */}
-              <motion.div 
-                className="mt-10 bg-white rounded-xl p-6 shadow-lg border border-gray-200 max-w-2xl mx-auto"
-                whileHover={{ y: -5 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center mb-4 overflow-hidden">
-                  <div className="relative w-full h-full">
-                    <iframe 
-                      className="absolute top-0 left-0 w-full h-full" 
-                      src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-                      title="AI Voice Agent Demo" 
-                      frameBorder="0" 
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                      allowFullScreen
-                    ></iframe>
-                  </div>
-                </div>
-                <h3 className={`text-xl font-medium bg-gradient-to-r ${gradient} bg-clip-text text-transparent`}>
-                  See the AI Voice Agent in Action
-                </h3>
-                <p className="text-gray-600 mt-2">Watch how our AI handles calls for {industry.replace('-', ' ')} businesses</p>
-              </motion.div>
               
               <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
                 <Button 
@@ -238,7 +238,7 @@ const NicheLayout = ({ children, industry, title, subtitle }: NicheLayoutProps) 
                 </CardContent>
               </Card>
               
-              {/* ROI Calculator */}
+              {/* ROI Calculator - Updated to be functional */}
               <Card className="shadow-lg hover:shadow-xl transition-all duration-300 border-t-4 border-t-brand-aqua">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
@@ -249,9 +249,15 @@ const NicheLayout = ({ children, industry, title, subtitle }: NicheLayoutProps) 
                 <CardContent>
                   <div className="space-y-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Monthly Calls</label>
-                      <input type="range" min="100" max="1000" step="100" defaultValue="500" 
-                        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer" />
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Monthly Calls: {monthlyCalls}</label>
+                      <Slider 
+                        value={[monthlyCalls]} 
+                        min={100} 
+                        max={1000} 
+                        step={50} 
+                        onValueChange={(value) => setMonthlyCalls(value[0])}
+                        className="w-full"
+                      />
                       <div className="flex justify-between text-xs text-gray-500 mt-1">
                         <span>100</span>
                         <span>1000</span>
@@ -259,18 +265,40 @@ const NicheLayout = ({ children, industry, title, subtitle }: NicheLayoutProps) 
                     </div>
                     
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Average Transaction Value ($)</label>
-                      <input type="range" min="50" max="500" step="50" defaultValue="150" 
-                        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer" />
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Average Transaction Value: ${avgTransactionValue}</label>
+                      <Slider 
+                        value={[avgTransactionValue]} 
+                        min={50} 
+                        max={500} 
+                        step={10} 
+                        onValueChange={(value) => setAvgTransactionValue(value[0])}
+                        className="w-full"
+                      />
                       <div className="flex justify-between text-xs text-gray-500 mt-1">
                         <span>$50</span>
                         <span>$500</span>
                       </div>
                     </div>
                     
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Conversion Rate: {(conversionRate * 100).toFixed(0)}%</label>
+                      <Slider 
+                        value={[conversionRate * 100]} 
+                        min={5} 
+                        max={40} 
+                        step={1} 
+                        onValueChange={(value) => setConversionRate(value[0] / 100)}
+                        className="w-full" 
+                      />
+                      <div className="flex justify-between text-xs text-gray-500 mt-1">
+                        <span>5%</span>
+                        <span>40%</span>
+                      </div>
+                    </div>
+                    
                     <div className="bg-gray-50 p-4 rounded-lg mt-4">
                       <h4 className="font-medium mb-2">Your Potential Monthly Savings</h4>
-                      <p className="text-2xl font-bold text-brand-aqua">$2,450</p>
+                      <p className="text-2xl font-bold text-brand-aqua">${calculateMonthlySavings()}</p>
                       <p className="text-sm text-gray-500 mt-1">Based on industry averages</p>
                     </div>
                   </div>
@@ -280,7 +308,7 @@ const NicheLayout = ({ children, industry, title, subtitle }: NicheLayoutProps) 
                     className={`w-full bg-gradient-to-r from-brand-aqua to-brand-purple text-white`}
                     onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
                   >
-                    Calculate Your Savings
+                    Get Your Custom ROI Analysis
                   </Button>
                 </CardFooter>
               </Card>
