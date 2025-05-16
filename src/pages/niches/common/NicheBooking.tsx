@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { PhoneCall } from 'lucide-react';
 import NicheLayout from '@/components/niches/NicheLayout';
@@ -14,7 +13,6 @@ import '@/styles/iframe-container.css';
 const NicheBooking = () => {
   const { industry = 'healthcare' } = useParams();
   const [showDemoVideo, setShowDemoVideo] = useState(false);
-  const [showCallDialog, setShowCallDialog] = useState(false);
   
   const validIndustry = ['healthcare', 'real-estate', 'restaurants', 'service-contractors', 'music'].includes(industry) 
     ? industry 
@@ -38,7 +36,6 @@ const NicheBooking = () => {
   };
   
   const industryText = getIndustryText();
-  const phoneNumber = "+1 (302) 618-3977";
   const demoVideoUrl = "https://www.youtube.com/embed/HuU_pxXVVqo?si=qrMXYUDeg8m8zUzs";
 
   return (
@@ -52,14 +49,14 @@ const NicheBooking = () => {
           <div className="max-w-4xl mx-auto">
             <SectionTitle 
               title="Experience Our AI Voice Agent Live"
-              subtitle="Call our demo number to speak with our AI voice agent"
+              subtitle="Complete our demo form to speak with our AI voice agent"
               centered={true}
             />
             
             <StyleProvider className="bg-white rounded-xl p-6 md:p-8 shadow-lg border border-gray-200 mt-12">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="space-y-6 flex flex-col items-center justify-center text-center">
-                  <h3 className="text-xl font-bold text-gray-800">Call Our AI Demo</h3>
+                  <h3 className="text-xl font-bold text-gray-800">Try Our AI Demo</h3>
                   
                   <motion.div 
                     initial={{ scale: 1 }}
@@ -70,32 +67,15 @@ const NicheBooking = () => {
                     <PhoneCall size={30} className="text-white" />
                   </motion.div>
                   
-                  <motion.a
-                    href={`tel:${phoneNumber.replace(/\D/g, '')}`}
-                    className="text-3xl font-bold mb-5 text-brand-aqua"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                  >
-                    {phoneNumber}
-                  </motion.a>
-                  
-                  <Button
-                    variant="action"
-                    size="lg"
-                    className="shadow-lg bg-gradient-to-r from-brand-pink to-brand-aqua hover:shadow-xl transition-all duration-300"
-                    onClick={() => window.location.href = `tel:${phoneNumber.replace(/\D/g, '')}`}
-                  >
-                    <PhoneCall className="mr-2" /> Call Now
-                  </Button>
-                  
-                  <div className="text-right mt-12">
-                    <button 
-                      onClick={() => setShowCallDialog(true)}
-                      className="text-sm text-brand-aqua hover:text-brand-pink"
+                  <Link to="/demo">
+                    <Button
+                      variant="action"
+                      size="lg"
+                      className="shadow-lg bg-gradient-to-r from-brand-pink to-brand-aqua hover:shadow-xl transition-all duration-300"
                     >
-                      Show in popup
-                    </button>
-                  </div>
+                      <PhoneCall className="mr-2" /> Try AI Demo
+                    </Button>
+                  </Link>
                 </div>
                 
                 <div className="space-y-6">
@@ -152,13 +132,6 @@ const NicheBooking = () => {
           </div>
         </DialogContent>
       </Dialog>
-      
-      {/* AI Demo Call Dialog - Shows automatically after form submission */}
-      <AIDemoCallDialog 
-        open={showCallDialog} 
-        onOpenChange={setShowCallDialog}
-        phoneNumber={phoneNumber}
-      />
       
       {/* Add pricing section directly on the booking page for easier access */}
       <section className="py-16 bg-gray-50">
