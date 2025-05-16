@@ -17,6 +17,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
 
 interface CustomDemoFormProps {
   onSubmitSuccess: () => void;
@@ -29,6 +30,10 @@ const formSchema = z.object({
   phone: z.string().min(10, { message: "Please enter a valid phone number." }),
   company: z.string().optional(),
   website: z.string().optional(),
+  agreeSMS: z.boolean().default(false),
+  agreeTerms: z.boolean().default(false).refine(val => val === true, {
+    message: "You must agree to the terms and conditions.",
+  }),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -46,7 +51,9 @@ const CustomDemoForm: React.FC<CustomDemoFormProps> = ({ onSubmitSuccess }) => {
       email: "",
       phone: "",
       company: "",
-      website: ""
+      website: "",
+      agreeSMS: false,
+      agreeTerms: false,
     }
   });
 
@@ -62,6 +69,8 @@ const CustomDemoForm: React.FC<CustomDemoFormProps> = ({ onSubmitSuccess }) => {
       formData.append('phone', data.phone);
       if (data.company) formData.append('company', data.company);
       if (data.website) formData.append('website', data.website);
+      formData.append('agreeSMS', data.agreeSMS ? 'true' : 'false');
+      formData.append('agreeTerms', 'true'); // This is required to be true by validation
       
       // The GHL form endpoint - this should be the same as the one used in the iframe
       const ghlFormEndpoint = "https://link.suddenimpactagency.io/form_submissions";
@@ -188,6 +197,49 @@ const CustomDemoForm: React.FC<CustomDemoFormProps> = ({ onSubmitSuccess }) => {
               </FormItem>
             )}
           />
+
+          <div className="space-y-2 pt-2">
+            <FormField
+              control={form.control}
+              name="agreeSMS"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                  <FormControl>
+                    <Checkbox 
+                      checked={field.value} 
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                  <div className="space-y-1 leading-none">
+                    <FormLabel className="font-normal text-sm text-gray-600">
+                      I agree to receive SMS updates about my demo request.
+                    </FormLabel>
+                  </div>
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="agreeTerms"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                  <FormControl>
+                    <Checkbox 
+                      checked={field.value} 
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                  <div className="space-y-1 leading-none">
+                    <FormLabel className="font-normal text-sm text-gray-600">
+                      I agree to the <a href="/legal" className="text-brand-aqua hover:underline">Terms and Conditions</a> and <a href="/legal" className="text-brand-aqua hover:underline">Privacy Policy</a>. *
+                    </FormLabel>
+                    <FormMessage />
+                  </div>
+                </FormItem>
+              )}
+            />
+          </div>
           
           <div className="pt-4">
             <Button 
