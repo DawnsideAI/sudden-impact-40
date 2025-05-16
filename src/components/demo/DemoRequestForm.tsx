@@ -6,6 +6,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import CustomDemoForm from "./CustomDemoForm";
 
 interface DemoRequestFormProps {
   onFormSubmit?: () => void;
@@ -13,7 +14,6 @@ interface DemoRequestFormProps {
 }
 
 const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormProps) => {
-  const formContainerRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
   const [showDemoVideo, setShowDemoVideo] = useState(false);
   const [isVideoLoading, setIsVideoLoading] = useState(true);
@@ -21,107 +21,18 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
   
   const phoneNumber = "+1 (302) 618-3977";
   const demoVideoUrl = "https://www.youtube.com/embed/HuU_pxXVVqo?si=qrMXYUDeg8m8zUzs";
-  const formUrl = "https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L";
 
   // Check if the form has been submitted on component mount
   useEffect(() => {
     const isA2PFormSubmitted = localStorage.getItem('a2pFormSubmitted') === 'true';
     setFormSubmitted(isA2PFormSubmitted);
-    
-    // Listen for form submission events from the iframe
-    const handleMessage = (event: MessageEvent) => {
-      // Check if the message is from our form iframe
-      if (
-        event.data && 
-        typeof event.data === 'object' && 
-        event.data.formId === 'Gf3ORV8Uba4HRiXoml5L' && 
-        event.data.type === 'form:submit'
-      ) {
-        console.log('Form submitted event detected!', event.data);
-        localStorage.setItem('a2pFormSubmitted', 'true');
-        setFormSubmitted(true);
-        if (onFormSubmit) onFormSubmit();
-      }
-    };
+  }, []);
 
-    window.addEventListener('message', handleMessage);
-    
-    // Create MutationObserver to detect changes in the form container
-    if (formContainerRef.current && !isA2PFormSubmitted) {
-      const observer = new MutationObserver((mutations) => {
-        // Look for success messages or thank you messages
-        for (const mutation of mutations) {
-          if (mutation.type === 'childList' || mutation.type === 'attributes') {
-            // Check for success elements - common patterns in form submissions
-            const container = formContainerRef.current;
-            if (!container) continue;
-            
-            // Check for thank you message that specifically mentions completing the form
-            const thankYouText = container.innerText && 
-              (container.innerText.toLowerCase().includes('thank you for taking the time to complete this form') ||
-               container.innerText.toLowerCase().includes('thank you for taking the time') ||
-               container.innerText.toLowerCase().includes('form to access our ai demo') ||
-               container.innerText.toLowerCase().includes('complete the form'));
-            
-            // Check for success messages or thank you elements
-            const successElements = container.querySelectorAll(
-              '.form-success, .thank-you, .success-message, .form-submitted, [data-form-state="success"]'
-            );
-            
-            // Check if the form container is empty (sometimes forms are removed after submission)
-            const isContainerEmpty = container.children.length === 0;
-            
-            // Check for text content mentioning success or thank you
-            const containsSuccessText = container.innerText && 
-              (container.innerText.toLowerCase().includes('thank you') || 
-               container.innerText.toLowerCase().includes('success') ||
-               container.innerText.toLowerCase().includes('submitted') ||
-               container.innerText.toLowerCase().includes('complete'));
-            
-            if (successElements.length > 0 || isContainerEmpty || containsSuccessText || thankYouText) {
-              console.log('Form submission detected via DOM changes');
-              localStorage.setItem('a2pFormSubmitted', 'true');
-              setFormSubmitted(true);
-              if (onFormSubmit) onFormSubmit();
-              // Disconnect observer once submission is detected
-              observer.disconnect();
-              break;
-            }
-          }
-        }
-      });
-      
-      // Configure and start the observer
-      observer.observe(formContainerRef.current, {
-        childList: true,
-        attributes: true,
-        subtree: true,
-        characterData: true
-      });
-      
-      // Clean up observer
-      return () => {
-        observer.disconnect();
-        window.removeEventListener('message', handleMessage);
-      };
-    }
-    
-    return () => window.removeEventListener('message', handleMessage);
-  }, [onFormSubmit]);
-
-  // Load the direct form link in the iframe
-  useEffect(() => {
-    // Only load the form if not already submitted
-    if (!formSubmitted && formContainerRef.current) {
-      const formContainer = formContainerRef.current;
-      formContainer.innerHTML = `<iframe 
-        src="${formUrl}"
-        style="width: 100%; height: 100%; min-height: 680px; border: none; border-radius: 3px;"
-        title="A2P Form - New"
-        id="a2p-form-iframe"
-      ></iframe>`;
-    }
-  }, [formSubmitted, formUrl]);
+  // Handle successful form submission
+  const handleFormSuccess = () => {
+    setFormSubmitted(true);
+    if (onFormSubmit) onFormSubmit();
+  };
 
   // Handle video load complete
   const handleVideoLoad = () => {
@@ -168,12 +79,8 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
             <p className="text-gray-600">Fill out this quick form to get instant access to our AI voice agent demo</p>
           </div>
           
-          {/* Form container that will hold the iframe */}
-          <div 
-            ref={formContainerRef} 
-            className="iframe-container" 
-            style={{ height: isMobile ? "800px" : "754px", width: "100%" }}
-          ></div>
+          {/* Custom form component instead of iframe */}
+          <CustomDemoForm onSubmitSuccess={handleFormSuccess} />
         </div>
       ) : (
         <motion.div 
