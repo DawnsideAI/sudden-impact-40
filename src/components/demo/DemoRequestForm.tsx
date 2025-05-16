@@ -21,6 +21,7 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
   
   const phoneNumber = "+1 (302) 618-3977";
   const demoVideoUrl = "https://www.youtube.com/embed/HuU_pxXVVqo?si=qrMXYUDeg8m8zUzs";
+  const formUrl = "https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L";
 
   // Check if the form has been submitted on component mount
   useEffect(() => {
@@ -108,19 +109,19 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
     return () => window.removeEventListener('message', handleMessage);
   }, [onFormSubmit]);
 
-  // Add the form URL directly
+  // Load the direct form link in the iframe
   useEffect(() => {
     // Only load the form if not already submitted
     if (!formSubmitted && formContainerRef.current) {
       const formContainer = formContainerRef.current;
       formContainer.innerHTML = `<iframe 
-        src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
+        src="${formUrl}"
         style="width: 100%; height: 100%; min-height: 680px; border: none; border-radius: 3px;"
         title="A2P Form - New"
         id="a2p-form-iframe"
       ></iframe>`;
     }
-  }, [formSubmitted]);
+  }, [formSubmitted, formUrl]);
 
   // Handle video load complete
   const handleVideoLoad = () => {

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Check, Calendar, PhoneCall } from "lucide-react";
@@ -15,6 +14,7 @@ const DemoForm = () => {
   const [showDemoVideo, setShowDemoVideo] = useState(false);
   const [showCallDialog, setShowCallDialog] = useState(false);
   const isMobile = useIsMobile();
+  const formUrl = "https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L";
   
   // Add the script tag for the form embed.js after component mounts
   useEffect(() => {
@@ -54,6 +54,59 @@ const DemoForm = () => {
     window.addEventListener('message', handleMessage);
     return () => window.removeEventListener('message', handleMessage);
   }, []);
+
+  // Create MutationObserver to detect changes in the form container
+  useEffect(() => {
+    const formContainer = document.querySelector('.iframe-container');
+    if (!formContainer || isSubmitted) return;
+
+    const observer = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        if (mutation.type === 'childList' || mutation.type === 'attributes') {
+          // Get the iframe's document content
+          const iframe = document.querySelector('.iframe-container iframe');
+          if (!iframe) continue;
+          
+          try {
+            const iframeDocument = (iframe as HTMLIFrameElement).contentDocument || 
+                                (iframe as HTMLIFrameElement).contentWindow?.document;
+            
+            if (iframeDocument) {
+              // Check for thank you text or success message
+              const content = iframeDocument.body.innerText || '';
+              if (
+                content.toLowerCase().includes('thank you') || 
+                content.toLowerCase().includes('success') ||
+                content.toLowerCase().includes('submitted') ||
+                content.toLowerCase().includes('complete the form')
+              ) {
+                console.log('Form submission detected in DemoForm');
+                setIsSubmitted(true);
+                setShowCallDialog(true);
+                toast({
+                  title: "Demo Request Submitted!",
+                  description: "You'll be connected to our AI voice agent shortly.",
+                });
+                observer.disconnect();
+              }
+            }
+          } catch (error) {
+            // Cross-origin restrictions might prevent access to iframe content
+            console.log('Could not access iframe content, possibly due to cross-origin restrictions');
+          }
+        }
+      }
+    });
+
+    observer.observe(formContainer, {
+      childList: true,
+      attributes: true,
+      subtree: true,
+      characterData: true
+    });
+
+    return () => observer.disconnect();
+  }, [isSubmitted]);
 
   const handleScheduleClick = () => {
     setShowCalendar(true);
@@ -172,7 +225,7 @@ const DemoForm = () => {
                 
                 <div className="w-full iframe-container relative" style={{ minHeight: isMobile ? "800px" : "700px" }}>
                   <iframe
-                    src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
+                    src={formUrl}
                     style={{
                       display: isSubmitted ? "none" : "block",
                       width: "100%", 
@@ -180,18 +233,6 @@ const DemoForm = () => {
                       border: "none", 
                       borderRadius: "3px"
                     }}
-                    id="inline-Gf3ORV8Uba4HRiXoml5L" 
-                    data-layout="{'id':'INLINE'}"
-                    data-trigger-type="alwaysShow"
-                    data-trigger-value=""
-                    data-activation-type="alwaysActivated"
-                    data-activation-value=""
-                    data-deactivation-type="leadCollected"
-                    data-deactivation-value=""
-                    data-form-name="A2P Form - New"
-                    data-height={isMobile ? "800" : "700"}
-                    data-layout-iframe-id="inline-Gf3ORV8Uba4HRiXoml5L"
-                    data-form-id="Gf3ORV8Uba4HRiXoml5L"
                     title="A2P Form - New"
                     className="no-scrollbar"
                   />
