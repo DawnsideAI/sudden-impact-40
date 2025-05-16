@@ -51,10 +51,10 @@ const industries = [
   {
     id: "music",
     icon: <Music className="h-5 w-5" />,
-    title: "Music Industry",
+    title: "Music Producers & Artists",
     description: "Booking and fan engagement solutions",
     detailsTitle: "AI Voice Agents for Music Industry",
-    detailsDescription: "Our AI voice agents handle booking inquiries, merchandise sales, and fan engagement, allowing artists and managers to focus on creative work.",
+    detailsDescription: "Our AI voice agents handle booking inquiries, merchandise sales, and fan engagement, allowing artists and producers to focus on creative work.",
     features: [
       "24/7 booking inquiry handling",
       "Merchandise order processing",

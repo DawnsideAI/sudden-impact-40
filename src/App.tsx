@@ -50,6 +50,7 @@ const App = () => (
           <Route path="/niches/real-estate" element={<RealEstateNiche />} />
           <Route path="/niches/restaurants" element={<RestaurantsNiche />} />
           <Route path="/niches/service-contractors" element={<ServiceContractorsNiche />} />
+          <Route path="/niches/music" element={<RestaurantsNiche />} /> {/* Temporarily use Restaurants as template */}
           
           {/* Common niche page routes */}
           <Route path="/niches/:industry/about" element={<NicheAbout />} />

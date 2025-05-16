@@ -13,6 +13,7 @@ const industries = [
   { id: "realestate", label: "Real Estate", value: "realestate" },
   { id: "healthcare", label: "Healthcare & Wellness", value: "healthcare" },
   { id: "contractors", label: "Service Contractors", value: "contractors" },
+  { id: "music", label: "Music Producers & Artists", value: "music" },
 ];
 
 const businessTypes = {
@@ -43,6 +44,14 @@ const businessTypes = {
     { id: "landscaping", label: "Landscaping" },
     { id: "cleaning", label: "Cleaning Service" },
     { id: "general", label: "General Contractor" },
+  ],
+  music: [
+    { id: "producer", label: "Music Producer" },
+    { id: "artist", label: "Recording Artist" },
+    { id: "band", label: "Band/Group" },
+    { id: "studio", label: "Recording Studio" },
+    { id: "label", label: "Independent Label" },
+    { id: "composer", label: "Composer/Songwriter" },
   ],
 };
 
