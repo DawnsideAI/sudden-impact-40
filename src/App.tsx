@@ -51,7 +51,7 @@ const App = () => (
           <Route path="/niches/real-estate" element={<RealEstateNiche />} />
           <Route path="/niches/restaurants" element={<RestaurantsNiche />} />
           <Route path="/niches/service-contractors" element={<ServiceContractorsNiche />} />
-          <Route path="/niches/music" element={<MusicNiche />} /> {/* Now uses the dedicated MusicNiche component */}
+          <Route path="/niches/music" element={<MusicNiche />} /> {/* Make sure this route is correctly defined */}
           
           {/* Common niche page routes */}
           <Route path="/niches/:industry/about" element={<NicheAbout />} />

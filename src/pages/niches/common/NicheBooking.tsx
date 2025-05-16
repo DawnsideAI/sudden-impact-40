@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -15,7 +16,7 @@ const NicheBooking = () => {
   const [showDemoVideo, setShowDemoVideo] = useState(false);
   const [showCallDialog, setShowCallDialog] = useState(false);
   
-  const validIndustry = ['healthcare', 'real-estate', 'restaurants', 'service-contractors'].includes(industry) 
+  const validIndustry = ['healthcare', 'real-estate', 'restaurants', 'service-contractors', 'music'].includes(industry) 
     ? industry 
     : 'healthcare';
   
@@ -29,6 +30,8 @@ const NicheBooking = () => {
         return { title: "Restaurant", subtitle: "Experience our AI agent demo to see how we can enhance your reservation system and guest experience" };
       case 'service-contractors':
         return { title: "Service", subtitle: "Experience our AI agent demo to see how we can optimize your booking system and customer follow-ups" };
+      case 'music':
+        return { title: "Music", subtitle: "Experience our AI agent demo to see how we can handle your bookings and fan engagement" };
       default:
         return { title: "Your", subtitle: "Experience our AI voice agents in action" };
     }

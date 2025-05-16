@@ -73,8 +73,14 @@ const Industries = () => {
 
   const handleSubmit = () => {
     if (selectedIndustry && selectedBusinessType) {
-      // Map to appropriate industry page
-      const route = `/industries/${selectedIndustry}`;
+      // Map to appropriate industry page - fix the route for music industry
+      let route;
+      
+      if (selectedIndustry === 'music') {
+        route = `/niches/music`; // Direct to the niches/music route
+      } else {
+        route = `/industries/${selectedIndustry}`;
+      }
       
       // Store the business type in session storage for the industry page to use
       sessionStorage.setItem('selectedBusinessType', selectedBusinessType);
