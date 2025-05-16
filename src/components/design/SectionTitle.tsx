@@ -9,6 +9,7 @@ interface SectionTitleProps {
   light?: boolean;
   className?: string;
   maxWidth?: string;
+  subtitleClassName?: string;
 }
 
 const SectionTitle: React.FC<SectionTitleProps> = ({
@@ -18,14 +19,15 @@ const SectionTitle: React.FC<SectionTitleProps> = ({
   light = false,
   className = '',
   maxWidth = 'max-w-3xl',
+  subtitleClassName = '',
 }) => {
   const titleClasses = light
     ? "text-white font-bold mb-4"
     : "bg-gradient-to-r from-brand-pink via-brand-purple to-brand-aqua bg-clip-text text-transparent font-bold mb-4";
   
   const subtitleClasses = light
-    ? "text-gray-300 text-xl"
-    : "text-brand-gray text-xl";
+    ? `text-gray-300 text-xl ${subtitleClassName}`
+    : `text-brand-gray text-xl ${subtitleClassName}`;
 
   return (
     <StyleProvider 
