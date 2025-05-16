@@ -44,6 +44,37 @@ const ServiceContractors = () => {
     }
   ];
 
+  // Service contractors pricing plans
+  const pricingPlans = [
+    {
+      name: "Impact Starter",
+      price: "$397/mo",
+      annualPrice: "$3,811/annual",
+      setupFee: "$197.00 One-time set-up",
+      popular: false,
+      monthlyLink: "https://buy.stripe.com/aFa14ffVxdNy9ej1mJejK06",
+      annualLink: "https://buy.stripe.com/fZu00b38LaBm627aXjejK07"
+    },
+    {
+      name: "Impact Pro",
+      price: "$597/mo",
+      annualPrice: "$5,731/annual",
+      setupFee: "$197.00 One-time set-up",
+      popular: true,
+      monthlyLink: "https://buy.stripe.com/eVqfZ95gT38UgGL3uRejK08",
+      annualLink: "https://buy.stripe.com/eVq8wHbFhaBm8af9TfejK09"
+    },
+    {
+      name: "Impact Enterprise",
+      price: "$897/mo",
+      annualPrice: "$8,611/annual",
+      setupFee: "$197.00 One-time set-up",
+      popular: false,
+      monthlyLink: "https://buy.stripe.com/5kQ5kv10DbFq1LRe9vejK0a",
+      annualLink: "https://buy.stripe.com/bJe5kvdNp10MeyDc1nejK0b"
+    }
+  ];
+
   return (
     <NicheLayout 
       industry="service-contractors"
@@ -76,8 +107,71 @@ const ServiceContractors = () => {
         </div>
       </section>
       
-      {/* Workflows Section */}
+      {/* Pricing Plans Section */}
       <section className="py-20 bg-white">
+        <div className="container-custom">
+          <SectionTitle
+            title="Service Contractor AI Voice Agent Pricing"
+            subtitle="Choose the plan that's right for your business"
+            centered={true}
+          />
+          
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {pricingPlans.map((plan, index) => (
+              <StyleProvider 
+                key={index} 
+                delay={index * 0.1} 
+                className={`bg-white p-6 rounded-xl border ${plan.popular ? 'border-brand-pink shadow-lg' : 'border-gray-200'} flex flex-col`}
+              >
+                {plan.popular && (
+                  <div className="py-1 text-sm bg-gradient-to-r from-brand-purple to-brand-pink text-white text-center font-medium rounded-t-lg -mt-6 -mx-6 mb-4">
+                    Most Popular
+                  </div>
+                )}
+                <h3 className="text-xl font-bold text-center mb-2">{plan.name}</h3>
+                
+                {/* Monthly Option */}
+                <div className="border rounded-lg p-4 mb-3 flex-1">
+                  <div className="text-center">
+                    <p className="text-xl font-bold mb-1">{plan.price}</p>
+                    <p className="text-sm text-gray-500 mb-2">{plan.setupFee}</p>
+                    
+                    <motion.button
+                      className="w-full text-sm py-2 px-3 bg-gradient-to-r from-brand-pink to-brand-aqua text-white rounded-md hover:shadow-md transition-all duration-300"
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
+                      onClick={() => window.open(plan.monthlyLink, '_blank')}
+                    >
+                      Select Monthly
+                    </motion.button>
+                  </div>
+                </div>
+                
+                {/* Annual Option */}
+                <div className="border border-green-100 bg-green-50/30 rounded-lg p-4 flex-1">
+                  <div className="text-center">
+                    <p className="text-lg font-bold mb-1">{plan.annualPrice}</p>
+                    <p className="text-sm text-gray-500 mb-1">{plan.setupFee}</p>
+                    <p className="text-xs text-green-600 font-medium mb-2">Save with annual billing</p>
+                    
+                    <motion.button
+                      className="w-full text-sm py-2 px-3 bg-gradient-to-r from-green-500 to-brand-aqua text-white rounded-md hover:shadow-md transition-all duration-300"
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
+                      onClick={() => window.open(plan.annualLink, '_blank')}
+                    >
+                      Select Annual
+                    </motion.button>
+                  </div>
+                </div>
+              </StyleProvider>
+            ))}
+          </div>
+        </div>
+      </section>
+      
+      {/* Workflows Section */}
+      <section className="py-20 bg-gradient-to-br from-brand-purple/5 to-brand-pink/5">
         <div className="container-custom">
           <SectionTitle
             title="Service Contractor Automation Workflows"
@@ -113,7 +207,7 @@ const ServiceContractors = () => {
       </section>
       
       {/* Testimonial Section */}
-      <section className="py-20 bg-gradient-to-br from-brand-purple/5 to-brand-pink/5">
+      <section className="py-20 bg-white">
         <div className="container-custom">
           <SectionTitle
             title="Success Stories from Service Professionals"
