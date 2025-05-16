@@ -214,7 +214,7 @@ const DemoForm = () => {
                   </p>
                 </div>
                 
-                <div className="w-full iframe-container relative" style={{ minHeight: isMobile ? "800px" : "700px" }}>
+                <div className="w-full iframe-container relative" style={{ height: isMobile ? "1000px" : "900px" }}>
                   <iframe
                     src={formUrl}
                     style={{

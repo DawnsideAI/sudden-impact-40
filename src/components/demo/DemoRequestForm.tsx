@@ -150,7 +150,7 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
             <p className="text-gray-600">Fill out this quick form to get instant access to our AI voice agent demo</p>
           </div>
           
-          <div className="ghl-form-wrapper relative" style={{ minHeight: isMobile ? "650px" : "600px" }}>
+          <div className="ghl-form-wrapper" style={{ height: isMobile ? "900px" : "850px" }}>
             <iframe
               src={`https://link.suddenimpactagency.io/widget/form/${formId}`}
               style={{

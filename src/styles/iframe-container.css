@@ -30,12 +30,13 @@
   position: relative;
   width: 100%;
   overflow: hidden;
+  min-height: 800px; /* Ensure form has enough room to display fully */
 }
 
 .ghl-form-wrapper iframe {
   width: 100% !important;
   height: 100% !important;
-  min-height: 650px !important;
+  min-height: 800px !important; /* Taller iframe to show all content */
   border: none !important;
   border-radius: 3px !important;
   display: block !important;
