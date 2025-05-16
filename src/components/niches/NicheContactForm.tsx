@@ -17,6 +17,38 @@ const NicheContactForm = ({ industry }: NicheContactFormProps) => {
   const [showCallDialog, setShowCallDialog] = useState(false);
   const phoneNumber = "+1 (302) 618-3977";
 
+  // Define industry-specific labels
+  const getIndustryLabel = () => {
+    switch(industry) {
+      case 'healthcare':
+        return 'Healthcare Practice';
+      case 'real-estate':
+        return 'Real Estate Agency';
+      case 'restaurants':
+        return 'Restaurant Name';
+      case 'service-contractors':
+        return 'Service Business Name';
+      default:
+        return 'Company Name';
+    }
+  };
+
+  // Define industry-specific gradients
+  const getGradient = () => {
+    switch(industry) {
+      case 'healthcare':
+        return 'from-brand-aqua to-brand-pink';
+      case 'real-estate':
+        return 'from-brand-purple to-brand-aqua';
+      case 'restaurants':
+        return 'from-brand-pink to-brand-aqua';
+      case 'service-contractors':
+        return 'from-brand-purple to-brand-pink';
+      default:
+        return 'from-brand-pink to-brand-aqua';
+    }
+  };
+
   // Define industry-specific pricing plans with exact links
   const getPricingPlans = () => {
     switch(industry) {
