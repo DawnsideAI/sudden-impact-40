@@ -1,14 +1,17 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Check, Music3, Music4, Calendar, PhoneCall } from 'lucide-react';
+import { Check, Music3, Music4, Calendar, PhoneCall, DollarSign, Quote } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import StyleProvider from '@/components/design/StyleProvider';
 import SectionTitle from '@/components/design/SectionTitle';
 import FeatureCard from '@/components/design/FeatureCard';
 import Layout from '@/components/layout/Layout';
+import LiveDemoDialog from '@/components/pricing/LiveDemoDialog';
 
 const MusicIndustry = () => {
+  const [showDemoDialog, setShowDemoDialog] = useState(false);
+  
   const benefits = [
     "24/7 availability for your clients and fans",
     "Automated booking and scheduling",
@@ -16,6 +19,45 @@ const MusicIndustry = () => {
     "Seamless integration with your existing calendar",
     "Personalized communication with fans and clients",
     "Reduced overhead costs and increased efficiency"
+  ];
+
+  // Pricing plans to match other industry pages
+  const pricingPlans = [
+    {
+      name: "Starter",
+      price: 197,
+      monthlyFee: 97,
+      features: ["300 AI Minutes", "Calendar Integration", "Booking Management", "24/7 Availability"]
+    },
+    {
+      name: "Professional",
+      price: 197,
+      monthlyFee: 297,
+      popular: true,
+      features: ["1000 AI Minutes", "CRM Integration", "Custom Workflows", "Fan Engagement System"]
+    },
+    {
+      name: "Enterprise",
+      price: 497,
+      monthlyFee: 597,
+      features: ["3000 AI Minutes", "White-labeled Solution", "Dedicated Manager", "Multi-location Support"]
+    }
+  ];
+
+  // Testimonials to match other industry pages
+  const testimonials = [
+    {
+      quote: "The AI voice agent has transformed how we manage our recording studio. Our booking rate has increased by 35%, and we're spending far less time on the phone handling routine inquiries. This technology has been a game-changer for our business.",
+      name: "James Rodriguez",
+      position: "Owner, Harmony Recording Studios",
+      initials: "JR"
+    },
+    {
+      quote: "As a touring musician, managing fan interactions and merchandise orders was overwhelming. The AI system now handles all routine inquiries, allowing me to focus on creating music. My fans love the instant responses too!",
+      name: "Lisa Chen",
+      position: "Independent Artist",
+      initials: "LC"
+    }
   ];
 
   return (
@@ -87,6 +129,33 @@ const MusicIndustry = () => {
         </div>
       </section>
       
+      {/* Try AI Demo Banner - New Section that matches Healthcare page */}
+      <section className="py-12 bg-gradient-to-r from-brand-pink to-brand-aqua">
+        <div className="container-custom">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="text-white">
+              <h3 className="text-2xl md:text-3xl font-bold">Experience Our AI Voice Assistant</h3>
+              <p className="mt-2 text-white/90">Call our AI demo or schedule a personalized consultation</p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button
+                className="bg-white text-brand-pink hover:bg-gray-100 px-8 py-3 rounded-lg font-medium shadow-lg"
+                onClick={() => setShowDemoDialog(true)}
+              >
+                <PhoneCall className="mr-2" size={18} /> Try AI Demo
+              </Button>
+              <Button
+                variant="outline" 
+                className="border-2 border-white text-white hover:bg-white/10 px-8 py-3 rounded-lg font-medium"
+                onClick={() => window.open('https://link.suddenimpactagency.io/widget/booking/MYRdt5Un7mP29erZS5rx', '_blank')}
+              >
+                <Calendar className="mr-2" size={18} /> Schedule Consultation
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+      
       <section id="learn-more" className="py-20 bg-white">
         <div className="container-custom">
           <SectionTitle
@@ -143,7 +212,68 @@ const MusicIndustry = () => {
         </div>
       </section>
       
+      {/* Pricing Section - New Section that matches Healthcare page */}
       <section className="py-20 bg-white">
+        <div className="container-custom">
+          <SectionTitle
+            title="Simple, Transparent Pricing"
+            subtitle="Choose the plan that's right for your music business"
+            centered={true}
+          />
+          
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {pricingPlans.map((plan, index) => (
+              <StyleProvider key={index} delay={index * 0.1}>
+                <div className={`bg-white rounded-xl overflow-hidden border ${plan.popular ? 'border-brand-pink shadow-xl' : 'border-gray-200 shadow-lg'} h-full flex flex-col`}>
+                  {plan.popular && (
+                    <div className="bg-gradient-to-r from-brand-pink to-brand-aqua text-white py-2 px-4 text-center font-medium">
+                      Most Popular
+                    </div>
+                  )}
+                  <div className="p-6 flex-grow">
+                    <h3 className="text-xl font-bold text-gray-800">{plan.name}</h3>
+                    <div className="mt-4 mb-6">
+                      <div className="flex items-baseline">
+                        <span className="text-3xl font-bold">${plan.monthlyFee}</span>
+                        <span className="text-gray-500 ml-1">/month</span>
+                      </div>
+                      <p className="text-gray-500 text-sm mt-1">
+                        ${plan.price} one-time setup
+                      </p>
+                    </div>
+                    <ul className="space-y-3 mb-6">
+                      {plan.features.map((feature, i) => (
+                        <li key={i} className="flex items-start">
+                          <div className="mr-2 mt-1">
+                            <div className="w-5 h-5 rounded-full bg-gradient-to-r from-brand-pink to-brand-aqua flex items-center justify-center">
+                              <Check className="text-white" size={12} />
+                            </div>
+                          </div>
+                          <span className="text-gray-700">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="p-6 border-t border-gray-100">
+                    <Button
+                      className={`w-full ${plan.popular ? 'bg-gradient-to-r from-brand-pink to-brand-aqua text-white' : 'border-2 border-brand-aqua text-brand-aqua hover:bg-brand-aqua/5'}`}
+                      onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                    >
+                      Get Started
+                    </Button>
+                  </div>
+                </div>
+              </StyleProvider>
+            ))}
+          </div>
+          
+          <div className="mt-10 text-center">
+            <p className="text-gray-500">Need a custom plan? <a href="#contact" className="text-brand-pink font-medium hover:underline">Contact us</a> for enterprise solutions.</p>
+          </div>
+        </div>
+      </section>
+      
+      <section className="py-20 bg-gradient-to-br from-brand-pink/5 to-brand-aqua/5">
         <div className="container-custom">
           <SectionTitle
             title="Success Stories from Music Professionals"
@@ -151,26 +281,33 @@ const MusicIndustry = () => {
             centered={true}
           />
           
-          <div className="mt-12 max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-md border border-gray-100">
-            <div className="flex flex-col md:flex-row items-center gap-6">
-              <div className="w-24 h-24 rounded-full bg-gradient-to-r from-brand-pink to-brand-aqua flex items-center justify-center text-white text-2xl font-bold">
-                JR
-              </div>
-              <div className="flex-1">
-                <p className="text-lg text-gray-700 italic mb-4">
-                  "The AI voice agent has transformed how we manage our recording studio. Our booking rate has increased by 35%, and we're spending far less time on the phone handling routine inquiries. This technology has been a game-changer for our business."
-                </p>
-                <div>
-                  <h4 className="text-gray-800 font-medium">James Rodriguez</h4>
-                  <p className="text-gray-500">Owner, Harmony Recording Studios</p>
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {testimonials.map((testimonial, index) => (
+              <StyleProvider key={index} delay={index * 0.1} className="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+                <div className="flex flex-col h-full">
+                  <div className="mb-6 relative">
+                    <div className="absolute -top-4 -left-2 text-brand-pink/10">
+                      <Quote size={50} />
+                    </div>
+                    <p className="text-gray-700 italic relative z-10">"{testimonial.quote}"</p>
+                  </div>
+                  <div className="mt-auto flex items-center">
+                    <div className="w-16 h-16 rounded-full bg-gradient-to-r from-brand-pink to-brand-aqua flex items-center justify-center text-white text-xl font-bold mr-4">
+                      {testimonial.initials}
+                    </div>
+                    <div>
+                      <h4 className="text-gray-800 font-medium">{testimonial.name}</h4>
+                      <p className="text-gray-500">{testimonial.position}</p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
+              </StyleProvider>
+            ))}
           </div>
         </div>
       </section>
       
-      <section id="contact" className="py-20 bg-gradient-to-br from-brand-pink/5 to-brand-aqua/5">
+      <section id="contact" className="py-20 bg-white">
         <div className="container-custom">
           <SectionTitle
             title="Ready to Elevate Your Music Business?"
@@ -238,8 +375,12 @@ const MusicIndustry = () => {
           </div>
         </div>
       </section>
+
+      {/* Live Demo Dialog */}
+      <LiveDemoDialog open={showDemoDialog} onOpenChange={setShowDemoDialog} />
     </Layout>
   );
 };
 
 export default MusicIndustry;
+
