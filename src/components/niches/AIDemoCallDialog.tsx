@@ -11,15 +11,17 @@ import {
 } from "@/components/ui/dialog";
 
 interface AIDemoCallDialogProps {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
   phoneNumber?: string;
+  industry?: string;
 }
 
 const AIDemoCallDialog = ({ 
   open, 
   onOpenChange, 
-  phoneNumber = "+1 (302) 618-3977" 
+  phoneNumber = "+1 (302) 618-3977",
+  industry
 }: AIDemoCallDialogProps) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>

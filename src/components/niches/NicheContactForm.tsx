@@ -9,7 +9,7 @@ import SectionTitle from '@/components/design/SectionTitle';
 import AIDemoCallDialog from './AIDemoCallDialog';
 
 interface NicheContactFormProps {
-  industry: 'healthcare' | 'real-estate' | 'restaurants' | 'service-contractors';
+  industry: 'healthcare' | 'real-estate' | 'restaurants' | 'service-contractors' | 'music';
 }
 
 const NicheContactForm = ({ industry }: NicheContactFormProps) => {

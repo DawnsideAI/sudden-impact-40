@@ -5,8 +5,8 @@ import { Music } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SectionTitle from '@/components/design/SectionTitle';
 import StyleProvider from '@/components/design/StyleProvider';
-import { NicheContactForm } from '@/components/niches/NicheContactForm';
-import { AIDemoCallDialog } from '@/components/niches/AIDemoCallDialog';
+import NicheContactForm from '@/components/niches/NicheContactForm';
+import AIDemoCallDialog from '@/components/niches/AIDemoCallDialog';
 
 const MusicNiche = () => {
   return (
