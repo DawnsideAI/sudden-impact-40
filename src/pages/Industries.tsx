@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -86,22 +85,8 @@ const Industries = () => {
 
   const handleSubmit = () => {
     if (selectedIndustry && selectedBusinessType) {
-      // Map industry ID to appropriate route
-      let route: string;
-      
-      switch (selectedIndustry) {
-        case 'music':
-          route = '/niches/music-producers';
-          break;
-        case 'realestate':
-          route = '/niches/real-estate';
-          break;
-        case 'contractors':
-          route = '/niches/service-contractors';
-          break;
-        default:
-          route = `/niches/${selectedIndustry}`;
-      }
+      // Direct to industry page, not niche page
+      const route = `/industries/${selectedIndustry}`;
       
       // Store the business type in session storage for the industry page to use
       sessionStorage.setItem('selectedBusinessType', selectedBusinessType);
