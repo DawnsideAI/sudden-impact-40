@@ -9,9 +9,11 @@ import WhiteSection from "@/components/layout/WhiteSection";
 import StyleProvider from "@/components/design/StyleProvider";
 import { useIsMobile } from "@/hooks/use-mobile";
 
-// Lazy load non-critical components
+// Import IndustrySolutions directly instead of using lazy loading
+import IndustrySolutions from "@/components/home/IndustrySolutions";
+
+// Continue lazy loading other non-critical components
 const CallerComparisonChart = lazy(() => import("@/components/home/CallerComparisonChart"));
-const IndustrySolutions = lazy(() => import("@/components/home/IndustrySolutions"));
 const Testimonials = lazy(() => import("@/components/home/Testimonials"));
 const CaseStudies = lazy(() => import("@/components/home/CaseStudies"));
 const AIPapersSection = lazy(() => import("@/components/pricing/AIPapersSection"));
@@ -57,12 +59,14 @@ const Index = () => {
           <WhiteSection className="bg-white border-b border-gray-100">
             <CaseStudies />
           </WhiteSection>
-          
-          {/* Industry Solutions - Gradient Background */}
-          <WhiteSection className="bg-gradient-to-br from-brand-purple/5 via-white to-brand-pink/5 border-b border-gray-100">
-            <IndustrySolutions />
-          </WhiteSection>
-          
+        </Suspense>
+        
+        {/* Industry Solutions - Gradient Background - Import directly */}
+        <WhiteSection className="bg-gradient-to-br from-brand-purple/5 via-white to-brand-pink/5 border-b border-gray-100">
+          <IndustrySolutions />
+        </WhiteSection>
+        
+        <Suspense fallback={<div className="h-40 md:h-96 flex items-center justify-center">Loading...</div>}>
           {/* Testimonials - White Background */}
           <WhiteSection className="bg-white border-b border-gray-100">
             <Testimonials />
