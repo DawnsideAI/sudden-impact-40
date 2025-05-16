@@ -29,36 +29,19 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
     const isA2PFormSubmitted = localStorage.getItem('a2pFormSubmitted') === 'true';
     setFormSubmitted(isA2PFormSubmitted);
   }, []);
-
-  // Add the script tag for the form embed.js after component mounts
+  
+  // Handle message events from GHL form
   useEffect(() => {
-    const script = document.createElement('script');
-    script.src = "https://link.suddenimpactagency.io/js/form_embed.js";
-    script.async = true;
-    document.body.appendChild(script);
-    
-    return () => {
-      // Clean up script when component unmounts
-      const existingScript = document.querySelector(`script[src="https://link.suddenimpactagency.io/js/form_embed.js"]`);
-      if (existingScript && existingScript.parentNode) {
-        existingScript.parentNode.removeChild(existingScript);
-      }
-    };
-  }, []);
-
-  // Listen for form submission events from the iframe
-  useEffect(() => {
-    const handleMessage = (event: MessageEvent) => {
-      // Check if the message is from our form iframe
+    const handleGHLMessage = (event: MessageEvent) => {
       if (
         event.data && 
         typeof event.data === 'object' && 
-        event.data.formId === formId && 
         event.data.type === 'form:submit'
       ) {
-        console.log('Form submission detected via postMessage');
+        console.log('Form submission detected via postMessage', event.data);
         setFormSubmitted(true);
         localStorage.setItem('a2pFormSubmitted', 'true');
+        
         if (onFormSubmit) onFormSubmit();
         
         // Show success toast
@@ -69,47 +52,9 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
       }
     };
 
-    window.addEventListener('message', handleMessage);
-    return () => window.removeEventListener('message', handleMessage);
+    window.addEventListener('message', handleGHLMessage);
+    return () => window.removeEventListener('message', handleGHLMessage);
   }, [onFormSubmit]);
-
-  // Create MutationObserver to detect changes in the form container
-  useEffect(() => {
-    const formContainer = document.querySelector('.ghl-form-wrapper');
-    if (!formContainer || formSubmitted) return;
-
-    const observer = new MutationObserver((mutations) => {
-      for (const mutation of mutations) {
-        if (mutation.type === 'childList' || mutation.type === 'attributes') {
-          // Check for elements that indicate form completion
-          const thankYouElements = document.querySelectorAll('.thank-you-message, .form-success, .form-submitted');
-          if (thankYouElements.length > 0) {
-            console.log('Form completion detected via DOM mutation');
-            setFormSubmitted(true);
-            localStorage.setItem('a2pFormSubmitted', 'true');
-            if (onFormSubmit) onFormSubmit();
-            
-            // Show success toast
-            toast({
-              title: "Form submitted successfully",
-              description: "Call the number to experience our AI voice demo",
-            });
-            
-            observer.disconnect();
-          }
-        }
-      }
-    });
-
-    observer.observe(document.body, {
-      childList: true,
-      attributes: true,
-      subtree: true,
-      characterData: true
-    });
-
-    return () => observer.disconnect();
-  }, [formSubmitted, onFormSubmit]);
 
   // Handle video load complete
   const handleVideoLoad = () => {
@@ -151,30 +96,13 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
           </div>
           
           <div className="ghl-form-wrapper" style={{ height: isMobile ? "900px" : "850px" }}>
-            <iframe
-              src={`https://link.suddenimpactagency.io/widget/form/${formId}`}
-              style={{
-                width: "100%",
-                height: "100%",
-                border: "none",
-                borderRadius: "3px",
-                display: "block"
-              }}
-              id={`inline-${formId}`}
-              data-layout={`{'id':'INLINE'}`}
-              data-trigger-type="alwaysShow"
-              data-trigger-value=""
-              data-activation-type="alwaysActivated"
-              data-activation-value=""
-              data-deactivation-type="leadCollected"
-              data-deactivation-value=""
-              data-form-name={formName}
-              data-height="754"
-              data-layout-iframe-id={`inline-${formId}`}
-              data-form-id={formId}
-              title={formName}
-              className="no-scrollbar"
-            />
+            <div
+              className="ghl-embedded-form"
+              data-form-key={formId}
+              data-env="prod"
+              data-height-adjust="true"
+              data-hide-on-submit="true"
+            ></div>
           </div>
         </div>
       ) : (

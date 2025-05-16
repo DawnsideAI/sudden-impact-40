@@ -15,34 +15,17 @@ const DemoForm = () => {
   const [showDemoVideo, setShowDemoVideo] = useState(false);
   const [showCallDialog, setShowCallDialog] = useState(false);
   const isMobile = useIsMobile();
-  const formUrl = "https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L";
+  const formId = "Gf3ORV8Uba4HRiXoml5L";
   
-  // Add the script tag for the form embed.js after component mounts
+  // Handle GHL form message events
   useEffect(() => {
-    const script = document.createElement('script');
-    script.src = "https://link.suddenimpactagency.io/js/form_embed.js";
-    script.async = true;
-    document.body.appendChild(script);
-    
-    return () => {
-      // Clean up script when component unmounts
-      const existingScript = document.querySelector(`script[src="https://link.suddenimpactagency.io/js/form_embed.js"]`);
-      if (existingScript && existingScript.parentNode) {
-        existingScript.parentNode.removeChild(existingScript);
-      }
-    };
-  }, []);
-
-  // Listen for form submission events from the iframe
-  useEffect(() => {
-    const handleMessage = (event: MessageEvent) => {
-      // Check if the message is from our form iframe
+    const handleGHLMessage = (event: MessageEvent) => {
       if (
         event.data && 
         typeof event.data === 'object' && 
-        event.data.formId === 'Gf3ORV8Uba4HRiXoml5L' && 
         event.data.type === 'form:submit'
       ) {
+        console.log('Form submission detected via postMessage', event.data);
         setIsSubmitted(true);
         setShowCallDialog(true);
         toast({
@@ -52,62 +35,9 @@ const DemoForm = () => {
       }
     };
 
-    window.addEventListener('message', handleMessage);
-    return () => window.removeEventListener('message', handleMessage);
+    window.addEventListener('message', handleGHLMessage);
+    return () => window.removeEventListener('message', handleGHLMessage);
   }, []);
-
-  // Create MutationObserver to detect changes in the form container
-  useEffect(() => {
-    const formContainer = document.querySelector('.iframe-container');
-    if (!formContainer || isSubmitted) return;
-
-    const observer = new MutationObserver((mutations) => {
-      for (const mutation of mutations) {
-        if (mutation.type === 'childList' || mutation.type === 'attributes') {
-          // Get the iframe's document content
-          const iframe = document.querySelector('.iframe-container iframe');
-          if (!iframe) continue;
-          
-          try {
-            const iframeDocument = (iframe as HTMLIFrameElement).contentDocument || 
-                                (iframe as HTMLIFrameElement).contentWindow?.document;
-            
-            if (iframeDocument) {
-              // Check for thank you text or success message
-              const content = iframeDocument.body.innerText || '';
-              if (
-                content.toLowerCase().includes('thank you') || 
-                content.toLowerCase().includes('success') ||
-                content.toLowerCase().includes('submitted') ||
-                content.toLowerCase().includes('complete the form')
-              ) {
-                console.log('Form submission detected in DemoForm');
-                setIsSubmitted(true);
-                setShowCallDialog(true);
-                toast({
-                  title: "Demo Request Submitted!",
-                  description: "You'll be connected to our AI voice agent shortly.",
-                });
-                observer.disconnect();
-              }
-            }
-          } catch (error) {
-            // Cross-origin restrictions might prevent access to iframe content
-            console.log('Could not access iframe content, possibly due to cross-origin restrictions');
-          }
-        }
-      }
-    });
-
-    observer.observe(formContainer, {
-      childList: true,
-      attributes: true,
-      subtree: true,
-      characterData: true
-    });
-
-    return () => observer.disconnect();
-  }, [isSubmitted]);
 
   const handleScheduleClick = () => {
     setShowCalendar(true);
@@ -214,19 +144,14 @@ const DemoForm = () => {
                   </p>
                 </div>
                 
-                <div className="w-full iframe-container relative" style={{ height: isMobile ? "1000px" : "900px" }}>
-                  <iframe
-                    src={formUrl}
-                    style={{
-                      display: "block",
-                      width: "100%", 
-                      height: "100%",
-                      border: "none", 
-                      borderRadius: "3px"
-                    }}
-                    title="A2P Form - New"
-                    className="no-scrollbar"
-                  />
+                <div className="w-full" style={{ height: isMobile ? "900px" : "800px", padding: "0 20px 20px" }}>
+                  <div 
+                    className="ghl-embedded-form"
+                    data-form-key={formId}
+                    data-env="prod"
+                    data-height-adjust="true"
+                    data-hide-on-submit="true"
+                  ></div>
                 </div>
               </div>
             ) : (
