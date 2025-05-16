@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Check, Music3, Music4, Calendar, PhoneCall, DollarSign, Quote } from 'lucide-react';
+import { Check, Music3, Music, Calendar, PhoneCall, DollarSign, Quote, Heart } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import StyleProvider from '@/components/design/StyleProvider';
 import SectionTitle from '@/components/design/SectionTitle';
@@ -129,7 +129,7 @@ const MusicIndustry = () => {
         </div>
       </section>
       
-      {/* Try AI Demo Banner - New Section that matches Healthcare page */}
+      {/* Try AI Demo Banner - To match Healthcare page */}
       <section className="py-12 bg-gradient-to-r from-brand-pink to-brand-aqua">
         <div className="container-custom">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
@@ -178,7 +178,7 @@ const MusicIndustry = () => {
               index={1}
             />
             <FeatureCard
-              icon={Music4}
+              icon={Music}
               title="Business Management"
               description="Track inventory, manage schedules, and handle routine inquiries about your services and availability."
               index={2}
@@ -212,7 +212,7 @@ const MusicIndustry = () => {
         </div>
       </section>
       
-      {/* Pricing Section - New Section that matches Healthcare page */}
+      {/* Pricing Section - To match Healthcare page */}
       <section className="py-20 bg-white">
         <div className="container-custom">
           <SectionTitle
@@ -383,4 +383,3 @@ const MusicIndustry = () => {
 };
 
 export default MusicIndustry;
-
