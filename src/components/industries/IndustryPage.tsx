@@ -237,8 +237,8 @@ const industryData = {
     ],
     pricing: [
       {
-        title: "Solo",
-        price: "$199",
+        title: "Impact Starter",
+        price: "$397",
         description: "Perfect for independent contractors",
         features: [
           "1 AI voice agent",
@@ -248,11 +248,15 @@ const industryData = {
           "Customizable availability calendar",
           "Simple follow-up calls"
         ],
-        highlighted: false
+        highlighted: false,
+        monthlyUrl: "https://buy.stripe.com/aFa14ffVxdNy9ej1mJejK06",
+        annualUrl: "https://buy.stripe.com/fZu00b38LaBm627aXjejK07",
+        annualPrice: "$3,811/annual",
+        setupFee: "$197.00 One-time set-up"
       },
       {
-        title: "Team",
-        price: "$399",
+        title: "Impact Pro",
+        price: "$597",
         description: "Ideal for small contractor teams",
         features: [
           "2 AI voice agents",
@@ -263,11 +267,15 @@ const industryData = {
           "Quote request handling",
           "Customer satisfaction follow-ups"
         ],
-        highlighted: true
+        highlighted: true,
+        monthlyUrl: "https://buy.stripe.com/eVqfZ95gT38UgGL3uRejK08",
+        annualUrl: "https://buy.stripe.com/eVq8wHbFhaBm8af9TfejK09",
+        annualPrice: "$5,731/annual",
+        setupFee: "$197.00 One-time set-up"
       },
       {
-        title: "Enterprise",
-        price: "$799",
+        title: "Impact Enterprise",
+        price: "$897",
         description: "For large service companies with multiple teams",
         features: [
           "5 AI voice agents",
@@ -279,7 +287,11 @@ const industryData = {
           "Custom reporting and analytics",
           "Priority support"
         ],
-        highlighted: false
+        highlighted: false,
+        monthlyUrl: "https://buy.stripe.com/5kQ5kv10DbFq1LRe9vejK0a",
+        annualUrl: "https://buy.stripe.com/bJe5kvdNp10MeyDc1nejK0b",
+        annualPrice: "$8,611/annual",
+        setupFee: "$197.00 One-time set-up"
       }
     ],
     testimonials: [
@@ -518,10 +530,27 @@ const IndustryPage = () => {
                   
                   <div className={`p-8 ${plan.highlighted ? 'bg-gray-50' : ''}`}>
                     <h3 className="text-2xl font-bold mb-2">{plan.title}</h3>
-                    <div className="flex items-baseline mb-4">
-                      <span className="text-4xl font-bold">{plan.price}</span>
-                      <span className="text-gray-500 ml-2">/month</span>
+                    
+                    {/* Monthly Pricing */}
+                    <div className="flex items-baseline mb-1">
+                      <span className="text-3xl font-bold">{plan.price}</span>
+                      <span className="text-gray-500 ml-1">/mo</span>
                     </div>
+                    
+                    {/* Annual Option if available */}
+                    {plan.annualPrice && (
+                      <div className="text-sm text-green-600 font-medium mb-2">
+                        {plan.annualPrice} (save with annual billing)
+                      </div>
+                    )}
+                    
+                    {/* Setup Fee */}
+                    {plan.setupFee && (
+                      <div className="text-xs text-gray-500 mb-4">
+                        {plan.setupFee}
+                      </div>
+                    )}
+                    
                     <p className="text-gray-600 text-sm mb-6">{plan.description}</p>
                     
                     <ul className="space-y-3 mb-8">
@@ -535,16 +564,37 @@ const IndustryPage = () => {
                       ))}
                     </ul>
                     
-                    <Link
-                      to="/demo"
-                      className={`w-full block text-center py-3 px-4 rounded-lg transition-all duration-300 ${
-                        plan.highlighted 
-                          ? `bg-gradient-to-r ${gradientClass} text-white hover:shadow-lg` 
-                          : 'border border-gray-200 hover:border-brand-pink/30 text-gray-700 hover:shadow'
-                      }`}
-                    >
-                      {plan.highlighted ? 'Get Started' : 'Learn More'}
-                    </Link>
+                    {/* Monthly Button */}
+                    {plan.monthlyUrl && (
+                      <a
+                        href={plan.monthlyUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`w-full block text-center py-3 px-4 rounded-lg mb-3 transition-all duration-300 ${
+                          plan.highlighted 
+                            ? `bg-gradient-to-r ${gradientClass} text-white hover:shadow-lg` 
+                            : 'border border-gray-200 hover:border-brand-pink/30 text-gray-700 hover:shadow'
+                        }`}
+                      >
+                        Select Monthly
+                      </a>
+                    )}
+                    
+                    {/* Annual Button */}
+                    {plan.annualUrl && (
+                      <a
+                        href={plan.annualUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`w-full block text-center py-3 px-4 rounded-lg transition-all duration-300 ${
+                          plan.highlighted 
+                            ? `bg-green-500 text-white hover:shadow-lg` 
+                            : 'border border-green-200 bg-green-50 hover:border-green-300 text-green-700 hover:shadow'
+                        }`}
+                      >
+                        Select Annual
+                      </a>
+                    )}
                   </div>
                 </div>
               </StyleProvider>
