@@ -169,12 +169,12 @@ const DemoForm = () => {
                   </p>
                 </div>
                 
-                <div className="w-full iframe-container relative" style={{ minHeight: "400px" }}>
+                <div className="w-full iframe-container relative" style={{ minHeight: isMobile ? "800px" : "700px" }}>
                   <iframe
                     src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
                     style={{
                       width: "100%", 
-                      height: isMobile ? "650px" : "600px",
+                      height: "100%",
                       border: "none", 
                     }}
                     id="inline-Gf3ORV8Uba4HRiXoml5L" 
@@ -186,22 +186,24 @@ const DemoForm = () => {
                     data-deactivation-type="neverDeactivate"
                     data-deactivation-value=""
                     data-form-name="A2P Form - New"
-                    data-height={isMobile ? "650" : "600"}
+                    data-height={isMobile ? "800" : "700"}
                     data-layout-iframe-id="inline-Gf3ORV8Uba4HRiXoml5L"
                     data-form-id="Gf3ORV8Uba4HRiXoml5L"
                     title="A2P Form - New"
                     className="no-scrollbar"
                   />
                   
-                  {/* Demo-only submit button - for testing the success state */}
-                  <div className="absolute bottom-0 right-0 p-2">
-                    <button 
-                      onClick={handleFormSubmitted}
-                      className="text-xs text-gray-400 hover:text-gray-500"
-                    >
-                      (Demo Submit)
-                    </button>
-                  </div>
+                  {/* Development-only button - not visible in production */}
+                  {process.env.NODE_ENV === 'development' && (
+                    <div className="absolute bottom-0 right-0 p-2">
+                      <button 
+                        onClick={handleFormSubmitted}
+                        className="text-xs text-gray-400 hover:text-gray-500"
+                      >
+                        (Dev Test)
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             ) : (
