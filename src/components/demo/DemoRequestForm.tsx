@@ -1,4 +1,3 @@
-
 import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { PhoneCall, Play } from "lucide-react";
@@ -110,11 +109,14 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
-          className="p-8 flex flex-col items-center justify-center text-center"
+          className="p-8 flex flex-col items-center justify-center text-center bg-white rounded-lg shadow-md border border-gray-200"
         >
+          <h3 className="text-2xl font-bold mb-6 text-gray-800">Call Now To Speak With Our AI Assistant</h3>
+          
           <motion.div 
             className="bg-gradient-to-r from-brand-pink to-brand-aqua w-16 h-16 rounded-full flex items-center justify-center mb-6"
             whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             transition={{ type: "spring", stiffness: 260, damping: 20 }}
           >
             <PhoneCall size={30} className="text-white" />
@@ -128,6 +130,10 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
           >
             {phoneNumber}
           </motion.a>
+          
+          <p className="text-gray-600 mb-6">
+            Call this number to speak with our AI voice agent and experience our technology first-hand.
+          </p>
           
           <Button
             variant="action"
