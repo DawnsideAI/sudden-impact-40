@@ -27,17 +27,26 @@ const HeroPreview = ({ lightMode = false }: HeroPreviewProps) => {
                 animate={{ 
                   boxShadow: [
                     "0 0 15px rgba(236, 72, 153, 0.5), 0 0 30px rgba(124, 58, 237, 0.3)", 
-                    "0 0 30px rgba(236, 72, 153, 0.7), 0 0 60px rgba(124, 58, 237, 0.5)", 
-                    "0 0 15px rgba(236, 72, 153, 0.5), 0 0 30px rgba(124, 58, 237, 0.3)"
+                    "0 0 30px rgba(236, 72, 153, 0.7), 0 0 60px rgba(124, 58, 237, 0.5)"
                   ] 
                 }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                transition={{ 
+                  duration: 3, 
+                  repeat: Infinity, 
+                  repeatType: "reverse", 
+                  ease: "easeInOut" 
+                }}
               >
                 {/* Microphone icon */}
                 <motion.div
                   initial={{ scale: 0.8 }}
-                  animate={{ scale: [0.8, 1, 0.8] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  animate={{ scale: [0.8, 1] }}
+                  transition={{ 
+                    duration: 3, 
+                    repeat: Infinity, 
+                    repeatType: "reverse", 
+                    ease: "easeInOut" 
+                  }}
                   className="text-white z-10"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 md:h-16 md:w-16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -77,14 +86,14 @@ const HeroPreview = ({ lightMode = false }: HeroPreviewProps) => {
                     animate={{ 
                       height: [
                         `${10 + Math.random() * 5}px`,
-                        `${30 + Math.random() * 25}px`,
-                        `${10 + Math.random() * 5}px`
+                        `${30 + Math.random() * 25}px`
                       ],
-                      opacity: [0.7, 1, 0.7]
+                      opacity: [0.7, 1]
                     }}
                     transition={{
                       duration: 1 + Math.random() * 0.5,
                       repeat: Infinity,
+                      repeatType: "reverse",
                       ease: "easeInOut",
                       delay: i * 0.1
                     }}
@@ -114,19 +123,18 @@ const HeroPreview = ({ lightMode = false }: HeroPreviewProps) => {
                 animate={{
                   x: [
                     Math.random() * 40 - 20,
-                    Math.random() * 40 - 20,
                     Math.random() * 40 - 20
                   ],
                   y: [
                     Math.random() * 40 - 20,
-                    Math.random() * 40 - 20,
                     Math.random() * 40 - 20
                   ],
-                  opacity: [0.6, 0.9, 0.6]
+                  opacity: [0.6, 0.9]
                 }}
                 transition={{
                   duration: 5 + Math.random() * 5,
                   repeat: Infinity,
+                  repeatType: "reverse",
                   ease: "easeInOut"
                 }}
               />
@@ -140,12 +148,13 @@ const HeroPreview = ({ lightMode = false }: HeroPreviewProps) => {
                 left: '15%',
               }}
               animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.3, 0.5, 0.3],
+                scale: [1, 1.2],
+                opacity: [0.3, 0.5],
               }}
               transition={{
                 duration: 8,
                 repeat: Infinity,
+                repeatType: "reverse",
                 ease: "easeInOut"
               }}
             />
@@ -157,13 +166,14 @@ const HeroPreview = ({ lightMode = false }: HeroPreviewProps) => {
                 right: '20%',
               }}
               animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.3, 0.5, 0.3],
+                scale: [1, 1.2],
+                opacity: [0.3, 0.5],
               }}
               transition={{
                 duration: 7,
                 delay: 1,
                 repeat: Infinity,
+                repeatType: "reverse",
                 ease: "easeInOut"
               }}
             />

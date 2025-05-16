@@ -1,3 +1,4 @@
+
 import { ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import { FiHome } from 'react-icons/fi';
@@ -36,11 +37,12 @@ const IndustryAnimation = ({ industry }: IndustryAnimationProps) => {
 
   const floatVariants = {
     animate: {
-      y: [0, -10, 0],
+      y: [-10, 0],
       transition: {
         duration: 3,
         repeat: Infinity,
-        repeatType: "reverse" as const
+        repeatType: "reverse" as const,
+        ease: "easeInOut"
       }
     }
   };
@@ -407,13 +409,15 @@ const IndustryAnimation = ({ industry }: IndustryAnimationProps) => {
                     height: `${ring * 30 + 100}px`
                   }}
                   animate={{
-                    scale: [1, 1.1, 1],
-                    opacity: [0.7, 0.3, 0.7],
+                    scale: [1, 1.1],
+                    opacity: [0.7, 0.3],
                   }}
                   transition={{
                     duration: 2 + ring * 0.5,
                     repeat: Infinity,
+                    repeatType: "reverse",
                     delay: ring * 0.2,
+                    ease: "easeInOut"
                   }}
                 />
               ))}
@@ -450,14 +454,15 @@ const IndustryAnimation = ({ industry }: IndustryAnimationProps) => {
                     top: `${30 + (note % 3) * 15}%`,
                   }}
                   animate={{
-                    y: [-20, -40, -20],
-                    x: [0, note % 2 === 0 ? 10 : -10, 0],
-                    opacity: [0, 1, 0],
+                    y: [-40, -20],
+                    x: [note % 2 === 0 ? 10 : -10, 0],
+                    opacity: [1, 0],
                   }}
                   transition={{
                     duration: 3,
                     repeat: Infinity,
                     delay: note * 0.8,
+                    repeatDelay: 0.5,
                     ease: "easeInOut"
                   }}
                 >

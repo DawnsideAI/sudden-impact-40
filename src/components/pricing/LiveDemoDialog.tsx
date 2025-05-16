@@ -27,8 +27,13 @@ const LiveDemoDialog = ({ open, onOpenChange }: LiveDemoDialogProps) => {
         <div className="flex flex-col items-center justify-center gap-4 py-6 bg-gradient-to-br from-brand-pink/5 to-brand-aqua/5 rounded-lg px-4">
           <motion.div 
             initial={{ scale: 1 }}
-            animate={{ scale: [1, 1.05, 1] }}
-            transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
+            animate={{ scale: 1.05 }}
+            transition={{ 
+              duration: 2, 
+              repeat: Infinity, 
+              repeatType: "reverse",
+              ease: "easeInOut"
+            }}
             className="w-16 h-16 rounded-full bg-gradient-to-r from-brand-pink to-brand-aqua flex items-center justify-center text-white"
           >
             <Phone className="h-8 w-8" />
