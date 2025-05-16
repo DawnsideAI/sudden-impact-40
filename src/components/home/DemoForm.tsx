@@ -7,51 +7,20 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import DemoCalendarForm from "@/components/demo/DemoCalendarForm";
 import { useIsMobile } from '@/hooks/use-mobile';
 import AIDemoCallDialog from "@/components/niches/AIDemoCallDialog";
+import A2PFormEmbed from "@/components/demo/A2PFormEmbed";
 
 const DemoForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
   const [showDemoVideo, setShowDemoVideo] = useState(false);
   const [showCallDialog, setShowCallDialog] = useState(false);
+  const [a2pFormCompleted, setA2pFormCompleted] = useState(false);
   const isMobile = useIsMobile();
   
-  // Add the script tag for the form embed.js after component mounts
+  // Check localStorage for form completion status on component mount
   useEffect(() => {
-    const script = document.createElement('script');
-    script.src = "https://link.suddenimpactagency.io/js/form_embed.js";
-    script.async = true;
-    document.body.appendChild(script);
-    
-    return () => {
-      // Clean up script when component unmounts
-      const existingScript = document.querySelector(`script[src="https://link.suddenimpactagency.io/js/form_embed.js"]`);
-      if (existingScript && existingScript.parentNode) {
-        existingScript.parentNode.removeChild(existingScript);
-      }
-    };
-  }, []);
-
-  // Listen for form submission events from the iframe
-  useEffect(() => {
-    const handleMessage = (event: MessageEvent) => {
-      // Check if the message is from our form iframe
-      if (
-        event.data && 
-        typeof event.data === 'object' && 
-        event.data.formId === 'Gf3ORV8Uba4HRiXoml5L' && 
-        event.data.type === 'form:submit'
-      ) {
-        setIsSubmitted(true);
-        setShowCallDialog(true);
-        toast({
-          title: "Demo Request Submitted!",
-          description: "You'll be connected to our AI voice agent shortly.",
-        });
-      }
-    };
-
-    window.addEventListener('message', handleMessage);
-    return () => window.removeEventListener('message', handleMessage);
+    const formCompleted = localStorage.getItem('a2pFormCompleted') === 'true';
+    setA2pFormCompleted(formCompleted);
   }, []);
 
   const handleScheduleClick = () => {
@@ -72,6 +41,13 @@ const DemoForm = () => {
     });
   };
 
+  // Handle A2P form submission
+  const handleA2PFormSubmit = () => {
+    setA2pFormCompleted(true);
+    setIsSubmitted(true);
+    setShowCallDialog(true);
+  };
+
   const demoVideoUrl = "https://www.youtube.com/embed/HuU_pxXVVqo?si=qrMXYUDeg8m8zUzs";
   
   return (
@@ -81,6 +57,7 @@ const DemoForm = () => {
       
       <div className="container-custom relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+          {/* Left column with benefits */}
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -146,6 +123,7 @@ const DemoForm = () => {
             </div>
           </motion.div>
           
+          {/* Right column with form */}
           <motion.div 
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -169,40 +147,8 @@ const DemoForm = () => {
                   </p>
                 </div>
                 
-                <div className="w-full iframe-container relative" style={{ minHeight: "400px" }}>
-                  <iframe
-                    src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
-                    style={{
-                      width: "100%", 
-                      height: isMobile ? "650px" : "600px",
-                      border: "none", 
-                    }}
-                    id="inline-Gf3ORV8Uba4HRiXoml5L" 
-                    data-layout="{'id':'INLINE'}"
-                    data-trigger-type="alwaysShow"
-                    data-trigger-value=""
-                    data-activation-type="alwaysActivated"
-                    data-activation-value=""
-                    data-deactivation-type="neverDeactivate"
-                    data-deactivation-value=""
-                    data-form-name="A2P Form - New"
-                    data-height={isMobile ? "650" : "600"}
-                    data-layout-iframe-id="inline-Gf3ORV8Uba4HRiXoml5L"
-                    data-form-id="Gf3ORV8Uba4HRiXoml5L"
-                    title="A2P Form - New"
-                    className="no-scrollbar"
-                  />
-                  
-                  {/* Demo-only submit button - for testing the success state */}
-                  <div className="absolute bottom-0 right-0 p-2">
-                    <button 
-                      onClick={handleFormSubmitted}
-                      className="text-xs text-gray-400 hover:text-gray-500"
-                    >
-                      (Demo Submit)
-                    </button>
-                  </div>
-                </div>
+                {/* A2P Form */}
+                <A2PFormEmbed onFormSubmit={handleA2PFormSubmit} />
               </div>
             ) : (
               <div className="text-center py-8 px-6">
@@ -235,7 +181,7 @@ const DemoForm = () => {
         </div>
       </div>
       
-      {/* Calendar dialog for scheduling - Updated styling */}
+      {/* Calendar dialog for scheduling */}
       <Dialog open={showCalendar} onOpenChange={setShowCalendar}>
         <DialogContent className="sm:max-w-[800px] max-h-[90vh] overflow-y-auto bg-white border border-brand-pink/10 shadow-xl">
           <DialogTitle className="text-xl font-bold text-center mb-4 text-gray-800">Schedule Your Demo</DialogTitle>

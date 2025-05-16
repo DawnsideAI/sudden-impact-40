@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { PhoneCall } from 'lucide-react';
@@ -9,17 +8,25 @@ import SectionTitle from '@/components/design/SectionTitle';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import AIDemoCallDialog from '@/components/niches/AIDemoCallDialog';
+import A2PFormEmbed from '@/components/demo/A2PFormEmbed';
 import '@/styles/iframe-container.css';
 
 const NicheBooking = () => {
   const { industry = 'healthcare' } = useParams();
   const [showDemoVideo, setShowDemoVideo] = useState(false);
   const [showCallDialog, setShowCallDialog] = useState(false);
+  const [a2pFormCompleted, setA2pFormCompleted] = useState(false);
   
   const validIndustry = ['healthcare', 'real-estate', 'restaurants', 'service-contractors', 'music'].includes(industry) 
     ? industry 
     : 'healthcare';
   
+  // Check localStorage for form completion status on component mount
+  useEffect(() => {
+    const formCompleted = localStorage.getItem('a2pFormCompleted') === 'true';
+    setA2pFormCompleted(formCompleted);
+  }, []);
+
   const getIndustryText = () => {
     switch(validIndustry) {
       case 'healthcare':
@@ -41,6 +48,11 @@ const NicheBooking = () => {
   const phoneNumber = "+1 (302) 618-3977";
   const demoVideoUrl = "https://www.youtube.com/embed/HuU_pxXVVqo?si=qrMXYUDeg8m8zUzs";
 
+  // Handle A2P form submission
+  const handleA2PFormSubmit = () => {
+    setA2pFormCompleted(true);
+  };
+
   return (
     <NicheLayout 
       industry={validIndustry as any}
@@ -57,81 +69,92 @@ const NicheBooking = () => {
             />
             
             <StyleProvider className="bg-white rounded-xl p-6 md:p-8 shadow-lg border border-gray-200 mt-12">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="space-y-6 flex flex-col items-center justify-center text-center">
-                  <h3 className="text-xl font-bold text-gray-800">Call Our AI Demo</h3>
-                  
-                  <motion.div 
-                    initial={{ scale: 1 }}
-                    animate={{ scale: [1, 1.05, 1] }}
-                    transition={{ type: "spring", stiffness: 260, damping: 20, repeat: Infinity, repeatType: "reverse", duration: 2 }}
-                    className="bg-gradient-to-r from-brand-pink to-brand-aqua w-16 h-16 rounded-full flex items-center justify-center mb-6"
-                  >
-                    <PhoneCall size={30} className="text-white" />
-                  </motion.div>
-                  
-                  <motion.a
-                    href={`tel:${phoneNumber.replace(/\D/g, '')}`}
-                    className="text-3xl font-bold mb-5 text-brand-aqua"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                  >
-                    {phoneNumber}
-                  </motion.a>
-                  
-                  <Button
-                    variant="action"
-                    size="lg"
-                    className="shadow-lg bg-gradient-to-r from-brand-pink to-brand-aqua hover:shadow-xl transition-all duration-300"
-                    onClick={() => window.location.href = `tel:${phoneNumber.replace(/\D/g, '')}`}
-                  >
-                    <PhoneCall className="mr-2" /> Call Now
-                  </Button>
-                  
-                  <div className="text-right mt-12">
-                    <button 
-                      onClick={() => setShowCallDialog(true)}
-                      className="text-sm text-brand-aqua hover:text-brand-pink"
-                    >
-                      Show in popup
-                    </button>
-                  </div>
-                </div>
-                
+              {!a2pFormCompleted ? (
                 <div className="space-y-6">
-                  <h3 className="text-xl font-bold text-gray-800">Watch Demo Video</h3>
-                  <div onClick={() => setShowDemoVideo(true)} className="aspect-video bg-gray-100 rounded-lg overflow-hidden cursor-pointer relative group">
-                    <div className="absolute inset-0 bg-brand-darkPurple/50 flex items-center justify-center group-hover:bg-brand-darkPurple/70 transition-all duration-300">
-                      <motion.div 
-                        className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center"
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.95 }}
+                  <h3 className="text-xl font-bold text-center text-gray-800">A2P Registration Form</h3>
+                  <p className="text-gray-600 text-center mb-4">
+                    Please complete this form to register for our AI voice agent demo.
+                    This is required by telecommunications regulations.
+                  </p>
+                  <A2PFormEmbed onFormSubmit={handleA2PFormSubmit} />
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="space-y-6 flex flex-col items-center justify-center text-center">
+                    <h3 className="text-xl font-bold text-gray-800">Call Our AI Demo</h3>
+                    
+                    <motion.div 
+                      initial={{ scale: 1 }}
+                      animate={{ scale: [1, 1.05, 1] }}
+                      transition={{ type: "spring", stiffness: 260, damping: 20, repeat: Infinity, repeatType: "reverse", duration: 2 }}
+                      className="bg-gradient-to-r from-brand-pink to-brand-aqua w-16 h-16 rounded-full flex items-center justify-center mb-6"
+                    >
+                      <PhoneCall size={30} className="text-white" />
+                    </motion.div>
+                    
+                    <motion.a
+                      href={`tel:${phoneNumber.replace(/\D/g, '')}`}
+                      className="text-3xl font-bold mb-5 text-brand-aqua"
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                    >
+                      {phoneNumber}
+                    </motion.a>
+                    
+                    <Button
+                      variant="action"
+                      size="lg"
+                      className="shadow-lg bg-gradient-to-r from-brand-pink to-brand-aqua hover:shadow-xl transition-all duration-300"
+                      onClick={() => window.location.href = `tel:${phoneNumber.replace(/\D/g, '')}`}
+                    >
+                      <PhoneCall className="mr-2" /> Call Now
+                    </Button>
+                    
+                    <div className="text-right mt-12">
+                      <button 
+                        onClick={() => setShowCallDialog(true)}
+                        className="text-sm text-brand-aqua hover:text-brand-pink"
                       >
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-brand-pink" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                        </svg>
-                      </motion.div>
+                        Show in popup
+                      </button>
                     </div>
-                    <img 
-                      src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=80&w=800" 
-                      alt="Demo video thumbnail"
-                      className="w-full h-full object-cover"
-                    />
                   </div>
                   
-                  <div>
-                    <h4 className="font-medium text-gray-800 mb-2">Or schedule a consultation with our team:</h4>
-                    <a 
-                      href="https://link.suddenimpactagency.io/widget/booking/MYRdt5Un7mP29erZS5rx"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block px-6 py-3 bg-gradient-to-r from-brand-vibrantPurple to-brand-pink text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
-                    >
-                      Schedule a Consultation
-                    </a>
+                  <div className="space-y-6">
+                    <h3 className="text-xl font-bold text-gray-800">Watch Demo Video</h3>
+                    <div onClick={() => setShowDemoVideo(true)} className="aspect-video bg-gray-100 rounded-lg overflow-hidden cursor-pointer relative group">
+                      <div className="absolute inset-0 bg-brand-darkPurple/50 flex items-center justify-center group-hover:bg-brand-darkPurple/70 transition-all duration-300">
+                        <motion.div 
+                          className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center"
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-brand-pink" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                          </svg>
+                        </motion.div>
+                      </div>
+                      <img 
+                        src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=80&w=800" 
+                        alt="Demo video thumbnail"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    
+                    <div>
+                      <h4 className="font-medium text-gray-800 mb-2">Or schedule a consultation with our team:</h4>
+                      <a 
+                        href="https://link.suddenimpactagency.io/widget/booking/MYRdt5Un7mP29erZS5rx"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block px-6 py-3 bg-gradient-to-r from-brand-vibrantPurple to-brand-pink text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
+                      >
+                        Schedule a Consultation
+                      </a>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
             </StyleProvider>
           </div>
         </div>
