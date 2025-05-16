@@ -1,5 +1,5 @@
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { PhoneCall, Play } from "lucide-react";
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -17,16 +17,9 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
   const isMobile = useIsMobile();
   const [showDemoVideo, setShowDemoVideo] = useState(false);
   const [isVideoLoading, setIsVideoLoading] = useState(true);
-  const [formCompleted, setFormCompleted] = useState(false);
   
   const phoneNumber = "+1 (302) 618-3977";
   const demoVideoUrl = "https://www.youtube.com/embed/HuU_pxXVVqo?si=qrMXYUDeg8m8zUzs";
-
-  // Check localStorage for form completion status on component mount
-  useEffect(() => {
-    const a2pFormCompleted = localStorage.getItem('a2pFormCompleted') === 'true';
-    setFormCompleted(a2pFormCompleted);
-  }, []);
 
   // Handle video load complete
   const handleVideoLoad = () => {
@@ -55,23 +48,6 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
           </div>
         </CardContent>
       </Card>
-    );
-  }
-
-  // Show a message if form hasn't been completed
-  if (!formCompleted) {
-    return (
-      <div className="p-8 flex flex-col items-center justify-center text-center">
-        <div className="mb-6">
-          <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 bg-gray-100">
-            <PhoneCall size={30} className="text-gray-400" />
-          </div>
-          <h3 className="text-xl font-semibold mb-2">Complete the A2P Form First</h3>
-          <p className="text-gray-600">
-            Please complete the external A2P form that was provided to you before accessing this demo.
-          </p>
-        </div>
-      </div>
     );
   }
 
