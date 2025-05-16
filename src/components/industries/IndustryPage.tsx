@@ -1,4 +1,3 @@
-
 import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Layout from '@/components/layout/Layout';
@@ -26,8 +25,8 @@ const industryData = {
     ],
     pricing: [
       {
-        title: "Basic",
-        price: "$199",
+        title: "Impact Starter",
+        price: "$397",
         description: "Perfect for small cafés and restaurants",
         features: [
           "1 AI voice agent",
@@ -36,11 +35,15 @@ const industryData = {
           "Basic reservation handling",
           "Business hours configuration"
         ],
-        highlighted: false
+        highlighted: false,
+        monthlyUrl: "https://buy.stripe.com/dRmaEPeRt38Ubmr7L7ejK0w",
+        annualUrl: "https://buy.stripe.com/8x27sDbFh6l61LR0iFejK0x",
+        annualPrice: "$3,811/annual",
+        setupFee: "$197.00 One-time set-up"
       },
       {
-        title: "Standard",
-        price: "$349",
+        title: "Impact Pro",
+        price: "$597",
         description: "Ideal for busy restaurants and small chains",
         features: [
           "2 AI voice agents",
@@ -51,11 +54,15 @@ const industryData = {
           "Customer recognition system",
           "Weekly performance reports"
         ],
-        highlighted: true
+        highlighted: true,
+        monthlyUrl: "https://buy.stripe.com/28E3cncJl24Q2PVd5rejK0z",
+        annualUrl: "https://buy.stripe.com/14AcMX7p1eRC3TZ4yVejK0A",
+        annualPrice: "$5,731/annual",
+        setupFee: "$197.00 One-time set-up"
       },
       {
-        title: "Premium",
-        price: "$599",
+        title: "Impact Enterprise",
+        price: "$897",
         description: "For restaurant groups and large establishments",
         features: [
           "5 AI voice agents",
@@ -67,7 +74,11 @@ const industryData = {
           "Detailed analytics dashboard",
           "Priority support"
         ],
-        highlighted: false
+        highlighted: false,
+        monthlyUrl: "https://buy.stripe.com/eVqdR18t538Ubmr8PbejK0B",
+        annualUrl: "https://buy.stripe.com/6oU28j38L24QeyD5CZejK0C",
+        annualPrice: "$8,611/annual",
+        setupFee: "$197.00 One-time set-up"
       }
     ],
     testimonials: [
@@ -96,8 +107,8 @@ const industryData = {
     ],
     pricing: [
       {
-        title: "Agent",
-        price: "$249",
+        title: "Impact Starter",
+        price: "$397",
         description: "Perfect for individual agents",
         features: [
           "1 AI voice agent",
@@ -107,11 +118,15 @@ const industryData = {
           "Basic CRM integration",
           "Property information handling"
         ],
-        highlighted: false
+        highlighted: false,
+        monthlyUrl: "https://buy.stripe.com/4gM8wH10DcJu2PV0iFejK0d",
+        annualUrl: "https://buy.stripe.com/28EfZ9aBd38U1LR0iFejK0e",
+        annualPrice: "$3,811/annual",
+        setupFee: "$197.00 One-time set-up"
       },
       {
-        title: "Team",
-        price: "$499",
+        title: "Impact Pro",
+        price: "$597",
         description: "Ideal for real estate teams and small agencies",
         features: [
           "3 AI voice agents",
@@ -122,11 +137,15 @@ const industryData = {
           "Automated follow-up sequences",
           "Performance analytics"
         ],
-        highlighted: true
+        highlighted: true,
+        monthlyUrl: "https://buy.stripe.com/3cIcMX8t5dNy627d5rejK0f",
+        annualUrl: "https://buy.stripe.com/8x23cn8t58tegGL6H3ejK0g",
+        annualPrice: "$5,731/annual",
+        setupFee: "$197.00 One-time set-up"
       },
       {
-        title: "Brokerage",
-        price: "$899",
+        title: "Impact Enterprise",
+        price: "$897",
         description: "For large brokerages with multiple teams",
         features: [
           "10 AI voice agents",
@@ -138,7 +157,11 @@ const industryData = {
           "White-labeled solution",
           "Priority support"
         ],
-        highlighted: false
+        highlighted: false,
+        monthlyUrl: "https://buy.stripe.com/9B6dR124HeRC6275CZejK0h",
+        annualUrl: "https://buy.stripe.com/3cIdR18t510MfCHd5rejK0i",
+        annualPrice: "$8,611/annual",
+        setupFee: "$197.00 One-time set-up"
       }
     ],
     testimonials: [
@@ -167,8 +190,8 @@ const industryData = {
     ],
     pricing: [
       {
-        title: "Essential",
-        price: "$279",
+        title: "Impact Starter",
+        price: "$797",
         description: "Perfect for small practices and individual providers",
         features: [
           "1 HIPAA-compliant AI voice agent",
@@ -178,11 +201,15 @@ const industryData = {
           "Appointment reminders",
           "FAQ handling"
         ],
-        highlighted: false
+        highlighted: false,
+        monthlyUrl: "https://buy.stripe.com/4gM3cnbFheRC3TZd5rejK0p",
+        annualUrl: "https://buy.stripe.com/00wdR14cPdNyfCHaXjejK0r",
+        annualPrice: "$7,651/annual",
+        setupFee: "$297.00 One-time set-up"
       },
       {
-        title: "Professional",
-        price: "$549",
+        title: "Impact Pro",
+        price: "$1,097",
         description: "Ideal for established practices and clinics",
         features: [
           "3 HIPAA-compliant AI voice agents",
@@ -193,11 +220,15 @@ const industryData = {
           "Customized patient communication",
           "Detailed reporting"
         ],
-        highlighted: true
+        highlighted: true,
+        monthlyUrl: "https://buy.stripe.com/14A9ALgZBbFq76baXjejK0s",
+        annualUrl: "https://buy.stripe.com/fZu28j4cP9xiain4yVejK0t",
+        annualPrice: "$10,531/annual",
+        setupFee: "$297.00 One-time set-up"
       },
       {
-        title: "Enterprise",
-        price: "$999",
+        title: "Impact Enterprise",
+        price: "$1,497",
         description: "For medical groups and healthcare networks",
         features: [
           "10 HIPAA-compliant AI voice agents",
@@ -209,7 +240,11 @@ const industryData = {
           "Advanced analytics dashboard",
           "Priority support"
         ],
-        highlighted: false
+        highlighted: false,
+        monthlyUrl: "https://buy.stripe.com/14AdR124HfVGainfdzejK0u",
+        annualUrl: "https://buy.stripe.com/4gMbITbFh9xigGL4yVejK0v",
+        annualPrice: "$14,371/annual",
+        setupFee: "$297.00 One-time set-up"
       }
     ],
     testimonials: [
@@ -307,6 +342,89 @@ const industryData = {
         position: "Operations Manager, Reliable Electric"
       }
     ]
+  },
+  music: {
+    title: "Music Industry",
+    intro: "Revolutionize your music business with AI voice agents that handle booking requests, fan inquiries, and merchandising management 24/7, allowing your team to focus on creating and performing great music.",
+    image: "/lovable-uploads/293aebbf-1435-4e16-867f-2a95f52ef685.png",
+    benefits: [
+      "Never miss a booking or performance opportunity",
+      "Manage fan requests and inquiries automatically",
+      "Handle merchandise orders efficiently",
+      "Gather fan information for marketing purposes",
+      "Increase booking efficiency and reduce scheduling conflicts"
+    ],
+    pricing: [
+      {
+        title: "Impact Starter",
+        price: "$397",
+        description: "Perfect for independent musicians and small studios",
+        features: [
+          "1 AI voice agent",
+          "100 minutes/month",
+          "Basic booking management",
+          "Fan inquiries handling",
+          "Customizable availability calendar",
+          "Simple follow-up messages"
+        ],
+        highlighted: false,
+        monthlyUrl: "https://buy.stripe.com/4gM00bfVxbFq2PV9TfejK0j",
+        annualUrl: "https://buy.stripe.com/7sY00bcJl38UgGLaXjejK0k",
+        annualPrice: "$3,811/annual",
+        setupFee: "$197.00 One-time set-up"
+      },
+      {
+        title: "Impact Pro",
+        price: "$597",
+        description: "Ideal for music labels and established artists",
+        features: [
+          "2 AI voice agents",
+          "300 minutes/month",
+          "Advanced booking management",
+          "VIP fan engagement",
+          "Artist-specific scheduling",
+          "Merchandise order handling",
+          "Fan satisfaction follow-ups"
+        ],
+        highlighted: true,
+        monthlyUrl: "https://buy.stripe.com/cNi5kv6kX7pa2PVd5rejK0l",
+        annualUrl: "https://buy.stripe.com/9B600bfVx4cYbmr2qNejK0m",
+        annualPrice: "$5,731/annual",
+        setupFee: "$197.00 One-time set-up"
+      },
+      {
+        title: "Impact Enterprise",
+        price: "$897",
+        description: "For music companies with multiple artists and venues",
+        features: [
+          "5 AI voice agents",
+          "800 minutes/month",
+          "Multi-venue support",
+          "CRM & ticketing software integration",
+          "Complex event management",
+          "Fan club management",
+          "Custom reporting and analytics",
+          "Priority support"
+        ],
+        highlighted: false,
+        monthlyUrl: "https://buy.stripe.com/bJecMXeRt6l6bmr9TfejK0n",
+        annualUrl: "https://buy.stripe.com/dRm7sD24HfVG4Y33uRejK0o",
+        annualPrice: "$8,611/annual",
+        setupFee: "$197.00 One-time set-up"
+      }
+    ],
+    testimonials: [
+      {
+        quote: "Since implementing the AI voice agent, I've been able to focus more on music production and less on answering routine calls. Our booking inquiries are handled efficiently 24/7.",
+        name: "Alex Morgan",
+        position: "Independent Music Producer, Rhythm Studios"
+      },
+      {
+        quote: "The AI voice system has revolutionized how we manage fan interactions and merchandise sales. It's like having a dedicated assistant working around the clock.",
+        name: "Taylor Swift",
+        position: "Artist & Performer, Melody Records"
+      }
+    ]
   }
 };
 
@@ -369,6 +487,12 @@ const IndustryPage = () => {
       textColorClass = "text-brand-blue";
       gradientClass = "from-brand-blue to-brand-purple";
       animationType = "contractors";
+      break;
+    case "music":
+      industryName = "Music Industry";
+      textColorClass = "text-brand-pink";
+      gradientClass = "from-brand-pink to-brand-purple";
+      animationType = "music";
       break;
     default:
       industryName = "Restaurants &";
