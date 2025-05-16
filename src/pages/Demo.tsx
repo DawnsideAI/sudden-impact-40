@@ -301,58 +301,7 @@ const Demo = () => {
         </div>
       </section>
 
-      {/* Call to Action */}
-      {!showAIDemo && (
-        <section className="py-8 md:py-16 bg-white">
-          <div className="container-custom px-4 md:px-8">
-            <StyleProvider className="max-w-4xl mx-auto">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                className="p-5 md:p-10 rounded-xl bg-gradient-to-br from-brand-purple/5 via-white to-brand-aqua/5 shadow-xl border border-gray-100 text-center"
-              >
-                <h2 className="text-xl md:text-3xl font-bold mb-3 md:mb-6 text-gray-800">
-                  Ready to See Our AI Voice Agent in Action?
-                </h2>
-                <p className="text-sm md:text-lg text-gray-600 mb-5 md:mb-8">
-                  Choose the option that works best for you. Try our live demo now, watch a video demo, or schedule a time for later.
-                </p>
-                <div className="flex flex-col sm:flex-row justify-center gap-3 md:gap-4">
-                  <button 
-                    onClick={() => {
-                      setActiveTab("live");
-                      window.scrollTo({ top: 400, behavior: 'smooth' });
-                    }}
-                    className="px-4 md:px-6 py-2.5 md:py-3 bg-gradient-to-r from-brand-pink to-brand-aqua text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all hover:-translate-y-1 text-sm md:text-base"
-                  >
-                    Try Live Demo Now
-                  </button>
-                  <button 
-                    onClick={() => {
-                      setActiveTab("video");
-                      window.scrollTo({ top: 400, behavior: 'smooth' });
-                    }}
-                    className="px-4 md:px-6 py-2.5 md:py-3 bg-white border border-brand-purple/30 text-brand-purple font-medium rounded-lg shadow-sm hover:shadow-md transition-all hover:-translate-y-1 text-sm md:text-base"
-                  >
-                    Watch Video Demo
-                  </button>
-                  <button 
-                    onClick={() => {
-                      setActiveTab("schedule");
-                      window.scrollTo({ top: 400, behavior: 'smooth' });
-                    }}
-                    className="px-4 md:px-6 py-2.5 md:py-3 bg-white border border-brand-purple/30 text-brand-purple font-medium rounded-lg shadow-sm hover:shadow-md transition-all hover:-translate-y-1 text-sm md:text-base"
-                  >
-                    Schedule For Later
-                  </button>
-                </div>
-              </motion.div>
-            </StyleProvider>
-          </div>
-        </section>
-      )}
+      {/* Call to Action section completely removed */}
       
       {/* AI Demo Call Dialog */}
       <AIDemoCallDialog 
