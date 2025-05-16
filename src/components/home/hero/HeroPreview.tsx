@@ -32,19 +32,19 @@ const HeroPreview = ({ lightMode = false }: HeroPreviewProps) => {
                 }}
                 transition={{ 
                   duration: 3, 
-                  repeat: Infinity, 
                   repeatType: "reverse", 
+                  repeat: Infinity,
                   ease: "easeInOut" 
                 }}
               >
                 {/* Microphone icon */}
                 <motion.div
                   initial={{ scale: 0.8 }}
-                  animate={{ scale: [0.8, 1] }}
+                  animate={{ scale: 1 }}
                   transition={{ 
                     duration: 3, 
-                    repeat: Infinity, 
                     repeatType: "reverse", 
+                    repeat: Infinity,
                     ease: "easeInOut" 
                   }}
                   className="text-white z-10"

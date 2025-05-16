@@ -26,13 +26,11 @@ const LiveDemoDialog = ({ open, onOpenChange }: LiveDemoDialogProps) => {
         </DialogHeader>
         <div className="flex flex-col items-center justify-center gap-4 py-6 bg-gradient-to-br from-brand-pink/5 to-brand-aqua/5 rounded-lg px-4">
           <motion.div 
-            initial={{ scale: 1 }}
-            animate={{ scale: 1.05 }}
+            whileHover={{ scale: 1.05 }}
             transition={{ 
-              duration: 2, 
-              repeat: Infinity, 
-              repeatType: "reverse",
-              ease: "easeInOut"
+              type: "spring",
+              stiffness: 300,
+              damping: 20 
             }}
             className="w-16 h-16 rounded-full bg-gradient-to-r from-brand-pink to-brand-aqua flex items-center justify-center text-white"
           >

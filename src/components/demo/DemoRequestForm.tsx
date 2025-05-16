@@ -1,12 +1,11 @@
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { PhoneCall, Play } from "lucide-react";
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import { useState } from "react";
 
 interface DemoRequestFormProps {
   onFormSubmit?: () => void;
@@ -17,22 +16,34 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const isMobile = useIsMobile();
   const [showDemoVideo, setShowDemoVideo] = useState(false);
+  const [isVideoLoading, setIsVideoLoading] = useState(true);
   
   const phoneNumber = "+1 (302) 618-3977";
   const demoVideoUrl = "https://www.youtube.com/embed/HuU_pxXVVqo?si=qrMXYUDeg8m8zUzs";
+
+  // Handle video load complete
+  const handleVideoLoad = () => {
+    setIsVideoLoading(false);
+  };
 
   // Render demo video if showVideo prop is true
   if (showVideo) {
     return (
       <Card className="overflow-hidden">
         <CardContent className="p-0">
-          <div className="aspect-video w-full">
+          <div className="aspect-video w-full relative">
+            {isVideoLoading && (
+              <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
+                <div className="w-10 h-10 border-4 border-t-brand-pink rounded-full animate-spin"></div>
+              </div>
+            )}
             <iframe
               src={demoVideoUrl}
               title="AI Voice Agent Demo"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
               className="w-full h-full"
+              onLoad={handleVideoLoad}
             ></iframe>
           </div>
         </CardContent>
@@ -43,16 +54,15 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
   return (
     <div className="relative">
       <motion.div 
-        initial={{ opacity: 1 }}
+        initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.3 }}
         className="p-8 flex flex-col items-center justify-center text-center"
       >
         <motion.div 
-          initial={{ scale: 1 }}
-          animate={{ scale: [1, 1.05, 1] }}
-          transition={{ type: "spring", stiffness: 260, damping: 20, repeat: Infinity, repeatType: "reverse", duration: 2 }}
           className="bg-gradient-to-r from-brand-pink to-brand-aqua w-16 h-16 rounded-full flex items-center justify-center mb-6"
+          whileHover={{ scale: 1.05 }}
+          transition={{ type: "spring", stiffness: 260, damping: 20 }}
         >
           <PhoneCall size={30} className="text-white" />
         </motion.div>
@@ -70,7 +80,10 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
           variant="action"
           size="xl"
           className="shadow-lg bg-gradient-to-r from-brand-pink to-brand-aqua hover:shadow-xl transition-all duration-300"
-          onClick={() => window.location.href = `tel:${phoneNumber.replace(/\D/g, '')}`}
+          onClick={() => {
+            window.location.href = `tel:${phoneNumber.replace(/\D/g, '')}`;
+            if (onFormSubmit) onFormSubmit();
+          }}
         >
           <PhoneCall className="mr-2" /> Call Now
         </Button>
@@ -89,12 +102,18 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
             <DialogContent className="sm:max-w-[800px] bg-white border border-brand-pink/10 shadow-xl">
               <DialogTitle className="text-xl font-bold text-center mb-4 text-gray-800">AI Voice Agent Demo</DialogTitle>
               <div className="aspect-video relative bg-gradient-to-br from-brand-pink/5 to-brand-aqua/5 rounded-lg overflow-hidden">
+                {isVideoLoading && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-10 h-10 border-4 border-t-brand-pink rounded-full animate-spin"></div>
+                  </div>
+                )}
                 <iframe 
                   src={demoVideoUrl}
                   className="w-full h-full"
                   title="AI Voice Agent Demo"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
+                  onLoad={() => setIsVideoLoading(false)}
                 ></iframe>
               </div>
             </DialogContent>

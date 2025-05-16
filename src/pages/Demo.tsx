@@ -1,8 +1,8 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import Layout from "@/components/layout/Layout";
 import { Calendar, Clock, Check, Mic, MessageSquare, CalendarClock } from "lucide-react";
+import Layout from "@/components/layout/Layout";
 import DemoRequestForm from "@/components/demo/DemoRequestForm";
 import AIDemoContact from "@/components/demo/AIDemoContact";
 import AIDemoCallDialog from "@/components/niches/AIDemoCallDialog";
@@ -19,8 +19,14 @@ const Demo = () => {
   const [showDemoVideo, setShowDemoVideo] = useState(false);
   const isMobile = useIsMobile();
   const [isBookingScriptLoaded, setIsBookingScriptLoaded] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    // Set loading to false after a timeout to ensure components have time to render
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+
     window.scrollTo(0, 0);
     document.title = "Demo | Sudden Impact Agency";
     
@@ -32,26 +38,46 @@ const Demo = () => {
 
     // Load booking script for the scheduler
     if (activeTab === "schedule" && !isBookingScriptLoaded) {
-      const script = document.createElement('script');
-      script.src = "https://link.suddenimpactagency.io/js/embed.js";
-      script.type = "text/javascript";
-      script.async = true;
-      script.onload = () => setIsBookingScriptLoaded(true);
-      document.body.appendChild(script);
+      try {
+        const script = document.createElement('script');
+        script.src = "https://link.suddenimpactagency.io/js/embed.js";
+        script.type = "text/javascript";
+        script.async = true;
+        script.onload = () => setIsBookingScriptLoaded(true);
+        document.body.appendChild(script);
       
-      return () => {
-        const existingScript = document.querySelector(`script[src="https://link.suddenimpactagency.io/js/embed.js"]`);
-        if (existingScript && existingScript.parentNode) {
-          existingScript.parentNode.removeChild(existingScript);
-        }
-      };
+        return () => {
+          const existingScript = document.querySelector(`script[src="https://link.suddenimpactagency.io/js/embed.js"]`);
+          if (existingScript && existingScript.parentNode) {
+            existingScript.parentNode.removeChild(existingScript);
+          }
+          clearTimeout(timer);
+        };
+      } catch (error) {
+        console.error("Error loading booking script:", error);
+      }
     }
+    
+    return () => clearTimeout(timer);
   }, [activeTab, isBookingScriptLoaded]);
 
   // Handle form submission
   const handleFormSubmit = () => {
     setShowCallDialog(true);
   };
+
+  if (isLoading) {
+    return (
+      <Layout lightMode={true}>
+        <div className="flex items-center justify-center min-h-[50vh]">
+          <div className="text-center">
+            <div className="w-12 h-12 border-4 border-t-brand-pink rounded-full animate-spin mx-auto mb-4"></div>
+            <p className="text-gray-600">Loading demo page...</p>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout lightMode={true}>
@@ -192,17 +218,26 @@ const Demo = () => {
                   {/* Updated Booking Widget with improved mobile handling */}
                   <div className="w-full calendar-container">
                     <div className="iframe-container">
-                      <iframe 
-                        src="https://link.suddenimpactagency.io/widget/booking/MYRdt5Un7mP29erZS5rx" 
-                        style={{ 
-                          width: "100%",
-                          height: isMobile ? "1000px" : "800px", 
-                          border: "none",
-                        }}
-                        scrolling="no" 
-                        id="msgsndr-calendar"
-                        className="no-scrollbar"
-                      ></iframe>
+                      {isBookingScriptLoaded ? (
+                        <iframe 
+                          src="https://link.suddenimpactagency.io/widget/booking/MYRdt5Un7mP29erZS5rx" 
+                          style={{ 
+                            width: "100%",
+                            height: isMobile ? "1000px" : "800px", 
+                            border: "none",
+                          }}
+                          scrolling="no" 
+                          id="msgsndr-calendar"
+                          className="no-scrollbar"
+                        ></iframe>
+                      ) : (
+                        <div className="flex items-center justify-center h-64">
+                          <div className="text-center">
+                            <div className="w-10 h-10 border-4 border-t-brand-pink rounded-full animate-spin mx-auto mb-4"></div>
+                            <p className="text-gray-600">Loading calendar...</p>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </StyleProvider>
