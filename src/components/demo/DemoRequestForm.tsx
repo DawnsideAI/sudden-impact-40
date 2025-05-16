@@ -90,7 +90,7 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
             <h3 className="text-xl font-bold">Complete the form to access our AI demo</h3>
             <p className="text-gray-600">Fill out this quick form to get instant access to our AI voice agent demo</p>
           </div>
-          <div className="relative" style={{ height: isMobile ? "650px" : "600px" }}>
+          <div className="relative" style={{ height: isMobile ? "750px" : "700px" }}>
             <iframe
               src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
               style={{
@@ -108,25 +108,12 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
               data-deactivation-type="neverDeactivate"
               data-deactivation-value=""
               data-form-name="A2P Form - New"
-              data-height={isMobile ? "650" : "600"}
+              data-height={isMobile ? "750" : "700"}
               data-layout-iframe-id="inline-Gf3ORV8Uba4HRiXoml5L"
               data-form-id="Gf3ORV8Uba4HRiXoml5L"
               title="A2P Form - New"
               className="no-scrollbar"
             />
-            {/* For demo testing purposes only */}
-            <div className="absolute bottom-0 right-0 p-2">
-              <button 
-                onClick={() => {
-                  localStorage.setItem('a2pFormSubmitted', 'true');
-                  setFormSubmitted(true);
-                  if (onFormSubmit) onFormSubmit();
-                }}
-                className="text-xs text-gray-400 hover:text-gray-500"
-              >
-                (Demo Submit)
-              </button>
-            </div>
           </div>
         </div>
       ) : (
@@ -197,12 +184,14 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
             </Dialog>
           </div>
           
-          {/* For testing purposes - hidden in production */}
-          <div className="mt-8 text-xs text-gray-400">
-            <button onClick={resetFormSubmission} className="hover:text-gray-600">
-              (Reset Form)
-            </button>
-          </div>
+          {/* Hidden reset button - only visible in development */}
+          {process.env.NODE_ENV === 'development' && (
+            <div className="mt-8 text-xs text-gray-400">
+              <button onClick={resetFormSubmission} className="hover:text-gray-600">
+                (Reset Form)
+              </button>
+            </div>
+          )}
         </motion.div>
       )}
     </div>
