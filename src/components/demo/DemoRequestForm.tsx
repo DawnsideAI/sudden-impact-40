@@ -107,7 +107,7 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
             <h3 className="text-xl font-bold">Complete the form to access our AI demo</h3>
             <p className="text-gray-600">Fill out this quick form to get instant access to our AI voice agent demo</p>
           </div>
-          <div className="iframe-container" style={{ height: isMobile ? "800px" : "750px" }}>
+          <div className="iframe-container" style={{ height: isMobile ? "800px" : "754px" }}>
             <iframe
               ref={iframeRef}
               src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
@@ -126,7 +126,7 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
               data-deactivation-type="leadCollected"
               data-deactivation-value=""
               data-form-name="A2P Form - New"
-              data-height={isMobile ? "800" : "750"}
+              data-height={isMobile ? "800" : "754"}
               data-layout-iframe-id="inline-Gf3ORV8Uba4HRiXoml5L"
               data-form-id="Gf3ORV8Uba4HRiXoml5L"
               title="A2P Form - New"
