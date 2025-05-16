@@ -10,9 +10,11 @@ import { toast } from '@/hooks/use-toast';
 
 const industries = [
   { id: "restaurants", label: "Restaurants & Hospitality", value: "restaurants" },
-  { id: "realestate", label: "Real Estate", value: "realestate" },
-  { id: "healthcare", label: "Healthcare & Wellness", value: "healthcare" },
+  { id: "realestate", label: "Real Estate / Mortgage", value: "realestate" },
+  { id: "healthcare", label: "Healthcare & Medical Providers", value: "healthcare" },
   { id: "contractors", label: "Service Contractors", value: "contractors" },
+  { id: "music", label: "Music Producers & Artists", value: "music" },
+  { id: "custom", label: "Custom Solutions", value: "custom" },
 ];
 
 const businessTypes = {
@@ -28,6 +30,7 @@ const businessTypes = {
     { id: "broker", label: "Individual Broker/Agent" },
     { id: "property-management", label: "Property Management" },
     { id: "developer", label: "Property Developer" },
+    { id: "mortgage", label: "Mortgage Broker/Lender" },
   ],
   healthcare: [
     { id: "medical-practice", label: "Medical Practice" },
@@ -44,6 +47,20 @@ const businessTypes = {
     { id: "cleaning", label: "Cleaning Service" },
     { id: "general", label: "General Contractor" },
   ],
+  music: [
+    { id: "producer", label: "Music Producer" },
+    { id: "artist", label: "Recording Artist" },
+    { id: "studio", label: "Recording Studio" },
+    { id: "label", label: "Independent Label" },
+    { id: "dj", label: "DJ/Performer" },
+  ],
+  custom: [
+    { id: "enterprise", label: "Enterprise Business" },
+    { id: "agency", label: "Marketing Agency" },
+    { id: "saas", label: "SaaS Company" },
+    { id: "ecommerce", label: "E-commerce" },
+    { id: "other", label: "Other Industry" },
+  ],
 };
 
 type BusinessType = keyof typeof businessTypes;
@@ -56,6 +73,11 @@ const Industries = () => {
   const handleIndustrySelect = (industry: BusinessType) => {
     setSelectedIndustry(industry);
     setSelectedBusinessType(null); // Reset business type when industry changes
+    
+    // If custom solutions is selected, direct to calendar booking
+    if (industry === 'custom') {
+      window.open('https://link.suddenimpactagency.io/widget/booking/MYRdt5Un7mP29erZS5rx', '_blank');
+    }
   };
 
   const handleBusinessTypeSelect = (businessType: string) => {
@@ -134,12 +156,17 @@ const Industries = () => {
                     )}
                     
                     <span className="text-base font-medium block">{industry.label}</span>
+                    {industry.id === 'custom' && (
+                      <span className="text-xs text-gray-500 mt-1 block">
+                        Need a tailored plan? We build fully custom solutions for high-growth businesses.
+                      </span>
+                    )}
                   </motion.button>
                 ))}
               </div>
             </div>
             
-            {selectedIndustry && (
+            {selectedIndustry && selectedIndustry !== 'custom' && (
               <motion.div 
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
@@ -177,17 +204,19 @@ const Industries = () => {
               </motion.div>
             )}
             
-            <div className="text-center mt-8">
-              <Button
-                onClick={handleSubmit}
-                disabled={!selectedIndustry || !selectedBusinessType}
-                className={`pink-aqua-bg hover:opacity-90 px-8 py-6 rounded-lg font-medium text-white text-lg shadow-md transition-all duration-300 ${
-                  (!selectedIndustry || !selectedBusinessType) ? 'opacity-70' : 'hover:shadow-lg'
-                }`}
-              >
-                See Your Tailored Solution
-              </Button>
-            </div>
+            {selectedIndustry && selectedIndustry !== 'custom' && (
+              <div className="text-center mt-8">
+                <Button
+                  onClick={handleSubmit}
+                  disabled={!selectedBusinessType}
+                  className={`pink-aqua-bg hover:opacity-90 px-8 py-6 rounded-lg font-medium text-white text-lg shadow-md transition-all duration-300 ${
+                    !selectedBusinessType ? 'opacity-70' : 'hover:shadow-lg'
+                  }`}
+                >
+                  See Your Tailored Solution
+                </Button>
+              </div>
+            )}
           </motion.div>
         </div>
       </section>

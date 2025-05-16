@@ -175,7 +175,7 @@ const NicheContactForm = ({ industry }: NicheContactFormProps) => {
                 <h3 className="text-lg font-bold mb-4">Watch Demo Video</h3>
                 <div className="aspect-video max-w-lg mx-auto overflow-hidden rounded-lg shadow-md">
                   <iframe
-                    src="https://www.youtube.com/embed/HuU_pxXVVqo"
+                    src="https://www.youtube.com/embed/HuU_pxXVVqo?si=qrMXYUDeg8m8zUzs"
                     title="AI Voice Agent Demo"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen

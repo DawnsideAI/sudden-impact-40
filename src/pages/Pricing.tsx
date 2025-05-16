@@ -335,6 +335,14 @@ const Pricing = () => {
                 <div className="h-2 w-full bg-gradient-to-r from-brand-purple via-brand-pink to-brand-aqua"></div>
                 
                 <div className="p-8 md:p-12">
+                  <div className="text-center mb-8">
+                    <p className="text-lg text-gray-700 mb-6">
+                      Need a tailored plan? We build fully custom solutions for high-growth businesses. 
+                      Our team will work with you to create a customized AI voice solution that perfectly fits your 
+                      unique business needs and workflows.
+                    </p>
+                  </div>
+                
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
                     {[
                       "Custom AI Voice Agent Development",
@@ -365,12 +373,12 @@ const Pricing = () => {
                   
                   <div className="text-center">
                     <Link
-                      to="https://www.go.suddenimpact.agency/meetings/suddenimpact/30min"
+                      to="https://link.suddenimpactagency.io/widget/booking/MYRdt5Un7mP29erZS5rx"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-block py-4 px-8 text-center rounded-lg bg-gradient-to-r from-brand-purple via-brand-pink to-brand-aqua text-white hover:opacity-90 transition-all font-medium text-lg shadow-lg hover:shadow-xl"
                     >
-                      Schedule a Consultation
+                      Schedule a Strategy Call
                     </Link>
                   </div>
                 </div>
@@ -411,11 +419,13 @@ const Pricing = () => {
         <DialogContent className="sm:max-w-[800px] bg-gray-900 border-white/10">
           <DialogTitle className="text-xl font-bold text-center mb-4">AI Voice Agent Demo</DialogTitle>
           <div className="aspect-video relative bg-black/20 rounded-lg overflow-hidden flex items-center justify-center">
-            {/* Replace with actual video once available */}
-            <div className="text-center p-8">
-              <p className="text-white/80 mb-4">Demo video will be placed here once available.</p>
-              <p className="text-sm text-white/60">This video will show the AI voice agent in action, CRM dashboard previews, and onboarding automation.</p>
-            </div>
+            <iframe
+              src="https://www.youtube.com/embed/HuU_pxXVVqo?si=qrMXYUDeg8m8zUzs"
+              title="AI Voice Agent Demo"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="w-full h-full"
+            ></iframe>
           </div>
         </DialogContent>
       </Dialog>
