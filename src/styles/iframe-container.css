@@ -25,6 +25,22 @@
   display: block !important;
 }
 
+/* GHL form wrapper styles */
+.ghl-form-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.ghl-form-wrapper iframe {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 650px !important;
+  border: none !important;
+  border-radius: 3px !important;
+  display: block !important;
+}
+
 /* Ensure calendar booking widgets display properly */
 [id^="msgsndr-calendar"] {
   min-height: 600px;
@@ -42,19 +58,23 @@
 }
 
 /* Improve form completion detection */
-.iframe-container iframe {
+.iframe-container iframe,
+.ghl-form-wrapper iframe {
   opacity: 1;
   transition: opacity 0.3s ease;
 }
 
-.iframe-container.form-submitted iframe {
+.iframe-container.form-submitted iframe,
+.ghl-form-wrapper.form-submitted iframe {
   opacity: 0.5;
 }
 
 /* Add custom selectors for form completion state */
 .form-success-message,
 .thank-you-message,
-.form-completed {
+.form-completed,
+.form-success,
+.form-submitted {
   display: block;
   text-align: center;
   padding: 1.5rem;
