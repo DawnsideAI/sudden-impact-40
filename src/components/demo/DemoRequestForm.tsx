@@ -13,7 +13,7 @@ interface DemoRequestFormProps {
 }
 
 const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormProps) => {
-  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const formContainerRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
   const [showDemoVideo, setShowDemoVideo] = useState(false);
   const [isVideoLoading, setIsVideoLoading] = useState(true);
@@ -44,24 +44,75 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
     };
 
     window.addEventListener('message', handleMessage);
+    
+    // Create MutationObserver to detect changes in the form container
+    if (formContainerRef.current && !isA2PFormSubmitted) {
+      const observer = new MutationObserver((mutations) => {
+        // Look for success messages or thank you messages
+        for (const mutation of mutations) {
+          if (mutation.type === 'childList' || mutation.type === 'attributes') {
+            // Check for success elements - common patterns in form submissions
+            const container = formContainerRef.current;
+            if (!container) continue;
+            
+            // Check for success messages or thank you elements
+            const successElements = container.querySelectorAll(
+              '.form-success, .thank-you, .success-message, .form-submitted, [data-form-state="success"]'
+            );
+            
+            // Check if the form container is empty (sometimes forms are removed after submission)
+            const isContainerEmpty = container.children.length === 0;
+            
+            // Check for text content mentioning success or thank you
+            const containsSuccessText = container.innerText && 
+              (container.innerText.toLowerCase().includes('thank you') || 
+               container.innerText.toLowerCase().includes('success') ||
+               container.innerText.toLowerCase().includes('submitted'));
+            
+            if (successElements.length > 0 || isContainerEmpty || containsSuccessText) {
+              console.log('Form submission detected via DOM changes');
+              localStorage.setItem('a2pFormSubmitted', 'true');
+              setFormSubmitted(true);
+              if (onFormSubmit) onFormSubmit();
+              // Disconnect observer once submission is detected
+              observer.disconnect();
+              break;
+            }
+          }
+        }
+      });
+      
+      // Configure and start the observer
+      observer.observe(formContainerRef.current, {
+        childList: true,
+        attributes: true,
+        subtree: true,
+        characterData: true
+      });
+      
+      // Clean up observer
+      return () => {
+        observer.disconnect();
+        window.removeEventListener('message', handleMessage);
+      };
+    }
+    
     return () => window.removeEventListener('message', handleMessage);
   }, [onFormSubmit]);
 
-  // Add the script tag for the form embed.js after component mounts
+  // Add the form URL directly
   useEffect(() => {
-    const script = document.createElement('script');
-    script.src = "https://link.suddenimpactagency.io/js/form_embed.js";
-    script.async = true;
-    document.body.appendChild(script);
-    
-    return () => {
-      // Clean up script when component unmounts
-      const existingScript = document.querySelector(`script[src="https://link.suddenimpactagency.io/js/form_embed.js"]`);
-      if (existingScript && existingScript.parentNode) {
-        existingScript.parentNode.removeChild(existingScript);
-      }
-    };
-  }, []);
+    // Only load the form if not already submitted
+    if (!formSubmitted && formContainerRef.current) {
+      const formContainer = formContainerRef.current;
+      formContainer.innerHTML = `<iframe 
+        src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
+        style="width: 100%; height: 100%; min-height: 680px; border: none; border-radius: 3px;"
+        title="A2P Form - New"
+        id="a2p-form-iframe"
+      ></iframe>`;
+    }
+  }, [formSubmitted]);
 
   // Handle video load complete
   const handleVideoLoad = () => {
@@ -108,35 +159,12 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
             <p className="text-gray-600">Fill out this quick form to get instant access to our AI voice agent demo</p>
           </div>
           
-          {/* Updated with display:none as per the embed code */}
-          <iframe
-            ref={iframeRef}
-            src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
-            style={{
-              display: "none",
-              width: "100%", 
-              height: "100%",
-              border: "none", 
-              borderRadius: "3px"
-            }}
-            id="inline-Gf3ORV8Uba4HRiXoml5L" 
-            data-layout="{'id':'INLINE'}"
-            data-trigger-type="alwaysShow"
-            data-trigger-value=""
-            data-activation-type="alwaysActivated"
-            data-activation-value=""
-            data-deactivation-type="leadCollected"
-            data-deactivation-value=""
-            data-form-name="A2P Form - New"
-            data-height={isMobile ? "800" : "754"}
-            data-layout-iframe-id="inline-Gf3ORV8Uba4HRiXoml5L"
-            data-form-id="Gf3ORV8Uba4HRiXoml5L"
-            title="A2P Form - New"
-          />
-          
-          <div id="form-container" className="iframe-container" style={{ height: isMobile ? "800px" : "754px" }}>
-            {/* The form will be rendered here by the script */}
-          </div>
+          {/* Form container that will hold the iframe */}
+          <div 
+            ref={formContainerRef} 
+            className="iframe-container" 
+            style={{ height: isMobile ? "800px" : "754px", width: "100%" }}
+          ></div>
         </div>
       ) : (
         <motion.div 

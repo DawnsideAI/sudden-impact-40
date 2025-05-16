@@ -15,21 +15,14 @@
   display: none;  /* Safari and Chrome */
 }
 
-/* Specific form iframe styling for homepage */
-#inline-Gf3ORV8Uba4HRiXoml5L {
-  margin: 0 !important;
-  padding: 0 !important;
-  background: transparent !important;
+/* Ensure iframe forms fit properly */
+.iframe-container iframe {
   width: 100% !important;
   height: 100% !important;
-  overflow: visible !important;
   min-height: 680px !important;
-}
-
-/* Form container styling */
-#form-container {
-  width: 100%;
-  min-height: 680px;
+  border: none !important;
+  border-radius: 3px !important;
+  display: block !important;
 }
 
 /* Ensure calendar booking widgets display properly */
