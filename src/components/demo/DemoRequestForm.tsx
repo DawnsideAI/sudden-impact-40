@@ -141,12 +141,6 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
     );
   }
 
-  // For testing purposes - reset the form submission state
-  const resetFormSubmission = () => {
-    localStorage.removeItem('a2pFormSubmitted');
-    setFormSubmitted(false);
-  };
-
   return (
     <div className="relative">
       {!formSubmitted ? (
@@ -163,7 +157,8 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
                 width: "100%",
                 height: "100%",
                 border: "none",
-                borderRadius: "3px"
+                borderRadius: "3px",
+                display: "block"
               }}
               id={`inline-${formId}`}
               data-layout={`{'id':'INLINE'}`}
@@ -181,15 +176,6 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
               className="no-scrollbar"
             />
           </div>
-          
-          {/* Hidden reset button - only visible in development */}
-          {process.env.NODE_ENV === 'development' && (
-            <div className="mt-2 text-xs text-gray-400 text-center">
-              <button onClick={resetFormSubmission} className="hover:text-gray-600">
-                (Reset Form)
-              </button>
-            </div>
-          )}
         </div>
       ) : (
         <motion.div 
@@ -258,15 +244,6 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
               </DialogContent>
             </Dialog>
           </div>
-          
-          {/* Hidden reset button - only visible in development */}
-          {process.env.NODE_ENV === 'development' && (
-            <div className="mt-8 text-xs text-gray-400">
-              <button onClick={resetFormSubmission} className="hover:text-gray-600">
-                (Reset Form)
-              </button>
-            </div>
-          )}
         </motion.div>
       )}
     </div>

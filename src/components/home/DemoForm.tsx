@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Check, Calendar, PhoneCall } from "lucide-react";
@@ -115,16 +116,6 @@ const DemoForm = () => {
   const handleDemoVideoClick = () => {
     setShowDemoVideo(true);
   };
-  
-  // For demo purposes - simulates form submission
-  const handleFormSubmitted = () => {
-    setIsSubmitted(true);
-    setShowCallDialog(true);
-    toast({
-      title: "Demo Request Submitted!",
-      description: "Call the AI demo number shown in the popup.",
-    });
-  };
 
   const demoVideoUrl = "https://www.youtube.com/embed/HuU_pxXVVqo?si=qrMXYUDeg8m8zUzs";
   
@@ -227,7 +218,7 @@ const DemoForm = () => {
                   <iframe
                     src={formUrl}
                     style={{
-                      display: isSubmitted ? "none" : "block",
+                      display: "block",
                       width: "100%", 
                       height: "100%",
                       border: "none", 
@@ -236,18 +227,6 @@ const DemoForm = () => {
                     title="A2P Form - New"
                     className="no-scrollbar"
                   />
-                  
-                  {/* Development-only button - not visible in production */}
-                  {process.env.NODE_ENV === 'development' && (
-                    <div className="absolute bottom-0 right-0 p-2">
-                      <button 
-                        onClick={handleFormSubmitted}
-                        className="text-xs text-gray-400 hover:text-gray-500"
-                      >
-                        (Dev Test)
-                      </button>
-                    </div>
-                  )}
                 </div>
               </div>
             ) : (
