@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { PhoneCall } from 'lucide-react';
@@ -13,6 +14,22 @@ import '@/styles/iframe-container.css';
 const NicheBooking = () => {
   const { industry = 'healthcare' } = useParams();
   const [showDemoVideo, setShowDemoVideo] = useState(false);
+  
+  // Add the script tag for the form embed.js after component mounts
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = "https://link.suddenimpactagency.io/js/form_embed.js";
+    script.async = true;
+    document.body.appendChild(script);
+    
+    return () => {
+      // Clean up script when component unmounts
+      const existingScript = document.querySelector(`script[src="https://link.suddenimpactagency.io/js/form_embed.js"]`);
+      if (existingScript && existingScript.parentNode) {
+        existingScript.parentNode.removeChild(existingScript);
+      }
+    };
+  }, []);
   
   const validIndustry = ['healthcare', 'real-estate', 'restaurants', 'service-contractors', 'music'].includes(industry) 
     ? industry 

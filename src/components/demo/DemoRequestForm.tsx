@@ -46,6 +46,22 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
     return () => window.removeEventListener('message', handleMessage);
   }, [onFormSubmit]);
 
+  // Add the script tag for the form embed.js after component mounts
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = "https://link.suddenimpactagency.io/js/form_embed.js";
+    script.async = true;
+    document.body.appendChild(script);
+    
+    return () => {
+      // Clean up script when component unmounts
+      const existingScript = document.querySelector(`script[src="https://link.suddenimpactagency.io/js/form_embed.js"]`);
+      if (existingScript && existingScript.parentNode) {
+        existingScript.parentNode.removeChild(existingScript);
+      }
+    };
+  }, []);
+
   // Handle video load complete
   const handleVideoLoad = () => {
     setIsVideoLoading(false);
@@ -98,7 +114,8 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
                 width: "100%", 
                 height: "100%",
                 border: "none", 
-                borderRadius: "3px"
+                borderRadius: "3px",
+                display: formSubmitted ? "none" : "block"
               }}
               id="inline-Gf3ORV8Uba4HRiXoml5L" 
               data-layout="{'id':'INLINE'}"
@@ -106,7 +123,7 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
               data-trigger-value=""
               data-activation-type="alwaysActivated"
               data-activation-value=""
-              data-deactivation-type="neverDeactivate"
+              data-deactivation-type="leadCollected"
               data-deactivation-value=""
               data-form-name="A2P Form - New"
               data-height={isMobile ? "800" : "730"}

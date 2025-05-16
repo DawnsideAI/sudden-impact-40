@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Calendar, Clock, Check, Mic, MessageSquare, CalendarClock } from "lucide-react";
@@ -56,6 +55,22 @@ const Demo = () => {
       } catch (error) {
         console.error("Error loading booking script:", error);
       }
+    }
+    
+    // Add embed.js script for the form if we're on the live demo tab
+    if (activeTab === "live") {
+      const script = document.createElement('script');
+      script.src = "https://link.suddenimpactagency.io/js/form_embed.js";
+      script.async = true;
+      document.body.appendChild(script);
+      
+      return () => {
+        const existingScript = document.querySelector(`script[src="https://link.suddenimpactagency.io/js/form_embed.js"]`);
+        if (existingScript && existingScript.parentNode) {
+          existingScript.parentNode.removeChild(existingScript);
+        }
+        clearTimeout(timer);
+      };
     }
     
     return () => clearTimeout(timer);

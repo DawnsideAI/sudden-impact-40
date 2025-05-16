@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Check, Calendar, PhoneCall } from "lucide-react";
@@ -173,9 +174,11 @@ const DemoForm = () => {
                   <iframe
                     src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
                     style={{
+                      display: isSubmitted ? "none" : "block",
                       width: "100%", 
                       height: "100%",
                       border: "none", 
+                      borderRadius: "3px"
                     }}
                     id="inline-Gf3ORV8Uba4HRiXoml5L" 
                     data-layout="{'id':'INLINE'}"
@@ -183,7 +186,7 @@ const DemoForm = () => {
                     data-trigger-value=""
                     data-activation-type="alwaysActivated"
                     data-activation-value=""
-                    data-deactivation-type="neverDeactivate"
+                    data-deactivation-type="leadCollected"
                     data-deactivation-value=""
                     data-form-name="A2P Form - New"
                     data-height={isMobile ? "800" : "700"}
