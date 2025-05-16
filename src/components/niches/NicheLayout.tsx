@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -16,7 +17,7 @@ import { Slider } from "@/components/ui/slider";
 
 interface NicheLayoutProps {
   children: React.ReactNode;
-  industry: 'healthcare' | 'real-estate' | 'restaurants' | 'service-contractors';
+  industry: 'healthcare' | 'real-estate' | 'restaurants' | 'service-contractors' | 'music-producers';
   title: string;
   subtitle: string;
 }
