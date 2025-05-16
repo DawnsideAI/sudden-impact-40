@@ -1,9 +1,8 @@
-
 import { ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import { FiHome } from 'react-icons/fi';
 import { RiRestaurantLine, RiBuilding2Line, RiHealthBookLine } from 'react-icons/ri';
-import { Wrench } from 'lucide-react';
+import { Wrench, Music } from 'lucide-react';
 
 interface IndustryAnimationProps {
   industry: string;
@@ -367,6 +366,104 @@ const IndustryAnimation = ({ industry }: IndustryAnimationProps) => {
                   </motion.div>
                 ))}
               </motion.div>
+            </motion.div>
+          </div>
+        );
+        
+      case 'music':
+        return (
+          <div className="relative h-80 w-full">
+            {/* Background gradient */}
+            <div className="absolute inset-0 bg-gradient-to-br from-brand-pink/20 via-purple-500/10 to-brand-aqua/20 rounded-xl" />
+            
+            {/* Main animation container */}
+            <motion.div 
+              className="relative h-full w-full flex items-center justify-center"
+              variants={containerVariants}
+              initial="initial"
+              animate="animate"
+            >
+              {/* Center music icon */}
+              <motion.div 
+                className="absolute z-20"
+                variants={floatVariants}
+                animate="animate"
+              >
+                <motion.div 
+                  className="w-28 h-28 bg-gradient-to-br from-brand-pink to-brand-aqua rounded-full flex items-center justify-center text-white shadow-lg"
+                  variants={itemVariants}
+                >
+                  <Music size={64} />
+                </motion.div>
+              </motion.div>
+              
+              {/* Sound waves animation */}
+              {[1, 2, 3].map((ring) => (
+                <motion.div
+                  key={`ring-${ring}`}
+                  className="absolute rounded-full border-2 border-brand-pink/30"
+                  style={{
+                    width: `${ring * 30 + 100}px`, 
+                    height: `${ring * 30 + 100}px`
+                  }}
+                  animate={{
+                    scale: [1, 1.1, 1],
+                    opacity: [0.7, 0.3, 0.7],
+                  }}
+                  transition={{
+                    duration: 2 + ring * 0.5,
+                    repeat: Infinity,
+                    delay: ring * 0.2,
+                  }}
+                />
+              ))}
+              
+              {/* Orbiting music icons */}
+              <motion.div 
+                className="absolute w-64 h-64"
+                variants={rotateVariants}
+                animate="animate"
+              >
+                {[0, 60, 120, 180, 240, 300].map((degree, index) => (
+                  <motion.div 
+                    key={index}
+                    className="absolute" 
+                    style={{
+                      transform: `rotate(${degree}deg) translateX(120px)`,
+                    }}
+                    variants={itemVariants}
+                  >
+                    <div className={`w-12 h-12 rounded-full flex items-center justify-center bg-white text-brand-aqua shadow-md`}>
+                      {index % 6 === 0 ? '🎸' : index % 6 === 1 ? '🎹' : index % 6 === 2 ? '🎵' : index % 6 === 3 ? '🎤' : index % 6 === 4 ? '🎧' : '🥁'}
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+              
+              {/* Music notes animation */}
+              {[1, 2, 3, 4].map((note) => (
+                <motion.div
+                  key={`note-${note}`}
+                  className="absolute text-3xl"
+                  style={{
+                    left: `${20 + note * 15}%`,
+                    top: `${30 + (note % 3) * 15}%`,
+                  }}
+                  animate={{
+                    y: [-20, -40, -20],
+                    x: [0, note % 2 === 0 ? 10 : -10, 0],
+                    opacity: [0, 1, 0],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    delay: note * 0.8,
+                    ease: "easeInOut"
+                  }}
+                >
+                  {note % 2 === 0 ? '♪' : '♫'}
+                </motion.div>
+              ))}
             </motion.div>
           </div>
         );

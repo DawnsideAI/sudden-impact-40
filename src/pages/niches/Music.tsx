@@ -1,11 +1,12 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Check, Music, Calendar, Star, User } from 'lucide-react';
+import { Check, Music as MusicIcon, Calendar, Star, User } from 'lucide-react';
 import NicheLayout from '@/components/niches/NicheLayout';
 import NicheContactForm from '@/components/niches/NicheContactForm';
 import StyleProvider from '@/components/design/StyleProvider';
 import SectionTitle from '@/components/design/SectionTitle';
+import IndustryAnimation from '@/components/industries/IndustryAnimation';
 
 const MusicNiche = () => {
   const benefits = [
@@ -34,7 +35,7 @@ const MusicNiche = () => {
       title: "Review & Promotion Request",
       trigger: "After performance or release",
       actions: "SMS and email with social sharing links",
-      icon: Music
+      icon: MusicIcon
     },
     {
       title: "Loyalty Campaign",
@@ -50,6 +51,15 @@ const MusicNiche = () => {
       title="Book Studio Time or Manage Fan Engagement"
       subtitle="Instant booking, fan communication, and merchandise management — all in one seamless experience."
     >
+      {/* Music Industry Animation Section */}
+      <section className="py-12 bg-white">
+        <div className="container-custom">
+          <div className="max-w-5xl mx-auto">
+            <IndustryAnimation industry="music" />
+          </div>
+        </div>
+      </section>
+      
       {/* Benefits Section */}
       <section className="py-20 bg-gradient-to-br from-brand-pink/5 to-brand-aqua/5">
         <div className="container-custom">
