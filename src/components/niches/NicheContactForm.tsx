@@ -17,62 +17,172 @@ const NicheContactForm = ({ industry }: NicheContactFormProps) => {
   const [showCallDialog, setShowCallDialog] = useState(false);
   const phoneNumber = "+1 (302) 618-3977";
 
-  // Define industry-specific form labels
-  const getIndustryLabel = () => {
+  // Define industry-specific pricing plans with exact links
+  const getPricingPlans = () => {
     switch(industry) {
       case 'healthcare':
-        return 'Healthcare Practice';
+        return [
+          {
+            name: "Impact Starter - HIPAA Compliance",
+            price: "$797/mo",
+            annualPrice: "$7,651/annual",
+            setupFee: "$297.00 One-time set-up",
+            popular: false,
+            monthlyLink: "https://buy.stripe.com/4gM3cnbFheRC3TZd5rejK0p",
+            annualLink: "https://buy.stripe.com/00wdR14cPdNyfCHaXjejK0r"
+          },
+          {
+            name: "Impact Pro - HIPAA Compliance",
+            price: "$1,097/mo",
+            annualPrice: "$10,531/annual",
+            setupFee: "$297.00 One-time set-up",
+            popular: true,
+            monthlyLink: "https://buy.stripe.com/14A9ALgZBbFq76baXjejK0s",
+            annualLink: "https://buy.stripe.com/fZu28j4cP9xiain4yVejK0t"
+          },
+          {
+            name: "Impact Enterprise - HIPAA Compliance",
+            price: "$1,497/mo",
+            annualPrice: "$14,371/annual",
+            setupFee: "$297.00 One-time set-up",
+            popular: false,
+            monthlyLink: "https://buy.stripe.com/14AdR124HfVGainfdzejK0u",
+            annualLink: "https://buy.stripe.com/4gMbITbFh9xigGL4yVejK0v"
+          }
+        ];
       case 'real-estate':
-        return 'Real Estate Agency';
+        return [
+          {
+            name: "Impact Starter",
+            price: "$397/mo",
+            annualPrice: "$3,811/annual",
+            setupFee: "$197.00 One-time set-up",
+            popular: false,
+            monthlyLink: "https://buy.stripe.com/4gM8wH10DcJu2PV0iFejK0d",
+            annualLink: "https://buy.stripe.com/28EfZ9aBd38U1LR0iFejK0e"
+          },
+          {
+            name: "Impact Pro",
+            price: "$597/mo",
+            annualPrice: "$5,731/annual",
+            setupFee: "$197.00 One-time set-up",
+            popular: true,
+            monthlyLink: "https://buy.stripe.com/3cIcMX8t5dNy627d5rejK0f",
+            annualLink: "https://buy.stripe.com/8x23cn8t58tegGL6H3ejK0g"
+          },
+          {
+            name: "Impact Enterprise",
+            price: "$897/mo",
+            annualPrice: "$8,611/annual",
+            setupFee: "$197.00 One-time set-up",
+            popular: false,
+            monthlyLink: "https://buy.stripe.com/9B6dR124HeRC6275CZejK0h",
+            annualLink: "https://buy.stripe.com/3cIdR18t510MfCHd5rejK0i"
+          }
+        ];
       case 'restaurants':
-        return 'Restaurant Name';
+        return [
+          {
+            name: "Impact Starter",
+            price: "$397/mo",
+            annualPrice: "$3,811/annual",
+            setupFee: "$197.00 One-time set-up",
+            popular: false,
+            monthlyLink: "https://buy.stripe.com/dRmaEPeRt38Ubmr7L7ejK0w",
+            annualLink: "https://buy.stripe.com/8x27sDbFh6l61LR0iFejK0x"
+          },
+          {
+            name: "Impact Pro",
+            price: "$597/mo",
+            annualPrice: "$5,731/annual",
+            setupFee: "$197.00 One-time set-up",
+            popular: true,
+            monthlyLink: "https://buy.stripe.com/28E3cncJl24Q2PVd5rejK0z",
+            annualLink: "https://buy.stripe.com/14AcMX7p1eRC3TZ4yVejK0A"
+          },
+          {
+            name: "Impact Enterprise",
+            price: "$897/mo",
+            annualPrice: "$8,611/annual",
+            setupFee: "$197.00 One-time set-up",
+            popular: false,
+            monthlyLink: "https://buy.stripe.com/eVqdR18t538Ubmr8PbejK0B",
+            annualLink: "https://buy.stripe.com/6oU28j38L24QeyD5CZejK0C"
+          }
+        ];
       case 'service-contractors':
-        return 'Service Business Name';
+        return [
+          {
+            name: "Impact Starter",
+            price: "$397/mo",
+            annualPrice: "$3,811/annual",
+            setupFee: "$197.00 One-time set-up",
+            popular: false,
+            monthlyLink: "https://buy.stripe.com/aFa14ffVxdNy9ej1mJejK06",
+            annualLink: "https://buy.stripe.com/fZu00b38LaBm627aXjejK07"
+          },
+          {
+            name: "Impact Pro",
+            price: "$597/mo",
+            annualPrice: "$5,731/annual",
+            setupFee: "$197.00 One-time set-up",
+            popular: true,
+            monthlyLink: "https://buy.stripe.com/eVqfZ95gT38UgGL3uRejK08",
+            annualLink: "https://buy.stripe.com/eVq8wHbFhaBm8af9TfejK09"
+          },
+          {
+            name: "Impact Enterprise",
+            price: "$897/mo",
+            annualPrice: "$8,611/annual",
+            setupFee: "$197.00 One-time set-up",
+            popular: false,
+            monthlyLink: "https://buy.stripe.com/5kQ5kv10DbFq1LRe9vejK0a",
+            annualLink: "https://buy.stripe.com/bJe5kvdNp10MeyDc1nejK0b"
+          }
+        ];
+      case 'music':
+        return [
+          {
+            name: "Impact Starter",
+            price: "$397/mo",
+            annualPrice: "$3,811/annual",
+            setupFee: "$197.00 One-time set-up",
+            popular: false,
+            monthlyLink: "https://buy.stripe.com/4gM00bfVxbFq2PV9TfejK0j",
+            annualLink: "https://buy.stripe.com/7sY00bcJl38UgGLaXjejK0k"
+          },
+          {
+            name: "Impact Pro",
+            price: "$597/mo",
+            annualPrice: "$5,731/annual",
+            setupFee: "$197.00 One-time set-up",
+            popular: true,
+            monthlyLink: "https://buy.stripe.com/cNi5kv6kX7pa2PVd5rejK0l",
+            annualLink: "https://buy.stripe.com/9B600bfVx4cYbmr2qNejK0m"
+          },
+          {
+            name: "Impact Enterprise",
+            price: "$897/mo",
+            annualPrice: "$8,611/annual",
+            setupFee: "$197.00 One-time set-up",
+            popular: false,
+            monthlyLink: "https://buy.stripe.com/bJecMXeRt6l6bmr9TfejK0n",
+            annualLink: "https://buy.stripe.com/dRm7sD24HfVG4Y33uRejK0o"
+          }
+        ];
       default:
-        return 'Company Name';
-    }
-  };
-
-  const getGradient = () => {
-    switch(industry) {
-      case 'healthcare':
-        return 'from-brand-aqua to-brand-pink';
-      case 'real-estate':
-        return 'from-brand-purple to-brand-aqua';
-      case 'restaurants':
-        return 'from-brand-pink to-brand-aqua';
-      case 'service-contractors':
-        return 'from-brand-purple to-brand-pink';
-      default:
-        return 'from-brand-pink to-brand-aqua';
+        return [];
     }
   };
 
   const industryLabel = getIndustryLabel();
   const gradient = getGradient();
+  const pricingPlans = getPricingPlans();
 
-  // Basic pricing plans to display inline
-  const pricingPlans = [
-    {
-      name: "Starter",
-      price: 197,
-      monthlyFee: 97,
-      features: ["300 AI Minutes", "Calendar Integration", "24/7 Availability"]
-    },
-    {
-      name: "Professional",
-      price: 197,
-      monthlyFee: 297,
-      popular: true,
-      features: ["1000 AI Minutes", "CRM Integration", "Custom Workflows"]
-    },
-    {
-      name: "Enterprise",
-      price: 497,
-      monthlyFee: 597,
-      features: ["3000 AI Minutes", "White-labeled Solution", "Dedicated Manager"]
-    }
-  ];
+  // Handle video load complete
+  const handlePlanSelect = (url: string) => {
+    window.open(url, '_blank');
+  };
 
   return (
     <section id="contact" className="py-20 bg-white">
@@ -83,57 +193,58 @@ const NicheContactForm = ({ industry }: NicheContactFormProps) => {
           centered={true}
         />
         
-        {/* Display condensed pricing plans directly on the page */}
+        {/* Display pricing plans directly on the page */}
         <div className="mt-8 mb-12 max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {pricingPlans.map((plan, index) => (
               <StyleProvider 
                 key={index} 
                 delay={index * 0.1} 
-                className={`bg-white p-4 rounded-xl border ${plan.popular ? 'border-brand-pink shadow-lg' : 'border-gray-200'}`}
+                className={`bg-white p-6 rounded-xl border ${plan.popular ? 'border-brand-pink shadow-lg' : 'border-gray-200'} flex flex-col`}
               >
                 {plan.popular && (
-                  <div className={`py-1 text-sm bg-gradient-to-r ${gradient} text-white text-center font-medium rounded-t-lg -mt-4 -mx-4 mb-3`}>
+                  <div className={`py-1 text-sm bg-gradient-to-r ${gradient} text-white text-center font-medium rounded-t-lg -mt-6 -mx-6 mb-4`}>
                     Most Popular
                   </div>
                 )}
-                <h3 className="text-lg font-semibold text-center">{plan.name}</h3>
-                <div className="text-center my-3">
-                  <p className="text-sm text-gray-500">One-time setup</p>
-                  <p className="text-xl font-bold">${plan.price}</p>
-                  <p className="text-sm text-gray-500">Monthly</p>
-                  <p className="text-xl font-bold">${plan.monthlyFee}/mo</p>
+                <h3 className="text-xl font-bold text-center mb-2">{plan.name}</h3>
+                
+                {/* Monthly Option */}
+                <div className="border rounded-lg p-4 mb-3 flex-1">
+                  <div className="text-center">
+                    <p className="text-xl font-bold mb-1">{plan.price}</p>
+                    <p className="text-sm text-gray-500 mb-2">{plan.setupFee}</p>
+                    
+                    <motion.button
+                      className="w-full text-sm py-2 px-3 bg-gradient-to-r from-brand-pink to-brand-aqua text-white rounded-md hover:shadow-md transition-all duration-300"
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
+                      onClick={() => handlePlanSelect(plan.monthlyLink)}
+                    >
+                      Select Monthly
+                    </motion.button>
+                  </div>
                 </div>
-                <ul className="text-sm space-y-2 mb-4">
-                  {plan.features.map((feature, i) => (
-                    <li key={i} className="flex items-center">
-                      <div className={`w-4 h-4 rounded-full bg-gradient-to-r ${gradient} flex items-center justify-center mr-2 flex-shrink-0`}>
-                        <Check size={10} className="text-white" />
-                      </div>
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div className="text-center">
-                  <motion.button
-                    className="w-full text-sm py-2 bg-gradient-to-r from-brand-pink to-brand-aqua text-white rounded-md hover:shadow-md transition-all duration-300"
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.97 }}
-                    onClick={() => document.getElementById('ai-demo-form')?.scrollIntoView({ behavior: 'smooth' })}
-                  >
-                    Get Started
-                  </motion.button>
+                
+                {/* Annual Option */}
+                <div className="border border-green-100 bg-green-50/30 rounded-lg p-4 flex-1">
+                  <div className="text-center">
+                    <p className="text-lg font-bold mb-1">{plan.annualPrice}</p>
+                    <p className="text-sm text-gray-500 mb-1">{plan.setupFee}</p>
+                    <p className="text-xs text-green-600 font-medium mb-2">Save with annual billing</p>
+                    
+                    <motion.button
+                      className="w-full text-sm py-2 px-3 bg-gradient-to-r from-green-500 to-brand-aqua text-white rounded-md hover:shadow-md transition-all duration-300"
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
+                      onClick={() => handlePlanSelect(plan.annualLink)}
+                    >
+                      Select Annual
+                    </motion.button>
+                  </div>
                 </div>
               </StyleProvider>
             ))}
-          </div>
-          <div className="text-center mt-4">
-            <Link 
-              to="/pricing"
-              className="inline-flex items-center font-medium text-brand-vibrantPurple hover:text-brand-pink transition-colors"
-            >
-              View detailed pricing plans <ArrowRight size={16} className="ml-1" />
-            </Link>
           </div>
         </div>
         

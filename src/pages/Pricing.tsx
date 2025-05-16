@@ -15,9 +15,10 @@ import StyleProvider from "@/components/design/StyleProvider";
 
 const pricingPlans = [
   {
-    name: "Starter Impact",
+    name: "Impact Starter",
     price: 397,
-    annualPrice: 317, // 397 - 20% = 317.6, rounded to 317
+    annualPrice: 3811,
+    setupFee: "$197.00 One-time set-up",
     description: "Perfect for solo pros & lean teams starting their AI journey",
     features: [
       "500 AI Engagement Minutes/month",
@@ -42,7 +43,8 @@ const pricingPlans = [
   {
     name: "Impact Pro",
     price: 597,
-    annualPrice: 478, // 597 - 20% = 477.6, rounded up to 478
+    annualPrice: 5731,
+    setupFee: "$197.00 One-time set-up",
     description: "For growing teams who need smart routing and powerful automation",
     features: [
       "1,500 AI Engagement Minutes/month",
@@ -69,7 +71,8 @@ const pricingPlans = [
   {
     name: "Enterprise",
     price: 897,
-    annualPrice: 718, // 897 - 20% = 717.6, rounded up to 718
+    annualPrice: 8611,
+    setupFee: "$197.00 One-time set-up",
     description: "Ideal for scaling companies & multi-location teams",
     features: [
       "5,000 AI Engagement Minutes/month",
@@ -94,10 +97,115 @@ const pricingPlans = [
   }
 ];
 
+const healthcarePricingPlans = [
+  {
+    name: "Impact Starter - HIPAA Compliance",
+    price: 797,
+    annualPrice: 7651,
+    setupFee: "$297.00 One-time set-up",
+    mostPopular: false,
+    monthlyLink: "https://buy.stripe.com/4gM3cnbFheRC3TZd5rejK0p",
+    annualLink: "https://buy.stripe.com/00wdR14cPdNyfCHaXjejK0r"
+  },
+  {
+    name: "Impact Pro - HIPAA Compliance",
+    price: 1097,
+    annualPrice: 10531,
+    setupFee: "$297.00 One-time set-up",
+    mostPopular: true,
+    monthlyLink: "https://buy.stripe.com/14A9ALgZBbFq76baXjejK0s",
+    annualLink: "https://buy.stripe.com/fZu28j4cP9xiain4yVejK0t"
+  },
+  {
+    name: "Impact Enterprise - HIPAA Compliance",
+    price: 1497,
+    annualPrice: 14371,
+    setupFee: "$297.00 One-time set-up",
+    mostPopular: false,
+    monthlyLink: "https://buy.stripe.com/14AdR124HfVGainfdzejK0u",
+    annualLink: "https://buy.stripe.com/4gMbITbFh9xigGL4yVejK0v"
+  }
+];
+
+// Industry links map
+const industryLinks = {
+  'service-contractors': {
+    starter: {
+      monthly: "https://buy.stripe.com/aFa14ffVxdNy9ej1mJejK06",
+      annual: "https://buy.stripe.com/fZu00b38LaBm627aXjejK07"
+    },
+    pro: {
+      monthly: "https://buy.stripe.com/eVqfZ95gT38UgGL3uRejK08",
+      annual: "https://buy.stripe.com/eVq8wHbFhaBm8af9TfejK09"
+    },
+    enterprise: {
+      monthly: "https://buy.stripe.com/5kQ5kv10DbFq1LRe9vejK0a",
+      annual: "https://buy.stripe.com/bJe5kvdNp10MeyDc1nejK0b"
+    }
+  },
+  'real-estate': {
+    starter: {
+      monthly: "https://buy.stripe.com/4gM8wH10DcJu2PV0iFejK0d",
+      annual: "https://buy.stripe.com/28EfZ9aBd38U1LR0iFejK0e"
+    },
+    pro: {
+      monthly: "https://buy.stripe.com/3cIcMX8t5dNy627d5rejK0f",
+      annual: "https://buy.stripe.com/8x23cn8t58tegGL6H3ejK0g"
+    },
+    enterprise: {
+      monthly: "https://buy.stripe.com/9B6dR124HeRC6275CZejK0h",
+      annual: "https://buy.stripe.com/3cIdR18t510MfCHd5rejK0i"
+    }
+  },
+  'music': {
+    starter: {
+      monthly: "https://buy.stripe.com/4gM00bfVxbFq2PV9TfejK0j",
+      annual: "https://buy.stripe.com/7sY00bcJl38UgGLaXjejK0k"
+    },
+    pro: {
+      monthly: "https://buy.stripe.com/cNi5kv6kX7pa2PVd5rejK0l",
+      annual: "https://buy.stripe.com/9B600bfVx4cYbmr2qNejK0m"
+    },
+    enterprise: {
+      monthly: "https://buy.stripe.com/bJecMXeRt6l6bmr9TfejK0n",
+      annual: "https://buy.stripe.com/dRm7sD24HfVG4Y33uRejK0o"
+    }
+  },
+  'healthcare': {
+    starter: {
+      monthly: "https://buy.stripe.com/4gM3cnbFheRC3TZd5rejK0p",
+      annual: "https://buy.stripe.com/00wdR14cPdNyfCHaXjejK0r"
+    },
+    pro: {
+      monthly: "https://buy.stripe.com/14A9ALgZBbFq76baXjejK0s",
+      annual: "https://buy.stripe.com/fZu28j4cP9xiain4yVejK0t"
+    },
+    enterprise: {
+      monthly: "https://buy.stripe.com/14AdR124HfVGainfdzejK0u",
+      annual: "https://buy.stripe.com/4gMbITbFh9xigGL4yVejK0v"
+    }
+  },
+  'restaurants': {
+    starter: {
+      monthly: "https://buy.stripe.com/dRmaEPeRt38Ubmr7L7ejK0w",
+      annual: "https://buy.stripe.com/8x27sDbFh6l61LR0iFejK0x"
+    },
+    pro: {
+      monthly: "https://buy.stripe.com/28E3cncJl24Q2PVd5rejK0z",
+      annual: "https://buy.stripe.com/14AcMX7p1eRC3TZ4yVejK0A"
+    },
+    enterprise: {
+      monthly: "https://buy.stripe.com/eVqdR18t538Ubmr8PbejK0B",
+      annual: "https://buy.stripe.com/6oU28j38L24QeyD5CZejK0C"
+    }
+  }
+};
+
 const Pricing = () => {
   const [showDemoDialog, setShowDemoDialog] = useState(false);
   const [showCalendarDialog, setShowCalendarDialog] = useState(false);
   const [showDemoVideo, setShowDemoVideo] = useState(false);
+  const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'annual'>('monthly');
   
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -119,9 +227,21 @@ const Pricing = () => {
     setShowDemoVideo(true);
   };
   
-  const handlePurchaseClick = (planName: string) => {
-    // Direct to checkout page with the selected plan
-    window.location.href = `https://checkout.suddenimpact.agency?plan=${encodeURIComponent(planName)}`;
+  const handlePurchaseClick = (plan: typeof pricingPlans[0]) => {
+    const tierMap: Record<string, string> = {
+      "Impact Starter": "starter",
+      "Impact Pro": "pro",
+      "Enterprise": "enterprise"
+    };
+    
+    // Default to service-contractors if no specific industry
+    const industry = 'service-contractors';
+    const tier = tierMap[plan.name] || 'starter';
+    const url = industryLinks[industry as keyof typeof industryLinks][tier as keyof typeof industryLinks[keyof typeof industryLinks]][billingPeriod];
+    
+    if (url) {
+      window.open(url, '_blank');
+    }
   };
 
   return (
@@ -144,9 +264,9 @@ const Pricing = () => {
               <div className="max-w-2xl mx-auto mt-8 p-6 rounded-xl bg-white shadow-lg border border-gray-100">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-gray-700">
                   <p className="flex items-center"><Check className="mr-2 h-4 w-4 text-brand-pink" /> 7-Day Free Trial (credit card required)</p>
-                  <p className="flex items-center"><Check className="mr-2 h-4 w-4 text-brand-aqua" /> $197 one-time setup fee</p>
+                  <p className="flex items-center"><Check className="mr-2 h-4 w-4 text-brand-aqua" /> $197.00 One-time setup fee</p>
                   <p className="flex items-center"><Check className="mr-2 h-4 w-4 text-brand-pink" /> Cancel anytime during trial period</p>
-                  <p className="flex items-center"><Check className="mr-2 h-4 w-4 text-brand-aqua" /> Save 20% when billed annually</p>
+                  <p className="flex items-center"><Check className="mr-2 h-4 w-4 text-brand-aqua" /> Save with annual billing</p>
                 </div>
               </div>
             </div>
@@ -167,8 +287,25 @@ const Pricing = () => {
             title="Choose Your Plan"
             subtitle="Select the perfect plan for your business needs"
             centered={true}
-            className="mb-16"
+            className="mb-8"
           />
+          
+          <div className="flex justify-center mb-10">
+            <div className="bg-gray-100 p-1 rounded-lg inline-flex">
+              <button 
+                className={`px-4 py-2 rounded-md text-sm font-medium ${billingPeriod === 'monthly' ? 'bg-white shadow-sm text-brand-dark' : 'text-gray-600'}`}
+                onClick={() => setBillingPeriod('monthly')}
+              >
+                Monthly
+              </button>
+              <button 
+                className={`px-4 py-2 rounded-md text-sm font-medium ${billingPeriod === 'annual' ? 'bg-white shadow-sm text-brand-dark' : 'text-gray-600'}`}
+                onClick={() => setBillingPeriod('annual')}
+              >
+                Annual (Save)
+              </button>
+            </div>
+          </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {pricingPlans.map((plan, index) => (
@@ -211,18 +348,18 @@ const Pricing = () => {
                                 ? 'text-brand-pink' 
                                 : 'text-brand-aqua'
                           }`}>
-                            ${plan.price}
+                            ${billingPeriod === 'monthly' ? plan.price : plan.annualPrice}
                           </span>
-                          <span className="text-gray-500 ml-2">/month</span>
+                          <span className="text-gray-500 ml-2">{billingPeriod === 'monthly' ? '/mo' : '/annual'}</span>
                         </div>
                         <div className="text-sm text-gray-500">
-                          ${plan.annualPrice}/month billed annually
+                          {plan.setupFee}
                         </div>
                       </div>
                     </div>
                     
                     <button
-                      onClick={() => handlePurchaseClick(plan.name)}
+                      onClick={() => handlePurchaseClick(plan)}
                       className={`block w-full py-3 px-4 text-center rounded-lg font-medium mb-8 ${
                         plan.color === 'gradient'
                           ? "bg-gradient-to-r from-brand-pink to-brand-aqua text-white shadow-lg hover:shadow-xl transition-all"
@@ -275,8 +412,72 @@ const Pricing = () => {
         </div>
       </section>
 
+      {/* Healthcare Pricing Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="container-custom">
+          <SectionTitle
+            title="Healthcare HIPAA-Compliant Pricing"
+            subtitle="Secure solutions for healthcare providers with full HIPAA compliance"
+            centered={true}
+            className="mb-12"
+          />
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {healthcarePricingPlans.map((plan, index) => (
+              <StyleProvider 
+                key={index} 
+                delay={index * 0.1} 
+                className={`bg-white p-6 rounded-xl border ${plan.mostPopular ? 'border-brand-pink shadow-lg' : 'border-gray-200'} flex flex-col`}
+              >
+                {plan.mostPopular && (
+                  <div className={`py-1 text-sm bg-gradient-to-r from-brand-aqua to-brand-pink text-white text-center font-medium rounded-t-lg -mt-6 -mx-6 mb-4`}>
+                    Most Popular
+                  </div>
+                )}
+                <h3 className="text-xl font-bold text-center mb-2">{plan.name}</h3>
+                
+                {/* Monthly Option */}
+                <div className="border rounded-lg p-4 mb-3 flex-1">
+                  <div className="text-center">
+                    <p className="text-xl font-bold mb-1">${plan.price}/mo</p>
+                    <p className="text-sm text-gray-500 mb-2">{plan.setupFee}</p>
+                    
+                    <motion.button
+                      className="w-full text-sm py-2 px-3 bg-gradient-to-r from-brand-pink to-brand-aqua text-white rounded-md hover:shadow-md transition-all duration-300"
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
+                      onClick={() => window.open(plan.monthlyLink, '_blank')}
+                    >
+                      Select Monthly
+                    </motion.button>
+                  </div>
+                </div>
+                
+                {/* Annual Option */}
+                <div className="border border-green-100 bg-green-50/30 rounded-lg p-4 flex-1">
+                  <div className="text-center">
+                    <p className="text-lg font-bold mb-1">${plan.annualPrice}/annual</p>
+                    <p className="text-sm text-gray-500 mb-1">{plan.setupFee}</p>
+                    <p className="text-xs text-green-600 font-medium mb-2">Save with annual billing</p>
+                    
+                    <motion.button
+                      className="w-full text-sm py-2 px-3 bg-gradient-to-r from-green-500 to-brand-aqua text-white rounded-md hover:shadow-md transition-all duration-300"
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
+                      onClick={() => window.open(plan.annualLink, '_blank')}
+                    >
+                      Select Annual
+                    </motion.button>
+                  </div>
+                </div>
+              </StyleProvider>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Overage Pricing Section */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-gray-50 to-white">
+      <section className="py-16 md:py-24 bg-white">
         <div className="container-custom">
           <SectionTitle
             title="Overage Pricing"
@@ -319,7 +520,7 @@ const Pricing = () => {
       </section>
 
       {/* Custom Solutions Section */}
-      <section className="py-16 md:py-24 bg-white">
+      <section className="py-16 md:py-24 bg-gradient-to-br from-gray-50 to-white">
         <div className="container-custom">
           <StyleProvider>
             <div className="max-w-4xl mx-auto">
@@ -411,11 +612,13 @@ const Pricing = () => {
         <DialogContent className="sm:max-w-[800px] bg-gray-900 border-white/10">
           <DialogTitle className="text-xl font-bold text-center mb-4">AI Voice Agent Demo</DialogTitle>
           <div className="aspect-video relative bg-black/20 rounded-lg overflow-hidden flex items-center justify-center">
-            {/* Replace with actual video once available */}
-            <div className="text-center p-8">
-              <p className="text-white/80 mb-4">Demo video will be placed here once available.</p>
-              <p className="text-sm text-white/60">This video will show the AI voice agent in action, CRM dashboard previews, and onboarding automation.</p>
-            </div>
+            <iframe
+              src="https://www.youtube.com/embed/HuU_pxXVVqo"
+              title="AI Voice Agent Demo"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="w-full h-full"
+            ></iframe>
           </div>
         </DialogContent>
       </Dialog>
