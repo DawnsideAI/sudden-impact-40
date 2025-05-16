@@ -55,6 +55,13 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
             const container = formContainerRef.current;
             if (!container) continue;
             
+            // Check for thank you message that specifically mentions completing the form
+            const thankYouText = container.innerText && 
+              (container.innerText.toLowerCase().includes('thank you for taking the time to complete this form') ||
+               container.innerText.toLowerCase().includes('thank you for taking the time') ||
+               container.innerText.toLowerCase().includes('form to access our ai demo') ||
+               container.innerText.toLowerCase().includes('complete the form'));
+            
             // Check for success messages or thank you elements
             const successElements = container.querySelectorAll(
               '.form-success, .thank-you, .success-message, .form-submitted, [data-form-state="success"]'
@@ -67,9 +74,10 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
             const containsSuccessText = container.innerText && 
               (container.innerText.toLowerCase().includes('thank you') || 
                container.innerText.toLowerCase().includes('success') ||
-               container.innerText.toLowerCase().includes('submitted'));
+               container.innerText.toLowerCase().includes('submitted') ||
+               container.innerText.toLowerCase().includes('complete'));
             
-            if (successElements.length > 0 || isContainerEmpty || containsSuccessText) {
+            if (successElements.length > 0 || isContainerEmpty || containsSuccessText || thankYouText) {
               console.log('Form submission detected via DOM changes');
               localStorage.setItem('a2pFormSubmitted', 'true');
               setFormSubmitted(true);

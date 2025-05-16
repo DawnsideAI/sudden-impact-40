@@ -40,3 +40,25 @@
   border-radius: 0.375rem !important;
   padding: 0.5rem 0.75rem !important;
 }
+
+/* Improve form completion detection */
+.iframe-container iframe {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.iframe-container.form-submitted iframe {
+  opacity: 0.5;
+}
+
+/* Add custom selectors for form completion state */
+.form-success-message,
+.thank-you-message,
+.form-completed {
+  display: block;
+  text-align: center;
+  padding: 1.5rem;
+  background-color: #f9f9f9;
+  border-radius: 0.5rem;
+  border: 1px solid #e2e8f0;
+}
