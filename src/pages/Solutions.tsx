@@ -16,8 +16,7 @@ import {
   Stethoscope, 
   Wrench, 
   Heart, 
-  PhoneCall,
-  Music 
+  PhoneCall 
 } from 'lucide-react';
 import SectionTitle from '@/components/design/SectionTitle';
 import StyleProvider from '@/components/design/StyleProvider';
@@ -98,25 +97,6 @@ const industries = [
       "38% reduction in administrative workload",
       "42% decrease in appointment no-shows",
       "35% improvement in patient satisfaction"
-    ]
-  },
-  {
-    id: "music-producers",
-    icon: <Music className="h-5 w-5" />,
-    title: "Music Producers",
-    description: "Manage studio bookings, artist schedules, and fan engagement with AI voice agents tailored for the music industry.",
-    detailsTitle: "AI Voice Agents for Music Producers",
-    detailsDescription: "Our AI voice agents handle studio bookings, manage artist schedules, and engage with fans, allowing music producers to focus on creating amazing music.",
-    features: [
-      "Studio Session Booking",
-      "Artist Management",
-      "Fan Engagement",
-      "Release Promotion"
-    ],
-    results: [
-      "40% increase in studio bookings",
-      "35% reduction in scheduling conflicts",
-      "30% improvement in fan engagement metrics"
     ]
   },
   {

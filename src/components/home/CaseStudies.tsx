@@ -71,7 +71,6 @@ const CaseStudies = () => {
   const [activeCase, setActiveCase] = useState(caseStudies[0].id);
   const demoVideoUrl = "https://www.youtube.com/embed/HuU_pxXVVqo?si=qrMXYUDeg8m8zUzs";
   const currentCase = caseStudies.find(cs => cs.id === activeCase) || caseStudies[0];
-  const phoneNumber = "+1 (302) 618-3977";
 
   return (
     <section className="py-16 md:py-24 bg-white relative overflow-hidden">
@@ -157,7 +156,7 @@ const CaseStudies = () => {
                 ></iframe>
               </div>
               <div className="mt-4 flex justify-between">
-                <div className="text-xs text-gray-400">Call Now: {phoneNumber}</div>
+                <div className="text-xs text-gray-400">Powered by Sudden Impact Agency</div>
                 <div className="text-xs text-gray-400">Real-time data</div>
               </div>
             </div>

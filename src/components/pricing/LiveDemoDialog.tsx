@@ -33,7 +33,7 @@ const LiveDemoDialog = ({ open, onOpenChange }: LiveDemoDialogProps) => {
           >
             <Phone className="h-8 w-8" />
           </motion.div>
-          <p className="text-2xl font-semibold text-center text-gray-800">+1 (302) 618-3977</p>
+          <p className="text-2xl font-semibold text-center text-gray-800">1-800-123-4567</p>
           <p className="text-sm text-gray-500 text-center">
             Available 24/7 - Toll Free
           </p>

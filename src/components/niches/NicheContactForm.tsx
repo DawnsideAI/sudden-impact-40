@@ -1,118 +1,211 @@
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Check, ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Check, ArrowRight, Calendar, PhoneCall } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Button } from "@/components/ui/button";
 import StyleProvider from '@/components/design/StyleProvider';
 import SectionTitle from '@/components/design/SectionTitle';
+import AIDemoCallDialog from './AIDemoCallDialog';
 
 interface NicheContactFormProps {
-  industry: 'healthcare' | 'real-estate' | 'restaurants' | 'service-contractors' | 'music-producers';
+  industry: 'healthcare' | 'real-estate' | 'restaurants' | 'service-contractors';
 }
 
 const NicheContactForm = ({ industry }: NicheContactFormProps) => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
-  const [submitted, setSubmitted] = useState(false);
+  const [showPricing, setShowPricing] = useState(true);
+  const [showCallDialog, setShowCallDialog] = useState(false);
+  const phoneNumber = "+1 (302) 618-3977";
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Sending');
-
-    let data = {
-      name,
-      email,
-      message,
-      industry
-    };
-
-    await fetch('/api/send', {
-      method: 'POST',
-      body: JSON.stringify(data)
-    }).then((res) => {
-      if (res.status === 200) {
-        setSubmitted(true);
-        setName('');
-        setEmail('');
-        setMessage('');
-      } else {
-        console.error('Failed to send message. Status code:', res.status);
-      }
-    }).catch((error) => {
-      console.error('An error occurred while sending the message:', error);
-    });
+  // Define industry-specific form labels
+  const getIndustryLabel = () => {
+    switch(industry) {
+      case 'healthcare':
+        return 'Healthcare Practice';
+      case 'real-estate':
+        return 'Real Estate Agency';
+      case 'restaurants':
+        return 'Restaurant Name';
+      case 'service-contractors':
+        return 'Service Business Name';
+      default:
+        return 'Company Name';
+    }
   };
+
+  const getGradient = () => {
+    switch(industry) {
+      case 'healthcare':
+        return 'from-brand-aqua to-brand-pink';
+      case 'real-estate':
+        return 'from-brand-purple to-brand-aqua';
+      case 'restaurants':
+        return 'from-brand-pink to-brand-aqua';
+      case 'service-contractors':
+        return 'from-brand-purple to-brand-pink';
+      default:
+        return 'from-brand-pink to-brand-aqua';
+    }
+  };
+
+  const industryLabel = getIndustryLabel();
+  const gradient = getGradient();
+
+  // Basic pricing plans to display inline
+  const pricingPlans = [
+    {
+      name: "Starter",
+      price: 197,
+      monthlyFee: 97,
+      features: ["300 AI Minutes", "Calendar Integration", "24/7 Availability"]
+    },
+    {
+      name: "Professional",
+      price: 197,
+      monthlyFee: 297,
+      popular: true,
+      features: ["1000 AI Minutes", "CRM Integration", "Custom Workflows"]
+    },
+    {
+      name: "Enterprise",
+      price: 497,
+      monthlyFee: 597,
+      features: ["3000 AI Minutes", "White-labeled Solution", "Dedicated Manager"]
+    }
+  ];
 
   return (
     <section id="contact" className="py-20 bg-white">
       <div className="container-custom">
         <SectionTitle
-          title="Get in Touch"
-          subtitle={`Let's discuss how AI voice agents can transform your ${industry.replace('-', ' ')} business`}
+          title="Get Started Today"
+          subtitle={`Begin your ${industry.replace('-', ' ')} automation journey`}
           centered={true}
         />
         
-        <div className="mt-12 max-w-3xl mx-auto">
-          {submitted ? (
-            <StyleProvider>
-              <div className="bg-green-50 border border-green-200 text-green-800 p-6 rounded-xl text-center">
-                <Check className="mx-auto mb-4 w-10 h-10 text-green-600" />
-                <h3 className="text-xl font-semibold mb-2">Thank you!</h3>
-                <p className="text-gray-600">We'll be in touch shortly.</p>
+        {/* Display condensed pricing plans directly on the page */}
+        <div className="mt-8 mb-12 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {pricingPlans.map((plan, index) => (
+              <StyleProvider 
+                key={index} 
+                delay={index * 0.1} 
+                className={`bg-white p-4 rounded-xl border ${plan.popular ? 'border-brand-pink shadow-lg' : 'border-gray-200'}`}
+              >
+                {plan.popular && (
+                  <div className={`py-1 text-sm bg-gradient-to-r ${gradient} text-white text-center font-medium rounded-t-lg -mt-4 -mx-4 mb-3`}>
+                    Most Popular
+                  </div>
+                )}
+                <h3 className="text-lg font-semibold text-center">{plan.name}</h3>
+                <div className="text-center my-3">
+                  <p className="text-sm text-gray-500">One-time setup</p>
+                  <p className="text-xl font-bold">${plan.price}</p>
+                  <p className="text-sm text-gray-500">Monthly</p>
+                  <p className="text-xl font-bold">${plan.monthlyFee}/mo</p>
+                </div>
+                <ul className="text-sm space-y-2 mb-4">
+                  {plan.features.map((feature, i) => (
+                    <li key={i} className="flex items-center">
+                      <div className={`w-4 h-4 rounded-full bg-gradient-to-r ${gradient} flex items-center justify-center mr-2 flex-shrink-0`}>
+                        <Check size={10} className="text-white" />
+                      </div>
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="text-center">
+                  <motion.button
+                    className="w-full text-sm py-2 bg-gradient-to-r from-brand-pink to-brand-aqua text-white rounded-md hover:shadow-md transition-all duration-300"
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    onClick={() => document.getElementById('ai-demo-form')?.scrollIntoView({ behavior: 'smooth' })}
+                  >
+                    Get Started
+                  </motion.button>
+                </div>
+              </StyleProvider>
+            ))}
+          </div>
+          <div className="text-center mt-4">
+            <Link 
+              to="/pricing"
+              className="inline-flex items-center font-medium text-brand-vibrantPurple hover:text-brand-pink transition-colors"
+            >
+              View detailed pricing plans <ArrowRight size={16} className="ml-1" />
+            </Link>
+          </div>
+        </div>
+        
+        <div id="ai-demo-form" className="mt-12 max-w-3xl mx-auto">
+          <StyleProvider className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
+            <h3 className="text-xl font-semibold text-center mb-4">Try Our AI Voice Agent</h3>
+            <p className="text-center text-gray-600 mb-6">Call our demo number to experience our AI voice agent</p>
+            
+            {/* Direct call section */}
+            <div className="text-center py-8">
+              <motion.div 
+                initial={{ scale: 1 }}
+                animate={{ scale: [1, 1.05, 1] }}
+                transition={{ type: "spring", stiffness: 260, damping: 20, repeat: Infinity, repeatType: "reverse", duration: 2 }}
+                className="bg-gradient-to-r from-brand-pink to-brand-aqua w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-6"
+              >
+                <PhoneCall size={30} className="text-white" />
+              </motion.div>
+              
+              <motion.a
+                href={`tel:${phoneNumber.replace(/\D/g, '')}`}
+                className="text-3xl font-bold mb-5 text-brand-aqua block"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
+                {phoneNumber}
+              </motion.a>
+              
+              <Button
+                variant="action"
+                size="lg"
+                className="shadow-lg bg-gradient-to-r from-brand-pink to-brand-aqua hover:shadow-xl transition-all duration-300 my-4"
+                onClick={() => window.location.href = `tel:${phoneNumber.replace(/\D/g, '')}`}
+              >
+                <PhoneCall className="mr-2" /> Call Now
+              </Button>
+              
+              <div className="mt-8">
+                <h3 className="text-lg font-bold mb-4">Watch Demo Video</h3>
+                <div className="aspect-video max-w-lg mx-auto overflow-hidden rounded-lg shadow-md">
+                  <iframe
+                    src="https://www.youtube.com/embed/HuU_pxXVVqo"
+                    title="AI Voice Agent Demo"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full"
+                  ></iframe>
+                </div>
               </div>
-            </StyleProvider>
-          ) : (
-            <StyleProvider>
-              <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-pink focus:ring-brand-pink sm:text-sm"
-                    onChange={(e) => setName(e.target.value)}
-                    value={name}
-                    required
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-pink focus:ring-brand-pink sm:text-sm"
-                    onChange={(e) => setEmail(e.target.value)}
-                    value={email}
-                    required
-                  />
-                </div>
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700">Message</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={4}
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-pink focus:ring-brand-pink sm:text-sm"
-                    onChange={(e) => setMessage(e.target.value)}
-                    value={message}
-                    required
-                  />
-                </div>
-                
-                <Button 
-                  type="submit" 
-                  className="bg-gradient-to-r from-brand-pink to-brand-aqua text-white hover:opacity-90 px-6 py-3 rounded-lg shadow-lg flex items-center gap-2 text-lg"
-                >
-                  Send Message
-                  <ArrowRight size={18} />
-                </Button>
-              </form>
-            </StyleProvider>
-          )}
+            </div>
+            
+            <div className="text-center mt-8">
+              <p className="font-medium text-gray-700 mb-2">Prefer to speak with our team?</p>
+              <a 
+                href="https://link.suddenimpactagency.io/widget/booking/MYRdt5Un7mP29erZS5rx" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center px-4 py-2 bg-brand-aqua/10 text-brand-aqua hover:bg-brand-aqua/20 rounded-lg transition-colors"
+              >
+                <Calendar size={16} className="mr-1" /> Schedule a consultation
+              </a>
+            </div>
+          </StyleProvider>
         </div>
       </div>
+      
+      {/* AI Demo Call Dialog - Shows automatically after form submission */}
+      <AIDemoCallDialog 
+        open={showCallDialog}
+        onOpenChange={setShowCallDialog}
+        phoneNumber={phoneNumber}
+      />
     </section>
   );
 };
