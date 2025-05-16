@@ -6,7 +6,6 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import CustomDemoForm from "./CustomDemoForm";
 
 interface DemoRequestFormProps {
   onFormSubmit?: () => void;
@@ -21,6 +20,7 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
   
   const phoneNumber = "+1 (302) 618-3977";
   const demoVideoUrl = "https://www.youtube.com/embed/HuU_pxXVVqo?si=qrMXYUDeg8m8zUzs";
+  const formUrl = "https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L";
 
   // Check if the form has been submitted on component mount
   useEffect(() => {
@@ -28,11 +28,91 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
     setFormSubmitted(isA2PFormSubmitted);
   }, []);
 
-  // Handle successful form submission
-  const handleFormSuccess = () => {
-    setFormSubmitted(true);
-    if (onFormSubmit) onFormSubmit();
-  };
+  // Add the script tag for the form embed.js after component mounts
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = "https://link.suddenimpactagency.io/js/form_embed.js";
+    script.async = true;
+    document.body.appendChild(script);
+    
+    return () => {
+      // Clean up script when component unmounts
+      const existingScript = document.querySelector(`script[src="https://link.suddenimpactagency.io/js/form_embed.js"]`);
+      if (existingScript && existingScript.parentNode) {
+        existingScript.parentNode.removeChild(existingScript);
+      }
+    };
+  }, []);
+
+  // Listen for form submission events from the iframe
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      // Check if the message is from our form iframe
+      if (
+        event.data && 
+        typeof event.data === 'object' && 
+        event.data.formId === 'Gf3ORV8Uba4HRiXoml5L' && 
+        event.data.type === 'form:submit'
+      ) {
+        setFormSubmitted(true);
+        localStorage.setItem('a2pFormSubmitted', 'true');
+        if (onFormSubmit) onFormSubmit();
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, [onFormSubmit]);
+
+  // Create MutationObserver to detect changes in the form container
+  useEffect(() => {
+    const formContainer = document.querySelector('.iframe-container');
+    if (!formContainer || formSubmitted) return;
+
+    const observer = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        if (mutation.type === 'childList' || mutation.type === 'attributes') {
+          // Get the iframe's document content
+          const iframe = document.querySelector('.iframe-container iframe');
+          if (!iframe) continue;
+          
+          try {
+            const iframeDocument = (iframe as HTMLIFrameElement).contentDocument || 
+                                (iframe as HTMLIFrameElement).contentWindow?.document;
+            
+            if (iframeDocument) {
+              // Check for thank you text or success message
+              const content = iframeDocument.body.innerText || '';
+              if (
+                content.toLowerCase().includes('thank you') || 
+                content.toLowerCase().includes('success') ||
+                content.toLowerCase().includes('submitted') ||
+                content.toLowerCase().includes('complete the form')
+              ) {
+                console.log('Form submission detected in DemoRequestForm');
+                setFormSubmitted(true);
+                localStorage.setItem('a2pFormSubmitted', 'true');
+                if (onFormSubmit) onFormSubmit();
+                observer.disconnect();
+              }
+            }
+          } catch (error) {
+            // Cross-origin restrictions might prevent access to iframe content
+            console.log('Could not access iframe content, possibly due to cross-origin restrictions');
+          }
+        }
+      }
+    });
+
+    observer.observe(formContainer, {
+      childList: true,
+      attributes: true,
+      subtree: true,
+      characterData: true
+    });
+
+    return () => observer.disconnect();
+  }, [formSubmitted, onFormSubmit]);
 
   // Handle video load complete
   const handleVideoLoad = () => {
@@ -79,8 +159,28 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
             <p className="text-gray-600">Fill out this quick form to get instant access to our AI voice agent demo</p>
           </div>
           
-          {/* Custom form component instead of iframe */}
-          <CustomDemoForm onSubmitSuccess={handleFormSuccess} />
+          <div className="w-full iframe-container relative" style={{ minHeight: isMobile ? "650px" : "600px" }}>
+            <iframe
+              src={formUrl}
+              style={{
+                width: "100%",
+                height: "100%",
+                border: "none",
+                borderRadius: "3px"
+              }}
+              title="GHL Form - Demo Request"
+              className="no-scrollbar"
+            />
+          </div>
+          
+          {/* Hidden reset button - only visible in development */}
+          {process.env.NODE_ENV === 'development' && (
+            <div className="mt-2 text-xs text-gray-400 text-center">
+              <button onClick={resetFormSubmission} className="hover:text-gray-600">
+                (Reset Form)
+              </button>
+            </div>
+          )}
         </div>
       ) : (
         <motion.div 
