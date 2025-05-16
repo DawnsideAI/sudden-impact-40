@@ -1,8 +1,9 @@
+
 import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Layout from '@/components/layout/Layout';
 import { motion } from 'framer-motion';
-import { Check, ArrowRight } from 'lucide-react';
+import { Check, ArrowRight, BadgeDollarSign } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { toast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
@@ -516,85 +517,108 @@ const IndustryPage = () => {
             {currentIndustry.pricing.map((plan, index) => (
               <StyleProvider key={index} delay={index * 0.2}>
                 <div 
-                  className={`rounded-xl overflow-hidden bg-white border transition-all duration-300 hover:shadow-lg ${
+                  className={`rounded-2xl overflow-hidden bg-white border transition-all duration-300 ${
                     plan.highlighted 
-                      ? 'border-brand-pink shadow-md transform scale-105 md:scale-110' 
-                      : 'border-gray-200 shadow-sm hover:-translate-y-1'
+                      ? 'border-brand-pink shadow-xl transform scale-105 md:scale-110 relative z-10' 
+                      : 'border-gray-200 shadow-md hover:-translate-y-2 hover:shadow-lg'
                   }`}
                 >
                   {plan.highlighted && (
-                    <div className={`bg-gradient-to-r ${gradientClass} text-white text-center py-1 font-medium`}>
+                    <div className={`bg-gradient-to-r ${gradientClass} text-white text-center py-2 font-medium`}>
                       Most Popular
                     </div>
                   )}
                   
-                  <div className={`p-8 ${plan.highlighted ? 'bg-gray-50' : ''}`}>
-                    <h3 className="text-2xl font-bold mb-2">{plan.title}</h3>
-                    
-                    {/* Monthly Pricing */}
-                    <div className="flex items-baseline mb-1">
-                      <span className="text-3xl font-bold">{plan.price}</span>
-                      <span className="text-gray-500 ml-1">/mo</span>
+                  <div className={`p-8 ${plan.highlighted ? 'bg-gradient-to-b from-gray-50 to-white' : ''}`}>
+                    <div className="flex items-start justify-between mb-4">
+                      <h3 className="text-2xl font-bold">{plan.title}</h3>
+                      {plan.highlighted && (
+                        <span className="bg-brand-pink/10 text-brand-pink text-xs font-semibold px-2 py-1 rounded-full">
+                          BEST VALUE
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Price Badge */}
+                    <div className="mb-6 relative">
+                      <div className="flex items-baseline mb-1">
+                        <span className={`text-4xl font-bold ${plan.highlighted ? 'text-brand-pink' : ''}`}>{plan.price}</span>
+                        <span className={`text-gray-500 ml-1 ${plan.highlighted ? 'text-brand-pink/70' : ''}`}>/mo</span>
+                      </div>
+
+                      {/* Setup Fee */}
+                      {plan.setupFee && (
+                        <div className="text-sm text-gray-500 mb-1">
+                          + {plan.setupFee}
+                        </div>
+                      )}
+                      
+                      {/* Annual Option */}
+                      {plan.annualPrice && (
+                        <div className="flex items-center">
+                          <BadgeDollarSign size={16} className="text-green-600 mr-1" />
+                          <span className="text-sm text-green-600 font-medium">
+                            Save with annual billing
+                          </span>
+                        </div>
+                      )}
                     </div>
                     
-                    {/* Annual Option if available */}
-                    {plan.annualPrice && (
-                      <div className="text-sm text-green-600 font-medium mb-2">
-                        {plan.annualPrice} (save with annual billing)
-                      </div>
-                    )}
+                    <p className="text-gray-600 text-sm mb-6 min-h-[40px]">{plan.description}</p>
                     
-                    {/* Setup Fee */}
-                    {plan.setupFee && (
-                      <div className="text-xs text-gray-500 mb-4">
-                        {plan.setupFee}
-                      </div>
-                    )}
-                    
-                    <p className="text-gray-600 text-sm mb-6">{plan.description}</p>
-                    
-                    <ul className="space-y-3 mb-8">
+                    <ul className="space-y-3 mb-8 min-h-[240px]">
                       {plan.features.map((feature, fIndex) => (
                         <li key={fIndex} className="flex items-start">
-                          <div className={`mr-3 mt-1 text-${plan.highlighted ? 'brand-pink' : 'brand-aqua'}`}>
-                            <Check size={16} className={plan.highlighted ? 'text-brand-pink' : 'text-brand-aqua'} />
+                          <div className={`mr-3 mt-1 flex-shrink-0 p-1 rounded-full ${
+                            plan.highlighted 
+                              ? 'bg-brand-pink/10 text-brand-pink' 
+                              : 'bg-brand-aqua/10 text-brand-aqua'
+                          }`}>
+                            <Check size={12} className={plan.highlighted ? 'text-brand-pink' : 'text-brand-aqua'} />
                           </div>
                           <span className="text-gray-600 text-sm">{feature}</span>
                         </li>
                       ))}
                     </ul>
                     
-                    {/* Monthly Button */}
-                    {plan.monthlyUrl && (
-                      <a
-                        href={plan.monthlyUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`w-full block text-center py-3 px-4 rounded-lg mb-3 transition-all duration-300 ${
-                          plan.highlighted 
-                            ? `bg-gradient-to-r ${gradientClass} text-white hover:shadow-lg` 
-                            : 'border border-gray-200 hover:border-brand-pink/30 text-gray-700 hover:shadow'
-                        }`}
-                      >
-                        Select Monthly
-                      </a>
-                    )}
-                    
-                    {/* Annual Button */}
-                    {plan.annualUrl && (
-                      <a
-                        href={plan.annualUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`w-full block text-center py-3 px-4 rounded-lg transition-all duration-300 ${
-                          plan.highlighted 
-                            ? `bg-green-500 text-white hover:shadow-lg` 
-                            : 'border border-green-200 bg-green-50 hover:border-green-300 text-green-700 hover:shadow'
-                        }`}
-                      >
-                        Select Annual
-                      </a>
-                    )}
+                    <div className="space-y-3">
+                      {/* Monthly Button */}
+                      {plan.monthlyUrl && (
+                        <a
+                          href={plan.monthlyUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`w-full block text-center py-3 px-4 rounded-lg transition-all duration-300 ${
+                            plan.highlighted 
+                              ? `bg-gradient-to-r ${gradientClass} text-white hover:shadow-lg` 
+                              : 'border border-gray-200 hover:border-brand-pink/30 text-gray-700 hover:shadow'
+                          }`}
+                        >
+                          <span className="font-medium">Select Monthly</span>
+                        </a>
+                      )}
+                      
+                      {/* Annual Button */}
+                      {plan.annualUrl && (
+                        <a
+                          href={plan.annualUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`w-full block text-center py-3 px-4 rounded-lg transition-all duration-300 ${
+                            plan.highlighted 
+                              ? `bg-green-500 text-white hover:shadow-lg` 
+                              : 'border border-green-200 bg-green-50 hover:border-green-300 text-green-700 hover:shadow'
+                          }`}
+                        >
+                          <div className="flex flex-col">
+                            <span className="font-medium">Select Annual</span>
+                            {plan.annualPrice && (
+                              <span className="text-xs opacity-90">{plan.annualPrice}</span>
+                            )}
+                          </div>
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
               </StyleProvider>
