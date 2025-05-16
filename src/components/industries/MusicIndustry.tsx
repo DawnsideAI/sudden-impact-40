@@ -1,8 +1,9 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Check, Music3, Music, Calendar, PhoneCall, DollarSign, Quote, Heart } from 'lucide-react';
+import { Check, Music3, Music, Calendar, PhoneCall, DollarSign, Quote, Heart, ArrowRight } from 'lucide-react';
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import StyleProvider from '@/components/design/StyleProvider';
 import SectionTitle from '@/components/design/SectionTitle';
 import FeatureCard from '@/components/design/FeatureCard';
@@ -83,7 +84,7 @@ const MusicIndustry = () => {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button
+                <Button 
                   className="bg-gradient-to-r from-brand-pink to-brand-aqua hover:opacity-90 text-white px-6 py-6 rounded-lg font-medium shadow-md hover:shadow-lg transition-all duration-300"
                   onClick={() => document.getElementById('learn-more')?.scrollIntoView({ behavior: 'smooth' })}
                 >
@@ -271,7 +272,7 @@ const MusicIndustry = () => {
           </div>
           
           <div className="mt-10 text-center">
-            <p className="text-gray-500">Need a custom plan? <a href="#contact" className="text-brand-pink font-medium hover:underline">Contact us</a> for enterprise solutions.</p>
+            <p className="text-gray-500">Need a custom plan? <Link to="#contact" className="text-brand-pink font-medium hover:underline">Contact us</Link> for enterprise solutions.</p>
           </div>
         </div>
       </section>
