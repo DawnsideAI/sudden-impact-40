@@ -36,6 +36,7 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
         event.data.formId === 'Gf3ORV8Uba4HRiXoml5L' && 
         event.data.type === 'form:submit'
       ) {
+        console.log('Form submitted event detected!', event.data);
         localStorage.setItem('a2pFormSubmitted', 'true');
         setFormSubmitted(true);
         if (onFormSubmit) onFormSubmit();
@@ -106,7 +107,7 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
             <h3 className="text-xl font-bold">Complete the form to access our AI demo</h3>
             <p className="text-gray-600">Fill out this quick form to get instant access to our AI voice agent demo</p>
           </div>
-          <div className="iframe-container" style={{ height: isMobile ? "800px" : "730px" }}>
+          <div className="iframe-container" style={{ height: isMobile ? "800px" : "750px" }}>
             <iframe
               ref={iframeRef}
               src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
@@ -114,8 +115,7 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
                 width: "100%", 
                 height: "100%",
                 border: "none", 
-                borderRadius: "3px",
-                display: formSubmitted ? "none" : "block"
+                borderRadius: "3px"
               }}
               id="inline-Gf3ORV8Uba4HRiXoml5L" 
               data-layout="{'id':'INLINE'}"
@@ -126,7 +126,7 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
               data-deactivation-type="leadCollected"
               data-deactivation-value=""
               data-form-name="A2P Form - New"
-              data-height={isMobile ? "800" : "730"}
+              data-height={isMobile ? "800" : "750"}
               data-layout-iframe-id="inline-Gf3ORV8Uba4HRiXoml5L"
               data-form-id="Gf3ORV8Uba4HRiXoml5L"
               title="A2P Form - New"
