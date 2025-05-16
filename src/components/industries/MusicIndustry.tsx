@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Check, Calendar, Bell, Music } from 'lucide-react';
@@ -9,6 +8,7 @@ import SectionTitle from '@/components/design/SectionTitle';
 import FeatureCard from '@/components/design/FeatureCard';
 import Layout from '@/components/layout/Layout';
 import LiveDemoDialog from '@/components/pricing/LiveDemoDialog';
+import IndustryAnimation from '@/components/industries/IndustryAnimation';
 
 const MusicIndustry = () => {
   const [showDemoDialog, setShowDemoDialog] = useState(false);
@@ -143,11 +143,7 @@ const MusicIndustry = () => {
               className="relative"
             >
               <div className="aspect-video rounded-xl overflow-hidden shadow-xl border-2 border-white">
-                <img 
-                  src="/lovable-uploads/46b36e77-e44d-4dfd-8c35-6805698f485f.png" 
-                  alt="AI Voice Agent for Music Industry" 
-                  className="w-full h-full object-cover"
-                />
+                <IndustryAnimation industry="music" />
               </div>
               
               <div className="absolute -bottom-6 -right-6 bg-white p-4 rounded-lg shadow-lg border border-gray-100">
