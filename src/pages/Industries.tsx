@@ -76,8 +76,9 @@ const Industries = () => {
       // Map to appropriate industry page - fix the route for music industry
       let route;
       
+      // Updated this to point to the industry page for music
       if (selectedIndustry === 'music') {
-        route = `/niches/music`; // Direct to the niches/music route
+        route = `/industries/music`; // Now pointing to the industries route instead of niches
       } else {
         route = `/industries/${selectedIndustry}`;
       }

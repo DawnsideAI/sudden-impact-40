@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -27,6 +26,9 @@ import NicheBooking from "./pages/niches/common/NicheBooking";
 
 import "./styles/iframe-container.css"; // Import the iframe container styles globally
 
+// Import the new MusicIndustry component
+import MusicIndustry from "./components/industries/MusicIndustry";
+
 // Create the client
 const queryClient = new QueryClient();
 
@@ -42,6 +44,8 @@ const App = () => (
           <Route path="/solutions" element={<Solutions />} />
           <Route path="/industries" element={<Industries />} />
           <Route path="/industries/:industryId" element={<IndustryPage />} />
+          {/* Add new route for Music Industry */}
+          <Route path="/industries/music" element={<MusicIndustry />} />
           <Route path="/demo" element={<Demo />} />
           <Route path="/legal" element={<Legal />} />
           <Route path="/contact" element={<Contact />} />
@@ -51,7 +55,7 @@ const App = () => (
           <Route path="/niches/real-estate" element={<RealEstateNiche />} />
           <Route path="/niches/restaurants" element={<RestaurantsNiche />} />
           <Route path="/niches/service-contractors" element={<ServiceContractorsNiche />} />
-          <Route path="/niches/music" element={<MusicNiche />} /> {/* Make sure this route is correctly defined */}
+          <Route path="/niches/music" element={<MusicNiche />} /> {/* Keep this route for direct access */}
           
           {/* Common niche page routes */}
           <Route path="/niches/:industry/about" element={<NicheAbout />} />
