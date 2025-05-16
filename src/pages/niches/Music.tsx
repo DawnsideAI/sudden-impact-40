@@ -7,6 +7,7 @@ import NicheContactForm from '@/components/niches/NicheContactForm';
 import StyleProvider from '@/components/design/StyleProvider';
 import SectionTitle from '@/components/design/SectionTitle';
 import IndustryAnimation from '@/components/industries/IndustryAnimation';
+import { Button } from '@/components/ui/button';
 
 const MusicNiche = () => {
   const benefits = [
@@ -145,6 +146,40 @@ const MusicNiche = () => {
                   <p className="text-gray-500">Independent Music Producer, Rhythm Studios</p>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* New Contact Section - Styled like the second screenshot */}
+      <section className="py-20 bg-white border-t border-gray-100">
+        <div className="container-custom">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <span className="bg-gradient-to-r from-brand-pink to-brand-aqua bg-clip-text text-transparent">
+                Ready to Transform Your Music Business?
+              </span>
+            </h2>
+            <p className="text-lg text-gray-600 mb-10 max-w-2xl mx-auto">
+              Schedule a personalized demo to see how our AI voice agents can revolutionize your 
+              customer interactions and operational efficiency.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button 
+                className="bg-gradient-to-r from-brand-pink to-brand-aqua text-white hover:opacity-90 px-8 py-6"
+                onClick={() => window.open('https://link.suddenimpactagency.io/widget/booking/MYRdt5Un7mP29erZS5rx', '_blank')}
+              >
+                Try AI Demo Now
+              </Button>
+              
+              <Button
+                variant="outline"
+                className="border border-gray-200 px-8 py-6"
+                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                Schedule Consultation
+              </Button>
             </div>
           </div>
         </div>
