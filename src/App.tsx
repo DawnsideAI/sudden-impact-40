@@ -19,6 +19,7 @@ import HealthcareNiche from "./pages/niches/Healthcare";
 import RealEstateNiche from "./pages/niches/RealEstate";
 import RestaurantsNiche from "./pages/niches/Restaurants";
 import ServiceContractorsNiche from "./pages/niches/ServiceContractors";
+import MusicNiche from "./pages/niches/Music";
 
 // Import niche common pages
 import NicheAbout from "./pages/niches/common/NicheAbout";
@@ -50,7 +51,7 @@ const App = () => (
           <Route path="/niches/real-estate" element={<RealEstateNiche />} />
           <Route path="/niches/restaurants" element={<RestaurantsNiche />} />
           <Route path="/niches/service-contractors" element={<ServiceContractorsNiche />} />
-          <Route path="/niches/music" element={<RestaurantsNiche />} /> {/* Temporarily use Restaurants as template */}
+          <Route path="/niches/music" element={<MusicNiche />} /> {/* Now uses the dedicated MusicNiche component */}
           
           {/* Common niche page routes */}
           <Route path="/niches/:industry/about" element={<NicheAbout />} />
