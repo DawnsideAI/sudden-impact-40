@@ -107,31 +107,35 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
             <h3 className="text-xl font-bold">Complete the form to access our AI demo</h3>
             <p className="text-gray-600">Fill out this quick form to get instant access to our AI voice agent demo</p>
           </div>
-          <div className="iframe-container" style={{ height: isMobile ? "800px" : "754px" }}>
-            <iframe
-              ref={iframeRef}
-              src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
-              style={{
-                width: "100%", 
-                height: "100%",
-                border: "none", 
-                borderRadius: "3px"
-              }}
-              id="inline-Gf3ORV8Uba4HRiXoml5L" 
-              data-layout="{'id':'INLINE'}"
-              data-trigger-type="alwaysShow"
-              data-trigger-value=""
-              data-activation-type="alwaysActivated"
-              data-activation-value=""
-              data-deactivation-type="leadCollected"
-              data-deactivation-value=""
-              data-form-name="A2P Form - New"
-              data-height={isMobile ? "800" : "754"}
-              data-layout-iframe-id="inline-Gf3ORV8Uba4HRiXoml5L"
-              data-form-id="Gf3ORV8Uba4HRiXoml5L"
-              title="A2P Form - New"
-              className="no-scrollbar"
-            />
+          
+          {/* Updated with display:none as per the embed code */}
+          <iframe
+            ref={iframeRef}
+            src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
+            style={{
+              display: "none",
+              width: "100%", 
+              height: "100%",
+              border: "none", 
+              borderRadius: "3px"
+            }}
+            id="inline-Gf3ORV8Uba4HRiXoml5L" 
+            data-layout="{'id':'INLINE'}"
+            data-trigger-type="alwaysShow"
+            data-trigger-value=""
+            data-activation-type="alwaysActivated"
+            data-activation-value=""
+            data-deactivation-type="leadCollected"
+            data-deactivation-value=""
+            data-form-name="A2P Form - New"
+            data-height={isMobile ? "800" : "754"}
+            data-layout-iframe-id="inline-Gf3ORV8Uba4HRiXoml5L"
+            data-form-id="Gf3ORV8Uba4HRiXoml5L"
+            title="A2P Form - New"
+          />
+          
+          <div id="form-container" className="iframe-container" style={{ height: isMobile ? "800px" : "754px" }}>
+            {/* The form will be rendered here by the script */}
           </div>
         </div>
       ) : (

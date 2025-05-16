@@ -26,6 +26,12 @@
   min-height: 680px !important;
 }
 
+/* Form container styling */
+#form-container {
+  width: 100%;
+  min-height: 680px;
+}
+
 /* Ensure calendar booking widgets display properly */
 [id^="msgsndr-calendar"] {
   min-height: 600px;
