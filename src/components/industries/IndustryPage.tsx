@@ -1,585 +1,453 @@
-import { useParams, useNavigate, Navigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import Layout from '@/components/layout/Layout';
 import { motion } from 'framer-motion';
-import { Check, ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { toast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
-import StyleProvider from '@/components/design/StyleProvider';
 import SectionTitle from '@/components/design/SectionTitle';
-import IndustryAnimation from '@/components/industries/IndustryAnimation';
+import IndustrySelector from '@/components/industries/IndustrySelector';
+import { Check, ArrowRight, ChevronRight, Music, Calendar, Star, User } from 'lucide-react';
 
-// Define industry data with testimonials
-const industryData = {
+// Type for industry data
+interface IndustryData {
+  id: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  benefits: string[];
+  testimonial?: {
+    quote: string;
+    author: string;
+    position: string;
+    initial: string;
+  };
+  workflows?: {
+    title: string;
+    description: string;
+    icon: React.ElementType;
+  }[];
+}
+
+// Data for each industry
+const industryData: Record<string, IndustryData> = {
   restaurants: {
-    title: "Restaurants & Hospitality",
-    intro: "Transform your restaurant or hospitality business with AI voice agents that handle reservations, takeout orders, and customer inquiries 24/7, allowing your staff to focus on delivering exceptional in-person experiences.",
-    image: "/lovable-uploads/46b36e77-e44d-4dfd-8c35-6805698f485f.png",
+    id: "restaurants",
+    title: "Restaurant & Hospitality AI",
+    subtitle: "Enhance guest experiences and streamline operations",
+    description: "Our AI voice assistant handles reservations, answers common questions, and manages waitlists automatically. Free up your staff to focus on creating exceptional dining experiences.",
     benefits: [
-      "Never miss a reservation or takeout order call again",
-      "Reduce staffing costs while maintaining excellent service",
-      "Handle peak-time call overflow automatically",
-      "Collect valuable customer feedback and preferences",
-      "Provide 24/7 availability for information and bookings"
+      "24/7 reservation handling without adding staff",
+      "Automatic waitlist management during peak hours",
+      "Answer FAQs like hours and directions instantly",
+      "Seamless integration with your existing systems",
+      "Personalized guest experiences and preferences tracking",
+      "Reduce no-shows with automated confirmations"
     ],
-    pricing: [
-      {
-        title: "Basic",
-        price: "$199",
-        description: "Perfect for small cafés and restaurants",
-        features: [
-          "1 AI voice agent",
-          "100 minutes/month",
-          "Restaurant menu integration",
-          "Basic reservation handling",
-          "Business hours configuration"
-        ],
-        highlighted: false
-      },
-      {
-        title: "Standard",
-        price: "$349",
-        description: "Ideal for busy restaurants and small chains",
-        features: [
-          "2 AI voice agents",
-          "300 minutes/month",
-          "Advanced reservation system integration",
-          "Special requests handling",
-          "Custom voice and personality",
-          "Customer recognition system",
-          "Weekly performance reports"
-        ],
-        highlighted: true
-      },
-      {
-        title: "Premium",
-        price: "$599",
-        description: "For restaurant groups and large establishments",
-        features: [
-          "5 AI voice agents",
-          "600 minutes/month",
-          "Multi-location support",
-          "POS & CRM integration",
-          "VIP customer recognition",
-          "Custom workflows and scripts",
-          "Detailed analytics dashboard",
-          "Priority support"
-        ],
-        highlighted: false
-      }
-    ],
-    testimonials: [
-      {
-        quote: "Our staff used to spend hours on the phone taking orders and reservations. Now our AI assistant handles it all, and our team can focus on creating amazing dining experiences.",
-        name: "Michael Chen",
-        position: "Owner, Fusion Bistro"
-      },
-      {
-        quote: "We've seen a 35% increase in takeout orders since implementing the AI voice agent. It never misses specials or upsell opportunities!",
-        name: "Sarah Johnson",
-        position: "Manager, Harbor Grill"
-      }
-    ]
+    testimonial: {
+      quote: "Since implementing the AI assistant, we've increased our bookings by 22% and our staff can focus completely on our guests instead of answering phones.",
+      author: "Michael Rodriguez",
+      position: "Owner, Bistro Nouveau",
+      initial: "MR"
+    }
   },
   realestate: {
-    title: "Real Estate",
-    intro: "Elevate your real estate business with AI voice agents that qualify leads, schedule property viewings, and follow up with potential buyers 24/7, helping your agents focus on closing deals rather than administrative tasks.",
-    image: "/lovable-uploads/3094ebcc-0925-48b6-9f13-c4e025b7e67d.png",
+    id: "realestate",
+    title: "Real Estate AI Solutions",
+    subtitle: "Convert more leads and schedule more showings 24/7",
+    description: "Our AI voice assistant qualifies leads, schedules property showings, and follows up with potential buyers automatically. Never miss an opportunity again.",
     benefits: [
-      "Qualify leads 24/7 without agent intervention",
-      "Automatically schedule and confirm property viewings",
-      "Collect detailed buyer requirements and preferences",
-      "Never miss a follow-up with interested buyers",
-      "Free up agents' time for high-value activities"
+      "24/7 lead qualification and appointment scheduling",
+      "Instant property information for callers",
+      "Automatic follow-up sequences with prospects",
+      "Seamless integration with your CRM",
+      "Track every client interaction and preference",
+      "Increase showing attendance with confirmations"
     ],
-    pricing: [
-      {
-        title: "Agent",
-        price: "$249",
-        description: "Perfect for individual agents",
-        features: [
-          "1 AI voice agent",
-          "150 minutes/month",
-          "Lead qualification",
-          "Viewing scheduling",
-          "Basic CRM integration",
-          "Property information handling"
-        ],
-        highlighted: false
-      },
-      {
-        title: "Team",
-        price: "$499",
-        description: "Ideal for real estate teams and small agencies",
-        features: [
-          "3 AI voice agents",
-          "400 minutes/month",
-          "Advanced lead qualification",
-          "Property matching system",
-          "Detailed buyer preference tracking",
-          "Automated follow-up sequences",
-          "Performance analytics"
-        ],
-        highlighted: true
-      },
-      {
-        title: "Brokerage",
-        price: "$899",
-        description: "For large brokerages with multiple teams",
-        features: [
-          "10 AI voice agents",
-          "1000 minutes/month",
-          "Multi-team management",
-          "Advanced CRM & MLS integration",
-          "Custom workflows per agent team",
-          "Lead routing and distribution",
-          "White-labeled solution",
-          "Priority support"
-        ],
-        highlighted: false
-      }
-    ],
-    testimonials: [
-      {
-        quote: "Our agents save at least 15 hours per week now that the AI assistant handles initial inquiries and schedules viewings. Our sales have increased by 28% this quarter!",
-        name: "Jennifer Lopez",
-        position: "Broker, Prime Properties"
-      },
-      {
-        quote: "The detailed lead qualification from the AI voice agent means our agents only speak with serious buyers who are ready to move forward. Game changer!",
-        name: "David Wilson",
-        position: "Sales Director, Metropolitan Realty"
-      }
-    ]
+    testimonial: {
+      quote: "In just one month, our AI assistant scheduled 57 property showings that would have been missed calls after hours. It's like adding a full-time agent without the cost.",
+      author: "Jennifer Wilson",
+      position: "Broker, Premier Properties",
+      initial: "JW"
+    }
   },
   healthcare: {
-    title: "Healthcare & Wellness",
-    intro: "Revolutionize your healthcare or wellness practice with HIPAA-compliant AI voice agents that handle appointment scheduling, patient inquiries, and follow-ups, allowing your staff to focus on providing exceptional care.",
-    image: "/lovable-uploads/04e02938-36ca-4abc-adad-95afd668326b.png",
+    id: "healthcare",
+    title: "Healthcare & Medical AI",
+    subtitle: "Streamline patient scheduling and communications",
+    description: "Our HIPAA-compliant AI voice assistant handles appointment scheduling, reminders, and routine patient inquiries, allowing your staff to focus on providing exceptional care.",
     benefits: [
-      "Reduce administrative workload for front-office staff",
-      "Decrease appointment no-shows with automated reminders",
-      "Answer common patient questions 24/7",
-      "Collect patient information securely before appointments",
-      "Maintain HIPAA compliance while improving efficiency"
+      "HIPAA-compliant communications",
+      "24/7 appointment scheduling and management",
+      "Automatic patient reminders to reduce no-shows",
+      "Insurance verification workflows",
+      "After-hours emergency routing protocols",
+      "Seamless EMR/EHR integration"
     ],
-    pricing: [
-      {
-        title: "Essential",
-        price: "$279",
-        description: "Perfect for small practices and individual providers",
-        features: [
-          "1 HIPAA-compliant AI voice agent",
-          "150 minutes/month",
-          "Appointment scheduling",
-          "Basic patient triage",
-          "Appointment reminders",
-          "FAQ handling"
-        ],
-        highlighted: false
-      },
-      {
-        title: "Professional",
-        price: "$549",
-        description: "Ideal for established practices and clinics",
-        features: [
-          "3 HIPAA-compliant AI voice agents",
-          "400 minutes/month",
-          "Advanced appointment management",
-          "Insurance verification assistance",
-          "Patient portal integration",
-          "Customized patient communication",
-          "Detailed reporting"
-        ],
-        highlighted: true
-      },
-      {
-        title: "Enterprise",
-        price: "$999",
-        description: "For medical groups and healthcare networks",
-        features: [
-          "10 HIPAA-compliant AI voice agents",
-          "1000 minutes/month",
-          "Multi-location support",
-          "EHR/EMR system integration",
-          "Complex scheduling workflows",
-          "Custom provider availability rules",
-          "Advanced analytics dashboard",
-          "Priority support"
-        ],
-        highlighted: false
-      }
-    ],
-    testimonials: [
-      {
-        quote: "Our front desk was overwhelmed with calls before implementing this AI solution. Now they can focus on patients in the office while the voice agent handles scheduling and routine inquiries.",
-        name: "Dr. Rebecca Harris",
-        position: "Director, Wellness Medical Center"
-      },
-      {
-        quote: "We've seen a 45% reduction in no-shows thanks to the automated appointment reminders. The ROI was evident within the first month.",
-        name: "Thomas Miller",
-        position: "Practice Manager, Family Health Associates"
-      }
-    ]
+    testimonial: {
+      quote: "Our no-show rate has dropped by 35% since implementing the AI assistant. Plus, our front office staff can now focus on patients in the office rather than constantly answering phones.",
+      author: "Dr. Sarah Chen",
+      position: "Medical Director, Wellness Medical Group",
+      initial: "SC"
+    }
   },
   contractors: {
-    title: "Service Contractors",
-    intro: "Transform your service contracting business with AI voice agents that handle appointment scheduling, service inquiries, and follow-up calls 24/7, allowing your team to focus on providing exceptional service rather than phone management.",
-    image: "/lovable-uploads/a8ea11c6-eee2-4a72-9e98-851efb0bdc3d.png",
+    id: "contractors",
+    title: "Service Contractor AI",
+    subtitle: "Book more jobs and provide better customer service",
+    description: "Our AI voice assistant books appointments, handles emergency calls, and follows up with customers automatically. Never miss a service opportunity again.",
     benefits: [
-      "Never miss a service call or new customer inquiry",
-      "Qualify leads and schedule appointments automatically",
-      "Handle emergency service requests 24/7",
-      "Gather detailed information before dispatching technicians",
-      "Increase technician productivity with better scheduling"
+      "24/7 emergency and standard service booking",
+      "Automatic technician scheduling and routing",
+      "Job confirmation and reminder sequences",
+      "Seamless integration with field service software",
+      "Customer follow-ups for reviews and future services",
+      "Detailed analytics on call volumes and types"
     ],
-    pricing: [
-      {
-        title: "Solo",
-        price: "$199",
-        description: "Perfect for independent contractors",
-        features: [
-          "1 AI voice agent",
-          "100 minutes/month",
-          "Basic appointment scheduling",
-          "Service inquiries handling",
-          "Customizable availability calendar",
-          "Simple follow-up calls"
-        ],
-        highlighted: false
-      },
-      {
-        title: "Team",
-        price: "$399",
-        description: "Ideal for small contractor teams",
-        features: [
-          "2 AI voice agents",
-          "300 minutes/month",
-          "Advanced appointment management",
-          "Emergency service prioritization",
-          "Technician-specific scheduling",
-          "Quote request handling",
-          "Customer satisfaction follow-ups"
-        ],
-        highlighted: true
-      },
-      {
-        title: "Enterprise",
-        price: "$799",
-        description: "For large service companies with multiple teams",
-        features: [
-          "5 AI voice agents",
-          "800 minutes/month",
-          "Multi-service area support",
-          "CRM & field service software integration",
-          "Complex dispatching logic",
-          "Service contract management",
-          "Custom reporting and analytics",
-          "Priority support"
-        ],
-        highlighted: false
-      }
+    testimonial: {
+      quote: "We've been able to respond to emergency calls 100% of the time, even during peak seasons. The AI has paid for itself just in the after-hours calls it handles.",
+      author: "Robert Martinez",
+      position: "Owner, Elite Plumbing & HVAC",
+      initial: "RM"
+    }
+  },
+  music: {
+    id: "music",
+    title: "Music Industry AI",
+    subtitle: "Streamline studio operations and artist management",
+    description: "Our AI voice assistant handles studio bookings, manages artist schedules, and automates fan engagement. Focus on creating amazing music while we handle the business side.",
+    benefits: [
+      "24/7 studio scheduling and equipment management",
+      "Automated artist booking and contract workflows",
+      "Fan engagement and release promotion sequences",
+      "Venue booking and tour management assistance",
+      "Royalty collection and distribution tracking",
+      "Seamless integration with music production software"
     ],
-    testimonials: [
+    testimonial: {
+      quote: "The AI assistant has transformed our studio operations. We've increased bookings by 40% while spending less time on administrative tasks and more time on creative production.",
+      author: "Alex Johnson",
+      position: "Owner, Resonance Studios",
+      initial: "AJ"
+    },
+    workflows: [
       {
-        quote: "This AI assistant has transformed our business. We've expanded service coverage without adding office staff, and our technicians always have the information they need before arriving at a job.",
-        name: "Robert Johnson",
-        position: "Owner, Elite Plumbing Solutions"
+        title: "Studio Booking Automation",
+        description: "Automatically manage studio bookings, equipment requests, and engineer scheduling",
+        icon: Music
       },
       {
-        quote: "The AI voice agent efficiently screens emergency calls, ensuring our team responds to genuine emergencies quickly while scheduling routine matters appropriately. Our customer satisfaction is at an all-time high.",
-        name: "Amanda Taylor",
-        position: "Operations Manager, Reliable Electric"
+        title: "Artist Management",
+        description: "Track artist schedules, contracts, and performance obligations",
+        icon: User
+      },
+      {
+        title: "Release Promotion",
+        description: "Coordinate release dates, fan engagement, and streaming platform updates",
+        icon: Star
+      },
+      {
+        title: "Event Scheduling",
+        description: "Manage venue bookings, tour dates, and promotional appearances",
+        icon: Calendar
       }
     ]
   }
 };
 
 const IndustryPage = () => {
-  const { industryId } = useParams<{ industryId: string }>();
-  const navigate = useNavigate();
-  const [industry, setIndustry] = useState<string>(industryId || 'restaurants');
-  const [selectedBusinessType, setSelectedBusinessType] = useState<string | null>(null);
+  const { industryId } = useParams();
+  const [selectedType, setSelectedType] = useState<string | null>(null);
   
+  // Get industry data or use restaurants as fallback
+  const industry = industryData[industryId as string] || industryData.restaurants;
+  
+  // List of industries for the selector
+  const industries = Object.values(industryData).map(ind => ({ id: ind.id, title: ind.title }));
+  
+  // Get business type from session storage
   useEffect(() => {
-    // Get selected business type from session storage if available
-    const storedBusinessType = sessionStorage.getItem('selectedBusinessType');
-    if (storedBusinessType) {
-      setSelectedBusinessType(storedBusinessType);
-      sessionStorage.removeItem('selectedBusinessType'); // Clean up after using
+    const storedType = sessionStorage.getItem('selectedBusinessType');
+    if (storedType) {
+      setSelectedType(storedType);
     }
-    
-    if (industryId && industryData[industryId as keyof typeof industryData]) {
-      setIndustry(industryId);
-    } else if (!industryId) {
-      navigate('/industries/restaurants', { replace: true });
-    }
-    
-    window.scrollTo(0, 0);
-  }, [industryId, navigate]);
+  }, []);
   
-  const currentIndustry = industryData[industry as keyof typeof industryData];
-  
-  if (!currentIndustry) {
-    return <Navigate to="/404" replace />;
-  }
-
-  // Extract the industry name and color based on industry ID
-  let industryName = "";
-  let textColorClass = "";
-  let gradientClass = "";
-  let animationType = "";
-  
-  switch(industry) {
-    case "restaurants":
-      industryName = "Restaurants &";
-      textColorClass = "text-brand-pink";
-      gradientClass = "from-brand-pink to-brand-aqua";
-      animationType = "restaurants";
-      break;
-    case "realestate":
-      industryName = "Real Estate";
-      textColorClass = "text-brand-purple";
-      gradientClass = "from-brand-purple to-brand-aqua";
-      animationType = "realEstate";
-      break;
-    case "healthcare":
-      industryName = "Healthcare &";
-      textColorClass = "text-brand-aqua";
-      gradientClass = "from-brand-aqua to-brand-pink";
-      animationType = "healthcare";
-      break;
-    case "contractors":
-      industryName = "Service Contractors";
-      textColorClass = "text-brand-blue";
-      gradientClass = "from-brand-blue to-brand-purple";
-      animationType = "contractors";
-      break;
-    default:
-      industryName = "Restaurants &";
-      textColorClass = "text-brand-pink";
-      gradientClass = "from-brand-pink to-brand-aqua";
-      animationType = "restaurants";
-  }
-
-  // Second part of title for restaurants and healthcare
-  const secondLine = industry === "restaurants" ? "Hospitality" : industry === "healthcare" ? "Wellness" : "";
-
   return (
-    <Layout lightMode={true}>
+    <Layout lightMode={false}>
       {/* Hero Section */}
-      <section className="bg-gray-50 pt-16 pb-24 overflow-hidden">
-        <div className="container-custom">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <StyleProvider>
-              <div className="text-left">
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-                  <span className={`${textColorClass}`}>{industryName}</span>
-                  {secondLine && (
-                    <span className="block mt-1">{secondLine}</span>
-                  )}
-                  <span className="bg-gradient-to-r from-brand-pink to-brand-aqua bg-clip-text text-transparent mt-2 block">AI Voice Solutions</span>
-                </h1>
-                
-                <p className="text-xl text-gray-600 mt-6 max-w-lg">
-                  {currentIndustry.intro}
-                </p>
-                
-                <div className="mt-8 flex flex-col sm:flex-row gap-4">
-                  <Button 
-                    className="bg-gradient-to-r from-brand-pink to-brand-aqua text-white hover:opacity-90 px-6 py-6 rounded-lg shadow-lg flex items-center gap-2 text-lg"
-                    onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
-                  >
-                    View Pricing Options
-                    <ArrowRight size={18} />
-                  </Button>
-                  
-                  <Link
-                    to="/demo"
-                    className="px-6 py-6 rounded-lg border border-gray-200 hover:border-brand-pink/30 shadow-sm hover:shadow transition-all duration-300 flex items-center justify-center gap-2 text-lg"
-                  >
-                    Try AI Demo
-                  </Link>
-                </div>
-              </div>
-            </StyleProvider>
+      <section className="pt-32 pb-24 relative overflow-hidden">
+        {/* Background Effects */}
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-darkPurple to-black z-0"></div>
+        <div className="absolute top-0 left-0 right-0 h-[400px] bg-gradient-to-b from-brand-pink/20 to-transparent z-0"></div>
+        <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-black to-transparent z-0"></div>
+        
+        {/* Content */}
+        <div className="container-custom relative z-10">
+          {/* Industry Selector */}
+          <IndustrySelector 
+            industries={industries} 
+            selectedId={industry.id} 
+            onChange={(id) => {
+              window.location.href = `/industries/${id}`;
+            }} 
+          />
+          
+          <div className="text-center">
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6"
+            >
+              {industry.title}
+            </motion.h1>
             
-            <StyleProvider delay={0.3}>
-              <div className="relative">
-                {/* Decorative elements */}
-                <div className="absolute -z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] rounded-full bg-gradient-to-br from-brand-pink/5 via-transparent to-brand-aqua/5 blur-xl"></div>
-                <div className="absolute -z-10 -bottom-10 -right-10 w-40 h-40 rounded-full bg-gradient-to-br from-brand-aqua/10 to-transparent blur-xl"></div>
-                
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6 }}
-                  className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 transform hover:scale-[1.02] transition-transform duration-300"
-                >
-                  {/* Show only the animation and remove the background image */}
-                  <div className="relative">
-                    <IndustryAnimation industry={animationType} />
-                  </div>
-                </motion.div>
-              </div>
-            </StyleProvider>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="text-xl text-gray-300 max-w-3xl mx-auto"
+            >
+              {industry.subtitle}
+            </motion.p>
+            
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="mt-12"
+            >
+              <Button 
+                size="lg"
+                className="pink-aqua-bg hover:opacity-95 text-white rounded-full px-8 py-6 text-lg font-medium shadow-lg"
+                onClick={() => {
+                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                Get Started Today <ArrowRight className="ml-2" size={20} />
+              </Button>
+            </motion.div>
           </div>
         </div>
       </section>
       
-      {/* Key Benefits Section */}
-      <section className="py-20 bg-white">
-        <div className="container-custom">
-          <SectionTitle
-            title="Key Benefits"
-            subtitle={`How our AI voice agents transform ${currentIndustry.title} businesses`}
+      {/* Benefits Section */}
+      <section className="py-20 bg-black relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-purple/10 to-transparent z-0"></div>
+        
+        <div className="container-custom relative z-10">
+          <SectionTitle 
+            title={`AI Voice Agents for ${industry.title}`}
+            subtitle={industry.description}
             centered={true}
+            className="text-white"
+            subtitleClassName="text-gray-300"
           />
           
-          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {currentIndustry.benefits.map((benefit, index) => (
-              <StyleProvider key={index} delay={index * 0.1} className="bg-gradient-to-br from-gray-50 to-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300">
+          <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {industry.benefits.map((benefit, index) => (
+              <motion.div 
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300"
+              >
                 <div className="flex items-start">
-                  <div className="mt-1 mr-4 flex-shrink-0">
-                    <div className={`w-8 h-8 rounded-full bg-gradient-to-r ${gradientClass} flex items-center justify-center shadow-md`}>
+                  <div className="mt-1 mr-4">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-r from-brand-pink to-brand-aqua flex items-center justify-center">
                       <Check className="text-white" size={16} />
                     </div>
                   </div>
-                  <p className="text-gray-700">{benefit}</p>
+                  <p className="text-gray-200">{benefit}</p>
                 </div>
-              </StyleProvider>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
       
-      {/* Testimonials Section */}
-      {currentIndustry.testimonials && (
-        <section className="py-20 bg-gradient-to-br from-brand-pink/5 to-brand-aqua/5">
-          <div className="container-custom">
-            <SectionTitle
-              title={`What ${currentIndustry.title} Clients Say`}
-              subtitle="Success stories from businesses like yours"
+      {/* Workflows Section - Only for Music Industry */}
+      {industry.id === 'music' && industry.workflows && (
+        <section className="py-20 bg-gradient-to-br from-brand-darkPurple to-black relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(156,39,176,0.1),_transparent_70%)] z-0"></div>
+          
+          <div className="container-custom relative z-10">
+            <SectionTitle 
+              title="Music Industry Workflows"
+              subtitle="Our AI voice agents can automate these critical processes for your music business"
               centered={true}
+              className="text-white"
+              subtitleClassName="text-gray-300"
             />
             
-            <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-              {currentIndustry.testimonials.map((testimonial, index) => (
-                <StyleProvider key={index} delay={index * 0.2}>
-                  <div className="bg-white p-8 rounded-xl shadow-md border border-gray-100 relative">
-                    <div className="absolute top-0 right-0 -mt-4 -mr-4 w-20 h-20 bg-gradient-to-r from-brand-pink/10 to-brand-aqua/10 rounded-full blur-xl"></div>
-                    <svg className="h-10 w-10 text-brand-pink/30 mb-4" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                    </svg>
-                    <p className="text-gray-600 italic mb-6">{testimonial.quote}</p>
-                    <div className="flex items-center">
-                      <div className={`w-10 h-10 rounded-full bg-gradient-to-r ${gradientClass} flex items-center justify-center text-white font-bold`}>
-                        {testimonial.name.charAt(0)}
-                      </div>
-                      <div className="ml-4">
-                        <h4 className="text-gray-800 font-medium">{testimonial.name}</h4>
-                        <p className="text-gray-500 text-sm">{testimonial.position}</p>
-                      </div>
-                    </div>
+            <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
+              {industry.workflows.map((workflow, index) => (
+                <motion.div 
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8 hover:bg-white/10 transition-all duration-300"
+                >
+                  <div className="w-12 h-12 bg-gradient-to-r from-brand-purple to-brand-pink rounded-lg flex items-center justify-center mb-5">
+                    <workflow.icon className="text-white" size={24} />
                   </div>
-                </StyleProvider>
+                  <h3 className="text-xl font-semibold text-white mb-3">{workflow.title}</h3>
+                  <p className="text-gray-300">{workflow.description}</p>
+                </motion.div>
               ))}
             </div>
           </div>
         </section>
       )}
       
-      {/* Pricing Section */}
-      <section id="pricing" className="py-20 bg-white">
-        <div className="container-custom">
-          <SectionTitle
-            title={`Pricing for ${currentIndustry.title}`}
-            subtitle="Select the plan that's right for your business"
-            centered={true}
-          />
+      {/* Testimonial Section */}
+      {industry.testimonial && (
+        <section className="py-20 bg-black relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_rgba(33,150,243,0.1),_transparent_70%)] z-0"></div>
           
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {currentIndustry.pricing.map((plan, index) => (
-              <StyleProvider key={index} delay={index * 0.2}>
-                <div 
-                  className={`rounded-xl overflow-hidden bg-white border transition-all duration-300 hover:shadow-lg ${
-                    plan.highlighted 
-                      ? 'border-brand-pink shadow-md transform scale-105 md:scale-110' 
-                      : 'border-gray-200 shadow-sm hover:-translate-y-1'
-                  }`}
-                >
-                  {plan.highlighted && (
-                    <div className={`bg-gradient-to-r ${gradientClass} text-white text-center py-1 font-medium`}>
-                      Most Popular
-                    </div>
-                  )}
-                  
-                  <div className={`p-8 ${plan.highlighted ? 'bg-gray-50' : ''}`}>
-                    <h3 className="text-2xl font-bold mb-2">{plan.title}</h3>
-                    <div className="flex items-baseline mb-4">
-                      <span className="text-4xl font-bold">{plan.price}</span>
-                      <span className="text-gray-500 ml-2">/month</span>
-                    </div>
-                    <p className="text-gray-600 text-sm mb-6">{plan.description}</p>
-                    
-                    <ul className="space-y-3 mb-8">
-                      {plan.features.map((feature, fIndex) => (
-                        <li key={fIndex} className="flex items-start">
-                          <div className={`mr-3 mt-1 text-${plan.highlighted ? 'brand-pink' : 'brand-aqua'}`}>
-                            <Check size={16} className={plan.highlighted ? 'text-brand-pink' : 'text-brand-aqua'} />
-                          </div>
-                          <span className="text-gray-600 text-sm">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    
-                    <Link
-                      to="/demo"
-                      className={`w-full block text-center py-3 px-4 rounded-lg transition-all duration-300 ${
-                        plan.highlighted 
-                          ? `bg-gradient-to-r ${gradientClass} text-white hover:shadow-lg` 
-                          : 'border border-gray-200 hover:border-brand-pink/30 text-gray-700 hover:shadow'
-                      }`}
-                    >
-                      {plan.highlighted ? 'Get Started' : 'Learn More'}
-                    </Link>
+          <div className="container-custom relative z-10">
+            <SectionTitle 
+              title="Success Story"
+              subtitle="See how AI voice agents are transforming businesses like yours"
+              centered={true}
+              className="text-white"
+              subtitleClassName="text-gray-300"
+            />
+            
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className="mt-12 max-w-4xl mx-auto bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8 md:p-12"
+            >
+              <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
+                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-brand-pink to-brand-aqua flex items-center justify-center text-white text-2xl font-bold flex-shrink-0">
+                  {industry.testimonial.initial}
+                </div>
+                <div>
+                  <svg className="w-10 h-10 text-brand-pink/40 mb-4" fill="currentColor" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 8v12H6v-8c0-2.21 1.79-4 4-4zm12 0v12h-4v-8c0-2.21 1.79-4 4-4z"/>
+                  </svg>
+                  <p className="text-xl text-gray-200 italic mb-6">
+                    {industry.testimonial.quote}
+                  </p>
+                  <div>
+                    <h4 className="text-lg font-semibold text-white">{industry.testimonial.author}</h4>
+                    <p className="text-brand-aqua">{industry.testimonial.position}</p>
                   </div>
                 </div>
-              </StyleProvider>
-            ))}
+              </div>
+            </motion.div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
       
-      {/* Call to Action */}
-      <section className="py-20 bg-gradient-to-br from-brand-pink/5 to-brand-aqua/5">
-        <div className="container-custom text-center max-w-4xl mx-auto">
-          <StyleProvider>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Ready to Transform Your {currentIndustry.title} Business?
-            </h2>
-            <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-              Schedule a personalized demo to see how our AI voice agents can revolutionize your customer interactions and operational efficiency.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link 
-                to="/demo"
-                className="bg-gradient-to-r from-brand-pink to-brand-aqua text-white hover:opacity-90 px-6 py-3 rounded-lg font-medium shadow-lg flex items-center justify-center gap-2"
+      {/* Contact Section */}
+      <section id="contact" className="py-20 bg-gradient-to-br from-brand-darkPurple to-black relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(156,39,176,0.15),_transparent_70%)] z-0"></div>
+        
+        <div className="container-custom relative z-10">
+          <SectionTitle 
+            title="Ready to Transform Your Business?"
+            subtitle="Get started with your AI voice assistant today"
+            centered={true}
+            className="text-white"
+            subtitleClassName="text-gray-300"
+          />
+          
+          <div className="mt-12 max-w-xl mx-auto">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8"
+            >
+              <h3 className="text-xl font-semibold text-white mb-6">Contact our team</h3>
+              
+              <form 
+                className="space-y-6"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  // Form handling code
+                  alert("Thanks for your interest! Our team will contact you soon.");
+                }}
               >
-                Try AI Demo Now
-              </Link>
-              <Link 
-                to="https://www.go.suddenimpact.agency/meetings/suddenimpact/30min" 
-                className="border border-gray-200 hover:border-brand-pink/30 px-6 py-3 rounded-lg font-medium shadow-sm hover:shadow flex items-center justify-center gap-2"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Schedule Consultation
-              </Link>
-            </div>
-          </StyleProvider>
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">Full Name</label>
+                  <input 
+                    type="text" 
+                    id="name" 
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-pink/50"
+                    placeholder="Your name"
+                    required
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">Email Address</label>
+                  <input 
+                    type="email" 
+                    id="email" 
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-pink/50"
+                    placeholder="you@example.com"
+                    required
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-2">Phone Number</label>
+                  <input 
+                    type="tel" 
+                    id="phone" 
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-pink/50"
+                    placeholder="Your phone number"
+                    required
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="businessType" className="block text-sm font-medium text-gray-300 mb-2">Business Type</label>
+                  <input 
+                    type="text" 
+                    id="businessType" 
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-pink/50"
+                    placeholder="Type of business"
+                    defaultValue={selectedType || ''}
+                    required
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">Message (Optional)</label>
+                  <textarea 
+                    id="message" 
+                    rows={4}
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-pink/50"
+                    placeholder="Tell us about your needs"
+                  />
+                </div>
+                
+                <div>
+                  <Button
+                    type="submit" 
+                    className="w-full pink-aqua-bg hover:opacity-95 text-white py-4 rounded-lg font-medium text-lg shadow-lg"
+                  >
+                    Get Started
+                  </Button>
+                  
+                  <p className="text-sm text-gray-400 mt-4 text-center">
+                    You'll hear back from our team within 24 hours
+                  </p>
+                </div>
+              </form>
+            </motion.div>
+          </div>
         </div>
       </section>
     </Layout>
