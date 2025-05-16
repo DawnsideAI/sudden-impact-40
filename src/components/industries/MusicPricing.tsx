@@ -10,8 +10,8 @@ const MusicPricing = () => {
 
   const plans = [
     {
-      name: "Studio",
-      price: 199,
+      name: "Music Impact Starter",
+      price: 397,
       description: "Perfect for small studios and independent artists",
       features: [
         "1 AI voice agent",
@@ -32,8 +32,8 @@ const MusicPricing = () => {
       highlight: false
     },
     {
-      name: "Professional",
-      price: 349,
+      name: "Music Impact Pro",
+      price: 597,
       description: "Ideal for busy studios and small labels",
       features: [
         "2 AI voice agents",
@@ -56,8 +56,8 @@ const MusicPricing = () => {
       highlight: true
     },
     {
-      name: "Enterprise",
-      price: 599,
+      name: "Music Impact Enterprise",
+      price: 897,
       description: "For music groups and large establishments",
       features: [
         "5 AI voice agents",
