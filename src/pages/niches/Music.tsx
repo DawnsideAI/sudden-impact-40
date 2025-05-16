@@ -7,6 +7,7 @@ import NicheContactForm from '@/components/niches/NicheContactForm';
 import StyleProvider from '@/components/design/StyleProvider';
 import SectionTitle from '@/components/design/SectionTitle';
 import IndustryAnimation from '@/components/industries/IndustryAnimation';
+import MusicPricing from '@/components/industries/MusicPricing';
 import { Button } from '@/components/ui/button';
 
 const MusicNiche = () => {
@@ -86,6 +87,9 @@ const MusicNiche = () => {
           </div>
         </div>
       </section>
+      
+      {/* New Pricing Section */}
+      <MusicPricing />
       
       {/* Workflows Section */}
       <section className="py-20 bg-white">
