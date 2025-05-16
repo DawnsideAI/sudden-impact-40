@@ -21,7 +21,7 @@ const MusicIndustry = () => {
     "Reduced overhead costs and increased efficiency"
   ];
 
-  // Pricing plans to match other industry pages
+  // Pricing plans to match healthcare page exactly
   const pricingPlans = [
     {
       name: "Starter",
@@ -44,7 +44,7 @@ const MusicIndustry = () => {
     }
   ];
 
-  // Testimonials to match other industry pages
+  // Testimonials to match healthcare page
   const testimonials = [
     {
       quote: "The AI voice agent has transformed how we manage our recording studio. Our booking rate has increased by 35%, and we're spending far less time on the phone handling routine inquiries. This technology has been a game-changer for our business.",
@@ -62,6 +62,7 @@ const MusicIndustry = () => {
 
   return (
     <Layout lightMode={true}>
+      {/* Hero Section - Exactly matching healthcare layout */}
       <section className="pt-32 pb-20 bg-gradient-to-br from-brand-pink/5 via-white to-brand-aqua/5 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-64 h-64 bg-brand-pink/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 right-0 w-80 h-80 bg-brand-aqua/10 rounded-full blur-3xl"></div>
@@ -129,7 +130,7 @@ const MusicIndustry = () => {
         </div>
       </section>
       
-      {/* Try AI Demo Banner - To match Healthcare page */}
+      {/* Demo Banner - Exactly matching healthcare layout */}
       <section className="py-12 bg-gradient-to-r from-brand-pink to-brand-aqua">
         <div className="container-custom">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
@@ -156,6 +157,7 @@ const MusicIndustry = () => {
         </div>
       </section>
       
+      {/* Features Section - Exactly matching healthcare layout */}
       <section id="learn-more" className="py-20 bg-white">
         <div className="container-custom">
           <SectionTitle
@@ -187,6 +189,7 @@ const MusicIndustry = () => {
         </div>
       </section>
       
+      {/* Benefits Section - Exactly matching healthcare layout */}
       <section className="py-20 bg-gradient-to-br from-brand-pink/5 to-brand-aqua/5">
         <div className="container-custom">
           <SectionTitle
@@ -212,7 +215,7 @@ const MusicIndustry = () => {
         </div>
       </section>
       
-      {/* Pricing Section - To match Healthcare page */}
+      {/* Pricing Section - Exactly matching healthcare layout */}
       <section className="py-20 bg-white">
         <div className="container-custom">
           <SectionTitle
@@ -273,6 +276,7 @@ const MusicIndustry = () => {
         </div>
       </section>
       
+      {/* Testimonials Section - Exactly matching healthcare layout */}
       <section className="py-20 bg-gradient-to-br from-brand-pink/5 to-brand-aqua/5">
         <div className="container-custom">
           <SectionTitle
@@ -307,6 +311,7 @@ const MusicIndustry = () => {
         </div>
       </section>
       
+      {/* Contact Form - Exactly matching healthcare layout */}
       <section id="contact" className="py-20 bg-white">
         <div className="container-custom">
           <SectionTitle
