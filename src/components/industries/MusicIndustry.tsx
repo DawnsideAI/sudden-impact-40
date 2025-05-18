@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Check, Calendar, Bell, Music } from 'lucide-react';
@@ -9,6 +10,7 @@ import FeatureCard from '@/components/design/FeatureCard';
 import Layout from '@/components/layout/Layout';
 import LiveDemoDialog from '@/components/pricing/LiveDemoDialog';
 import IndustryAnimation from '@/components/industries/IndustryAnimation';
+import MusicPricing from '@/components/industries/MusicPricing';
 
 const MusicIndustry = () => {
   const [showDemoDialog, setShowDemoDialog] = useState(false);
@@ -46,54 +48,6 @@ const MusicIndustry = () => {
       trigger: "Booking confirmation",
       actions: "Send secure form for intake",
       icon: Check
-    }
-  ];
-
-  // Add pricing data
-  const pricing = [
-    {
-      title: "Studio",
-      price: "$199",
-      description: "Perfect for small studios and independent artists",
-      features: [
-        "1 AI voice agent",
-        "100 minutes/month",
-        "Studio booking integration",
-        "Basic artist management",
-        "Business hours configuration"
-      ],
-      highlighted: false
-    },
-    {
-      title: "Professional",
-      price: "$349",
-      description: "Ideal for busy studios and small labels",
-      features: [
-        "2 AI voice agents",
-        "300 minutes/month",
-        "Advanced booking system integration",
-        "Special requests handling",
-        "Custom voice and personality",
-        "Artist recognition system",
-        "Weekly performance reports"
-      ],
-      highlighted: true
-    },
-    {
-      title: "Enterprise",
-      price: "$599",
-      description: "For music groups and large establishments",
-      features: [
-        "5 AI voice agents",
-        "600 minutes/month",
-        "Multi-location support",
-        "DAW & CRM integration",
-        "VIP artist recognition",
-        "Custom workflows and scripts",
-        "Detailed analytics dashboard",
-        "Priority support"
-      ],
-      highlighted: false
     }
   ];
 
@@ -224,67 +178,8 @@ const MusicIndustry = () => {
         </div>
       </section>
       
-      {/* Pricing Section - Added to match other industry pages */}
-      <section id="pricing" className="py-20 bg-white">
-        <div className="container-custom">
-          <SectionTitle
-            title="Pricing for Music Industry"
-            subtitle="Select the plan that's right for your music business"
-            centered={true}
-          />
-          
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {pricing.map((plan, index) => (
-              <StyleProvider key={index} delay={index * 0.2}>
-                <div 
-                  className={`rounded-xl overflow-hidden bg-white border transition-all duration-300 hover:shadow-lg ${
-                    plan.highlighted 
-                      ? 'border-brand-pink shadow-md transform scale-105 md:scale-110' 
-                      : 'border-gray-200 shadow-sm hover:-translate-y-1'
-                  }`}
-                >
-                  {plan.highlighted && (
-                    <div className="bg-gradient-to-r from-brand-pink to-brand-aqua text-white text-center py-1 font-medium">
-                      Most Popular
-                    </div>
-                  )}
-                  
-                  <div className={`p-8 ${plan.highlighted ? 'bg-gray-50' : ''}`}>
-                    <h3 className="text-2xl font-bold mb-2">{plan.title}</h3>
-                    <div className="flex items-baseline mb-4">
-                      <span className="text-4xl font-bold">{plan.price}</span>
-                      <span className="text-gray-500 ml-2">/month</span>
-                    </div>
-                    <p className="text-gray-600 text-sm mb-6">{plan.description}</p>
-                    
-                    <ul className="space-y-3 mb-8">
-                      {plan.features.map((feature, fIndex) => (
-                        <li key={fIndex} className="flex items-start">
-                          <div className={`mr-3 mt-1 text-${plan.highlighted ? 'brand-pink' : 'brand-aqua'}`}>
-                            <Check size={16} className={plan.highlighted ? 'text-brand-pink' : 'text-brand-aqua'} />
-                          </div>
-                          <span className="text-gray-600 text-sm">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    
-                    <Link
-                      to="/demo"
-                      className={`w-full block text-center py-3 px-4 rounded-lg transition-all duration-300 ${
-                        plan.highlighted 
-                          ? 'bg-gradient-to-r from-brand-pink to-brand-aqua text-white hover:shadow-lg' 
-                          : 'border border-gray-200 hover:border-brand-pink/30 text-gray-700 hover:shadow'
-                      }`}
-                    >
-                      {plan.highlighted ? 'Get Started' : 'Learn More'}
-                    </Link>
-                  </div>
-                </div>
-              </StyleProvider>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Pricing Section - Using the updated MusicPricing component */}
+      <MusicPricing />
       
       {/* Testimonial Section */}
       <section className="py-20 bg-gradient-to-br from-brand-pink/5 to-brand-aqua/5">
