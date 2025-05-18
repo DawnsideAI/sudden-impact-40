@@ -56,6 +56,29 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
     return () => window.removeEventListener('message', handleGHLMessage);
   }, [onFormSubmit]);
 
+  // Add the script tag for the form embed.js after component mounts
+  useEffect(() => {
+    // First check if script already exists
+    const existingScript = document.querySelector('script[src="https://link.suddenimpactagency.io/js/form_embed.js"]');
+    
+    if (!existingScript) {
+      const script = document.createElement('script');
+      script.src = "https://link.suddenimpactagency.io/js/form_embed.js";
+      script.async = true;
+      document.body.appendChild(script);
+      
+      console.log('GHL form script added to the page');
+    }
+    
+    return () => {
+      // Clean up script when component unmounts
+      const scriptToRemove = document.querySelector('script[src="https://link.suddenimpactagency.io/js/form_embed.js"]');
+      if (scriptToRemove && scriptToRemove.parentNode) {
+        scriptToRemove.parentNode.removeChild(scriptToRemove);
+      }
+    };
+  }, []);
+
   // Handle video load complete
   const handleVideoLoad = () => {
     setIsVideoLoading(false);

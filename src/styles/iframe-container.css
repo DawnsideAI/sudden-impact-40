@@ -31,6 +31,7 @@
   width: 100%;
   overflow: hidden;
   min-height: 800px; /* Ensure form has enough room to display fully */
+  padding: 0;
 }
 
 .ghl-form-wrapper iframe {
@@ -40,6 +41,19 @@
   border: none !important;
   border-radius: 3px !important;
   display: block !important;
+  overflow: visible !important;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+  .ghl-form-wrapper {
+    min-height: 900px;
+    padding: 0;
+  }
+  
+  .ghl-form-wrapper iframe {
+    min-height: 900px !important;
+  }
 }
 
 /* Ensure calendar booking widgets display properly */

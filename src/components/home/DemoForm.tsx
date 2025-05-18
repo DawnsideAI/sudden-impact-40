@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Check, Calendar, PhoneCall } from "lucide-react";
@@ -167,7 +166,7 @@ const DemoForm = () => {
                   </p>
                 </div>
                 
-                <div className="w-full ghl-form-wrapper" style={{ height: isMobile ? "900px" : "800px", padding: "20px" }}>
+                <div className="w-full ghl-form-wrapper" style={{ height: isMobile ? "900px" : "800px" }}>
                   <iframe
                     src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
                     style={{ width: "100%", height: "100%", border: "none", borderRadius: "8px" }}
