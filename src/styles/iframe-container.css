@@ -190,11 +190,28 @@
     max-width: 100vw;
   }
 
-  /* Ensure headings and text are fully visible */
-  h1, h2, h3, .section-title, .heading-text {
+  /* Text balance and overflow handling for headings */
+  h1, h2, h3, .section-title, .heading-text, p {
     word-wrap: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
+    text-wrap: balance;
+  }
+
+  /* Gradient text heading fix for mobile */
+  .bg-gradient-to-r.bg-clip-text.text-transparent,
+  h1.bg-clip-text.text-transparent,
+  h2.bg-clip-text.text-transparent,
+  h3.bg-clip-text.text-transparent,
+  p.bg-clip-text.text-transparent,
+  .gradient-text,
+  .pink-aqua-text,
+  .aqua-pink-text,
+  .modern-gradient-text {
+    display: inline-block;
+    width: 100%;
+    word-break: normal;
+    padding: 0 0.1em;
   }
 
   /* Add more padding to containers to prevent text from touching edges */
@@ -217,11 +234,6 @@
   h1 {
     font-size: 1.75rem !important;
     line-height: 2rem !important;
-  }
-
-  /* Ensure gradient text is fully visible */
-  .bg-gradient-to-r.bg-clip-text.text-transparent {
-    padding-right: 0.1em; /* Add slight padding for gradient text elements */
   }
 }
 
@@ -281,5 +293,29 @@
   .ghl-form-wrapper {
     padding-bottom: 0 !important;
     margin-bottom: 0 !important;
+  }
+
+  /* Fix for accordion item text overflow */
+  .accordion-item button span,
+  [data-radix-accordion-trigger] span {
+    text-wrap: balance;
+    word-break: normal;
+    overflow-wrap: break-word;
+  }
+
+  /* Center align headings in pricing cards */
+  .pricing-card h3,
+  .pricing-plans h3 {
+    text-align: center;
+  }
+
+  /* Fix NicheContactForm headings */
+  #contact h2, 
+  #contact h3,
+  #ai-demo-form h3 {
+    text-wrap: balance;
+    word-break: normal;
+    overflow-wrap: break-word;
+    padding: 0 0.1em;
   }
 }

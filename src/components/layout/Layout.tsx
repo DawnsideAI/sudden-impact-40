@@ -20,13 +20,16 @@ const Layout = ({ children, showBgEffects = true, lightMode = false }: LayoutPro
     // Apply mobile-specific optimizations
     if (isMobile) {
       document.body.classList.add('mobile-optimized');
+      document.documentElement.style.wordBreak = 'break-word';
     } else {
       document.body.classList.remove('mobile-optimized');
+      document.documentElement.style.wordBreak = '';
     }
     
     return () => {
       document.body.style.overflowX = '';
       document.body.classList.remove('mobile-optimized');
+      document.documentElement.style.wordBreak = '';
     };
   }, [isMobile]);
   

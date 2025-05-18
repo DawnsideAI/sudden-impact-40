@@ -37,7 +37,7 @@ const PricingFaq = () => {
   const [openItem, setOpenItem] = useState<string | null>("item-0");
 
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-br from-gray-50 to-white">
+    <section className="py-12 md:py-24 bg-gradient-to-br from-gray-50 to-white">
       <div className="container-custom">
         <SectionTitle
           title="Frequently Asked Questions"
@@ -47,7 +47,7 @@ const PricingFaq = () => {
         
         <StyleProvider 
           delay={0.2}
-          className="max-w-3xl mx-auto mt-16"
+          className="max-w-3xl mx-auto mt-8 md:mt-16"
         >
           <div className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-lg">
             <Accordion
@@ -63,12 +63,12 @@ const PricingFaq = () => {
                   value={`item-${index}`}
                   className="border-b border-gray-200 last:border-0 px-6"
                 >
-                  <AccordionTrigger className="hover:no-underline py-5 group">
-                    <span className="text-lg font-medium text-gray-800 group-hover:text-brand-pink transition-colors text-left">
+                  <AccordionTrigger className="hover:no-underline py-4 md:py-5 group">
+                    <span className="text-base md:text-lg font-medium text-gray-800 group-hover:text-brand-pink transition-colors text-left text-balance">
                       {item.question}
                     </span>
                   </AccordionTrigger>
-                  <AccordionContent className="text-gray-600 pb-5">
+                  <AccordionContent className="text-gray-600 pb-4 md:pb-5">
                     <div className="leading-relaxed">
                       {item.answer}
                     </div>

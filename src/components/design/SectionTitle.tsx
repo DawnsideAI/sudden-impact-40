@@ -22,21 +22,21 @@ const SectionTitle: React.FC<SectionTitleProps> = ({
   subtitleClassName = '',
 }) => {
   const titleClasses = light
-    ? "text-white font-bold mb-2 md:mb-4"
-    : "bg-gradient-to-r from-brand-pink via-brand-purple to-brand-aqua bg-clip-text text-transparent font-bold mb-2 md:mb-4";
+    ? "text-white font-bold mb-2 md:mb-4 text-balance"
+    : "bg-gradient-to-r from-brand-pink via-brand-purple to-brand-aqua bg-clip-text text-transparent font-bold mb-2 md:mb-4 text-balance";
   
   const subtitleClasses = light
-    ? "text-gray-300 text-base md:text-xl"
-    : "text-brand-gray text-base md:text-xl";
+    ? "text-gray-300 text-base md:text-xl text-balance"
+    : "text-brand-gray text-base md:text-xl text-balance";
 
   return (
     <StyleProvider 
       className={`${centered ? 'text-center' : 'text-left'} ${className} ${centered ? 'mx-auto' : ''} ${maxWidth}`}
     >
-      <h2 className={`text-2xl md:text-4xl lg:text-5xl leading-tight ${titleClasses}`}>
+      <h2 className={`text-2xl md:text-4xl lg:text-5xl leading-tight ${titleClasses} px-1 md:px-0`}>
         {title}
       </h2>
-      {subtitle && <p className={`${subtitleClasses} ${subtitleClassName}`}>{subtitle}</p>}
+      {subtitle && <p className={`${subtitleClasses} ${subtitleClassName} px-1 md:px-0`}>{subtitle}</p>}
     </StyleProvider>
   );
 };

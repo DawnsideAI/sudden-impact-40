@@ -34,14 +34,14 @@ const faqs = [
 
 const Faq = () => {
   return (
-    <section className="py-24">
+    <section className="py-16 md:py-24">
       <StyleProvider className="container-custom">
         <SectionTitle
           title="Frequently Asked Questions"
           subtitle="Find answers to common questions about our AI voice agent solutions"
           centered={true}
           light={false}
-          className="mb-16"
+          className="mb-8 md:mb-16"
         />
 
         <StyleProvider 
@@ -56,12 +56,12 @@ const Faq = () => {
                   value={`item-${index}`}
                   className="border-b border-gray-200 last:border-0 px-6"
                 >
-                  <AccordionTrigger className="hover:no-underline py-5">
-                    <span className="text-lg font-medium text-gray-800 hover:text-agency-blue transition-colors text-left">
+                  <AccordionTrigger className="hover:no-underline py-4 md:py-5">
+                    <span className="text-base md:text-lg font-medium text-gray-800 hover:text-agency-blue transition-colors text-left text-balance">
                       {faq.question}
                     </span>
                   </AccordionTrigger>
-                  <AccordionContent className="text-gray-600 pb-5">
+                  <AccordionContent className="text-gray-600 pb-4 md:pb-5">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>

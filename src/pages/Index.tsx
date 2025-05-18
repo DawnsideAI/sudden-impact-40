@@ -31,6 +31,8 @@ const Index = () => {
     if (isMobile) {
       // Apply optimized touch handling
       document.documentElement.style.setProperty('scroll-behavior', 'smooth');
+      document.documentElement.style.setProperty('word-break', 'break-word');
+      document.documentElement.style.setProperty('overflow-wrap', 'break-word');
       
       // Ensure smooth scrolling by preventing any scroll hijacking
       const handleTouchStart = (e: TouchEvent) => {
@@ -44,6 +46,8 @@ const Index = () => {
       return () => {
         document.removeEventListener('touchstart', handleTouchStart);
         document.documentElement.style.removeProperty('scroll-behavior');
+        document.documentElement.style.removeProperty('word-break');
+        document.documentElement.style.removeProperty('overflow-wrap');
       };
     }
   }, [isMobile]);
