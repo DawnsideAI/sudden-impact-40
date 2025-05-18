@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Calendar, Clock, Check, Mic, MessageSquare, CalendarClock } from "lucide-react";
@@ -19,6 +20,7 @@ const Demo = () => {
   const isMobile = useIsMobile();
   const [isBookingScriptLoaded, setIsBookingScriptLoaded] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isFormScriptLoaded, setIsFormScriptLoaded] = useState(false);
 
   useEffect(() => {
     // Set loading to false after a timeout to ensure components have time to render
@@ -57,11 +59,12 @@ const Demo = () => {
       }
     }
     
-    // Add embed.js script for the form if we're on the live demo tab
-    if (activeTab === "live") {
+    // Load form script for all tabs (ensures it's available when switching tabs)
+    if (!isFormScriptLoaded) {
       const script = document.createElement('script');
       script.src = "https://link.suddenimpactagency.io/js/form_embed.js";
       script.async = true;
+      script.onload = () => setIsFormScriptLoaded(true);
       document.body.appendChild(script);
       
       return () => {
@@ -74,7 +77,7 @@ const Demo = () => {
     }
     
     return () => clearTimeout(timer);
-  }, [activeTab, isBookingScriptLoaded]);
+  }, [activeTab, isBookingScriptLoaded, isFormScriptLoaded]);
 
   // Handle form submission
   const handleFormSubmit = () => {
@@ -179,17 +182,36 @@ const Demo = () => {
                       <Mic className="h-4 w-4 md:h-6 md:w-6" />
                     </div>
                     <h2 className="text-lg md:text-2xl font-bold mb-1 md:mb-2 text-brand-dark">Live AI Voice Agent Demo</h2>
-                    <p className="text-xs md:text-base text-brand-gray">
+                    <p className="text-xs md:text-base text-brand-gray mb-6">
                       Complete the form below to access our AI voice agent demo.
                     </p>
                   </div>
-
-                  <DemoRequestForm onFormSubmit={handleFormSubmit} />
+                  
+                  {/* Direct GHL form embed */}
+                  <div className="ghl-form-wrapper" style={{ height: isMobile ? "900px" : "735px" }}>
+                    <iframe
+                      src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
+                      style={{ width: "100%", height: "100%", border: "none", borderRadius: "8px" }}
+                      id="inline-Gf3ORV8Uba4HRiXoml5L" 
+                      data-layout="{'id':'INLINE'}"
+                      data-trigger-type="alwaysShow"
+                      data-trigger-value=""
+                      data-activation-type="alwaysActivated"
+                      data-activation-value=""
+                      data-deactivation-type="leadCollected"
+                      data-deactivation-value=""
+                      data-form-name="A2P Form - New"
+                      data-height="735"
+                      data-layout-iframe-id="inline-Gf3ORV8Uba4HRiXoml5L"
+                      data-form-id="Gf3ORV8Uba4HRiXoml5L"
+                      title="A2P Form - New"
+                    ></iframe>
+                  </div>
                 </StyleProvider>
               </motion.div>
             )}
 
-            {/* Video Demo */}
+            {/* Video Demo - Using direct form embed */}
             {activeTab === "video" && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -315,8 +337,6 @@ const Demo = () => {
           </StyleProvider>
         </div>
       </section>
-
-      {/* Call to Action section completely removed */}
       
       {/* AI Demo Call Dialog */}
       <AIDemoCallDialog 

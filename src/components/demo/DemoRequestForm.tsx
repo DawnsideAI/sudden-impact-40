@@ -1,3 +1,4 @@
+
 import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { PhoneCall, Play } from "lucide-react";
@@ -88,20 +89,25 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
   return (
     <div className="relative">
       {!formSubmitted ? (
-        <div className="bg-white rounded-lg p-4 border border-gray-200">
-          <div className="text-center mb-4">
-            <h3 className="text-xl font-bold">Complete the form to access our AI demo</h3>
-            <p className="text-gray-600">Fill out this quick form to get instant access to our AI voice agent demo</p>
-          </div>
-          
-          <div className="ghl-form-wrapper" style={{ height: isMobile ? "900px" : "850px" }}>
-            <div
-              className="ghl-embedded-form"
-              data-form-key={formId}
-              data-env="prod"
-              data-height-adjust="true"
-              data-hide-on-submit="true"
-            ></div>
+        <div className="bg-white rounded-lg border border-gray-200">
+          <div className="ghl-form-wrapper" style={{ height: isMobile ? "900px" : "800px" }}>
+            <iframe
+              src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
+              style={{ width: "100%", height: "100%", border: "none", borderRadius: "8px" }}
+              id="inline-Gf3ORV8Uba4HRiXoml5L" 
+              data-layout="{'id':'INLINE'}"
+              data-trigger-type="alwaysShow"
+              data-trigger-value=""
+              data-activation-type="alwaysActivated"
+              data-activation-value=""
+              data-deactivation-type="leadCollected"
+              data-deactivation-value=""
+              data-form-name="A2P Form - New"
+              data-height="735"
+              data-layout-iframe-id="inline-Gf3ORV8Uba4HRiXoml5L"
+              data-form-id="Gf3ORV8Uba4HRiXoml5L"
+              title="A2P Form - New"
+            ></iframe>
           </div>
         </div>
       ) : (

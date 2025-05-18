@@ -14,12 +14,14 @@ import '@/styles/iframe-container.css';
 const NicheBooking = () => {
   const { industry = 'healthcare' } = useParams();
   const [showDemoVideo, setShowDemoVideo] = useState(false);
+  const [isFormScriptLoaded, setIsFormScriptLoaded] = useState(false);
   
   // Add the script tag for the form embed.js after component mounts
   useEffect(() => {
     const script = document.createElement('script');
     script.src = "https://link.suddenimpactagency.io/js/form_embed.js";
     script.async = true;
+    script.onload = () => setIsFormScriptLoaded(true);
     document.body.appendChild(script);
     
     return () => {
@@ -72,31 +74,31 @@ const NicheBooking = () => {
             
             <StyleProvider className="bg-white rounded-xl p-6 md:p-8 shadow-lg border border-gray-200 mt-12">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="space-y-6 flex flex-col items-center justify-center text-center">
-                  <h3 className="text-xl font-bold text-gray-800">Try Our AI Demo</h3>
-                  
-                  <motion.div 
-                    initial={{ scale: 1 }}
-                    animate={{ scale: [1, 1.05, 1] }}
-                    transition={{ type: "spring", stiffness: 260, damping: 20, repeat: Infinity, repeatType: "reverse", duration: 2 }}
-                    className="bg-gradient-to-r from-brand-pink to-brand-aqua w-16 h-16 rounded-full flex items-center justify-center mb-6"
-                  >
-                    <PhoneCall size={30} className="text-white" />
-                  </motion.div>
-                  
-                  <Link to="/demo">
-                    <Button
-                      variant="action"
-                      size="lg"
-                      className="shadow-lg bg-gradient-to-r from-brand-pink to-brand-aqua hover:shadow-xl transition-all duration-300"
-                    >
-                      <PhoneCall className="mr-2" /> Try AI Demo
-                    </Button>
-                  </Link>
+                <div className="space-y-6">
+                  <h3 className="text-xl font-bold text-gray-800 text-center">Complete The Demo Form</h3>
+                  <div className="ghl-form-wrapper" style={{ height: "735px" }}>
+                    <iframe
+                      src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
+                      style={{ width: "100%", height: "100%", border: "none", borderRadius: "8px" }}
+                      id="inline-niche-Gf3ORV8Uba4HRiXoml5L" 
+                      data-layout="{'id':'INLINE'}"
+                      data-trigger-type="alwaysShow"
+                      data-trigger-value=""
+                      data-activation-type="alwaysActivated"
+                      data-activation-value=""
+                      data-deactivation-type="leadCollected"
+                      data-deactivation-value=""
+                      data-form-name="A2P Form - New"
+                      data-height="735"
+                      data-layout-iframe-id="inline-niche-Gf3ORV8Uba4HRiXoml5L"
+                      data-form-id="Gf3ORV8Uba4HRiXoml5L"
+                      title="A2P Form - New"
+                    ></iframe>
+                  </div>
                 </div>
                 
                 <div className="space-y-6">
-                  <h3 className="text-xl font-bold text-gray-800">Watch Demo Video</h3>
+                  <h3 className="text-xl font-bold text-gray-800 text-center">Watch Demo Video</h3>
                   <div onClick={() => setShowDemoVideo(true)} className="aspect-video bg-gray-100 rounded-lg overflow-hidden cursor-pointer relative group">
                     <div className="absolute inset-0 bg-brand-darkPurple/50 flex items-center justify-center group-hover:bg-brand-darkPurple/70 transition-all duration-300">
                       <motion.div 
@@ -116,8 +118,8 @@ const NicheBooking = () => {
                     />
                   </div>
                   
-                  <div>
-                    <h4 className="font-medium text-gray-800 mb-2">Or schedule a consultation with our team:</h4>
+                  <div className="text-center mt-8">
+                    <h4 className="font-medium text-gray-800 mb-4">Or schedule a consultation with our team:</h4>
                     <a 
                       href="https://link.suddenimpactagency.io/widget/booking/MYRdt5Un7mP29erZS5rx"
                       target="_blank"

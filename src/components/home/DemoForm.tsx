@@ -62,22 +62,6 @@ const DemoForm = () => {
     };
   }, []);
 
-  // Initialize the form after script is loaded
-  useEffect(() => {
-    // Give time for the script to load and initialize
-    const timer = setTimeout(() => {
-      // Check if window.ghl exists and initialize the form
-      if (window.ghl && typeof window.ghl.loadEmbed === 'function') {
-        window.ghl.loadEmbed();
-        console.log('GHL form initialized');
-      } else {
-        console.log('GHL form script not yet available');
-      }
-    }, 1000);
-    
-    return () => clearTimeout(timer);
-  }, []);
-
   const handleScheduleClick = () => {
     setShowCalendar(true);
   };
@@ -184,15 +168,23 @@ const DemoForm = () => {
                 </div>
                 
                 <div className="w-full ghl-form-wrapper" style={{ height: isMobile ? "900px" : "800px", padding: "20px" }}>
-                  {/* Removed inline script - we load it via useEffect instead */}
-                  <div 
-                    id="ghl-form-container"
-                    className="ghl-embedded-form"
-                    data-form-key={formId}
-                    data-env="prod"
-                    data-height-adjust="true"
-                    data-hide-on-submit="true"
-                  ></div>
+                  <iframe
+                    src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
+                    style={{ width: "100%", height: "100%", border: "none", borderRadius: "8px" }}
+                    id="inline-home-Gf3ORV8Uba4HRiXoml5L" 
+                    data-layout="{'id':'INLINE'}"
+                    data-trigger-type="alwaysShow"
+                    data-trigger-value=""
+                    data-activation-type="alwaysActivated"
+                    data-activation-value=""
+                    data-deactivation-type="leadCollected"
+                    data-deactivation-value=""
+                    data-form-name="A2P Form - New"
+                    data-height="735"
+                    data-layout-iframe-id="inline-home-Gf3ORV8Uba4HRiXoml5L"
+                    data-form-id="Gf3ORV8Uba4HRiXoml5L"
+                    title="A2P Form - New"
+                  ></iframe>
                 </div>
               </div>
             ) : (
