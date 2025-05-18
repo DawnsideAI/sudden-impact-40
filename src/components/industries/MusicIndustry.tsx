@@ -265,42 +265,6 @@ const MusicIndustry = () => {
           </div>
         </div>
       </WhiteSection>
-      
-      {/* Contact Form - Replaced with Schedule/Demo options */}
-      <section id="contact" className="py-20 bg-white">
-        <div className="container-custom">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-brand-pink to-brand-aqua bg-clip-text text-transparent">
-                Ready to Transform Your Music Business?
-              </span>
-            </h2>
-            <p className="text-lg text-gray-600 mb-10 max-w-2xl mx-auto">
-              Schedule a personalized demo to see how our AI voice agents can revolutionize your 
-              music studio operations and fan engagement.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                className="bg-gradient-to-r from-brand-pink to-brand-aqua text-white hover:opacity-90 px-8 py-6"
-                onClick={() => setShowCallDialog(true)}
-              >
-                <Phone className="mr-2 h-5 w-5" />
-                Try AI Demo Now
-              </Button>
-              
-              <Button
-                variant="outline"
-                className="border border-gray-200 px-8 py-6"
-                onClick={() => setShowDemoDialog(true)}
-              >
-                <Calendar className="mr-2 h-5 w-5" />
-                Schedule Consultation
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Live Demo Dialog */}
       <LiveDemoDialog open={showDemoDialog} onOpenChange={setShowDemoDialog} />
