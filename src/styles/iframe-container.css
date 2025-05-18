@@ -1,5 +1,4 @@
 
-
 /* Styling for iframe containers */
 .iframe-container {
   position: relative;
@@ -51,17 +50,18 @@
 /* Enhanced responsive adjustments for mobile ONLY */
 @media (max-width: 768px) {
   .ghl-form-wrapper {
-    min-height: 1200px;
+    min-height: 1050px; /* Reduced from 1200px to remove empty space */
     padding: 0;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
   }
   
   .ghl-form-wrapper iframe {
-    min-height: 1200px !important;
+    min-height: 1050px !important; /* Reduced from 1200px to match wrapper */
     transform: scale(0.98);
     transform-origin: top center;
     width: 102% !important; /* Slightly wider to avoid horizontal scrollbars */
+    margin-bottom: 0 !important; /* Remove bottom margin */
   }
   
   /* Fix mobile text sizes */
@@ -201,5 +201,19 @@
   .motion-reduce {
     transition-duration: 0.1s !important;
   }
+  
+  /* Fix form spacing to avoid the empty space below submit button */
+  .ghl-form-wrapper iframe body form,
+  iframe[data-form-id] {
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+  }
+  
+  /* Target form submit elements to ensure they don't add extra spacing */
+  .ghl-form-wrapper iframe .form-element.submit-element,
+  .ghl-form-wrapper iframe .button-element,
+  .ghl-form-wrapper iframe .submit-wrapper {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
 }
-
