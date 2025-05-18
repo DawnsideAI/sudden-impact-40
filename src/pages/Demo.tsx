@@ -99,8 +99,8 @@ const Demo = () => {
 
   return (
     <Layout lightMode={true}>
-      {/* Hero Section - Mobile optimized */}
-      <section className="pt-16 md:pt-32 pb-6 md:pb-20 bg-gradient-to-br from-brand-darkPurple via-brand-purple to-black border-b border-white/10 relative overflow-hidden">
+      {/* Hero Section - Mobile optimized with improved text visibility */}
+      <section className="pt-16 md:pt-32 pb-10 md:pb-20 bg-gradient-to-br from-brand-darkPurple via-brand-purple to-black border-b border-white/10 relative overflow-hidden">
         {/* Background elements */}
         <div className="absolute inset-0">
           <div className="absolute top-0 left-0 w-full h-full bg-[url('/grid.svg')] bg-center opacity-10"></div>
@@ -108,19 +108,20 @@ const Demo = () => {
           <div className="absolute -top-10 -left-10 w-64 h-64 bg-brand-pink/20 rounded-full blur-3xl"></div>
         </div>
         
-        <StyleProvider className="container-custom relative z-10">
+        <StyleProvider className="container-custom relative z-10 px-4 md:px-6">
           <motion.div 
-            className="text-center max-w-3xl mx-auto px-4 md:px-0"
+            className="text-center max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <SectionTitle
-              title="Experience Our AI Voice Agents In Action"
-              subtitle="Witness first-hand how our AI voice agents can revolutionize your business operations."
-              centered={true}
-              light={true}
-            />
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 text-white leading-tight">
+              AI Voice Agents vs Human Agents
+            </h1>
+            <p className="text-base md:text-lg text-gray-300 max-w-2xl mx-auto px-2">
+              Experience the future of customer service with our AI voice agents - delivering 
+              unmatched efficiency, availability, and cost savings compared to traditional human call handlers
+            </p>
           </motion.div>
         </StyleProvider>
       </section>
@@ -130,10 +131,10 @@ const Demo = () => {
 
       {/* Demo Options - Mobile optimized */}
       <section className="py-4 md:py-16 bg-white">
-        <div className="container-custom px-2 md:px-8">
+        <div className="container-custom px-4 md:px-8">
           <StyleProvider className="max-w-4xl mx-auto">
             {/* Tab Navigation - Mobile friendly with overflow handling */}
-            <div className="flex border-b border-gray-300 mb-4 md:mb-12 overflow-x-auto no-scrollbar">
+            <div className="flex border-b border-gray-300 mb-6 md:mb-12 overflow-x-auto no-scrollbar">
               <button
                 onClick={() => setActiveTab("live")}
                 className={`py-2 md:py-4 px-3 md:px-6 text-sm md:text-lg font-medium border-b-2 transition-colors whitespace-nowrap flex-1 ${
@@ -176,22 +177,28 @@ const Demo = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
               >
-                <StyleProvider delay={0.2} className="bg-white rounded-xl p-2 md:p-8 shadow-md border border-brand-purple/10">
-                  <div className="text-center mb-3 md:mb-8">
-                    <div className="w-12 h-12 md:w-16 md:h-16 mx-auto rounded-full bg-gradient-to-br from-brand-pink to-brand-aqua/70 flex items-center justify-center text-white mb-2 md:mb-4">
+                <StyleProvider delay={0.2} className="bg-white rounded-xl p-4 md:p-8 shadow-md border border-brand-purple/10">
+                  <div className="text-center mb-4 md:mb-8">
+                    <div className="w-12 h-12 md:w-16 md:h-16 mx-auto rounded-full bg-gradient-to-br from-brand-pink to-brand-aqua/70 flex items-center justify-center text-white mb-3 md:mb-4">
                       <Mic className="h-4 w-4 md:h-6 md:w-6" />
                     </div>
-                    <h2 className="text-lg md:text-2xl font-bold mb-1 md:mb-2 text-brand-dark">Live AI Voice Agent Demo</h2>
-                    <p className="text-xs md:text-base text-brand-gray mb-6">
+                    <h2 className="text-lg md:text-2xl font-bold mb-2 md:mb-3 text-brand-dark">Live AI Voice Agent Demo</h2>
+                    <p className="text-sm md:text-base text-brand-gray mb-5">
                       Complete the form below to access our AI voice agent demo.
                     </p>
                   </div>
                   
                   {/* Direct GHL form embed */}
-                  <div className="ghl-form-wrapper" style={{ height: isMobile ? "900px" : "735px" }}>
+                  <div className="ghl-form-wrapper" style={{ height: "auto", minHeight: isMobile ? "1200px" : "900px" }}>
                     <iframe
                       src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
-                      style={{ width: "100%", height: "100%", border: "none", borderRadius: "8px" }}
+                      style={{ 
+                        width: "100%", 
+                        height: "100%", 
+                        minHeight: isMobile ? "1200px" : "900px",
+                        border: "none", 
+                        borderRadius: "8px" 
+                      }}
                       id="inline-Gf3ORV8Uba4HRiXoml5L" 
                       data-layout="{'id':'INLINE'}"
                       data-trigger-type="alwaysShow"
@@ -201,7 +208,7 @@ const Demo = () => {
                       data-deactivation-type="leadCollected"
                       data-deactivation-value=""
                       data-form-name="A2P Form - New"
-                      data-height="735"
+                      data-height="auto"
                       data-layout-iframe-id="inline-Gf3ORV8Uba4HRiXoml5L"
                       data-form-id="Gf3ORV8Uba4HRiXoml5L"
                       title="A2P Form - New"
@@ -284,7 +291,7 @@ const Demo = () => {
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* Features Section - Improved text visibility */}
       <section className="py-10 md:py-20 bg-gradient-to-br from-brand-darkPurple via-brand-purple to-brand-violet border-y border-white/10 relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-0 left-0 w-full h-full bg-[url('/grid.svg')] bg-center opacity-10"></div>
@@ -292,13 +299,14 @@ const Demo = () => {
         
         <div className="container-custom px-4 md:px-8 relative z-10">
           <StyleProvider>
-            <SectionTitle
-              title="What to Expect During Your Demo"
-              subtitle="Get a glimpse of how our AI voice agents can transform your business operations"
-              centered={true}
-              light={true}
-              className="mb-8 md:mb-16"
-            />
+            <div className="mb-8 md:mb-16 text-center">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 text-white leading-tight">
+                What to Expect During Your Demo
+              </h2>
+              <p className="text-base md:text-lg text-gray-300 max-w-2xl mx-auto">
+                Get a glimpse of how our AI voice agents can transform your business operations
+              </p>
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 max-w-6xl mx-auto">
               {[
@@ -322,13 +330,13 @@ const Demo = () => {
                   key={index}
                   delay={index * 0.15}
                 >
-                  <div className="text-center px-2">
+                  <div className="text-center px-3">
                     <div className="w-16 h-16 md:w-20 md:h-20 bg-pink-600/30 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 backdrop-blur-sm">
                       <div className="w-10 h-10 md:w-14 md:h-14 bg-gradient-to-br from-brand-pink to-brand-aqua rounded-full flex items-center justify-center text-white">
                         {feature.icon}
                       </div>
                     </div>
-                    <h3 className="text-lg md:text-2xl font-bold mb-2 md:mb-3 text-white">{feature.title}</h3>
+                    <h3 className="text-lg md:text-xl lg:text-2xl font-bold mb-2 md:mb-3 text-white">{feature.title}</h3>
                     <p className="text-sm md:text-base text-gray-300 max-w-xs mx-auto">{feature.description}</p>
                   </div>
                 </StyleProvider>

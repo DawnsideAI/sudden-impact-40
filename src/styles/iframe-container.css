@@ -152,4 +152,27 @@
     overflow-x: hidden;
     max-width: 100vw;
   }
+
+  /* Ensure headings and text are fully visible */
+  h1, h2, h3, .section-title, .heading-text {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+
+  /* Add more padding to containers to prevent text from touching edges */
+  .container-custom {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  /* Increase spacing for section titles on mobile */
+  .section-title {
+    margin-bottom: 1.5rem !important;
+  }
+
+  /* Ensure gradient text is fully visible */
+  .bg-gradient-to-r.bg-clip-text.text-transparent {
+    padding-right: 0.1em; /* Add slight padding for gradient text elements */
+  }
 }
