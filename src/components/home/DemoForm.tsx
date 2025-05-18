@@ -167,13 +167,13 @@ const DemoForm = () => {
                   </p>
                 </div>
                 
-                <div className="w-full ghl-form-wrapper" style={{ height: "auto", minHeight: isMobile ? "1000px" : "900px" }}>
+                <div className="w-full ghl-form-wrapper" style={{ height: "auto", minHeight: isMobile ? "1200px" : "900px" }}>
                   <iframe
                     src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
                     style={{ 
                       width: "100%", 
                       height: "100%", 
-                      minHeight: isMobile ? "1000px" : "900px",
+                      minHeight: isMobile ? "1200px" : "900px",
                       border: "none", 
                       borderRadius: "8px" 
                     }}

@@ -113,12 +113,13 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
     <div className="relative">
       {!formSubmitted ? (
         <div className="bg-white rounded-lg border border-gray-200">
-          <div className="ghl-form-wrapper" style={{ height: isMobile ? "900px" : "800px" }}>
+          <div className="ghl-form-wrapper" style={{ height: "auto", minHeight: isMobile ? "1200px" : "900px" }}>
             <iframe
               src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
               style={{ 
                 width: "100%", 
                 height: "100%", 
+                minHeight: isMobile ? "1200px" : "900px",
                 border: "none", 
                 borderRadius: "8px",
                 margin: "0 auto"
@@ -132,7 +133,7 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
               data-deactivation-type="leadCollected"
               data-deactivation-value=""
               data-form-name="A2P Form - New"
-              data-height={isMobile ? "900" : "800"}
+              data-height="auto"
               data-layout-iframe-id="inline-Gf3ORV8Uba4HRiXoml5L"
               data-form-id="Gf3ORV8Uba4HRiXoml5L"
               title="A2P Form - New"

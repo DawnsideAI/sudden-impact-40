@@ -15,6 +15,7 @@ const NicheBooking = () => {
   const { industry = 'healthcare' } = useParams();
   const [showDemoVideo, setShowDemoVideo] = useState(false);
   const [isFormScriptLoaded, setIsFormScriptLoaded] = useState(false);
+  const isMobile = window.innerWidth <= 768;
   
   // Add the script tag for the form embed.js after component mounts
   useEffect(() => {
@@ -76,10 +77,16 @@ const NicheBooking = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="space-y-6">
                   <h3 className="text-xl font-bold text-gray-800 text-center">Complete The Demo Form</h3>
-                  <div className="ghl-form-wrapper" style={{ height: "800px" }}>
+                  <div className="ghl-form-wrapper" style={{ height: "auto", minHeight: isMobile ? "1200px" : "900px" }}>
                     <iframe
                       src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
-                      style={{ width: "100%", height: "100%", border: "none", borderRadius: "8px" }}
+                      style={{ 
+                        width: "100%", 
+                        height: "100%", 
+                        minHeight: isMobile ? "1200px" : "900px",
+                        border: "none", 
+                        borderRadius: "8px" 
+                      }}
                       id="inline-niche-Gf3ORV8Uba4HRiXoml5L" 
                       data-layout="{'id':'INLINE'}"
                       data-trigger-type="alwaysShow"
@@ -89,7 +96,7 @@ const NicheBooking = () => {
                       data-deactivation-type="leadCollected"
                       data-deactivation-value=""
                       data-form-name="A2P Form - New"
-                      data-height="735"
+                      data-height="auto"
                       data-layout-iframe-id="inline-niche-Gf3ORV8Uba4HRiXoml5L"
                       data-form-id="Gf3ORV8Uba4HRiXoml5L"
                       title="A2P Form - New"

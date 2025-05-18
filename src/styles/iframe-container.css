@@ -50,14 +50,14 @@
 /* Enhanced responsive adjustments for mobile ONLY */
 @media (max-width: 768px) {
   .ghl-form-wrapper {
-    min-height: 900px;
+    min-height: 1200px;
     padding: 0;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
   }
   
   .ghl-form-wrapper iframe {
-    min-height: 900px !important;
+    min-height: 1200px !important;
     transform: scale(0.98);
     transform-origin: top center;
     width: 102% !important; /* Slightly wider to avoid horizontal scrollbars */
