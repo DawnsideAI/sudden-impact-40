@@ -28,7 +28,7 @@ const Layout = ({ children, showBgEffects = true, lightMode = false }: LayoutPro
       
       {/* Content */}
       <div className="relative z-10 flex flex-col min-h-screen">
-        {/* Header bar with increased padding for the larger logo */}
+        {/* Header bar with adjusted padding */}
         <div className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-lg border-b border-gray-200 shadow-sm">
           <Navbar />
         </div>

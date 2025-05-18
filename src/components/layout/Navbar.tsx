@@ -51,7 +51,7 @@ const Navbar = () => {
     <>
       <motion.div
         className={cn(
-          'w-full transition-all duration-300 border-b py-4 border-gray-200 relative z-40',
+          'w-full transition-all duration-300 border-b border-gray-200 relative z-40',
           bgColor,
           scrolled ? 'shadow-md' : ''
         )}
@@ -60,7 +60,7 @@ const Navbar = () => {
         transition={{ duration: 0.5, delay: 0.2 }}
       >
         <div className="container-custom">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between py-2">
             <Link to="/" className="flex items-center">
               <motion.div
                 whileHover={{ scale: 1.05 }}
@@ -69,7 +69,7 @@ const Navbar = () => {
                 <img 
                   src="/lovable-uploads/293aebbf-1435-4e16-867f-2a95f52ef685.png" 
                   alt="Sudden Impact Agency Logo" 
-                  className="h-40 md:h-56 w-auto rounded-md" 
+                  className="h-32 w-auto rounded-md" 
                 />
               </motion.div>
             </Link>
