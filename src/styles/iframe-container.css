@@ -1,4 +1,5 @@
 
+
 /* Styling for iframe containers */
 .iframe-container {
   position: relative;
@@ -176,3 +177,29 @@
     padding-right: 0.1em; /* Add slight padding for gradient text elements */
   }
 }
+
+/* Add smooth scrolling for mobile devices */
+@media (max-width: 768px) {
+  html, body {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Ensure the featurette sections scroll smoothly */
+  section, .section-padding {
+    scroll-snap-align: start;
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* Main content scrolling container */
+  main {
+    scroll-snap-type: y proximity;
+  }
+  
+  /* Ensure animation doesn't interfere with scrolling */
+  .motion-reduce {
+    transition-duration: 0.1s !important;
+  }
+}
+

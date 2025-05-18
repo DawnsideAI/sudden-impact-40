@@ -26,7 +26,23 @@ const Index = () => {
   
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+    
+    // Apply smooth scroll behavior for mobile
+    if (isMobile) {
+      // Ensure smooth scrolling by preventing any scroll hijacking
+      const handleTouchStart = (e: TouchEvent) => {
+        if (e.touches.length > 1) {
+          e.preventDefault(); // Prevent zooming which can cause scroll issues
+        }
+      };
+      
+      document.addEventListener('touchstart', handleTouchStart, { passive: false });
+      
+      return () => {
+        document.removeEventListener('touchstart', handleTouchStart);
+      };
+    }
+  }, [isMobile]);
 
   return (
     <Layout lightMode={true}>
