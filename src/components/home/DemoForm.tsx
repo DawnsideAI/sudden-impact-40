@@ -41,18 +41,41 @@ const DemoForm = () => {
 
   // Load the GHL embed.js script
   useEffect(() => {
-    const script = document.createElement('script');
-    script.src = "https://link.suddenimpactagency.io/js/form_embed.js";
-    script.async = true;
-    document.body.appendChild(script);
+    // First check if script already exists
+    const existingScript = document.querySelector('script[src="https://link.suddenimpactagency.io/js/form_embed.js"]');
+    
+    if (!existingScript) {
+      const script = document.createElement('script');
+      script.src = "https://link.suddenimpactagency.io/js/form_embed.js";
+      script.async = true;
+      document.body.appendChild(script);
+      
+      console.log('GHL form script added to the page');
+    }
     
     return () => {
       // Clean up script when component unmounts
-      const existingScript = document.querySelector(`script[src="https://link.suddenimpactagency.io/js/form_embed.js"]`);
-      if (existingScript && existingScript.parentNode) {
-        existingScript.parentNode.removeChild(existingScript);
+      const scriptToRemove = document.querySelector('script[src="https://link.suddenimpactagency.io/js/form_embed.js"]');
+      if (scriptToRemove && scriptToRemove.parentNode) {
+        scriptToRemove.parentNode.removeChild(scriptToRemove);
       }
     };
+  }, []);
+
+  // Initialize the form after script is loaded
+  useEffect(() => {
+    // Give time for the script to load and initialize
+    const timer = setTimeout(() => {
+      // Check if window.ghl exists and initialize the form
+      if (window.ghl && typeof window.ghl.loadEmbed === 'function') {
+        window.ghl.loadEmbed();
+        console.log('GHL form initialized');
+      } else {
+        console.log('GHL form script not yet available');
+      }
+    }, 1000);
+    
+    return () => clearTimeout(timer);
   }, []);
 
   const handleScheduleClick = () => {
@@ -160,8 +183,8 @@ const DemoForm = () => {
                   </p>
                 </div>
                 
-                <div className="w-full ghl-form-wrapper" style={{ height: isMobile ? "900px" : "800px", padding: "0 20px 20px" }}>
-                  <script src="https://link.suddenimpactagency.io/js/form_embed.js"></script>
+                <div className="w-full ghl-form-wrapper" style={{ height: isMobile ? "900px" : "800px", padding: "20px" }}>
+                  {/* Removed inline script - we load it via useEffect instead */}
                   <div 
                     id="ghl-form-container"
                     className="ghl-embedded-form"
@@ -252,5 +275,18 @@ const DemoForm = () => {
   );
 };
 
-export default DemoForm;
+interface Window {
+  ghl?: {
+    loadEmbed: () => void;
+  };
+}
 
+declare global {
+  interface Window {
+    ghl?: {
+      loadEmbed: () => void;
+    };
+  }
+}
+
+export default DemoForm;
