@@ -121,7 +121,7 @@ const NicheBooking = () => {
                   <div className="text-center mt-8">
                     <h4 className="font-medium text-gray-800 mb-4">Or schedule a consultation with our team:</h4>
                     <a 
-                      href="https://link.suddenimpactagency.io/widget/booking/MYRdt5Un7mP29erZS5rx"
+                      href="https://link.suddenimpactagency.io/widget/bookings/XaOGCzWWKmrQWqpbwWlq-4f31f69f-689b-4bd4-95d8-c885cf48e9ac-ff5dc43e-63e9-438c-a258-ad582d9e066e-a667fee4-6211-4e1e-9aed-df4252fe1635"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-block px-6 py-3 bg-gradient-to-r from-brand-vibrantPurple to-brand-pink text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300"

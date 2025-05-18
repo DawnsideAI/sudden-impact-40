@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Check, ArrowRight, Calendar, PhoneCall } from 'lucide-react';
@@ -7,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import StyleProvider from '@/components/design/StyleProvider';
 import SectionTitle from '@/components/design/SectionTitle';
 import AIDemoCallDialog from './AIDemoCallDialog';
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface NicheContactFormProps {
   industry: 'healthcare' | 'real-estate' | 'restaurants' | 'service-contractors' | 'music';
@@ -15,7 +16,9 @@ interface NicheContactFormProps {
 const NicheContactForm = ({ industry }: NicheContactFormProps) => {
   const [showPricing, setShowPricing] = useState(true);
   const [showCallDialog, setShowCallDialog] = useState(false);
+  const [showBookingDialog, setShowBookingDialog] = useState(false);
   const phoneNumber = "+1 (302) 618-3977";
+  const isMobile = useIsMobile();
 
   // Define industry-specific labels
   const getIndustryLabel = () => {
@@ -330,18 +333,39 @@ const NicheContactForm = ({ industry }: NicheContactFormProps) => {
             
             <div className="text-center mt-8">
               <p className="font-medium text-gray-700 mb-2">Prefer to speak with our team?</p>
-              <a 
-                href="https://link.suddenimpactagency.io/widget/booking/MYRdt5Un7mP29erZS5rx" 
-                target="_blank"
-                rel="noopener noreferrer"
+              <Button 
+                onClick={() => setShowBookingDialog(true)}
                 className="inline-flex items-center px-4 py-2 bg-brand-aqua/10 text-brand-aqua hover:bg-brand-aqua/20 rounded-lg transition-colors"
               >
                 <Calendar size={16} className="mr-1" /> Schedule a consultation
-              </a>
+              </Button>
             </div>
           </StyleProvider>
         </div>
       </div>
+      
+      {/* Booking Dialog - Added for Schedule Consultation button */}
+      <Dialog open={showBookingDialog} onOpenChange={setShowBookingDialog}>
+        <DialogContent className="sm:max-w-[800px] max-h-[90vh] overflow-y-auto bg-white border border-brand-pink/10 shadow-xl">
+          <DialogTitle className="text-xl font-bold text-center mb-4 text-gray-800">Schedule Your Consultation</DialogTitle>
+          <div className="w-full calendar-container p-1 md:p-4 bg-gradient-to-br from-brand-pink/5 to-brand-aqua/5 rounded-lg">
+            <div className="iframe-container">
+              <iframe 
+                src="https://link.suddenimpactagency.io/widget/bookings/XaOGCzWWKmrQWqpbwWlq-4f31f69f-689b-4bd4-95d8-c885cf48e9ac-ff5dc43e-63e9-438c-a258-ad582d9e066e-a667fee4-6211-4e1e-9aed-df4252fe1635" 
+                style={{ 
+                  width: "100%",
+                  height: isMobile ? "600px" : "700px", 
+                  border: "none",
+                  borderRadius: "8px",
+                }}
+                scrolling="no" 
+                id="booking-iframe-contact"
+                className="no-scrollbar bg-white shadow-md"
+              ></iframe>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
       
       {/* AI Demo Call Dialog - Shows automatically after form submission */}
       <AIDemoCallDialog 

@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -77,14 +78,14 @@ const CallToAction = () => {
         </motion.div>
       </div>
 
-      {/* Schedule Dialog - Updated styling to match brand colors */}
+      {/* Schedule Dialog - Updated styling to match brand colors and updated booking link */}
       <Dialog open={showScheduleDialog} onOpenChange={setShowScheduleDialog}>
         <DialogContent className="sm:max-w-[800px] max-h-[90vh] overflow-y-auto bg-white border border-brand-pink/10 shadow-xl">
           <DialogTitle className="text-xl font-bold text-center mb-4 text-gray-800">Schedule Your Demo</DialogTitle>
           <div className="w-full calendar-container p-1 md:p-4 bg-gradient-to-br from-brand-pink/5 to-brand-aqua/5 rounded-lg">
             <div className="iframe-container">
               <iframe 
-                src="https://link.suddenimpactagency.io/widget/booking/MYRdt5Un7mP29erZS5rx" 
+                src="https://link.suddenimpactagency.io/widget/bookings/XaOGCzWWKmrQWqpbwWlq-4f31f69f-689b-4bd4-95d8-c885cf48e9ac-ff5dc43e-63e9-438c-a258-ad582d9e066e-a667fee4-6211-4e1e-9aed-df4252fe1635" 
                 style={{ 
                   width: "100%",
                   height: isMobile ? "600px" : "700px", 
