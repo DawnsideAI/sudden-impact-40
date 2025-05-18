@@ -43,7 +43,7 @@ const Navbar = () => {
   }, [scrolled]);
 
   // Use consistent styling
-  const bgColor = 'bg-white/90 backdrop-blur-xl';
+  const bgColor = scrolled ? 'bg-white/95 backdrop-blur-xl' : 'bg-white/90 backdrop-blur-xl';
   const textColor = 'text-gray-800';
   // Updated navItemClass to include purple hover state with white text
   const navItemClass = "text-gray-700 hover:text-white hover:bg-brand-purple transition-colors duration-200";
