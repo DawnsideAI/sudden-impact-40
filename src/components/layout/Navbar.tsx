@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -62,6 +61,7 @@ const Navbar = () => {
       >
         <div className="container-custom">
           <div className="flex items-center justify-between py-1 md:py-2">
+            {/* Logo container with consistent sizing */}
             <Link to="/" className="flex items-center">
               <motion.div
                 whileHover={{ scale: 1.05 }}
@@ -70,7 +70,9 @@ const Navbar = () => {
                 <img 
                   src="/lovable-uploads/293aebbf-1435-4e16-867f-2a95f52ef685.png" 
                   alt="Sudden Impact Agency Logo" 
-                  className="h-16 md:h-32 w-auto object-contain" 
+                  // Maintain minimum logo size on mobile but allow it to be larger on desktop
+                  className="h-16 w-auto object-contain min-h-[64px]" 
+                  style={{ maxHeight: isMobile ? '64px' : '128px' }}
                 />
               </motion.div>
             </Link>
@@ -124,6 +126,7 @@ const Navbar = () => {
 
             {/* Mobile Menu using Sheet component */}
             <div className="flex items-center gap-2">
+              {/* Modified CTA button to be smaller on mobile */}
               <Link 
                 to="/demo" 
                 className="bg-gradient-to-r from-brand-pink to-brand-aqua text-white font-medium py-2 px-3 md:py-2 md:px-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 text-sm md:text-base whitespace-nowrap"
@@ -131,14 +134,14 @@ const Navbar = () => {
                 Try AI Voice Agent
               </Link>
               
-              {/* Sheet component for mobile menu */}
+              {/* Sheet component for mobile menu with slightly smaller trigger button */}
               <Sheet>
                 <SheetTrigger asChild className="md:hidden">
                   <button 
-                    className="ml-2 p-2 text-gray-700 focus:outline-none focus:ring-0"
+                    className="ml-2 p-1.5 text-gray-700 focus:outline-none focus:ring-0"
                     aria-label="Open menu"
                   >
-                    <Menu className="h-6 w-6" />
+                    <Menu className="h-5 w-5" />
                   </button>
                 </SheetTrigger>
                 <SheetContent side="right" className="md:hidden py-6 w-[85vw] sm:max-w-sm">

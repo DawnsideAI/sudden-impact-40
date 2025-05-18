@@ -1,7 +1,7 @@
 
 import { motion } from "framer-motion";
-import HeroContent from "./hero/HeroContent";
-import HeroPreview from "./hero/HeroPreview";
+import HeroContent from "../home/hero/HeroContent";
+import HeroPreview from "../home/hero/HeroPreview";
 import StyleProvider from "../design/StyleProvider";
 import { useIsMobile } from '@/hooks/use-mobile';
 
