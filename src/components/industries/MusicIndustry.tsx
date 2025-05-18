@@ -1,7 +1,6 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Check, Calendar, Bell, Music } from 'lucide-react';
+import { Check, Calendar, Bell, Music, ArrowRight, Phone } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import StyleProvider from '@/components/design/StyleProvider';
@@ -11,9 +10,11 @@ import Layout from '@/components/layout/Layout';
 import LiveDemoDialog from '@/components/pricing/LiveDemoDialog';
 import IndustryAnimation from '@/components/industries/IndustryAnimation';
 import MusicPricing from '@/components/industries/MusicPricing';
+import AIDemoCallDialog from '@/components/niches/AIDemoCallDialog';
 
 const MusicIndustry = () => {
   const [showDemoDialog, setShowDemoDialog] = useState(false);
+  const [showCallDialog, setShowCallDialog] = useState(false);
   
   const benefits = [
     "Book your studio time online in seconds",
@@ -181,6 +182,42 @@ const MusicIndustry = () => {
       {/* Pricing Section - Using the updated MusicPricing component */}
       <MusicPricing />
       
+      {/* New Demo/Call Section - Similar to other industry pages */}
+      <section className="py-20 bg-white border-t border-gray-100">
+        <div className="container-custom">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <span className="bg-gradient-to-r from-brand-pink to-brand-aqua bg-clip-text text-transparent">
+                Ready to Transform Your Music Business?
+              </span>
+            </h2>
+            <p className="text-lg text-gray-600 mb-10 max-w-2xl mx-auto">
+              Schedule a personalized demo to see how our AI voice agents can revolutionize your 
+              customer interactions and operational efficiency.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button 
+                className="bg-gradient-to-r from-brand-pink to-brand-aqua text-white hover:opacity-90 px-8 py-6"
+                onClick={() => setShowCallDialog(true)}
+              >
+                <Phone className="mr-2 h-5 w-5" />
+                Try AI Demo Now
+              </Button>
+              
+              <Button
+                variant="outline"
+                className="border border-gray-200 px-8 py-6"
+                onClick={() => window.location.href = "/demo"}
+              >
+                <Calendar className="mr-2 h-5 w-5" />
+                Schedule Consultation
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+      
       {/* Testimonial Section */}
       <section className="py-20 bg-gradient-to-br from-brand-pink/5 to-brand-aqua/5">
         <div className="container-custom">
@@ -281,6 +318,14 @@ const MusicIndustry = () => {
 
       {/* Live Demo Dialog */}
       <LiveDemoDialog open={showDemoDialog} onOpenChange={setShowDemoDialog} />
+      
+      {/* AI Call Demo Dialog - added from other industry pages */}
+      <AIDemoCallDialog
+        open={showCallDialog}
+        onOpenChange={setShowCallDialog}
+        phoneNumber="+1 (302) 618-3977"
+        industry="music"
+      />
     </Layout>
   );
 };
