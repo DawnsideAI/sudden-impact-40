@@ -189,13 +189,13 @@ const Demo = () => {
                   </div>
                   
                   {/* Direct GHL form embed */}
-                  <div className="ghl-form-wrapper" style={{ height: "auto", minHeight: isMobile ? "1200px" : "900px" }}>
+                  <div className="ghl-form-wrapper" style={{ height: "auto", minHeight: isMobile ? "980px" : "900px" }}>
                     <iframe
                       src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
                       style={{ 
                         width: "100%", 
                         height: "100%", 
-                        minHeight: isMobile ? "1200px" : "900px",
+                        minHeight: isMobile ? "980px" : "900px",
                         border: "none", 
                         borderRadius: "8px" 
                       }}
@@ -267,7 +267,7 @@ const Demo = () => {
                           src="https://link.suddenimpactagency.io/widget/booking/MYRdt5Un7mP29erZS5rx" 
                           style={{ 
                             width: "100%",
-                            height: isMobile ? "1000px" : "800px", 
+                            height: isMobile ? "950px" : "800px", 
                             border: "none",
                           }}
                           scrolling="no" 

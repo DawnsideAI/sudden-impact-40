@@ -77,13 +77,13 @@ const NicheBooking = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="space-y-6">
                   <h3 className="text-xl font-bold text-gray-800 text-center">Complete The Demo Form</h3>
-                  <div className="ghl-form-wrapper" style={{ height: "auto", minHeight: isMobile ? "1200px" : "900px" }}>
+                  <div className="ghl-form-wrapper" style={{ height: "auto", minHeight: isMobile ? "980px" : "900px" }}>
                     <iframe
                       src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
                       style={{ 
                         width: "100%", 
                         height: "100%", 
-                        minHeight: isMobile ? "1200px" : "900px",
+                        minHeight: isMobile ? "980px" : "900px",
                         border: "none", 
                         borderRadius: "8px" 
                       }}

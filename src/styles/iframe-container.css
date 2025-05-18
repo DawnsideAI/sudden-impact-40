@@ -50,14 +50,14 @@
 /* Enhanced responsive adjustments for mobile ONLY */
 @media (max-width: 768px) {
   .ghl-form-wrapper {
-    min-height: 1050px; /* Reduced from 1200px to remove empty space */
+    min-height: 1020px; /* Further reduced to remove empty space */
     padding: 0;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
   }
   
   .ghl-form-wrapper iframe {
-    min-height: 1050px !important; /* Reduced from 1200px to match wrapper */
+    min-height: 1020px !important; /* Match with wrapper height */
     transform: scale(0.98);
     transform-origin: top center;
     width: 102% !important; /* Slightly wider to avoid horizontal scrollbars */
@@ -215,5 +215,24 @@
   .ghl-form-wrapper iframe .submit-wrapper {
     margin-bottom: 0 !important;
     padding-bottom: 0 !important;
+  }
+  
+  /* Demo page specific adjustments */
+  #inline-Gf3ORV8Uba4HRiXoml5L,
+  #inline-home-Gf3ORV8Uba4HRiXoml5L,
+  #inline-niche-Gf3ORV8Uba4HRiXoml5L {
+    min-height: 980px !important;
+  }
+  
+  /* Demo page form container height reduction */
+  .ghl-form-wrapper[style*="min-height: 1200px"],
+  .ghl-form-wrapper[style*="min-height: 1050px"] {
+    min-height: 980px !important;
+  }
+  
+  /* Prevent bottom overflow on all form wrappers */
+  .ghl-form-wrapper {
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
   }
 }
