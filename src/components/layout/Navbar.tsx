@@ -62,7 +62,7 @@ const Navbar = () => {
       >
         <div className="container-custom">
           <div className="flex items-center justify-between py-1 md:py-2">
-            {/* Logo container with consistent sizing */}
+            {/* Logo container with different sizing for mobile vs desktop */}
             <Link to="/" className="flex items-center">
               <motion.div
                 whileHover={{ scale: 1.05 }}
@@ -71,7 +71,7 @@ const Navbar = () => {
                 <img 
                   src="/lovable-uploads/293aebbf-1435-4e16-867f-2a95f52ef685.png" 
                   alt="Sudden Impact Agency Logo" 
-                  className="h-24 md:h-32 w-auto object-contain" 
+                  className={isMobile ? "h-24 w-auto object-contain" : "h-32 w-auto object-contain"} 
                 />
               </motion.div>
             </Link>
