@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import StyleProvider from '@/components/design/StyleProvider';
+import SectionTitle from '@/components/design/SectionTitle';
 
 const MusicPricing = () => {
   const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'annual'>('monthly');
@@ -97,17 +98,14 @@ const MusicPricing = () => {
   return (
     <section className="py-20 bg-white">
       <div className="container-custom">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-3">
-            <span className="bg-gradient-to-r from-brand-pink to-brand-aqua bg-clip-text text-transparent">
-              Pricing for Music Industry
-            </span>
-          </h2>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            Select the plan that's right for your music business
-          </p>
-          
-          <div className="mt-6 inline-flex items-center p-1 bg-gray-100 rounded-lg">
+        <SectionTitle
+          title="Pricing for Music Studios"
+          subtitle="Choose the right plan for your music business needs"
+          centered={true}
+        />
+        
+        <div className="mt-8 text-center">
+          <div className="inline-flex items-center p-1 bg-gray-100 rounded-lg mb-12">
             <button
               className={`py-2 px-6 rounded-md text-sm font-medium transition-all ${
                 billingPeriod === 'monthly'
@@ -138,8 +136,8 @@ const MusicPricing = () => {
               delay={index * 0.1} 
               className={`relative rounded-xl overflow-hidden shadow-lg border transition-all ${
                 plan.highlight 
-                  ? 'border-brand-pink transform hover:scale-105' 
-                  : 'border-gray-200 transform hover:scale-102'
+                  ? 'border-brand-pink transform hover:-translate-y-1 hover:scale-105' 
+                  : 'border-gray-200 hover:-translate-y-1 transform hover:scale-102'
               }`}
             >
               {plan.popularTag && (
@@ -174,7 +172,7 @@ const MusicPricing = () => {
                   className={`w-full ${
                     plan.buttonVariant === 'default' 
                       ? 'bg-gradient-to-r from-brand-pink to-brand-aqua text-white hover:opacity-90' 
-                      : ''
+                      : 'border-brand-pink text-brand-pink hover:bg-brand-pink/5'
                   }`}
                   onClick={() => window.open(getStripeLink(plan), '_blank')}
                 >
@@ -183,6 +181,26 @@ const MusicPricing = () => {
               </div>
             </StyleProvider>
           ))}
+        </div>
+        
+        <div className="mt-12 text-center">
+          <p className="text-gray-600">
+            Need a custom solution? <a href="#contact" className="text-brand-pink hover:underline">Contact us</a> for a personalized quote.
+          </p>
+          <div className="flex flex-wrap gap-4 justify-center mt-6">
+            <div className="flex items-center text-sm text-gray-600">
+              <Check size={16} className="text-brand-aqua mr-2" />
+              No hidden fees
+            </div>
+            <div className="flex items-center text-sm text-gray-600">
+              <Check size={16} className="text-brand-aqua mr-2" />
+              Cancel anytime
+            </div>
+            <div className="flex items-center text-sm text-gray-600">
+              <Check size={16} className="text-brand-aqua mr-2" />
+              14-day money back guarantee
+            </div>
+          </div>
         </div>
       </div>
     </section>
