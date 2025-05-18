@@ -45,7 +45,8 @@ const Navbar = () => {
   // Use consistent styling
   const bgColor = 'bg-white/90 backdrop-blur-xl';
   const textColor = 'text-gray-800';
-  const navItemClass = "text-gray-700 hover:text-brand-pink transition-colors duration-200";
+  // Updated navItemClass to include purple hover state with white text
+  const navItemClass = "text-gray-700 hover:text-white hover:bg-brand-purple transition-colors duration-200";
 
   return (
     <>
@@ -80,7 +81,7 @@ const Navbar = () => {
                 <NavigationMenuList>
                   <NavigationMenuItem>
                     <NavigationMenuLink asChild>
-                      <Link to="/" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent")}>
+                      <Link to="/" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent rounded-md")}>
                         Home
                       </Link>
                     </NavigationMenuLink>
@@ -88,7 +89,7 @@ const Navbar = () => {
                   
                   <NavigationMenuItem>
                     <NavigationMenuLink asChild>
-                      <Link to="/solutions" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent")}>
+                      <Link to="/solutions" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent rounded-md")}>
                         Solutions
                       </Link>
                     </NavigationMenuLink>
@@ -96,7 +97,7 @@ const Navbar = () => {
 
                   <NavigationMenuItem>
                     <NavigationMenuLink asChild>
-                      <Link to="/industries" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent")}>
+                      <Link to="/industries" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent rounded-md")}>
                         Industries
                       </Link>
                     </NavigationMenuLink>
@@ -104,7 +105,7 @@ const Navbar = () => {
 
                   <NavigationMenuItem>
                     <NavigationMenuLink asChild>
-                      <Link to="/pricing" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent")}>
+                      <Link to="/pricing" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent rounded-md")}>
                         Pricing
                       </Link>
                     </NavigationMenuLink>
@@ -112,7 +113,7 @@ const Navbar = () => {
 
                   <NavigationMenuItem>
                     <NavigationMenuLink asChild>
-                      <Link to="/contact" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent")}>
+                      <Link to="/contact" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent rounded-md")}>
                         Contact
                       </Link>
                     </NavigationMenuLink>
@@ -147,35 +148,35 @@ const Navbar = () => {
                   <nav className="flex flex-col gap-6">
                     <Link 
                       to="/" 
-                      className="text-xl font-medium text-gray-800 hover:text-brand-pink transition-colors"
+                      className="text-xl font-medium text-gray-800 hover:text-white hover:bg-brand-purple p-2 rounded-md transition-colors"
                     >
                       Home
                     </Link>
                     
                     <Link 
                       to="/solutions" 
-                      className="text-xl font-medium text-gray-800 hover:text-brand-pink transition-colors"
+                      className="text-xl font-medium text-gray-800 hover:text-white hover:bg-brand-purple p-2 rounded-md transition-colors"
                     >
                       Solutions
                     </Link>
                     
                     <Link 
                       to="/industries" 
-                      className="text-xl font-medium text-gray-800 hover:text-brand-pink transition-colors"
+                      className="text-xl font-medium text-gray-800 hover:text-white hover:bg-brand-purple p-2 rounded-md transition-colors"
                     >
                       Industries
                     </Link>
                     
                     <Link 
                       to="/pricing" 
-                      className="text-xl font-medium text-gray-800 hover:text-brand-pink transition-colors"
+                      className="text-xl font-medium text-gray-800 hover:text-white hover:bg-brand-purple p-2 rounded-md transition-colors"
                     >
                       Pricing
                     </Link>
                     
                     <Link 
                       to="/contact" 
-                      className="text-xl font-medium text-gray-800 hover:text-brand-pink transition-colors"
+                      className="text-xl font-medium text-gray-800 hover:text-white hover:bg-brand-purple p-2 rounded-md transition-colors"
                     >
                       Contact
                     </Link>
