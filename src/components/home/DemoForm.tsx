@@ -39,6 +39,22 @@ const DemoForm = () => {
     return () => window.removeEventListener('message', handleGHLMessage);
   }, []);
 
+  // Load the GHL embed.js script
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = "https://link.suddenimpactagency.io/js/form_embed.js";
+    script.async = true;
+    document.body.appendChild(script);
+    
+    return () => {
+      // Clean up script when component unmounts
+      const existingScript = document.querySelector(`script[src="https://link.suddenimpactagency.io/js/form_embed.js"]`);
+      if (existingScript && existingScript.parentNode) {
+        existingScript.parentNode.removeChild(existingScript);
+      }
+    };
+  }, []);
+
   const handleScheduleClick = () => {
     setShowCalendar(true);
   };
@@ -144,8 +160,10 @@ const DemoForm = () => {
                   </p>
                 </div>
                 
-                <div className="w-full" style={{ height: isMobile ? "900px" : "800px", padding: "0 20px 20px" }}>
+                <div className="w-full ghl-form-wrapper" style={{ height: isMobile ? "900px" : "800px", padding: "0 20px 20px" }}>
+                  <script src="https://link.suddenimpactagency.io/js/form_embed.js"></script>
                   <div 
+                    id="ghl-form-container"
                     className="ghl-embedded-form"
                     data-form-key={formId}
                     data-env="prod"
@@ -235,3 +253,4 @@ const DemoForm = () => {
 };
 
 export default DemoForm;
+
