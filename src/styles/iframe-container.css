@@ -47,7 +47,7 @@
   margin: 0 auto;
 }
 
-/* Enhanced responsive adjustments for mobile */
+/* Enhanced responsive adjustments for mobile ONLY */
 @media (max-width: 768px) {
   .ghl-form-wrapper {
     min-height: 900px;
@@ -126,9 +126,6 @@
   .btn-secondary,
   a[role="button"] {
     min-height: 44px; /* Minimum touch target size */
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
   
   /* Improved card spacing on mobile */
@@ -144,20 +141,15 @@
     padding-top: 2rem !important;
     padding-bottom: 2rem !important;
   }
-  
-  /* Fix potential logo sizing issues */
-  header img, 
-  .logo img {
-    max-height: 70px;
-    width: auto;
-  }
 }
 
-/* Fix potential horizontal overflow issues */
-body, 
-#root, 
-main, 
-.container-custom {
-  overflow-x: hidden;
-  max-width: 100vw;
+/* Fix potential horizontal overflow issues - mobile only */
+@media (max-width: 768px) {
+  body, 
+  #root, 
+  main, 
+  .container-custom {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
 }
