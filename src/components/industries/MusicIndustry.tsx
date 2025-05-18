@@ -11,6 +11,7 @@ import LiveDemoDialog from '@/components/pricing/LiveDemoDialog';
 import IndustryAnimation from '@/components/industries/IndustryAnimation';
 import MusicPricing from '@/components/industries/MusicPricing';
 import AIDemoCallDialog from '@/components/niches/AIDemoCallDialog';
+import WhiteSection from '@/components/layout/WhiteSection';
 
 const MusicIndustry = () => {
   const [showDemoDialog, setShowDemoDialog] = useState(false);
@@ -218,33 +219,52 @@ const MusicIndustry = () => {
         </div>
       </section>
       
-      {/* Testimonial Section */}
-      <section className="py-20 bg-gradient-to-br from-brand-pink/5 to-brand-aqua/5">
-        <div className="container-custom">
+      {/* Updated Testimonial Section to match other industry pages */}
+      <WhiteSection className="bg-gradient-to-br from-brand-pink/5 to-brand-aqua/5">
+        <div className="max-w-4xl mx-auto">
           <SectionTitle
             title="Trusted by Music Professionals"
             subtitle="See how our AI voice agents are helping studios like yours"
             centered={true}
           />
           
-          <div className="mt-12 max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-md border border-gray-100">
-            <div className="flex flex-col md:flex-row items-center gap-6">
-              <div className="w-24 h-24 rounded-full bg-gradient-to-r from-brand-pink to-brand-aqua flex items-center justify-center text-white text-2xl font-bold">
-                JR
-              </div>
-              <div className="flex-1">
-                <p className="text-lg text-gray-700 italic mb-4">
-                  "Our front desk staff was overwhelmed with calls before implementing this AI solution. Now they can focus on artists in the studio while the voice agent handles scheduling and routine inquiries. We've seen a 45% reduction in no-shows and our client satisfaction has improved tremendously."
-                </p>
-                <div>
-                  <h4 className="text-gray-800 font-medium">James Rodriguez</h4>
-                  <p className="text-gray-500">Director, Harmony Studios</p>
+          <div className="mt-12 grid grid-cols-1 gap-8">
+            <StyleProvider className="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+              <div className="flex flex-col md:flex-row items-center gap-6">
+                <div className="w-24 h-24 rounded-full bg-gradient-to-r from-brand-pink to-brand-aqua flex items-center justify-center text-white text-2xl font-bold">
+                  JR
+                </div>
+                <div className="flex-1">
+                  <p className="text-lg text-gray-700 italic mb-4">
+                    "Our front desk staff was overwhelmed with calls before implementing this AI solution. Now they can focus on artists in the studio while the voice agent handles scheduling and routine inquiries. We've seen a 45% reduction in no-shows and our client satisfaction has improved tremendously."
+                  </p>
+                  <div>
+                    <h4 className="text-gray-800 font-medium">James Rodriguez</h4>
+                    <p className="text-gray-500">Director, Harmony Studios</p>
+                  </div>
                 </div>
               </div>
-            </div>
+            </StyleProvider>
+            
+            <StyleProvider delay={0.1} className="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+              <div className="flex flex-col md:flex-row items-center gap-6">
+                <div className="w-24 h-24 rounded-full bg-gradient-to-r from-brand-aqua to-brand-pink flex items-center justify-center text-white text-2xl font-bold">
+                  AM
+                </div>
+                <div className="flex-1">
+                  <p className="text-lg text-gray-700 italic mb-4">
+                    "Since implementing the AI voice agent, I've been able to focus more on music production and less on answering routine calls. Our booking inquiries are handled efficiently 24/7, and our merchandise sales have increased by 45%. It's been a game-changer for our studio."
+                  </p>
+                  <div>
+                    <h4 className="text-gray-800 font-medium">Alex Morgan</h4>
+                    <p className="text-gray-500">Independent Music Producer, Rhythm Studios</p>
+                  </div>
+                </div>
+              </div>
+            </StyleProvider>
           </div>
         </div>
-      </section>
+      </WhiteSection>
       
       {/* Contact Form */}
       <section id="contact" className="py-20 bg-white">
