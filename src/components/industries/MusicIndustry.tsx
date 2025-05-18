@@ -183,35 +183,36 @@ const MusicIndustry = () => {
       {/* Pricing Section - Using the updated MusicPricing component */}
       <MusicPricing />
       
-      {/* New Demo/Call Section - Similar to other industry pages */}
-      <section className="py-20 bg-white border-t border-gray-100">
+      {/* Updated Demo/Call Section - Moved below testimonials and made bigger */}
+      <section className="py-28 bg-gradient-to-br from-brand-pink/5 to-brand-aqua/5 border-t border-gray-100">
         <div className="container-custom">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <div className="max-w-5xl mx-auto text-center">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
               <span className="bg-gradient-to-r from-brand-pink to-brand-aqua bg-clip-text text-transparent">
                 Ready to Transform Your Music Business?
               </span>
             </h2>
-            <p className="text-lg text-gray-600 mb-10 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
               Schedule a personalized demo to see how our AI voice agents can revolutionize your 
               music studio operations and fan engagement.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                className="bg-gradient-to-r from-brand-pink to-brand-aqua text-white hover:opacity-90 px-8 py-6"
-                onClick={() => setShowCallDialog(true)}
-              >
-                <Phone className="mr-2 h-5 w-5" />
-                Try AI Demo Now
-              </Button>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <Link to="/demo">
+                <Button 
+                  className="bg-gradient-to-r from-brand-pink to-brand-aqua text-white hover:opacity-90 px-10 py-8 text-lg shadow-lg"
+                >
+                  <Phone className="mr-2 h-6 w-6" />
+                  Try AI Demo Now
+                </Button>
+              </Link>
               
               <Button
                 variant="outline"
-                className="border border-gray-200 px-8 py-6"
+                className="border-2 border-gray-300 hover:border-brand-pink px-10 py-8 text-lg"
                 onClick={() => setShowDemoDialog(true)}
               >
-                <Calendar className="mr-2 h-5 w-5" />
+                <Calendar className="mr-2 h-6 w-6" />
                 Schedule Consultation
               </Button>
             </div>
