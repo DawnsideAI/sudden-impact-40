@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
@@ -22,7 +21,7 @@ const MusicPricing = () => {
         "Business hours configuration"
       ],
       popularTag: false,
-      buttonText: "Learn More",
+      buttonText: "Start Free Trial",
       buttonVariant: "outline" as const,
       stripeLinks: {
         monthly: "https://buy.stripe.com/4gM00bfVxbFq2PV9TfejK0j",
@@ -46,7 +45,7 @@ const MusicPricing = () => {
         "Weekly performance reports"
       ],
       popularTag: true,
-      buttonText: "Get Started",
+      buttonText: "Start Free Trial",
       buttonVariant: "default" as const,
       stripeLinks: {
         monthly: "https://buy.stripe.com/cNi5kv6kX7pa2PVd5rejK0l",
@@ -71,7 +70,7 @@ const MusicPricing = () => {
         "Priority support"
       ],
       popularTag: false,
-      buttonText: "Learn More",
+      buttonText: "Start Free Trial",
       buttonVariant: "outline" as const,
       stripeLinks: {
         monthly: "https://buy.stripe.com/bJecMXeRt6l6bmr9TfejK0n",
