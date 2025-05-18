@@ -61,7 +61,7 @@ const Navbar = () => {
         transition={{ duration: 0.5, delay: 0.2 }}
       >
         <div className="container-custom">
-          <div className="flex items-center justify-between py-2">
+          <div className="flex items-center justify-between py-1 md:py-2">
             <Link to="/" className="flex items-center">
               <motion.div
                 whileHover={{ scale: 1.05 }}
@@ -70,7 +70,7 @@ const Navbar = () => {
                 <img 
                   src="/lovable-uploads/293aebbf-1435-4e16-867f-2a95f52ef685.png" 
                   alt="Sudden Impact Agency Logo" 
-                  className="h-32 w-auto rounded-md" 
+                  className="h-16 md:h-32 w-auto object-contain" 
                 />
               </motion.div>
             </Link>
@@ -126,7 +126,7 @@ const Navbar = () => {
             <div className="flex items-center gap-2">
               <Link 
                 to="/demo" 
-                className="bg-gradient-to-r from-brand-pink to-brand-aqua text-white font-medium py-2 px-3 md:py-2 md:px-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5"
+                className="bg-gradient-to-r from-brand-pink to-brand-aqua text-white font-medium py-2 px-3 md:py-2 md:px-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 text-sm md:text-base whitespace-nowrap"
               >
                 Try AI Voice Agent
               </Link>

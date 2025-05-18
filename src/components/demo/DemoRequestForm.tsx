@@ -116,7 +116,13 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
           <div className="ghl-form-wrapper" style={{ height: isMobile ? "900px" : "800px" }}>
             <iframe
               src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
-              style={{ width: "100%", height: "100%", border: "none", borderRadius: "8px" }}
+              style={{ 
+                width: "100%", 
+                height: "100%", 
+                border: "none", 
+                borderRadius: "8px",
+                margin: "0 auto"
+              }}
               id="inline-Gf3ORV8Uba4HRiXoml5L" 
               data-layout="{'id':'INLINE'}"
               data-trigger-type="alwaysShow"
@@ -126,7 +132,7 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
               data-deactivation-type="leadCollected"
               data-deactivation-value=""
               data-form-name="A2P Form - New"
-              data-height="735"
+              data-height={isMobile ? "900" : "800"}
               data-layout-iframe-id="inline-Gf3ORV8Uba4HRiXoml5L"
               data-form-id="Gf3ORV8Uba4HRiXoml5L"
               title="A2P Form - New"
@@ -138,36 +144,36 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
-          className="p-8 flex flex-col items-center justify-center text-center bg-white rounded-lg shadow-md border border-gray-200"
+          className="p-4 md:p-8 flex flex-col items-center justify-center text-center bg-white rounded-lg shadow-md border border-gray-200"
         >
-          <h3 className="text-2xl font-bold mb-6 text-gray-800">Call Now To Speak With Our AI Assistant</h3>
+          <h3 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-gray-800">Call Now To Speak With Our AI Assistant</h3>
           
           <motion.div 
-            className="bg-gradient-to-r from-brand-pink to-brand-aqua w-16 h-16 rounded-full flex items-center justify-center mb-6"
+            className="bg-gradient-to-r from-brand-pink to-brand-aqua w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center mb-4 md:mb-6"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             transition={{ type: "spring", stiffness: 260, damping: 20 }}
           >
-            <PhoneCall size={30} className="text-white" />
+            <PhoneCall size={isMobile ? 24 : 30} className="text-white" />
           </motion.div>
           
           <motion.a
             href={`tel:${phoneNumber.replace(/\D/g, '')}`}
-            className="text-3xl font-bold mb-5 text-brand-aqua"
+            className="text-2xl md:text-3xl font-bold mb-3 md:mb-5 text-brand-aqua"
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
             {phoneNumber}
           </motion.a>
           
-          <p className="text-gray-600 mb-6">
+          <p className="text-gray-600 mb-4 md:mb-6 text-sm md:text-base">
             Call this number to speak with our AI voice agent and experience our technology first-hand.
           </p>
           
           <Button
             variant="action"
-            size="xl"
-            className="shadow-lg bg-gradient-to-r from-brand-pink to-brand-aqua hover:shadow-xl transition-all duration-300"
+            size={isMobile ? "lg" : "xl"}
+            className="shadow-lg bg-gradient-to-r from-brand-pink to-brand-aqua hover:shadow-xl transition-all duration-300 w-full md:w-auto"
             onClick={() => {
               window.location.href = `tel:${phoneNumber.replace(/\D/g, '')}`;
               if (onFormSubmit) onFormSubmit();
@@ -176,23 +182,23 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
             <PhoneCall className="mr-2" /> Call Now
           </Button>
 
-          <div className="mt-8">
-            <h3 className="text-xl font-bold mb-4">Watch Demo Video</h3>
+          <div className="mt-6 md:mt-8">
+            <h3 className="text-lg md:text-xl font-bold mb-3 md:mb-4">Watch Demo Video</h3>
             <button 
               onClick={() => setShowDemoVideo(true)}
-              className="inline-flex items-center justify-center px-6 py-3 text-brand-pink bg-white hover:bg-gray-100 rounded-lg transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 border border-brand-pink/20"
+              className="inline-flex items-center justify-center px-4 md:px-6 py-2 md:py-3 text-brand-pink bg-white hover:bg-gray-100 rounded-lg transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 border border-brand-pink/20 w-full md:w-auto"
             >
-              <Play className="mr-2 h-5 w-5 text-brand-pink" fill="currentColor" />
+              <Play className="mr-2 h-4 w-4 md:h-5 md:w-5 text-brand-pink" fill="currentColor" />
               Watch Demo Video
             </button>
             
             <Dialog open={showDemoVideo} onOpenChange={setShowDemoVideo}>
-              <DialogContent className="sm:max-w-[800px] bg-white border border-brand-pink/10 shadow-xl">
-                <DialogTitle className="text-xl font-bold text-center mb-4 text-gray-800">AI Voice Agent Demo</DialogTitle>
+              <DialogContent className="sm:max-w-[800px] max-w-[90vw] bg-white border border-brand-pink/10 shadow-xl p-3 md:p-6">
+                <DialogTitle className="text-lg md:text-xl font-bold text-center mb-3 md:mb-4 text-gray-800">AI Voice Agent Demo</DialogTitle>
                 <div className="aspect-video relative bg-gradient-to-br from-brand-pink/5 to-brand-aqua/5 rounded-lg overflow-hidden">
                   {isVideoLoading && (
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-10 h-10 border-4 border-t-brand-pink rounded-full animate-spin"></div>
+                      <div className="w-8 h-8 md:w-10 md:h-10 border-4 border-t-brand-pink rounded-full animate-spin"></div>
                     </div>
                   )}
                   <iframe 

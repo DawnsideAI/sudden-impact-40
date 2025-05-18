@@ -1,5 +1,5 @@
 
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -13,8 +13,17 @@ interface LayoutProps {
 const Layout = ({ children, showBgEffects = true, lightMode = false }: LayoutProps) => {
   const isMobile = useIsMobile();
   
+  // Prevent horizontal scrolling
+  useEffect(() => {
+    document.body.style.overflowX = 'hidden';
+    
+    return () => {
+      document.body.style.overflowX = '';
+    };
+  }, []);
+  
   return (
-    <div className={`flex flex-col min-h-screen ${lightMode ? 'bg-white' : 'bg-background'}`}>
+    <div className={`flex flex-col min-h-screen ${lightMode ? 'bg-white' : 'bg-background'} overflow-x-hidden`}>
       {/* Background effects - only shown when requested, not in light mode, and reduced on mobile */}
       {showBgEffects && !lightMode && (
         <>
@@ -27,13 +36,13 @@ const Layout = ({ children, showBgEffects = true, lightMode = false }: LayoutPro
       )}
       
       {/* Content */}
-      <div className="relative z-10 flex flex-col min-h-screen">
+      <div className="relative z-10 flex flex-col min-h-screen w-full overflow-x-hidden">
         {/* Header bar with adjusted padding */}
         <div className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-lg border-b border-gray-200 shadow-sm">
           <Navbar />
         </div>
         
-        <main className="flex-grow">
+        <main className="flex-grow overflow-x-hidden">
           {children}
         </main>
         

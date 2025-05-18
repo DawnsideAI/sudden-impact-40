@@ -33,9 +33,9 @@ const Footer: React.FC<FooterProps> = ({ lightMode = false }) => {
   const linkHoverColor = lightMode ? 'hover:text-agency-blue' : 'hover:text-white';
 
   return (
-    <footer className={`${bgColor} border-t ${borderColor} pt-10 pb-6`}>
+    <footer className={`${bgColor} border-t ${borderColor} pt-8 pb-6`}>
       <div className="container-custom max-w-6xl mx-auto px-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 mb-6 md:mb-8">
           {/* Company Info */}
           <div>
             <motion.div
