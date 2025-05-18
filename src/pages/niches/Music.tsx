@@ -1,7 +1,7 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Check, Music as MusicIcon, Calendar, Star, User } from 'lucide-react';
+import { Check, Music as MusicIcon, Calendar, Star, User, Phone } from 'lucide-react';
 import NicheLayout from '@/components/niches/NicheLayout';
 import NicheContactForm from '@/components/niches/NicheContactForm';
 import StyleProvider from '@/components/design/StyleProvider';
@@ -9,8 +9,15 @@ import SectionTitle from '@/components/design/SectionTitle';
 import IndustryAnimation from '@/components/industries/IndustryAnimation';
 import MusicPricing from '@/components/industries/MusicPricing';
 import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
+import { useIsMobile } from '@/hooks/use-mobile';
+import AIDemoCallDialog from '@/components/niches/AIDemoCallDialog';
 
 const MusicNiche = () => {
+  const [showBookingDialog, setShowBookingDialog] = useState(false);
+  const [showCallDialog, setShowCallDialog] = useState(false);
+  const isMobile = useIsMobile();
+  
   const benefits = [
     "Book studio time and performances in seconds",
     "Receive instant booking confirmations",
@@ -172,22 +179,55 @@ const MusicNiche = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
                 className="bg-gradient-to-r from-brand-pink to-brand-aqua text-white hover:opacity-90 px-8 py-6"
-                onClick={() => window.open('https://link.suddenimpactagency.io/widget/booking/MYRdt5Un7mP29erZS5rx', '_blank')}
+                onClick={() => setShowCallDialog(true)}
               >
+                <Phone className="mr-2 h-5 w-5" />
                 Try AI Demo Now
               </Button>
               
               <Button
                 variant="outline"
                 className="border border-gray-200 px-8 py-6"
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => setShowBookingDialog(true)}
               >
+                <Calendar className="mr-2 h-5 w-5" />
                 Schedule Consultation
               </Button>
             </div>
           </div>
         </div>
       </section>
+      
+      {/* Booking Dialog */}
+      <Dialog open={showBookingDialog} onOpenChange={setShowBookingDialog}>
+        <DialogContent className="sm:max-w-[800px] max-h-[90vh] overflow-y-auto bg-white border border-brand-pink/10 shadow-xl">
+          <DialogTitle className="text-xl font-bold text-center mb-4 text-gray-800">Schedule Your Consultation</DialogTitle>
+          <div className="w-full calendar-container p-1 md:p-4 bg-gradient-to-br from-brand-pink/5 to-brand-aqua/5 rounded-lg">
+            <div className="iframe-container">
+              <iframe 
+                src="https://www.go.suddenimpact.agency/meetings/suddenimpact/30min" 
+                style={{ 
+                  width: "100%",
+                  height: isMobile ? "600px" : "700px", 
+                  border: "none",
+                  borderRadius: "8px",
+                }}
+                scrolling="no" 
+                id="booking-iframe-niche"
+                className="no-scrollbar bg-white shadow-md"
+              ></iframe>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* AI Demo Call Dialog */}
+      <AIDemoCallDialog 
+        open={showCallDialog} 
+        onOpenChange={setShowCallDialog}
+        phoneNumber="+1 (302) 618-3977"
+        industry="music"
+      />
       
       {/* Contact Form */}
       <NicheContactForm industry="music" />

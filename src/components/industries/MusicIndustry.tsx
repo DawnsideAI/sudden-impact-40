@@ -13,10 +13,14 @@ import IndustryAnimation from '@/components/industries/IndustryAnimation';
 import MusicPricing from '@/components/industries/MusicPricing';
 import AIDemoCallDialog from '@/components/niches/AIDemoCallDialog';
 import WhiteSection from '@/components/layout/WhiteSection';
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const MusicIndustry = () => {
   const [showDemoDialog, setShowDemoDialog] = useState(false);
   const [showCallDialog, setShowCallDialog] = useState(false);
+  const [showBookingDialog, setShowBookingDialog] = useState(false);
+  const isMobile = useIsMobile();
   
   const benefits = [
     "Book your studio time online in seconds",
@@ -258,7 +262,7 @@ const MusicIndustry = () => {
               <Button
                 variant="outline"
                 className="border-2 border-gray-300 hover:border-brand-pink px-12 py-8 text-lg rounded-xl bg-white"
-                onClick={() => setShowDemoDialog(true)}
+                onClick={() => setShowBookingDialog(true)}
               >
                 <Calendar className="mr-2 h-6 w-6" />
                 Schedule Consultation
@@ -271,13 +275,36 @@ const MusicIndustry = () => {
       {/* Live Demo Dialog */}
       <LiveDemoDialog open={showDemoDialog} onOpenChange={setShowDemoDialog} />
       
-      {/* AI Call Demo Dialog - added from other industry pages */}
+      {/* AI Call Demo Dialog */}
       <AIDemoCallDialog
         open={showCallDialog}
         onOpenChange={setShowCallDialog}
         phoneNumber="+1 (302) 618-3977"
         industry="music"
       />
+
+      {/* Booking Dialog */}
+      <Dialog open={showBookingDialog} onOpenChange={setShowBookingDialog}>
+        <DialogContent className="sm:max-w-[800px] max-h-[90vh] overflow-y-auto bg-white border border-brand-pink/10 shadow-xl">
+          <DialogTitle className="text-xl font-bold text-center mb-4 text-gray-800">Schedule Your Consultation</DialogTitle>
+          <div className="w-full calendar-container p-1 md:p-4 bg-gradient-to-br from-brand-pink/5 to-brand-aqua/5 rounded-lg">
+            <div className="iframe-container">
+              <iframe 
+                src="https://www.go.suddenimpact.agency/meetings/suddenimpact/30min" 
+                style={{ 
+                  width: "100%",
+                  height: isMobile ? "600px" : "700px", 
+                  border: "none",
+                  borderRadius: "8px",
+                }}
+                scrolling="no" 
+                id="booking-iframe"
+                className="no-scrollbar bg-white shadow-md"
+              ></iframe>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </Layout>
   );
 };
