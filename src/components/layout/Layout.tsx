@@ -53,7 +53,7 @@ const Layout = ({ children, showBgEffects = true, lightMode = false }: LayoutPro
           <Navbar />
         </div>
         
-        <main className="flex-grow overflow-x-hidden">
+        <main className="flex-grow overflow-x-hidden pt-4 md:pt-8">
           {children}
         </main>
         

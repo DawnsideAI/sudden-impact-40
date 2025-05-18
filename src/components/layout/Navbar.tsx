@@ -71,7 +71,7 @@ const Navbar = () => {
                 <img 
                   src="/lovable-uploads/293aebbf-1435-4e16-867f-2a95f52ef685.png" 
                   alt="Sudden Impact Agency Logo" 
-                  className={isMobile ? "h-24 w-auto object-contain" : "h-44 w-auto object-contain"} 
+                  className={isMobile ? "h-24 w-auto object-contain" : "h-56 w-auto object-contain"} 
                 />
               </motion.div>
             </Link>
