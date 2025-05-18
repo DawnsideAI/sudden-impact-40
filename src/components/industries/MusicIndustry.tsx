@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Check, Calendar, Bell, Music, ArrowRight, Phone } from 'lucide-react';
@@ -183,43 +184,6 @@ const MusicIndustry = () => {
       {/* Pricing Section - Using the updated MusicPricing component */}
       <MusicPricing />
       
-      {/* Updated Demo/Call Section - Moved below testimonials and made bigger */}
-      <section className="py-28 bg-gradient-to-br from-brand-pink/5 to-brand-aqua/5 border-t border-gray-100">
-        <div className="container-custom">
-          <div className="max-w-5xl mx-auto text-center">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-brand-pink to-brand-aqua bg-clip-text text-transparent">
-                Ready to Transform Your Music Business?
-              </span>
-            </h2>
-            <p className="text-xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
-              Schedule a personalized demo to see how our AI voice agents can revolutionize your 
-              music studio operations and fan engagement.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <Link to="/demo">
-                <Button 
-                  className="bg-gradient-to-r from-brand-pink to-brand-aqua text-white hover:opacity-90 px-10 py-8 text-lg shadow-lg"
-                >
-                  <Phone className="mr-2 h-6 w-6" />
-                  Try AI Demo Now
-                </Button>
-              </Link>
-              
-              <Button
-                variant="outline"
-                className="border-2 border-gray-300 hover:border-brand-pink px-10 py-8 text-lg"
-                onClick={() => setShowDemoDialog(true)}
-              >
-                <Calendar className="mr-2 h-6 w-6" />
-                Schedule Consultation
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-      
       {/* Updated Testimonial Section to match other industry pages */}
       <WhiteSection className="bg-gradient-to-br from-brand-pink/5 to-brand-aqua/5">
         <div className="max-w-4xl mx-auto">
@@ -266,6 +230,43 @@ const MusicIndustry = () => {
           </div>
         </div>
       </WhiteSection>
+      
+      {/* Enhanced Call-to-Action Section - Below testimonials and styled like reference image */}
+      <section className="py-28 bg-gradient-to-r from-brand-pink/20 to-brand-aqua/20 border-t border-gray-100">
+        <div className="container-custom">
+          <div className="max-w-5xl mx-auto text-center">
+            <h2 className="text-5xl md:text-6xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-brand-pink to-brand-aqua bg-clip-text text-transparent">
+                Ready to Transform Your Music Business?
+              </span>
+            </h2>
+            <p className="text-xl text-gray-600 mb-16 max-w-3xl mx-auto leading-relaxed">
+              Schedule a personalized demo to see how our AI voice agents can revolutionize your 
+              music studio operations and fan engagement.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-8 justify-center">
+              <Link to="/demo">
+                <Button 
+                  className="bg-gradient-to-r from-brand-pink to-brand-aqua text-white hover:opacity-90 px-12 py-8 text-lg shadow-xl rounded-xl"
+                >
+                  <Phone className="mr-2 h-6 w-6" />
+                  Try AI Demo Now
+                </Button>
+              </Link>
+              
+              <Button
+                variant="outline"
+                className="border-2 border-gray-300 hover:border-brand-pink px-12 py-8 text-lg rounded-xl bg-white"
+                onClick={() => setShowDemoDialog(true)}
+              >
+                <Calendar className="mr-2 h-6 w-6" />
+                Schedule Consultation
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Live Demo Dialog */}
       <LiveDemoDialog open={showDemoDialog} onOpenChange={setShowDemoDialog} />
