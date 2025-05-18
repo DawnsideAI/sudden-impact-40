@@ -13,14 +13,22 @@ interface LayoutProps {
 const Layout = ({ children, showBgEffects = true, lightMode = false }: LayoutProps) => {
   const isMobile = useIsMobile();
   
-  // Prevent horizontal scrolling
+  // Prevent horizontal scrolling and optimize mobile experience
   useEffect(() => {
     document.body.style.overflowX = 'hidden';
     
+    // Apply mobile-specific optimizations
+    if (isMobile) {
+      document.body.classList.add('mobile-optimized');
+    } else {
+      document.body.classList.remove('mobile-optimized');
+    }
+    
     return () => {
       document.body.style.overflowX = '';
+      document.body.classList.remove('mobile-optimized');
     };
-  }, []);
+  }, [isMobile]);
   
   return (
     <div className={`flex flex-col min-h-screen ${lightMode ? 'bg-white' : 'bg-background'} overflow-x-hidden`}>

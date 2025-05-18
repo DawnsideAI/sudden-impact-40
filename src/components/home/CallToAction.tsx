@@ -14,7 +14,7 @@ const CallToAction = () => {
   const demoVideoUrl = "https://www.youtube.com/embed/HuU_pxXVVqo?si=qrMXYUDeg8m8zUzs";
 
   return (
-    <section className="section-padding relative overflow-hidden">
+    <section className={`relative overflow-hidden ${isMobile ? 'py-5' : 'section-padding'}`}>
       {/* Enhanced background elements */}
       <div className="absolute inset-0">
         <motion.div 
@@ -37,7 +37,7 @@ const CallToAction = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="bg-gradient-to-br from-brand-indigo to-brand-violet rounded-3xl p-8 md:p-16 shadow-2xl"
+          className="bg-gradient-to-br from-brand-indigo to-brand-violet rounded-3xl p-6 md:p-16 shadow-2xl"
         >
           <div className="max-w-3xl mx-auto text-center">
             <SectionTitle
@@ -47,14 +47,14 @@ const CallToAction = () => {
               light={true}
             />
             
-            <div className="flex flex-col sm:flex-row items-center justify-center mt-8 space-y-4 sm:space-y-0 sm:space-x-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center mt-4 sm:mt-8 space-y-3 sm:space-y-0 sm:space-x-4">
               <motion.div
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
               >
                 <Link 
                   to="/pricing" 
-                  className="inline-flex items-center justify-center px-6 py-3 text-brand-indigo bg-white hover:bg-gray-100 rounded-lg transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
+                  className="inline-flex items-center justify-center px-6 py-3 text-brand-indigo bg-white hover:bg-gray-100 rounded-lg transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 w-full sm:w-auto"
                 >
                   Start Free Trial
                   <ArrowRight className="ml-2 h-5 w-5" />
@@ -64,10 +64,11 @@ const CallToAction = () => {
               <motion.div
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
+                className="w-full sm:w-auto"
               >
                 <button 
                   onClick={() => setShowDemoVideo(true)}
-                  className="inline-flex items-center justify-center px-6 py-3 text-brand-pink bg-white hover:bg-gray-100 rounded-lg transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 border border-brand-pink/20"
+                  className="inline-flex items-center justify-center px-6 py-3 text-brand-pink bg-white hover:bg-gray-100 rounded-lg transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 border border-brand-pink/20 w-full sm:w-auto"
                 >
                   <Play className="mr-2 h-5 w-5 text-brand-pink" fill="currentColor" />
                   Watch Demo Video

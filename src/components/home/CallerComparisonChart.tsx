@@ -78,8 +78,10 @@ const metrics = [
 
 // Comparison view that works for all screen sizes using cards
 const ComparisonView = ({ data }) => {
+  const isMobile = useIsMobile();
+  
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
       {data.map((item, index) => (
         <motion.div 
           key={index}
@@ -88,23 +90,23 @@ const ComparisonView = ({ data }) => {
           transition={{ duration: 0.3, delay: index * 0.1 }}
           className="bg-white rounded-lg shadow-md border border-gray-100 overflow-hidden hover:shadow-lg transition-all duration-300"
         >
-          <div className="bg-gradient-to-r from-brand-purple/10 to-brand-aqua/10 px-4 py-3 border-b border-gray-100">
-            <h3 className="font-bold text-lg text-brand-dark">{item.category}</h3>
+          <div className="bg-gradient-to-r from-brand-purple/10 to-brand-aqua/10 px-3 py-2 md:px-4 md:py-3 border-b border-gray-100">
+            <h3 className="font-bold text-base md:text-lg text-brand-dark">{item.category}</h3>
             <p className="text-xs text-brand-gray">{item.description}</p>
           </div>
           
-          <div className="p-4">
-            <div className="flex justify-between items-center mb-4">
+          <div className="p-3 md:p-4">
+            <div className="flex justify-between items-center mb-3 md:mb-4">
               <div className="flex flex-col">
-                <span className="text-sm text-brand-gray">Human</span>
-                <span className="text-xl font-bold text-brand-dark">
+                <span className="text-xs md:text-sm text-brand-gray">Human</span>
+                <span className="text-lg md:text-xl font-bold text-brand-dark">
                   {item.human} <span className="text-xs">{item.label}</span>
                 </span>
               </div>
               
               <div className="flex flex-col items-end">
-                <span className="text-sm text-brand-vibrantPurple">AI Voice Agent</span>
-                <span className="text-xl font-bold text-brand-vibrantPurple">
+                <span className="text-xs md:text-sm text-brand-vibrantPurple">AI Voice Agent</span>
+                <span className="text-lg md:text-xl font-bold text-brand-vibrantPurple">
                   {item.ai} <span className="text-xs">{item.label}</span>
                 </span>
               </div>
@@ -129,7 +131,7 @@ const ComparisonView = ({ data }) => {
             </div>
             
             <div className="mt-2 text-center">
-              <span className="text-sm font-medium text-brand-vibrantPurple">
+              <span className="text-xs md:text-sm font-medium text-brand-vibrantPurple">
                 {item.percentage}
               </span>
             </div>
@@ -141,24 +143,28 @@ const ComparisonView = ({ data }) => {
 };
 
 const CallerComparisonChart = () => {
+  const isMobile = useIsMobile();
+  const containerSpacing = isMobile ? "mb-6" : "mb-12";
+  const gridSpacing = isMobile ? "gap-3 mt-6" : "gap-6 mt-12";
+  
   return (
     <StyleProvider
-      className="section-padding bg-white"
+      className={isMobile ? "py-4" : "section-padding bg-white"}
     >
       <div className="container-custom">
         <SectionTitle
           title="AI Voice Agents vs Human Agents"
           subtitle="Experience the future of customer service with our AI voice agents - delivering unmatched efficiency, availability, and cost savings compared to traditional human call handlers"
           centered={true}
-          className="mb-12"
+          className={containerSpacing}
         />
 
-        <Card className="p-6 bg-white shadow-lg border border-gray-100 relative overflow-hidden">
+        <Card className="p-3 md:p-6 bg-white shadow-lg border border-gray-100 relative overflow-hidden">
           {/* Use card-based comparison for all screen sizes */}
           <ComparisonView data={metrics} />
         </Card>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 ${gridSpacing}`}>
           {[
             {
               icon: Clock,

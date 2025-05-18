@@ -27,8 +27,11 @@ const Index = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     
-    // Apply smooth scroll behavior for mobile
+    // Apply enhanced smooth scroll behavior for mobile
     if (isMobile) {
+      // Apply optimized touch handling
+      document.documentElement.style.setProperty('scroll-behavior', 'smooth');
+      
       // Ensure smooth scrolling by preventing any scroll hijacking
       const handleTouchStart = (e: TouchEvent) => {
         if (e.touches.length > 1) {
@@ -40,9 +43,14 @@ const Index = () => {
       
       return () => {
         document.removeEventListener('touchstart', handleTouchStart);
+        document.documentElement.style.removeProperty('scroll-behavior');
       };
     }
   }, [isMobile]);
+
+  // Add optimized section spacing for mobile
+  const mobileSectionClass = isMobile ? "py-3 md:py-12" : "py-6 md:py-12";
+  const mobileGradientSectionClass = isMobile ? "py-3 md:py-12" : "py-6 md:py-12";
 
   return (
     <Layout lightMode={true}>
@@ -51,60 +59,60 @@ const Index = () => {
         <Hero />
         
         {/* Stats Section - White Background */}
-        <WhiteSection className="bg-white border-b border-gray-100">
+        <WhiteSection className={`bg-white border-b border-gray-100 ${mobileSectionClass}`}>
           <Stats />
         </WhiteSection>
         
         {/* Service Features - Gradient Background */}
-        <WhiteSection className="bg-gradient-to-br from-brand-pink/5 via-white to-brand-aqua/5 border-b border-gray-100">
+        <WhiteSection className={`bg-gradient-to-br from-brand-pink/5 via-white to-brand-aqua/5 border-b border-gray-100 ${mobileGradientSectionClass}`}>
           <ServiceFeatures />
         </WhiteSection>
         
         {/* Trusted By - White Background */}
-        <WhiteSection className="bg-white border-b border-gray-100 py-6 md:py-12">
+        <WhiteSection className={`bg-white border-b border-gray-100 ${mobileSectionClass}`}>
           <TrustedBy />
         </WhiteSection>
         
         <Suspense fallback={<div className="h-40 md:h-96 flex items-center justify-center">Loading...</div>}>
           {/* Comparison Chart - Gradient Background */}
-          <WhiteSection className="bg-gradient-to-br from-brand-aqua/5 via-white to-brand-pink/5 border-b border-gray-100">
+          <WhiteSection className={`bg-gradient-to-br from-brand-aqua/5 via-white to-brand-pink/5 border-b border-gray-100 ${mobileGradientSectionClass}`}>
             <CallerComparisonChart />
           </WhiteSection>
           
           {/* Case Studies - White Background */}
-          <WhiteSection className="bg-white border-b border-gray-100">
+          <WhiteSection className={`bg-white border-b border-gray-100 ${mobileSectionClass}`}>
             <CaseStudies />
           </WhiteSection>
         </Suspense>
         
         {/* Industry Solutions - Gradient Background - Import directly */}
-        <WhiteSection className="bg-gradient-to-br from-brand-purple/5 via-white to-brand-pink/5 border-b border-gray-100">
+        <WhiteSection className={`bg-gradient-to-br from-brand-purple/5 via-white to-brand-pink/5 border-b border-gray-100 ${mobileGradientSectionClass}`}>
           <IndustrySolutions />
         </WhiteSection>
         
         <Suspense fallback={<div className="h-40 md:h-96 flex items-center justify-center">Loading...</div>}>
           {/* Testimonials - White Background */}
-          <WhiteSection className="bg-white border-b border-gray-100">
+          <WhiteSection className={`bg-white border-b border-gray-100 ${mobileSectionClass}`}>
             <Testimonials />
           </WhiteSection>
           
           {/* AI Papers - Gradient Background */}
-          <WhiteSection className="bg-gradient-to-br from-brand-pink/5 via-white to-brand-aqua/5 border-b border-gray-100">
+          <WhiteSection className={`bg-gradient-to-br from-brand-pink/5 via-white to-brand-aqua/5 border-b border-gray-100 ${mobileGradientSectionClass}`}>
             <AIPapersSection />
           </WhiteSection>
           
           {/* Demo Form - White Background */}
-          <WhiteSection className="bg-white border-b border-gray-100">
+          <WhiteSection className={`bg-white border-b border-gray-100 ${mobileSectionClass}`}>
             <DemoForm />
           </WhiteSection>
           
           {/* FAQ - Gradient Background */}
-          <WhiteSection className="bg-gradient-to-br from-brand-aqua/5 via-white to-brand-pink/5 border-b border-gray-100">
+          <WhiteSection className={`bg-gradient-to-br from-brand-aqua/5 via-white to-brand-pink/5 border-b border-gray-100 ${mobileGradientSectionClass}`}>
             <Faq />
           </WhiteSection>
           
           {/* Call to Action - Bold Gradient Background */}
-          <WhiteSection className="bg-gradient-to-br from-brand-purple/5 via-white to-brand-aqua/5">
+          <WhiteSection className={`bg-gradient-to-br from-brand-purple/5 via-white to-brand-aqua/5 ${mobileSectionClass}`}>
             <CallToAction />
           </WhiteSection>
         </Suspense>

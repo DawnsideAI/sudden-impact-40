@@ -50,14 +50,14 @@
 /* Enhanced responsive adjustments for mobile ONLY */
 @media (max-width: 768px) {
   .ghl-form-wrapper {
-    min-height: 1020px; /* Further reduced to remove empty space */
+    min-height: 980px; /* Adjusted to remove empty space */
     padding: 0;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
   }
   
   .ghl-form-wrapper iframe {
-    min-height: 1020px !important; /* Match with wrapper height */
+    min-height: 980px !important; /* Match with wrapper height */
     transform: scale(0.98);
     transform-origin: top center;
     width: 102% !important; /* Slightly wider to avoid horizontal scrollbars */
@@ -73,6 +73,38 @@
   .text-responsive-lg {
     font-size: 1.5rem !important;
     line-height: 2rem !important;
+  }
+  
+  /* Optimized spacing for mobile - reduce vertical gaps */
+  section {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+  
+  .section-padding {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+  
+  /* Reduce card spacing */
+  .card-light, .fancy-card, .modern-card {
+    padding: 1rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+  
+  /* Optimize disclaimer spacing */
+  .disclaimer-box {
+    padding: 0.75rem !important;
+    margin: 0.75rem 0 !important;
+  }
+  
+  /* Adjust section title spacing */
+  h2.text-3xl {
+    margin-bottom: 0.75rem !important;
+  }
+  
+  .section-title + p {
+    margin-bottom: 1rem !important;
   }
 }
 
@@ -134,13 +166,17 @@
   .fancy-card, 
   .modern-card {
     padding: 1rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+  
+  /* Optimize whitespace between content sections */
+  .container-custom > div {
     margin-bottom: 1rem !important;
   }
   
-  /* Ensure proper spacing between sections */
-  section {
-    padding-top: 2rem !important;
-    padding-bottom: 2rem !important;
+  /* Optimize spacing in gridted layouts */
+  .grid {
+    gap: 0.75rem !important;
   }
 }
 
@@ -167,9 +203,20 @@
     padding-right: 1rem !important;
   }
 
-  /* Increase spacing for section titles on mobile */
+  /* Reduce spacing for section titles on mobile */
   .section-title {
-    margin-bottom: 1.5rem !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  /* Optimize heading sizes */
+  h2.text-3xl, h2.text-4xl {
+    font-size: 1.5rem !important;
+    line-height: 1.75rem !important;
+  }
+  
+  h1 {
+    font-size: 1.75rem !important;
+    line-height: 2rem !important;
   }
 
   /* Ensure gradient text is fully visible */

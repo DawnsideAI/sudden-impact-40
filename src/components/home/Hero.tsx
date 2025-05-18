@@ -32,10 +32,10 @@ const Hero = () => {
         />
       </div>
       
-      <StyleProvider className="container-custom relative z-10 py-16 md:py-24 lg:py-32 px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
+      <StyleProvider className="container-custom relative z-10 py-8 md:py-24 lg:py-32 px-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center">
           <HeroContent lightMode={true} />
-          <div className={isMobile ? "mt-6" : ""}>
+          <div className={isMobile ? "mt-2" : ""}>
             <HeroPreview lightMode={true} />
           </div>
         </div>
