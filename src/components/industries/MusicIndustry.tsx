@@ -194,7 +194,7 @@ const MusicIndustry = () => {
             </h2>
             <p className="text-lg text-gray-600 mb-10 max-w-2xl mx-auto">
               Schedule a personalized demo to see how our AI voice agents can revolutionize your 
-              customer interactions and operational efficiency.
+              music studio operations and fan engagement.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -209,7 +209,7 @@ const MusicIndustry = () => {
               <Button
                 variant="outline"
                 className="border border-gray-200 px-8 py-6"
-                onClick={() => window.location.href = "/demo"}
+                onClick={() => setShowDemoDialog(true)}
               >
                 <Calendar className="mr-2 h-5 w-5" />
                 Schedule Consultation
@@ -266,72 +266,38 @@ const MusicIndustry = () => {
         </div>
       </WhiteSection>
       
-      {/* Contact Form */}
+      {/* Contact Form - Replaced with Schedule/Demo options */}
       <section id="contact" className="py-20 bg-white">
         <div className="container-custom">
-          <SectionTitle
-            title="Ready to Transform Your Music Business?"
-            subtitle="Get in touch with our team to learn more about our AI voice solutions"
-            centered={true}
-          />
-          
-          <div className="mt-12 max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-lg border border-gray-100">
-            <form className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Name</label>
-                  <input 
-                    type="text" 
-                    id="name" 
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-aqua focus:border-transparent transition-all duration-300"
-                    placeholder="Your name"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                  <input 
-                    type="email" 
-                    id="email" 
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-aqua focus:border-transparent transition-all duration-300"
-                    placeholder="your@email.com"
-                  />
-                </div>
-              </div>
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <span className="bg-gradient-to-r from-brand-pink to-brand-aqua bg-clip-text text-transparent">
+                Ready to Transform Your Music Business?
+              </span>
+            </h2>
+            <p className="text-lg text-gray-600 mb-10 max-w-2xl mx-auto">
+              Schedule a personalized demo to see how our AI voice agents can revolutionize your 
+              music studio operations and fan engagement.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button 
+                className="bg-gradient-to-r from-brand-pink to-brand-aqua text-white hover:opacity-90 px-8 py-6"
+                onClick={() => setShowCallDialog(true)}
+              >
+                <Phone className="mr-2 h-5 w-5" />
+                Try AI Demo Now
+              </Button>
               
-              <div>
-                <label htmlFor="business" className="block text-sm font-medium text-gray-700 mb-1">Business Type</label>
-                <select 
-                  id="business" 
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-aqua focus:border-transparent transition-all duration-300"
-                >
-                  <option value="">Select your business type</option>
-                  <option value="studio">Recording Studio</option>
-                  <option value="producer">Music Producer</option>
-                  <option value="artist">Independent Artist</option>
-                  <option value="band">Band/Group</option>
-                  <option value="label">Independent Label</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-              
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Message</label>
-                <textarea 
-                  id="message" 
-                  rows={4} 
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-aqua focus:border-transparent transition-all duration-300"
-                  placeholder="Tell us about your business needs..."
-                ></textarea>
-              </div>
-              
-              <div className="text-center">
-                <Button
-                  className="bg-gradient-to-r from-brand-pink to-brand-aqua hover:opacity-90 text-white px-8 py-3 rounded-lg font-medium shadow-md hover:shadow-lg transition-all duration-300"
-                >
-                  Submit Request
-                </Button>
-              </div>
-            </form>
+              <Button
+                variant="outline"
+                className="border border-gray-200 px-8 py-6"
+                onClick={() => setShowDemoDialog(true)}
+              >
+                <Calendar className="mr-2 h-5 w-5" />
+                Schedule Consultation
+              </Button>
+            </div>
           </div>
         </div>
       </section>
