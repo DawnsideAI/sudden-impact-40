@@ -183,9 +183,6 @@ const MusicPricing = () => {
         </div>
         
         <div className="mt-12 text-center">
-          <p className="text-gray-600">
-            Need a custom solution? <a href="#contact" className="text-brand-pink hover:underline">Contact us</a> for a personalized quote.
-          </p>
           <div className="flex flex-wrap gap-4 justify-center mt-6">
             <div className="flex items-center text-sm text-gray-600">
               <Check size={16} className="text-brand-aqua mr-2" />
