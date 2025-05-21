@@ -61,12 +61,12 @@ const Navbar = () => {
         transition={{ duration: 0.5, delay: 0.2 }}
       >
         <div className="container-custom">
-          <div className="flex items-center justify-between py-1">
+          <div className="flex items-center justify-between py-0.5">
             {/* Logo container with different sizing for mobile vs desktop */}
             <Link to="/" className="flex items-center">
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className="relative bg-transparent rounded-lg p-1"
+                className="relative bg-transparent rounded-lg p-0.5"
               >
                 {/* Logo with enhanced visibility on white background */}
                 <div className="relative inline-block">
@@ -89,7 +89,7 @@ const Navbar = () => {
                 <NavigationMenuList>
                   <NavigationMenuItem>
                     <NavigationMenuLink asChild>
-                      <Link to="/" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent rounded-md")}>
+                      <Link to="/" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent rounded-md py-1.5")}>
                         Home
                       </Link>
                     </NavigationMenuLink>
@@ -97,7 +97,7 @@ const Navbar = () => {
                   
                   <NavigationMenuItem>
                     <NavigationMenuLink asChild>
-                      <Link to="/solutions" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent rounded-md")}>
+                      <Link to="/solutions" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent rounded-md py-1.5")}>
                         Solutions
                       </Link>
                     </NavigationMenuLink>
@@ -105,7 +105,7 @@ const Navbar = () => {
 
                   <NavigationMenuItem>
                     <NavigationMenuLink asChild>
-                      <Link to="/industries" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent rounded-md")}>
+                      <Link to="/industries" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent rounded-md py-1.5")}>
                         Industries
                       </Link>
                     </NavigationMenuLink>
@@ -113,7 +113,7 @@ const Navbar = () => {
 
                   <NavigationMenuItem>
                     <NavigationMenuLink asChild>
-                      <Link to="/pricing" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent rounded-md")}>
+                      <Link to="/pricing" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent rounded-md py-1.5")}>
                         Pricing
                       </Link>
                     </NavigationMenuLink>
@@ -121,7 +121,7 @@ const Navbar = () => {
 
                   <NavigationMenuItem>
                     <NavigationMenuLink asChild>
-                      <Link to="/contact" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent rounded-md")}>
+                      <Link to="/contact" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent rounded-md py-1.5")}>
                         Contact
                       </Link>
                     </NavigationMenuLink>
@@ -135,7 +135,7 @@ const Navbar = () => {
               {/* CTA button with appropriate sizing */}
               <Link 
                 to="/demo" 
-                className="bg-gradient-to-r from-brand-pink to-brand-aqua text-white font-medium py-2 px-3 md:py-2 md:px-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 text-sm md:text-base whitespace-nowrap"
+                className="bg-gradient-to-r from-brand-pink to-brand-aqua text-white font-medium py-1.5 px-3 md:py-1.5 md:px-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 text-sm md:text-base whitespace-nowrap"
               >
                 Try AI Voice Agent
               </Link>
@@ -144,10 +144,10 @@ const Navbar = () => {
               <Sheet>
                 <SheetTrigger asChild className="md:hidden">
                   <button 
-                    className="ml-2 p-2 text-gray-700 focus:outline-none focus:ring-0"
+                    className="ml-2 p-1.5 text-gray-700 focus:outline-none focus:ring-0"
                     aria-label="Open menu"
                   >
-                    <Menu className="h-6 w-6" />
+                    <Menu className="h-5 w-5" />
                   </button>
                 </SheetTrigger>
                 <SheetContent side="right" className="md:hidden py-6 w-[85vw] sm:max-w-sm">
