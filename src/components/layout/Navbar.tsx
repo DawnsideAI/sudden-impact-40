@@ -69,7 +69,7 @@ const Navbar = () => {
                 className="relative bg-transparent rounded-lg"
               >
                 <img 
-                  src="/lovable-uploads/293aebbf-1435-4e16-867f-2a95f52ef685.png" 
+                  src="/lovable-uploads/79ed2bfc-fd57-4c1d-a483-d16c22680f10.png" 
                   alt="Sudden Impact Agency Logo" 
                   className={isMobile ? "h-24 w-auto object-contain" : "h-56 w-auto object-contain"} 
                 />
