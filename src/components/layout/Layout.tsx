@@ -22,8 +22,8 @@ const Layout = ({ children, showBgEffects = true, lightMode = false }: LayoutPro
       document.body.classList.add('mobile-optimized');
       document.documentElement.style.wordBreak = 'break-word';
       
-      // Fix for mobile Safari scrolling issues
-      document.body.style.WebkitOverflowScrolling = 'touch';
+      // Fix for mobile Safari scrolling issues - using type assertion for WebKit property
+      (document.body.style as any).WebkitOverflowScrolling = 'touch';
       document.documentElement.style.height = '100%';
       document.body.style.position = 'relative';
     } else {
@@ -35,7 +35,7 @@ const Layout = ({ children, showBgEffects = true, lightMode = false }: LayoutPro
       document.body.style.overflowX = '';
       document.body.classList.remove('mobile-optimized');
       document.documentElement.style.wordBreak = '';
-      document.body.style.WebkitOverflowScrolling = '';
+      (document.body.style as any).WebkitOverflowScrolling = '';
       document.documentElement.style.height = '';
       document.body.style.position = '';
     };

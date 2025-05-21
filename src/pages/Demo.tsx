@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Calendar, Clock, Check, Mic, MessageSquare, CalendarClock } from "lucide-react";
+import { Calendar, Clock, Check, Mic, MessageSquare, CalendarClock, PhoneCall } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import DemoRequestForm from "@/components/demo/DemoRequestForm";
 import AIDemoContact from "@/components/demo/AIDemoContact";
