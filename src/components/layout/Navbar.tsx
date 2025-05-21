@@ -66,13 +66,20 @@ const Navbar = () => {
             <Link to="/" className="flex items-center">
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className="relative bg-transparent rounded-lg"
+                className="relative bg-transparent rounded-lg p-1"
               >
-                <img 
-                  src="/lovable-uploads/79ed2bfc-fd57-4c1d-a483-d16c22680f10.png" 
-                  alt="Sudden Impact Agency Logo" 
-                  className={isMobile ? "h-24 w-auto object-contain" : "h-56 w-auto object-contain"} 
-                />
+                {/* Logo with enhanced visibility - adding a light box shadow and slightly improved contrast */}
+                <div className="relative inline-block">
+                  <img 
+                    src="/lovable-uploads/79ed2bfc-fd57-4c1d-a483-d16c22680f10.png" 
+                    alt="Sudden Impact Agency Logo" 
+                    className={cn(
+                      "relative z-10",
+                      isMobile ? "h-24 w-auto object-contain" : "h-56 w-auto object-contain",
+                      "filter drop-shadow-sm hover:drop-shadow-md transition-all duration-300"
+                    )} 
+                  />
+                </div>
               </motion.div>
             </Link>
 
