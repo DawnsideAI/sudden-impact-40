@@ -61,8 +61,8 @@ const Layout = ({ children, showBgEffects = true, lightMode = false }: LayoutPro
           <Navbar />
         </div>
         
-        {/* Significantly reduced padding */}
-        <div className={isMobile ? "pt-12" : "pt-14"}>
+        {/* Adjusted padding to provide more space for content */}
+        <div className={isMobile ? "pt-14" : "pt-16"}>
           <main className="flex-grow overflow-x-hidden pt-0">
             {children}
           </main>

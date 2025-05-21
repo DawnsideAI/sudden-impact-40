@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
@@ -95,7 +96,7 @@ const MusicPricing = () => {
   };
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-24 bg-white">
       <div className="container-custom">
         <SectionTitle
           title="Pricing for Music Studios"

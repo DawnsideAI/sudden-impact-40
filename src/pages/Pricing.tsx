@@ -246,8 +246,8 @@ const Pricing = () => {
 
   return (
     <Layout lightMode={true}>
-      {/* Hero Section */}
-      <section className="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-br from-gray-50 via-white to-gray-100 relative overflow-hidden">
+      {/* Hero Section - Modified to prevent content cutoff */}
+      <section className="pt-28 pb-20 md:pt-36 md:pb-28 bg-gradient-to-br from-gray-50 via-white to-gray-100 relative overflow-hidden">
         {/* Background elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-brand-pink/5 rounded-full blur-3xl"></div>
@@ -262,7 +262,7 @@ const Pricing = () => {
                 <span className="bg-gradient-to-r from-brand-pink to-brand-aqua bg-clip-text text-transparent"> — powered by our AI</span>
               </h1>
               <div className="max-w-2xl mx-auto mt-8 p-6 rounded-xl bg-white shadow-lg border border-gray-100">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-gray-700">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-5 text-gray-700">
                   <p className="flex items-center"><Check className="mr-2 h-4 w-4 text-brand-pink" /> 7-Day Free Trial (credit card required)</p>
                   <p className="flex items-center"><Check className="mr-2 h-4 w-4 text-brand-aqua" /> $197.00 One-time setup fee</p>
                   <p className="flex items-center"><Check className="mr-2 h-4 w-4 text-brand-pink" /> Cancel anytime during trial period</p>
