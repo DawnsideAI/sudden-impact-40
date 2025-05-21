@@ -53,9 +53,9 @@ const Layout = ({ children, showBgEffects = true, lightMode = false }: LayoutPro
           <Navbar />
         </div>
         
-        {/* Significantly reduced padding to account for thinner header */}
-        <div className={isMobile ? "pt-20" : "pt-28"}>
-          <main className="flex-grow overflow-x-hidden pt-2 md:pt-4">
+        {/* Further reduced padding to account for thinner header */}
+        <div className={isMobile ? "pt-16" : "pt-20"}>
+          <main className="flex-grow overflow-x-hidden pt-0">
             {children}
           </main>
         </div>
