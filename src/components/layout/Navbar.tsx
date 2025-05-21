@@ -45,7 +45,6 @@ const Navbar = () => {
   // Use consistent styling
   const bgColor = scrolled ? 'bg-white/95 backdrop-blur-xl' : 'bg-white/90 backdrop-blur-xl';
   const textColor = 'text-gray-800';
-  // Updated navItemClass to include purple hover state with white text
   const navItemClass = "text-gray-700 hover:text-white hover:bg-brand-purple transition-colors duration-200";
 
   return (
@@ -61,12 +60,12 @@ const Navbar = () => {
         transition={{ duration: 0.5, delay: 0.2 }}
       >
         <div className="container-custom">
-          <div className="flex items-center justify-between py-0.5">
-            {/* Logo container with different sizing for mobile vs desktop */}
+          <div className="flex items-center justify-between py-0">
+            {/* Logo container - maintain size but in thinner header */}
             <Link to="/" className="flex items-center">
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className="relative bg-transparent rounded-lg p-0.5"
+                className="relative bg-transparent rounded-lg p-0"
               >
                 {/* Logo with enhanced visibility on white background */}
                 <div className="relative inline-block">
@@ -83,13 +82,13 @@ const Navbar = () => {
               </motion.div>
             </Link>
 
-            {/* Desktop Navigation with direct links */}
+            {/* Desktop Navigation with direct links - smaller spacing */}
             <div className="hidden md:block">
               <NavigationMenu>
-                <NavigationMenuList>
+                <NavigationMenuList className="space-x-0">
                   <NavigationMenuItem>
                     <NavigationMenuLink asChild>
-                      <Link to="/" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent rounded-md py-1.5")}>
+                      <Link to="/" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent rounded-md py-1 px-2 text-sm")}>
                         Home
                       </Link>
                     </NavigationMenuLink>
@@ -97,7 +96,7 @@ const Navbar = () => {
                   
                   <NavigationMenuItem>
                     <NavigationMenuLink asChild>
-                      <Link to="/solutions" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent rounded-md py-1.5")}>
+                      <Link to="/solutions" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent rounded-md py-1 px-2 text-sm")}>
                         Solutions
                       </Link>
                     </NavigationMenuLink>
@@ -105,7 +104,7 @@ const Navbar = () => {
 
                   <NavigationMenuItem>
                     <NavigationMenuLink asChild>
-                      <Link to="/industries" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent rounded-md py-1.5")}>
+                      <Link to="/industries" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent rounded-md py-1 px-2 text-sm")}>
                         Industries
                       </Link>
                     </NavigationMenuLink>
@@ -113,7 +112,7 @@ const Navbar = () => {
 
                   <NavigationMenuItem>
                     <NavigationMenuLink asChild>
-                      <Link to="/pricing" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent rounded-md py-1.5")}>
+                      <Link to="/pricing" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent rounded-md py-1 px-2 text-sm")}>
                         Pricing
                       </Link>
                     </NavigationMenuLink>
@@ -121,7 +120,7 @@ const Navbar = () => {
 
                   <NavigationMenuItem>
                     <NavigationMenuLink asChild>
-                      <Link to="/contact" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent rounded-md py-1.5")}>
+                      <Link to="/contact" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent rounded-md py-1 px-2 text-sm")}>
                         Contact
                       </Link>
                     </NavigationMenuLink>
@@ -131,23 +130,23 @@ const Navbar = () => {
             </div>
 
             {/* Mobile Menu using Sheet component */}
-            <div className="flex items-center gap-2">
-              {/* CTA button with appropriate sizing */}
+            <div className="flex items-center gap-1">
+              {/* CTA button with appropriate sizing - smaller to fit header */}
               <Link 
                 to="/demo" 
-                className="bg-gradient-to-r from-brand-pink to-brand-aqua text-white font-medium py-1.5 px-3 md:py-1.5 md:px-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 text-sm md:text-base whitespace-nowrap"
+                className="bg-gradient-to-r from-brand-pink to-brand-aqua text-white font-medium py-1 px-2 md:py-1 md:px-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 text-xs md:text-sm whitespace-nowrap"
               >
                 Try AI Voice Agent
               </Link>
               
-              {/* Sheet component for mobile menu */}
+              {/* Sheet component for mobile menu - smaller button */}
               <Sheet>
                 <SheetTrigger asChild className="md:hidden">
                   <button 
-                    className="ml-2 p-1.5 text-gray-700 focus:outline-none focus:ring-0"
+                    className="ml-1 p-1 text-gray-700 focus:outline-none focus:ring-0"
                     aria-label="Open menu"
                   >
-                    <Menu className="h-5 w-5" />
+                    <Menu className="h-4 w-4" />
                   </button>
                 </SheetTrigger>
                 <SheetContent side="right" className="md:hidden py-6 w-[85vw] sm:max-w-sm">
