@@ -10,6 +10,7 @@ import WhiteSection from "@/components/layout/WhiteSection";
 import StyleProvider from "@/components/design/StyleProvider";
 import SectionTitle from "@/components/design/SectionTitle";
 import { useIsMobile } from '@/hooks/use-mobile';
+import { toast } from "@/hooks/use-toast";
 import "../styles/iframe-container.css"; // Import the iframe-container CSS
 
 const Demo = () => {
@@ -21,13 +22,26 @@ const Demo = () => {
   const [isBookingScriptLoaded, setIsBookingScriptLoaded] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isFormScriptLoaded, setIsFormScriptLoaded] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   useEffect(() => {
+    // Check if form was previously submitted
+    const hasSubmitted = localStorage.getItem('demoFormSubmitted') === 'true';
+    if (hasSubmitted) {
+      setFormSubmitted(true);
+    }
+
     // Set loading to false after a timeout to ensure components have time to render
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 500);
 
+    // Handle mobile scrolling issues
+    if (isMobile) {
+      document.documentElement.style.cssText = 'height: 100%; overflow-y: visible; -webkit-overflow-scrolling: touch;';
+      document.body.style.cssText = 'height: 100%; overflow-y: visible; position: relative;';
+    }
+    
     window.scrollTo(0, 0);
     document.title = "Demo | Sudden Impact Agency";
     
@@ -36,6 +50,26 @@ const Demo = () => {
     } else if (window.location.hash === "#video") {
       setActiveTab("video");
     }
+
+    // Handle messages from GHL form
+    const handleGHLMessage = (event: MessageEvent) => {
+      if (
+        event.data && 
+        typeof event.data === 'object' && 
+        event.data.type === 'form:submit'
+      ) {
+        console.log('Demo form submission detected', event.data);
+        setFormSubmitted(true);
+        setShowCallDialog(true);
+        localStorage.setItem('demoFormSubmitted', 'true');
+        toast({
+          title: "Demo Request Submitted!",
+          description: "You'll be connected to our AI voice agent shortly.",
+        });
+      }
+    };
+
+    window.addEventListener('message', handleGHLMessage);
 
     // Load booking script for the scheduler
     if (activeTab === "schedule" && !isBookingScriptLoaded) {
@@ -53,6 +87,10 @@ const Demo = () => {
             existingScript.parentNode.removeChild(existingScript);
           }
           clearTimeout(timer);
+          window.removeEventListener('message', handleGHLMessage);
+          // Restore default scrolling behavior
+          document.documentElement.style.cssText = '';
+          document.body.style.cssText = '';
         };
       } catch (error) {
         console.error("Error loading booking script:", error);
@@ -73,15 +111,31 @@ const Demo = () => {
           existingScript.parentNode.removeChild(existingScript);
         }
         clearTimeout(timer);
+        window.removeEventListener('message', handleGHLMessage);
+        // Restore default scrolling behavior
+        document.documentElement.style.cssText = '';
+        document.body.style.cssText = '';
       };
     }
     
-    return () => clearTimeout(timer);
-  }, [activeTab, isBookingScriptLoaded, isFormScriptLoaded]);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('message', handleGHLMessage);
+      // Restore default scrolling behavior
+      document.documentElement.style.cssText = '';
+      document.body.style.cssText = '';
+    };
+  }, [activeTab, isBookingScriptLoaded, isFormScriptLoaded, isMobile]);
 
   // Handle form submission
   const handleFormSubmit = () => {
+    setFormSubmitted(true);
     setShowCallDialog(true);
+    localStorage.setItem('demoFormSubmitted', 'true');
+    toast({
+      title: "Demo Request Submitted!",
+      description: "Call now to experience our AI voice agent demo.",
+    });
   };
 
   if (isLoading) {
@@ -178,42 +232,79 @@ const Demo = () => {
                 transition={{ duration: 0.4 }}
               >
                 <StyleProvider delay={0.2} className="bg-white rounded-xl p-4 md:p-8 shadow-md border border-brand-purple/10">
-                  <div className="text-center mb-4 md:mb-8">
-                    <div className="w-12 h-12 md:w-16 md:h-16 mx-auto rounded-full bg-gradient-to-br from-brand-pink to-brand-aqua/70 flex items-center justify-center text-white mb-3 md:mb-4">
-                      <Mic className="h-4 w-4 md:h-6 md:w-6" />
+                  {!formSubmitted ? (
+                    <>
+                      <div className="text-center mb-4 md:mb-8">
+                        <div className="w-12 h-12 md:w-16 md:h-16 mx-auto rounded-full bg-gradient-to-br from-brand-pink to-brand-aqua/70 flex items-center justify-center text-white mb-3 md:mb-4">
+                          <Mic className="h-4 w-4 md:h-6 md:w-6" />
+                        </div>
+                        <h2 className="text-lg md:text-2xl font-bold mb-2 md:mb-3 text-brand-dark">Live AI Voice Agent Demo</h2>
+                        <p className="text-sm md:text-base text-brand-gray mb-5">
+                          Complete the form below to access our AI voice agent demo.
+                        </p>
+                      </div>
+                      
+                      {/* Direct GHL form embed */}
+                      <div className="ghl-form-wrapper" style={{ height: "auto", minHeight: isMobile ? "800px" : "700px" }}>
+                        <iframe
+                          src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
+                          style={{ 
+                            width: "100%", 
+                            height: "100%", 
+                            minHeight: isMobile ? "800px" : "700px",
+                            border: "none", 
+                            borderRadius: "8px" 
+                          }}
+                          id="inline-Gf3ORV8Uba4HRiXoml5L" 
+                          data-layout="{'id':'INLINE'}"
+                          data-trigger-type="alwaysShow"
+                          data-trigger-value=""
+                          data-activation-type="alwaysActivated"
+                          data-activation-value=""
+                          data-deactivation-type="leadCollected"
+                          data-deactivation-value=""
+                          data-form-name="A2P Form - New"
+                          data-height="auto"
+                          data-layout-iframe-id="inline-Gf3ORV8Uba4HRiXoml5L"
+                          data-form-id="Gf3ORV8Uba4HRiXoml5L"
+                          title="A2P Form - New"
+                        ></iframe>
+                        
+                        {/* Fallback submit button in case form doesn't submit properly */}
+                        <button
+                          onClick={handleFormSubmit}
+                          className="w-full mt-4 py-3 px-4 bg-gradient-to-r from-brand-pink to-brand-aqua text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                        >
+                          Submit Demo Request
+                        </button>
+                      </div>
+                    </>
+                  ) : (
+                    <div className="text-center py-8 px-6">
+                      <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-r from-brand-pink to-brand-aqua flex items-center justify-center text-white mb-6">
+                        <Check className="h-8 w-8" />
+                      </div>
+                      <h3 className="text-2xl font-bold mb-2 text-gray-800">Demo Request Submitted!</h3>
+                      <p className="text-gray-600 mb-6">
+                        Call now to experience our AI voice agent demo.
+                      </p>
+                      <div className="flex items-center justify-center gap-3 mb-4">
+                        <PhoneCall className="h-5 w-5 text-brand-pink" />
+                        <a 
+                          href="tel:+13026183977"
+                          className="text-lg font-medium text-brand-aqua hover:underline"
+                        >
+                          +1 (302) 618-3977
+                        </a>
+                      </div>
+                      <button
+                        onClick={() => setShowCallDialog(true)}
+                        className="mt-4 py-3 px-6 bg-gradient-to-r from-brand-pink to-brand-aqua text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                      >
+                        <PhoneCall className="inline-block mr-2" /> Call AI Demo
+                      </button>
                     </div>
-                    <h2 className="text-lg md:text-2xl font-bold mb-2 md:mb-3 text-brand-dark">Live AI Voice Agent Demo</h2>
-                    <p className="text-sm md:text-base text-brand-gray mb-5">
-                      Complete the form below to access our AI voice agent demo.
-                    </p>
-                  </div>
-                  
-                  {/* Direct GHL form embed */}
-                  <div className="ghl-form-wrapper" style={{ height: "auto", minHeight: isMobile ? "980px" : "900px" }}>
-                    <iframe
-                      src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
-                      style={{ 
-                        width: "100%", 
-                        height: "100%", 
-                        minHeight: isMobile ? "980px" : "900px",
-                        border: "none", 
-                        borderRadius: "8px" 
-                      }}
-                      id="inline-Gf3ORV8Uba4HRiXoml5L" 
-                      data-layout="{'id':'INLINE'}"
-                      data-trigger-type="alwaysShow"
-                      data-trigger-value=""
-                      data-activation-type="alwaysActivated"
-                      data-activation-value=""
-                      data-deactivation-type="leadCollected"
-                      data-deactivation-value=""
-                      data-form-name="A2P Form - New"
-                      data-height="auto"
-                      data-layout-iframe-id="inline-Gf3ORV8Uba4HRiXoml5L"
-                      data-form-id="Gf3ORV8Uba4HRiXoml5L"
-                      title="A2P Form - New"
-                    ></iframe>
-                  </div>
+                  )}
                 </StyleProvider>
               </motion.div>
             )}
@@ -236,7 +327,7 @@ const Demo = () => {
                     </p>
                   </div>
 
-                  <DemoRequestForm showVideo={true} />
+                  <DemoRequestForm showVideo={true} onFormSubmit={handleFormSubmit} />
                 </StyleProvider>
               </motion.div>
             )}
@@ -267,7 +358,7 @@ const Demo = () => {
                           src="https://link.suddenimpactagency.io/widget/booking/MYRdt5Un7mP29erZS5rx" 
                           style={{ 
                             width: "100%",
-                            height: isMobile ? "950px" : "800px", 
+                            height: isMobile ? "700px" : "650px", 
                             border: "none",
                           }}
                           scrolling="no" 

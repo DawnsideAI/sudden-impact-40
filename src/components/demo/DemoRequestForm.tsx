@@ -26,7 +26,7 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
 
   // Check if the form has been submitted on component mount
   useEffect(() => {
-    const isA2PFormSubmitted = localStorage.getItem('a2pFormSubmitted') === 'true';
+    const isA2PFormSubmitted = localStorage.getItem('demoFormSubmitted') === 'true';
     setFormSubmitted(isA2PFormSubmitted);
   }, []);
   
@@ -40,7 +40,7 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
       ) {
         console.log('Form submission detected via postMessage', event.data);
         setFormSubmitted(true);
-        localStorage.setItem('a2pFormSubmitted', 'true');
+        localStorage.setItem('demoFormSubmitted', 'true');
         
         if (onFormSubmit) onFormSubmit();
         
@@ -79,6 +79,19 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
     };
   }, []);
 
+  // Handle manual form submission if automatic submission fails
+  const handleManualSubmit = () => {
+    setFormSubmitted(true);
+    localStorage.setItem('demoFormSubmitted', 'true');
+    
+    if (onFormSubmit) onFormSubmit();
+    
+    toast({
+      title: "Form submitted successfully",
+      description: "Call the number to experience our AI voice demo",
+    });
+  };
+
   // Handle video load complete
   const handleVideoLoad = () => {
     setIsVideoLoading(false);
@@ -113,13 +126,13 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
     <div className="relative">
       {!formSubmitted ? (
         <div className="bg-white rounded-lg border border-gray-200">
-          <div className="ghl-form-wrapper" style={{ height: "auto", minHeight: isMobile ? "980px" : "900px" }}>
+          <div className="ghl-form-wrapper" style={{ height: "auto", minHeight: isMobile ? "800px" : "700px" }}>
             <iframe
               src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
               style={{ 
                 width: "100%", 
                 height: "100%", 
-                minHeight: isMobile ? "980px" : "900px",
+                minHeight: isMobile ? "800px" : "700px",
                 border: "none", 
                 borderRadius: "8px",
                 margin: "0 auto"
@@ -138,6 +151,16 @@ const DemoRequestForm = ({ onFormSubmit, showVideo = false }: DemoRequestFormPro
               data-form-id="Gf3ORV8Uba4HRiXoml5L"
               title="A2P Form - New"
             ></iframe>
+          </div>
+          
+          {/* Manual submit button as fallback */}
+          <div className="px-4 pb-4">
+            <button
+              onClick={handleManualSubmit}
+              className="w-full py-3 px-4 mt-4 bg-gradient-to-r from-brand-pink to-brand-aqua text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition-all"
+            >
+              Submit Demo Request
+            </button>
           </div>
         </div>
       ) : (

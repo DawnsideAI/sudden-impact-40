@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Facebook, Linkedin } from 'lucide-react';
+import { Facebook, Linkedin, Phone, Mail } from 'lucide-react';
 
 interface FooterProps {
   lightMode?: boolean;
@@ -35,7 +35,7 @@ const Footer: React.FC<FooterProps> = ({ lightMode = false }) => {
   return (
     <footer className={`${bgColor} border-t ${borderColor} pt-8 pb-6`}>
       <div className="container-custom max-w-6xl mx-auto px-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 mb-6 md:mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mb-6 md:mb-8">
           {/* Company Info */}
           <div>
             <motion.div
@@ -44,13 +44,64 @@ const Footer: React.FC<FooterProps> = ({ lightMode = false }) => {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <p className={`${textColor} text-sm`}>
+              <img 
+                src="/lovable-uploads/99284eb7-0e97-4d18-a9bd-6e1edf74a2a1.png" 
+                alt="Sudden Impact Agency Logo" 
+                className="h-16 w-auto object-contain mb-4"
+              />
+              <p className={`${textColor} text-sm mb-4`}>
                 Transforming business communication through intelligent AI voice agents.
               </p>
+              <div className="flex items-center gap-4 mb-4">
+                <a href="tel:+13026183977" className={`${textColor} flex items-center gap-2 text-sm ${linkHoverColor}`}>
+                  <Phone className="h-3 w-3" />
+                  (302) 618-3977
+                </a>
+              </div>
+              <div className="flex items-center gap-4">
+                <a href="mailto:info@suddenimpactagency.io" className={`${textColor} flex items-center gap-2 text-sm ${linkHoverColor}`}>
+                  <Mail className="h-3 w-3" />
+                  info@suddenimpactagency.io
+                </a>
+              </div>
             </motion.div>
           </div>
 
-          {/* Case Studies */}
+          {/* Solutions */}
+          <div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              <h4 className={`font-bold text-sm mb-3 ${titleColor}`}>Solutions</h4>
+              <ul className="space-y-1.5 text-sm">
+                <li>
+                  <Link to="/solutions" className={`${textColor} ${linkHoverColor} transition-colors duration-200`}>
+                    AI Voice Agents
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/demo" className={`${textColor} ${linkHoverColor} transition-colors duration-200`}>
+                    Try Demo
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/pricing" className={`${textColor} ${linkHoverColor} transition-colors duration-200`}>
+                    Pricing
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/contact" className={`${textColor} ${linkHoverColor} transition-colors duration-200`}>
+                    Get Started
+                  </Link>
+                </li>
+              </ul>
+            </motion.div>
+          </div>
+
+          {/* Industries */}
           <div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -58,13 +109,14 @@ const Footer: React.FC<FooterProps> = ({ lightMode = false }) => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <h4 className={`font-bold text-sm mb-3 ${titleColor}`}>Case Studies</h4>
+              <h4 className={`font-bold text-sm mb-3 ${titleColor}`}>Industries</h4>
               <ul className="space-y-1.5 text-sm">
                 {[
                   { name: "Real Estate", url: "/industries/realestate" },
                   { name: "Healthcare", url: "/industries/healthcare" },
                   { name: "Restaurants", url: "/industries/restaurants" },
                   { name: "Service Contractors", url: "/industries/contractors" },
+                  { name: "Music", url: "/industries/music" }
                 ].map((item, i) => (
                   <li key={i}>
                     <Link to={item.url} className={`${textColor} ${linkHoverColor} transition-colors duration-200`}>
@@ -89,8 +141,10 @@ const Footer: React.FC<FooterProps> = ({ lightMode = false }) => {
                 {[
                   { name: "Demo", url: "/demo" },
                   { name: "Pricing", url: "/pricing" },
+                  { name: "FAQ", url: "/#faq" },
+                  { name: "Case Studies", url: "/#case-studies" },
                   { name: "Legal", url: "/legal" },
-                  { name: "Contact", url: "/demo" },
+                  { name: "Contact", url: "/contact" },
                 ].map((item, i) => (
                   <li key={i}>
                     <Link to={item.url} className={`${textColor} ${linkHoverColor} transition-colors duration-200`}>

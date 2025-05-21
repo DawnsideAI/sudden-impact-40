@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Check, Calendar, PhoneCall } from "lucide-react";
@@ -38,6 +39,14 @@ const DemoForm = () => {
     return () => window.removeEventListener('message', handleGHLMessage);
   }, []);
 
+  // Check local storage for previous submissions
+  useEffect(() => {
+    const hasSubmitted = localStorage.getItem('demoFormSubmitted') === 'true';
+    if (hasSubmitted) {
+      setIsSubmitted(true);
+    }
+  }, []);
+
   // Load the GHL embed.js script
   useEffect(() => {
     // First check if script already exists
@@ -67,6 +76,16 @@ const DemoForm = () => {
 
   const handleDemoVideoClick = () => {
     setShowDemoVideo(true);
+  };
+
+  const handleFormSubmit = () => {
+    setIsSubmitted(true);
+    setShowCallDialog(true);
+    localStorage.setItem('demoFormSubmitted', 'true');
+    toast({
+      title: "Demo Request Submitted!",
+      description: "You'll be connected to our AI voice agent shortly.",
+    });
   };
 
   const demoVideoUrl = "https://www.youtube.com/embed/HuU_pxXVVqo?si=qrMXYUDeg8m8zUzs";
@@ -166,13 +185,13 @@ const DemoForm = () => {
                   </p>
                 </div>
                 
-                <div className="w-full ghl-form-wrapper" style={{ height: "auto", minHeight: isMobile ? "980px" : "900px" }}>
+                <div className="w-full ghl-form-wrapper" style={{ height: "auto", minHeight: isMobile ? "800px" : "750px" }}>
                   <iframe
                     src="https://link.suddenimpactagency.io/widget/form/Gf3ORV8Uba4HRiXoml5L"
                     style={{ 
                       width: "100%", 
                       height: "100%", 
-                      minHeight: isMobile ? "980px" : "900px",
+                      minHeight: isMobile ? "800px" : "750px",
                       border: "none", 
                       borderRadius: "8px" 
                     }}
@@ -189,6 +208,17 @@ const DemoForm = () => {
                     data-layout-iframe-id="inline-home-Gf3ORV8Uba4HRiXoml5L"
                     data-form-id="Gf3ORV8Uba4HRiXoml5L"
                     title="A2P Form - New"
+                    onLoad={() => {
+                      // Add a fallback button for when the form doesn't auto-submit
+                      const formContainer = document.querySelector(".ghl-form-wrapper");
+                      if (formContainer) {
+                        const fallbackButton = document.createElement("button");
+                        fallbackButton.innerText = "Submit Demo Request";
+                        fallbackButton.className = "mt-4 bg-gradient-to-r from-brand-pink to-brand-aqua text-white font-medium py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-all";
+                        fallbackButton.onclick = handleFormSubmit;
+                        formContainer.appendChild(fallbackButton);
+                      }
+                    }}
                   ></iframe>
                 </div>
               </div>

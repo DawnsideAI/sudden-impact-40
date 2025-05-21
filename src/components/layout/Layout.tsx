@@ -21,6 +21,11 @@ const Layout = ({ children, showBgEffects = true, lightMode = false }: LayoutPro
     if (isMobile) {
       document.body.classList.add('mobile-optimized');
       document.documentElement.style.wordBreak = 'break-word';
+      
+      // Fix for mobile Safari scrolling issues
+      document.body.style.WebkitOverflowScrolling = 'touch';
+      document.documentElement.style.height = '100%';
+      document.body.style.position = 'relative';
     } else {
       document.body.classList.remove('mobile-optimized');
       document.documentElement.style.wordBreak = '';
@@ -30,6 +35,9 @@ const Layout = ({ children, showBgEffects = true, lightMode = false }: LayoutPro
       document.body.style.overflowX = '';
       document.body.classList.remove('mobile-optimized');
       document.documentElement.style.wordBreak = '';
+      document.body.style.WebkitOverflowScrolling = '';
+      document.documentElement.style.height = '';
+      document.body.style.position = '';
     };
   }, [isMobile]);
   
@@ -53,8 +61,8 @@ const Layout = ({ children, showBgEffects = true, lightMode = false }: LayoutPro
           <Navbar />
         </div>
         
-        {/* Further reduced padding to account for thinner header */}
-        <div className={isMobile ? "pt-16" : "pt-20"}>
+        {/* Significantly reduced padding */}
+        <div className={isMobile ? "pt-12" : "pt-14"}>
           <main className="flex-grow overflow-x-hidden pt-0">
             {children}
           </main>

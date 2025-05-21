@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { Menu, X } from 'lucide-react';
@@ -26,7 +26,8 @@ import {
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const isMobile = useIsMobile();
-
+  const location = useLocation();
+  
   useEffect(() => {
     const handleScroll = () => {
       const isTop = window.scrollY < 75;
@@ -42,10 +43,17 @@ const Navbar = () => {
     };
   }, [scrolled]);
 
+  // Determine active path for highlighting
+  const isActive = (path: string) => {
+    return location.pathname === path || 
+           (path !== '/' && location.pathname.startsWith(path));
+  };
+
   // Use consistent styling
   const bgColor = scrolled ? 'bg-white/95 backdrop-blur-xl' : 'bg-white/90 backdrop-blur-xl';
   const textColor = 'text-gray-800';
   const navItemClass = "text-gray-700 hover:text-white hover:bg-brand-purple transition-colors duration-200";
+  const activeClass = "text-white bg-brand-purple";
 
   return (
     <>
@@ -67,7 +75,7 @@ const Navbar = () => {
                 whileHover={{ scale: 1.05 }}
                 className="relative bg-transparent rounded-lg p-0"
               >
-                {/* Logo with enhanced visibility on white background */}
+                {/* Logo with transparent background */}
                 <div className="relative inline-block -mt-2 -mb-2">
                   <img 
                     src="/lovable-uploads/99284eb7-0e97-4d18-a9bd-6e1edf74a2a1.png" 
@@ -88,7 +96,15 @@ const Navbar = () => {
                 <NavigationMenuList className="space-x-0">
                   <NavigationMenuItem>
                     <NavigationMenuLink asChild>
-                      <Link to="/" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent rounded-md py-0 px-1.5 text-xs")}>
+                      <Link 
+                        to="/" 
+                        className={cn(
+                          navigationMenuTriggerStyle(), 
+                          navItemClass, 
+                          "bg-transparent rounded-md py-0 px-1.5 text-xs",
+                          isActive('/') ? activeClass : ""
+                        )}
+                      >
                         Home
                       </Link>
                     </NavigationMenuLink>
@@ -96,7 +112,15 @@ const Navbar = () => {
                   
                   <NavigationMenuItem>
                     <NavigationMenuLink asChild>
-                      <Link to="/solutions" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent rounded-md py-0 px-1.5 text-xs")}>
+                      <Link 
+                        to="/solutions" 
+                        className={cn(
+                          navigationMenuTriggerStyle(), 
+                          navItemClass, 
+                          "bg-transparent rounded-md py-0 px-1.5 text-xs",
+                          isActive('/solutions') ? activeClass : ""
+                        )}
+                      >
                         Solutions
                       </Link>
                     </NavigationMenuLink>
@@ -104,7 +128,15 @@ const Navbar = () => {
 
                   <NavigationMenuItem>
                     <NavigationMenuLink asChild>
-                      <Link to="/industries" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent rounded-md py-0 px-1.5 text-xs")}>
+                      <Link 
+                        to="/industries" 
+                        className={cn(
+                          navigationMenuTriggerStyle(), 
+                          navItemClass, 
+                          "bg-transparent rounded-md py-0 px-1.5 text-xs",
+                          isActive('/industries') ? activeClass : ""
+                        )}
+                      >
                         Industries
                       </Link>
                     </NavigationMenuLink>
@@ -112,7 +144,15 @@ const Navbar = () => {
 
                   <NavigationMenuItem>
                     <NavigationMenuLink asChild>
-                      <Link to="/pricing" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent rounded-md py-0 px-1.5 text-xs")}>
+                      <Link 
+                        to="/pricing" 
+                        className={cn(
+                          navigationMenuTriggerStyle(), 
+                          navItemClass, 
+                          "bg-transparent rounded-md py-0 px-1.5 text-xs",
+                          isActive('/pricing') ? activeClass : ""
+                        )}
+                      >
                         Pricing
                       </Link>
                     </NavigationMenuLink>
@@ -120,7 +160,15 @@ const Navbar = () => {
 
                   <NavigationMenuItem>
                     <NavigationMenuLink asChild>
-                      <Link to="/contact" className={cn(navigationMenuTriggerStyle(), navItemClass, "bg-transparent rounded-md py-0 px-1.5 text-xs")}>
+                      <Link 
+                        to="/contact" 
+                        className={cn(
+                          navigationMenuTriggerStyle(), 
+                          navItemClass, 
+                          "bg-transparent rounded-md py-0 px-1.5 text-xs",
+                          isActive('/contact') ? activeClass : ""
+                        )}
+                      >
                         Contact
                       </Link>
                     </NavigationMenuLink>
@@ -134,7 +182,10 @@ const Navbar = () => {
               {/* Ultra-thin CTA button */}
               <Link 
                 to="/demo" 
-                className="bg-gradient-to-r from-brand-pink to-brand-aqua text-white font-medium py-0.5 px-1.5 md:py-0.5 md:px-2 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 text-xs md:text-xs whitespace-nowrap"
+                className={cn(
+                  "bg-gradient-to-r from-brand-pink to-brand-aqua text-white font-medium py-0.5 px-1.5 md:py-0.5 md:px-2 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 text-xs md:text-xs whitespace-nowrap",
+                  isActive('/demo') ? "ring-2 ring-white" : ""
+                )}
               >
                 Try AI Voice Agent
               </Link>
@@ -156,35 +207,50 @@ const Navbar = () => {
                   <nav className="flex flex-col gap-6">
                     <Link 
                       to="/" 
-                      className="text-xl font-medium text-gray-800 hover:text-white hover:bg-brand-purple p-2 rounded-md transition-colors"
+                      className={cn(
+                        "text-xl font-medium p-2 rounded-md transition-colors",
+                        isActive('/') ? "text-white bg-brand-purple" : "text-gray-800 hover:text-white hover:bg-brand-purple"
+                      )}
                     >
                       Home
                     </Link>
                     
                     <Link 
                       to="/solutions" 
-                      className="text-xl font-medium text-gray-800 hover:text-white hover:bg-brand-purple p-2 rounded-md transition-colors"
+                      className={cn(
+                        "text-xl font-medium p-2 rounded-md transition-colors",
+                        isActive('/solutions') ? "text-white bg-brand-purple" : "text-gray-800 hover:text-white hover:bg-brand-purple"
+                      )}
                     >
                       Solutions
                     </Link>
                     
                     <Link 
                       to="/industries" 
-                      className="text-xl font-medium text-gray-800 hover:text-white hover:bg-brand-purple p-2 rounded-md transition-colors"
+                      className={cn(
+                        "text-xl font-medium p-2 rounded-md transition-colors",
+                        isActive('/industries') ? "text-white bg-brand-purple" : "text-gray-800 hover:text-white hover:bg-brand-purple"
+                      )}
                     >
                       Industries
                     </Link>
                     
                     <Link 
                       to="/pricing" 
-                      className="text-xl font-medium text-gray-800 hover:text-white hover:bg-brand-purple p-2 rounded-md transition-colors"
+                      className={cn(
+                        "text-xl font-medium p-2 rounded-md transition-colors",
+                        isActive('/pricing') ? "text-white bg-brand-purple" : "text-gray-800 hover:text-white hover:bg-brand-purple"
+                      )}
                     >
                       Pricing
                     </Link>
                     
                     <Link 
                       to="/contact" 
-                      className="text-xl font-medium text-gray-800 hover:text-white hover:bg-brand-purple p-2 rounded-md transition-colors"
+                      className={cn(
+                        "text-xl font-medium p-2 rounded-md transition-colors",
+                        isActive('/contact') ? "text-white bg-brand-purple" : "text-gray-800 hover:text-white hover:bg-brand-purple"
+                      )}
                     >
                       Contact
                     </Link>
