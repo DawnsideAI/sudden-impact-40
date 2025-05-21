@@ -48,13 +48,13 @@ const Layout = ({ children, showBgEffects = true, lightMode = false }: LayoutPro
       
       {/* Content */}
       <div className="relative z-10 flex flex-col min-h-screen w-full overflow-x-hidden">
-        {/* Header bar - now fixed to top */}
+        {/* Header bar - now fixed to top with reduced height */}
         <div className="fixed top-0 left-0 right-0 z-50 w-full bg-white/95 backdrop-blur-lg border-b border-gray-200 shadow-sm">
           <Navbar />
         </div>
         
-        {/* Add padding to account for fixed header height */}
-        <div className={isMobile ? "pt-28" : "pt-60"}>
+        {/* Adjusted padding to account for thinner header while maintaining logo size */}
+        <div className={isMobile ? "pt-28" : "pt-48"}>
           <main className="flex-grow overflow-x-hidden pt-4 md:pt-8">
             {children}
           </main>

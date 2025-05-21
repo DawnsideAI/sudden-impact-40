@@ -61,23 +61,23 @@ const Navbar = () => {
         transition={{ duration: 0.5, delay: 0.2 }}
       >
         <div className="container-custom">
-          <div className="flex items-center justify-between py-1 md:py-2">
+          <div className="flex items-center justify-between py-1">
             {/* Logo container with different sizing for mobile vs desktop */}
             <Link to="/" className="flex items-center">
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 className="relative bg-transparent rounded-lg p-1"
               >
-                {/* Logo with enhanced visibility - adding a light box shadow and slightly improved contrast */}
+                {/* Logo with enhanced visibility on white background */}
                 <div className="relative inline-block">
                   <img 
-                    src="/lovable-uploads/79ed2bfc-fd57-4c1d-a483-d16c22680f10.png" 
+                    src="/lovable-uploads/99284eb7-0e97-4d18-a9bd-6e1edf74a2a1.png" 
                     alt="Sudden Impact Agency Logo" 
                     className={cn(
                       "relative z-10",
                       isMobile ? "h-24 w-auto object-contain" : "h-56 w-auto object-contain",
                       "filter drop-shadow-sm hover:drop-shadow-md transition-all duration-300"
-                    )} 
+                    )}
                   />
                 </div>
               </motion.div>
