@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -68,20 +69,20 @@ const Navbar = () => {
       >
         <div className="container-custom py-2">
           <div className="flex items-center justify-between py-1">
-            {/* Logo container */}
+            {/* Logo container - increased size */}
             <Link to="/" className="flex items-center">
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 className="relative bg-transparent rounded-lg p-0"
               >
-                {/* Logo with significantly larger size */}
+                {/* Significantly larger logo */}
                 <div className="relative inline-block -mt-3 -mb-3">
                   <img 
                     src="/lovable-uploads/99284eb7-0e97-4d18-a9bd-6e1edf74a2a1.png" 
                     alt="Sudden Impact Agency Logo" 
                     className={cn(
                       "relative z-10",
-                      isMobile ? "h-24 w-auto object-contain" : "h-36 w-auto object-contain",
+                      isMobile ? "h-32 w-auto object-contain" : "h-44 w-auto object-contain",
                       "filter drop-shadow-sm hover:drop-shadow-md transition-all duration-300"
                     )}
                   />
