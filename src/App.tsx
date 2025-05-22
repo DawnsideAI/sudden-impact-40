@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -13,23 +14,23 @@ import Legal from "./pages/Legal";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
-// Import niche pages
-import HealthcareNiche from "./pages/niches/Healthcare";
-import RealEstateNiche from "./pages/niches/RealEstate";
-import RestaurantsNiche from "./pages/niches/Restaurants";
-import ServiceContractorsNiche from "./pages/niches/ServiceContractors";
-import MusicNiche from "./pages/niches/Music";
+// Import industry-specific pages
+import HealthcareNiche from "./pages/industries/Healthcare";
+import RealEstateNiche from "./pages/industries/RealEstate";
+import RestaurantsNiche from "./pages/industries/Restaurants";
+import ServiceContractorsNiche from "./pages/industries/ServiceContractors";
+import MusicNiche from "./pages/industries/Music";
 
-// Import niche common pages
-import NicheAbout from "./pages/niches/common/NicheAbout";
-import NicheBooking from "./pages/niches/common/NicheBooking";
+// Import common industry pages
+import IndustryAbout from "./pages/industries/common/IndustryAbout";
+import IndustryBooking from "./pages/industries/common/IndustryBooking";
 
-import "./styles/iframe-container.css"; // Import the iframe container styles globally
+import "./styles/iframe-container.css";
 
-// Import the new MusicIndustry component
+// Import the Music industry component
 import MusicIndustry from "./components/industries/MusicIndustry";
 
-// Create the client
+// Create the query client
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -44,24 +45,23 @@ const App = () => (
           <Route path="/solutions" element={<Solutions />} />
           <Route path="/industries" element={<Industries />} />
           <Route path="/industries/:industryId" element={<IndustryPage />} />
-          {/* Add new route for Music Industry */}
           <Route path="/industries/music" element={<MusicIndustry />} />
           <Route path="/demo" element={<Demo />} />
           <Route path="/legal" element={<Legal />} />
           <Route path="/contact" element={<Contact />} />
           
-          {/* Niche page routes - separate from main navigation */}
-          <Route path="/niches/healthcare" element={<HealthcareNiche />} />
-          <Route path="/niches/real-estate" element={<RealEstateNiche />} />
-          <Route path="/niches/restaurants" element={<RestaurantsNiche />} />
-          <Route path="/niches/service-contractors" element={<ServiceContractorsNiche />} />
-          <Route path="/niches/music" element={<MusicNiche />} /> {/* Keep this route for direct access */}
+          {/* Industry-specific page routes */}
+          <Route path="/industries/healthcare" element={<HealthcareNiche />} />
+          <Route path="/industries/real-estate" element={<RealEstateNiche />} />
+          <Route path="/industries/restaurants" element={<RestaurantsNiche />} />
+          <Route path="/industries/service-contractors" element={<ServiceContractorsNiche />} />
+          <Route path="/industries/music" element={<MusicNiche />} />
           
-          {/* Common niche page routes */}
-          <Route path="/niches/:industry/about" element={<NicheAbout />} />
-          <Route path="/niches/:industry/booking" element={<NicheBooking />} />
+          {/* Common industry page routes */}
+          <Route path="/industries/:industry/about" element={<IndustryAbout />} />
+          <Route path="/industries/:industry/booking" element={<IndustryBooking />} />
           
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          {/* Catch-all route */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
