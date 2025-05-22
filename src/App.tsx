@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -25,12 +24,12 @@ import MusicNiche from "./pages/niches/Music";
 import NicheAbout from "./pages/niches/common/NicheAbout";
 import NicheBooking from "./pages/niches/common/NicheBooking";
 
-import "./styles/iframe-container.css";
+import "./styles/iframe-container.css"; // Import the iframe container styles globally
 
-// Import the MusicIndustry component
+// Import the new MusicIndustry component
 import MusicIndustry from "./components/industries/MusicIndustry";
 
-// Create the query client
+// Create the client
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -45,23 +44,24 @@ const App = () => (
           <Route path="/solutions" element={<Solutions />} />
           <Route path="/industries" element={<Industries />} />
           <Route path="/industries/:industryId" element={<IndustryPage />} />
+          {/* Add new route for Music Industry */}
           <Route path="/industries/music" element={<MusicIndustry />} />
           <Route path="/demo" element={<Demo />} />
           <Route path="/legal" element={<Legal />} />
           <Route path="/contact" element={<Contact />} />
           
-          {/* Niche page routes */}
+          {/* Niche page routes - separate from main navigation */}
           <Route path="/niches/healthcare" element={<HealthcareNiche />} />
           <Route path="/niches/real-estate" element={<RealEstateNiche />} />
           <Route path="/niches/restaurants" element={<RestaurantsNiche />} />
           <Route path="/niches/service-contractors" element={<ServiceContractorsNiche />} />
-          <Route path="/niches/music" element={<MusicNiche />} />
+          <Route path="/niches/music" element={<MusicNiche />} /> {/* Keep this route for direct access */}
           
           {/* Common niche page routes */}
           <Route path="/niches/:industry/about" element={<NicheAbout />} />
           <Route path="/niches/:industry/booking" element={<NicheBooking />} />
           
-          {/* Catch all route */}
+          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
