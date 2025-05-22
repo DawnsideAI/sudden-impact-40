@@ -56,13 +56,13 @@ const Layout = ({ children, showBgEffects = true, lightMode = false }: LayoutPro
       
       {/* Content */}
       <div className="relative z-10 flex flex-col min-h-screen w-full overflow-x-hidden">
-        {/* Header bar with increased height */}
+        {/* Header bar with increased height for larger logo */}
         <div className="fixed top-0 left-0 right-0 z-50 w-full bg-white/95 backdrop-blur-lg border-b border-gray-200 shadow-sm">
           <Navbar />
         </div>
         
-        {/* Adjusted padding to provide more space for content */}
-        <div className={isMobile ? "pt-16" : "pt-20"}>
+        {/* Adjusted padding to accommodate larger header */}
+        <div className={isMobile ? "pt-20" : "pt-24"}>
           <main className="flex-grow overflow-x-hidden pt-0">
             {children}
           </main>
@@ -75,3 +75,4 @@ const Layout = ({ children, showBgEffects = true, lightMode = false }: LayoutPro
 };
 
 export default Layout;
+

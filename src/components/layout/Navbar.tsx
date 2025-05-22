@@ -75,14 +75,14 @@ const Navbar = () => {
                 whileHover={{ scale: 1.05 }}
                 className="relative bg-transparent rounded-lg p-0"
               >
-                {/* Logo with transparent background */}
+                {/* Logo with larger size */}
                 <div className="relative inline-block -mt-2 -mb-2">
                   <img 
                     src="/lovable-uploads/99284eb7-0e97-4d18-a9bd-6e1edf74a2a1.png" 
                     alt="Sudden Impact Agency Logo" 
                     className={cn(
                       "relative z-10",
-                      isMobile ? "h-16 w-auto object-contain" : "h-24 w-auto object-contain",
+                      isMobile ? "h-20 w-auto object-contain" : "h-28 w-auto object-contain",
                       "filter drop-shadow-sm hover:drop-shadow-md transition-all duration-300"
                     )}
                   />
@@ -275,3 +275,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
