@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -13,7 +14,7 @@ import Legal from "./pages/Legal";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
-// Import niche pages
+// Import niche pages - using correct paths
 import HealthcareNiche from "./pages/niches/Healthcare";
 import RealEstateNiche from "./pages/niches/RealEstate";
 import RestaurantsNiche from "./pages/niches/Restaurants";
@@ -26,7 +27,7 @@ import NicheBooking from "./pages/niches/common/NicheBooking";
 
 import "./styles/iframe-container.css"; // Import the iframe container styles globally
 
-// Import the new MusicIndustry component
+// Import the MusicIndustry component
 import MusicIndustry from "./components/industries/MusicIndustry";
 
 // Create the client
