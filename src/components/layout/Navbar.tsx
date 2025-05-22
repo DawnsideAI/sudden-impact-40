@@ -1,12 +1,12 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { Menu } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
-// Import required components for the mobile menu
+// Import required components for the popup approach
 import {
   Sheet,
   SheetContent,
@@ -14,6 +14,14 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+
+import { 
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  navigationMenuTriggerStyle
+} from "@/components/ui/navigation-menu";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -41,107 +49,228 @@ const Navbar = () => {
            (path !== '/' && location.pathname.startsWith(path));
   };
 
-  // Navigation items consistent with the reference image
-  const navItems = [
-    { label: 'Home', path: '/' },
-    { label: 'Solutions', path: '/solutions' },
-    { label: 'Industries', path: '/industries' },
-    { label: 'Pricing', path: '/pricing' },
-    { label: 'Contact', path: '/contact' },
-  ];
+  // Use consistent styling
+  const bgColor = scrolled ? 'bg-white/95 backdrop-blur-xl' : 'bg-white/90 backdrop-blur-xl';
+  const textColor = 'text-gray-800';
+  const navItemClass = "text-gray-700 hover:text-white hover:bg-brand-purple transition-colors duration-200";
+  const activeClass = "text-white bg-brand-purple";
 
   return (
-    <div className="container-custom">
-      <div className="flex items-center justify-between h-16">
-        {/* Logo container */}
-        <Link to="/" className="flex items-center">
-          <div className="relative inline-block">
-            <img 
-              src="/lovable-uploads/99284eb7-0e97-4d18-a9bd-6e1edf74a2a1.png" 
-              alt="Sudden Impact Agency Logo" 
-              className="h-12 w-auto object-contain"
-            />
-          </div>
-        </Link>
-
-        {/* Desktop Navigation - styled to match the reference image */}
-        <div className="hidden md:flex items-center space-x-8">
-          {navItems.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              className={cn(
-                "text-base font-medium transition-colors",
-                isActive(item.path) 
-                  ? "text-brand-purple" 
-                  : "text-gray-700 hover:text-brand-purple"
-              )}
-            >
-              {item.label}
-            </Link>
-          ))}
-          
-          {/* CTA Button - styled to match reference image */}
-          <Link 
-            to="/demo" 
-            className="bg-gradient-to-r from-brand-pink to-brand-aqua text-white font-medium py-2 px-6 rounded-full text-base hover:shadow-md transition-all duration-300"
-          >
-            Try AI Voice Agent
-          </Link>
-        </div>
-
-        {/* Mobile Menu */}
-        <div className="md:hidden flex items-center gap-2">
-          {/* CTA button - smaller on mobile */}
-          <Link 
-            to="/demo" 
-            className="bg-gradient-to-r from-brand-pink to-brand-aqua text-white font-medium py-1.5 px-3 rounded-full text-sm hover:shadow-md transition-all duration-300"
-          >
-            Try AI Voice Agent
-          </Link>
-          
-          {/* Sheet component for mobile menu */}
-          <Sheet>
-            <SheetTrigger asChild>
-              <button 
-                className="p-1 text-gray-700 focus:outline-none focus:ring-0"
-                aria-label="Open menu"
+    <>
+      <motion.div
+        className={cn(
+          'w-full transition-all duration-300 border-b border-gray-200 relative z-40',
+          bgColor,
+          scrolled ? 'shadow-md' : ''
+        )}
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
+        <div className="container-custom py-0">
+          <div className="flex items-center justify-between py-0">
+            {/* Logo container - maintain size in ultra-thin header */}
+            <Link to="/" className="flex items-center">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                className="relative bg-transparent rounded-lg p-0"
               >
-                <Menu className="h-5 w-5" />
-              </button>
-            </SheetTrigger>
-            <SheetContent side="right" className="md:hidden py-6 w-[85vw] sm:max-w-sm">
-              <SheetHeader className="mb-5">
-                <SheetTitle className="text-center font-bold text-xl">Menu</SheetTitle>
-              </SheetHeader>
-              <nav className="flex flex-col gap-6">
-                {navItems.map((item) => (
-                  <Link 
-                    key={item.path}
-                    to={item.path} 
+                {/* Logo with transparent background */}
+                <div className="relative inline-block -mt-2 -mb-2">
+                  <img 
+                    src="/lovable-uploads/99284eb7-0e97-4d18-a9bd-6e1edf74a2a1.png" 
+                    alt="Sudden Impact Agency Logo" 
                     className={cn(
-                      "text-xl font-medium p-2 rounded-md transition-colors",
-                      isActive(item.path) ? "text-white bg-brand-purple" : "text-gray-800 hover:text-white hover:bg-brand-purple"
+                      "relative z-10",
+                      isMobile ? "h-24 w-auto object-contain" : "h-56 w-auto object-contain",
+                      "filter drop-shadow-sm hover:drop-shadow-md transition-all duration-300"
                     )}
+                  />
+                </div>
+              </motion.div>
+            </Link>
+
+            {/* Desktop Navigation with direct links - even smaller spacing */}
+            <div className="hidden md:block">
+              <NavigationMenu>
+                <NavigationMenuList className="space-x-0">
+                  <NavigationMenuItem>
+                    <NavigationMenuLink asChild>
+                      <Link 
+                        to="/" 
+                        className={cn(
+                          navigationMenuTriggerStyle(), 
+                          navItemClass, 
+                          "bg-transparent rounded-md py-0 px-1.5 text-xs",
+                          isActive('/') ? activeClass : ""
+                        )}
+                      >
+                        Home
+                      </Link>
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
+                  
+                  <NavigationMenuItem>
+                    <NavigationMenuLink asChild>
+                      <Link 
+                        to="/solutions" 
+                        className={cn(
+                          navigationMenuTriggerStyle(), 
+                          navItemClass, 
+                          "bg-transparent rounded-md py-0 px-1.5 text-xs",
+                          isActive('/solutions') ? activeClass : ""
+                        )}
+                      >
+                        Solutions
+                      </Link>
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
+
+                  <NavigationMenuItem>
+                    <NavigationMenuLink asChild>
+                      <Link 
+                        to="/industries" 
+                        className={cn(
+                          navigationMenuTriggerStyle(), 
+                          navItemClass, 
+                          "bg-transparent rounded-md py-0 px-1.5 text-xs",
+                          isActive('/industries') ? activeClass : ""
+                        )}
+                      >
+                        Industries
+                      </Link>
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
+
+                  <NavigationMenuItem>
+                    <NavigationMenuLink asChild>
+                      <Link 
+                        to="/pricing" 
+                        className={cn(
+                          navigationMenuTriggerStyle(), 
+                          navItemClass, 
+                          "bg-transparent rounded-md py-0 px-1.5 text-xs",
+                          isActive('/pricing') ? activeClass : ""
+                        )}
+                      >
+                        Pricing
+                      </Link>
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
+
+                  <NavigationMenuItem>
+                    <NavigationMenuLink asChild>
+                      <Link 
+                        to="/contact" 
+                        className={cn(
+                          navigationMenuTriggerStyle(), 
+                          navItemClass, 
+                          "bg-transparent rounded-md py-0 px-1.5 text-xs",
+                          isActive('/contact') ? activeClass : ""
+                        )}
+                      >
+                        Contact
+                      </Link>
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+              </NavigationMenu>
+            </div>
+
+            {/* Mobile Menu using Sheet component */}
+            <div className="flex items-center gap-0.5">
+              {/* Ultra-thin CTA button */}
+              <Link 
+                to="/demo" 
+                className={cn(
+                  "bg-gradient-to-r from-brand-pink to-brand-aqua text-white font-medium py-0.5 px-1.5 md:py-0.5 md:px-2 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 text-xs md:text-xs whitespace-nowrap",
+                  isActive('/demo') ? "ring-2 ring-white" : ""
+                )}
+              >
+                Try AI Voice Agent
+              </Link>
+              
+              {/* Sheet component for mobile menu - smaller button */}
+              <Sheet>
+                <SheetTrigger asChild className="md:hidden">
+                  <button 
+                    className="ml-1 p-0.5 text-gray-700 focus:outline-none focus:ring-0"
+                    aria-label="Open menu"
                   >
-                    {item.label}
-                  </Link>
-                ))}
-                
-                <hr className="border-gray-200 my-2" />
-                
-                <Link 
-                  to="/demo" 
-                  className="bg-gradient-to-r from-brand-pink to-brand-aqua text-white text-center font-medium py-3 px-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
-                >
-                  Try AI Voice Agent
-                </Link>
-              </nav>
-            </SheetContent>
-          </Sheet>
+                    <Menu className="h-3 w-3" />
+                  </button>
+                </SheetTrigger>
+                <SheetContent side="right" className="md:hidden py-6 w-[85vw] sm:max-w-sm">
+                  <SheetHeader className="mb-5">
+                    <SheetTitle className="text-center font-bold text-xl">Menu</SheetTitle>
+                  </SheetHeader>
+                  <nav className="flex flex-col gap-6">
+                    <Link 
+                      to="/" 
+                      className={cn(
+                        "text-xl font-medium p-2 rounded-md transition-colors",
+                        isActive('/') ? "text-white bg-brand-purple" : "text-gray-800 hover:text-white hover:bg-brand-purple"
+                      )}
+                    >
+                      Home
+                    </Link>
+                    
+                    <Link 
+                      to="/solutions" 
+                      className={cn(
+                        "text-xl font-medium p-2 rounded-md transition-colors",
+                        isActive('/solutions') ? "text-white bg-brand-purple" : "text-gray-800 hover:text-white hover:bg-brand-purple"
+                      )}
+                    >
+                      Solutions
+                    </Link>
+                    
+                    <Link 
+                      to="/industries" 
+                      className={cn(
+                        "text-xl font-medium p-2 rounded-md transition-colors",
+                        isActive('/industries') ? "text-white bg-brand-purple" : "text-gray-800 hover:text-white hover:bg-brand-purple"
+                      )}
+                    >
+                      Industries
+                    </Link>
+                    
+                    <Link 
+                      to="/pricing" 
+                      className={cn(
+                        "text-xl font-medium p-2 rounded-md transition-colors",
+                        isActive('/pricing') ? "text-white bg-brand-purple" : "text-gray-800 hover:text-white hover:bg-brand-purple"
+                      )}
+                    >
+                      Pricing
+                    </Link>
+                    
+                    <Link 
+                      to="/contact" 
+                      className={cn(
+                        "text-xl font-medium p-2 rounded-md transition-colors",
+                        isActive('/contact') ? "text-white bg-brand-purple" : "text-gray-800 hover:text-white hover:bg-brand-purple"
+                      )}
+                    >
+                      Contact
+                    </Link>
+                    
+                    <hr className="border-gray-200 my-2" />
+                    
+                    <Link 
+                      to="/demo" 
+                      className="bg-gradient-to-r from-brand-pink to-brand-aqua text-white text-center font-medium py-3 px-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                    >
+                      Try AI Voice Agent
+                    </Link>
+                  </nav>
+                </SheetContent>
+              </Sheet>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </>
   );
 };
 
