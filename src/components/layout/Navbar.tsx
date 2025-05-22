@@ -67,9 +67,9 @@ const Navbar = () => {
         animate={{ y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
-        <div className="container-custom py-0">
-          <div className="flex items-center justify-between py-0">
-            {/* Logo container - maintain size in ultra-thin header */}
+        <div className="container-custom py-2">
+          <div className="flex items-center justify-between py-1">
+            {/* Logo container */}
             <Link to="/" className="flex items-center">
               <motion.div
                 whileHover={{ scale: 1.05 }}
@@ -82,7 +82,7 @@ const Navbar = () => {
                     alt="Sudden Impact Agency Logo" 
                     className={cn(
                       "relative z-10",
-                      isMobile ? "h-24 w-auto object-contain" : "h-56 w-auto object-contain",
+                      isMobile ? "h-16 w-auto object-contain" : "h-24 w-auto object-contain",
                       "filter drop-shadow-sm hover:drop-shadow-md transition-all duration-300"
                     )}
                   />
@@ -90,10 +90,10 @@ const Navbar = () => {
               </motion.div>
             </Link>
 
-            {/* Desktop Navigation with direct links - even smaller spacing */}
+            {/* Desktop Navigation with larger buttons */}
             <div className="hidden md:block">
               <NavigationMenu>
-                <NavigationMenuList className="space-x-0">
+                <NavigationMenuList className="space-x-2">
                   <NavigationMenuItem>
                     <NavigationMenuLink asChild>
                       <Link 
@@ -101,7 +101,7 @@ const Navbar = () => {
                         className={cn(
                           navigationMenuTriggerStyle(), 
                           navItemClass, 
-                          "bg-transparent rounded-md py-0 px-1.5 text-xs",
+                          "bg-transparent rounded-md py-2 px-4 text-base font-medium",
                           isActive('/') ? activeClass : ""
                         )}
                       >
@@ -117,7 +117,7 @@ const Navbar = () => {
                         className={cn(
                           navigationMenuTriggerStyle(), 
                           navItemClass, 
-                          "bg-transparent rounded-md py-0 px-1.5 text-xs",
+                          "bg-transparent rounded-md py-2 px-4 text-base font-medium",
                           isActive('/solutions') ? activeClass : ""
                         )}
                       >
@@ -133,7 +133,7 @@ const Navbar = () => {
                         className={cn(
                           navigationMenuTriggerStyle(), 
                           navItemClass, 
-                          "bg-transparent rounded-md py-0 px-1.5 text-xs",
+                          "bg-transparent rounded-md py-2 px-4 text-base font-medium",
                           isActive('/industries') ? activeClass : ""
                         )}
                       >
@@ -149,7 +149,7 @@ const Navbar = () => {
                         className={cn(
                           navigationMenuTriggerStyle(), 
                           navItemClass, 
-                          "bg-transparent rounded-md py-0 px-1.5 text-xs",
+                          "bg-transparent rounded-md py-2 px-4 text-base font-medium",
                           isActive('/pricing') ? activeClass : ""
                         )}
                       >
@@ -165,7 +165,7 @@ const Navbar = () => {
                         className={cn(
                           navigationMenuTriggerStyle(), 
                           navItemClass, 
-                          "bg-transparent rounded-md py-0 px-1.5 text-xs",
+                          "bg-transparent rounded-md py-2 px-4 text-base font-medium",
                           isActive('/contact') ? activeClass : ""
                         )}
                       >
@@ -178,26 +178,26 @@ const Navbar = () => {
             </div>
 
             {/* Mobile Menu using Sheet component */}
-            <div className="flex items-center gap-0.5">
-              {/* Ultra-thin CTA button */}
+            <div className="flex items-center gap-2">
+              {/* Larger CTA button */}
               <Link 
                 to="/demo" 
                 className={cn(
-                  "bg-gradient-to-r from-brand-pink to-brand-aqua text-white font-medium py-0.5 px-1.5 md:py-0.5 md:px-2 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 text-xs md:text-xs whitespace-nowrap",
+                  "bg-gradient-to-r from-brand-pink to-brand-aqua text-white font-medium py-2 px-4 md:py-2 md:px-5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 text-base md:text-base whitespace-nowrap",
                   isActive('/demo') ? "ring-2 ring-white" : ""
                 )}
               >
                 Try AI Voice Agent
               </Link>
               
-              {/* Sheet component for mobile menu - smaller button */}
+              {/* Sheet component for mobile menu - larger button */}
               <Sheet>
                 <SheetTrigger asChild className="md:hidden">
                   <button 
-                    className="ml-1 p-0.5 text-gray-700 focus:outline-none focus:ring-0"
+                    className="ml-2 p-2 text-gray-700 focus:outline-none focus:ring-0"
                     aria-label="Open menu"
                   >
-                    <Menu className="h-3 w-3" />
+                    <Menu className="h-6 w-6" />
                   </button>
                 </SheetTrigger>
                 <SheetContent side="right" className="md:hidden py-6 w-[85vw] sm:max-w-sm">
@@ -208,7 +208,7 @@ const Navbar = () => {
                     <Link 
                       to="/" 
                       className={cn(
-                        "text-xl font-medium p-2 rounded-md transition-colors",
+                        "text-xl font-medium p-3 rounded-md transition-colors",
                         isActive('/') ? "text-white bg-brand-purple" : "text-gray-800 hover:text-white hover:bg-brand-purple"
                       )}
                     >
@@ -218,7 +218,7 @@ const Navbar = () => {
                     <Link 
                       to="/solutions" 
                       className={cn(
-                        "text-xl font-medium p-2 rounded-md transition-colors",
+                        "text-xl font-medium p-3 rounded-md transition-colors",
                         isActive('/solutions') ? "text-white bg-brand-purple" : "text-gray-800 hover:text-white hover:bg-brand-purple"
                       )}
                     >
@@ -228,7 +228,7 @@ const Navbar = () => {
                     <Link 
                       to="/industries" 
                       className={cn(
-                        "text-xl font-medium p-2 rounded-md transition-colors",
+                        "text-xl font-medium p-3 rounded-md transition-colors",
                         isActive('/industries') ? "text-white bg-brand-purple" : "text-gray-800 hover:text-white hover:bg-brand-purple"
                       )}
                     >
@@ -238,7 +238,7 @@ const Navbar = () => {
                     <Link 
                       to="/pricing" 
                       className={cn(
-                        "text-xl font-medium p-2 rounded-md transition-colors",
+                        "text-xl font-medium p-3 rounded-md transition-colors",
                         isActive('/pricing') ? "text-white bg-brand-purple" : "text-gray-800 hover:text-white hover:bg-brand-purple"
                       )}
                     >
@@ -248,7 +248,7 @@ const Navbar = () => {
                     <Link 
                       to="/contact" 
                       className={cn(
-                        "text-xl font-medium p-2 rounded-md transition-colors",
+                        "text-xl font-medium p-3 rounded-md transition-colors",
                         isActive('/contact') ? "text-white bg-brand-purple" : "text-gray-800 hover:text-white hover:bg-brand-purple"
                       )}
                     >
@@ -259,7 +259,7 @@ const Navbar = () => {
                     
                     <Link 
                       to="/demo" 
-                      className="bg-gradient-to-r from-brand-pink to-brand-aqua text-white text-center font-medium py-3 px-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                      className="bg-gradient-to-r from-brand-pink to-brand-aqua text-white text-center font-medium py-3 px-5 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 text-lg"
                     >
                       Try AI Voice Agent
                     </Link>
